@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Embraer Regional Jet 190</description>
+  <author>Ian(Yves) Tolosa</author>
+  <path>Models/E90.ac</path>
+  <offsets>
+    <pitch-deg>-1.30</pitch-deg>
+  </offsets>
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/E90/Effects/E90-LightMap</inherits-from>
+    <object-name>E90</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/E90-NavLights.xml</path>
+  </model>
+</PropertyList>

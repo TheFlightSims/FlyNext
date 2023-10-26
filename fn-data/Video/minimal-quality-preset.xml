@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <id>minimal-quality</id>
+  <name>Minimal</name>
+  <description>Minimal settings for low-power laptops or very old systems.</description>
+  <order-num>0</order-num>
+
+  <settings>
+    <sim>
+      <rendering>
+        <shaders>
+          <skydome type="bool">false</skydome>
+          <use-shaders type="bool">false</use-shaders>
+          <landmass type="float">0</landmass>
+          <transition type="float">0</transition>
+          <model type="float">0</model>
+          <water type="float">0</water>
+          <clouds type="float">0</clouds>
+          <wind-effects type="float">0</wind-effects>
+          <vegetation-effects type="float">0</vegetation-effects>
+        </shaders>
+        <multi-sample-buffers type="bool">false</multi-sample-buffers>
+        <multi-samples type="int">0</multi-samples>
+        <shadows>
+          <enabled type="bool">false</enabled>
+          <sun-atlas-size type="int">1024</sun-atlas-size>
+        </shadows>
+        <dynamic-lighting>
+          <enabled type="bool">false</enabled>
+          <limit-lights type="bool">false</limit-lights>
+          <max-lights type="int">0</max-lights>
+        </dynamic-lighting>
+        <scenery-path-suffix n="0"><enabled type="bool">false</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="1"><enabled type="bool">false</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="2"><enabled type="bool">false</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="3"><enabled type="bool">false</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="4"><enabled type="bool">false</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="5"><enabled type="bool">false</enabled></scenery-path-suffix>
+        <osm-buildings type="bool">false</osm-buildings>
+        <random-objects type="bool">false</random-objects>
+        <random-buildings type="bool">false</random-buildings>
+        <random-vegetation type="bool">false</random-vegetation>
+        <random-vegetation-shadows type="bool">false</random-vegetation-shadows>
+        <vegetation-density type="float">0.0</vegetation-density>
+        <particles type="bool">false</particles>
+        <precipitation-gui-enable type="bool">false</precipitation-gui-enable>
+        <clouds3d-enable type="bool">false</clouds3d-enable>
+      </rendering>
+    </sim>
+  </settings>
+</PropertyList>

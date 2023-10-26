@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+  Multiplayer carrier Vinson fallback model. ID# 805
+ 
+  This will connect the MP carrier to the AI carrier when the low detail model is loaded.
+  Later on if the high detail model is also loaded it will be still be good
+  because the logic is resilient enough not to trample over itself.
+
+  Copyright (C) 2021 : Richard Harrison rjh@zaretto.com
+  Copyright (C) 2007 - 2016  Anders Gidenstam  (anders(at)gidenstam.org)
+
+  This file is released under the GPL license version 2 or later.
+-->
+<PropertyList>
+
+ <nasal>
+  <load>
+    <![CDATA[ 
+        ##############################################################################
+        # This logic connects the carrier to the AI carrier
+
+        var rplayer = cmdarg();
+        print("MP Vinson(Fallback): LOAD " ~ rplayer.getPath());
+
+        # Load the main MPCarriers Nasal module if needed.
+        if (!contains(globals, "MPCarriers")) {
+          var base = "Aircraft/Generic/MPCarriers.nas";
+          io.load_nasal(resolvepath(base), "MPCarriers");
+        }
+
+        # Create manager class.
+        var manager = nil;
+        var accept_callsign = "/sim/mp-carriers/vinson-callsign";
+
+        var init = func {
+          # Initialize the callsign property if not done already.
+          props.globals.initNode(accept_callsign, "", "STRING");
+
+          manager = MPCarriers.Manager.new(rplayer,
+                                        "Vinson",
+                                        props.globals.getNode(accept_callsign));
+          print("MP Vinson(Fallback): " ~ rplayer.getPath() ~ " done.");
+        }
+
+        settimer(init, 3); # 3 second delay should be sufficient
+        print("MP Vinson(Fallback): " ~ rplayer.getPath() ~ " waiting.");
+        ##############################################################################
+]]>
+</load>
+  <unload>
+    <![CDATA[ 
+    ##############################################################################
+      print("MP Vinson(Fallback): unload", cmdarg().getPath());
+      if (manager != nil) manager.die();
+    ##############################################################################
+    ]]>
+</unload>
+ </nasal>
+
+</PropertyList>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Embraer ERJ 145</description>
+  <author>Brett Harrison</author>
+  <path>Models/ERJ-145.ac</path>
+  <offsets>
+    <pitch-deg>-1.5</pitch-deg>
+  </offsets>
+  <animation>
+    <type>select</type>
+    <object-name>ER4_Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>180</value>
+      </less-than>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>ER4_GearCover</object-name>
+    <condition>
+      <greater-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>180</value>
+      </greater-than>
+    </condition>
+  </animation>
+</PropertyList>

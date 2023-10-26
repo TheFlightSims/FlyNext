@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    
+    <name>flight-recorder-control</name>
+    <layout>vbox</layout>
+    
+    <!-- titlebar -->
+    <group>
+        <layout>hbox</layout>
+        <empty><stretch>1</stretch></empty>
+
+        <text>
+            <label>Flight Recorder Control</label>
+        </text>
+
+        <empty><stretch>1</stretch></empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+
+    <hrule/>
+    
+    <!-- Dialogue contents -->
+    
+    <group>
+        
+        <layout>vbox</layout>
+        
+        <text>
+            <label>General</label>
+        </text>
+        
+        <button>
+            <legend>Replay in-memory recording &lt;Ctrl-R&gt;</legend>
+            <equal>true</equal>
+            <enable><not><property>sim/replay/replay-state</property></not></enable>
+            <halign>left</halign>
+            <binding>
+                <command>replay</command>
+            </binding>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>replay</dialog-name>
+            </binding>
+        </button>
+        
+        <button>
+            <legend>Replay recording from file...</legend>
+            <equal>true</equal>
+            <halign>left</halign>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>flight-recorder-load</dialog-name>
+            </binding>
+        </button>
+        
+        <button>
+            <legend>(Re)show replay dialogue</legend>
+            <equal>true</equal>
+            <enable><property>sim/replay/replay-state</property></enable>
+            <halign>left</halign>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>replay</dialog-name>
+            </binding>
+        </button>
+    
+        <button>
+            <legend>Save in-memory recording to file...</legend>
+            <equal>true</equal>
+            <halign>left</halign>
+            <binding>
+                <command>dialog-show</command>
+                <dialog-name>flight-recorder-save</dialog-name>
+            </binding>
+        </button>
+    
+        <checkbox>
+            <property>sim/replay/recovery-period</property>
+            <halign>left</halign>
+            <label>Maintain recovery snapshot</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+    
+        <hrule/>
+
+        <text>
+            <label>Continuous record</label>
+        </text>
+        
+        <button>
+            <legend>Start Continuous recording to file</legend>
+            <equal>true</equal>
+            <halign>left</halign>
+            <enable>
+                <not>
+                    <property>sim/replay/record-continuous</property>
+                </not>
+            </enable>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    setprop("sim/replay/record-continuous", 1);
+                </script>
+            </binding>
+        </button>
+
+        <button>
+            <legend>Stop Continuous recording to file</legend>
+            <equal>true</equal>
+            <halign>left</halign>
+            <enable>
+                <property>sim/replay/record-continuous</property>
+            </enable>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    setprop("sim/replay/record-continuous", 0);
+                </script>
+            </binding>
+        </button>
+
+        <checkbox>
+            <property>sim/replay/record-continuous-compression</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
+            <halign>left</halign>
+            <label>Use compression</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+
+        <checkbox>
+            <property>sim/replay/record-signals</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
+            <halign>left</halign>
+            <label>Include user aircraft in Continuous recordings</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+    
+        <checkbox>
+            <property>sim/replay/record-multiplayer</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
+            <halign>left</halign>
+            <label>Include multiplayer aircraft in recordings</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+    
+        <checkbox>
+            <property>sim/replay/record-main-window</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
+            <halign>left</halign>
+            <label>Record main window position and size</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+    
+        <checkbox>
+            <property>sim/replay/record-main-view</property>
+            <enable><not><property>sim/replay/record-continuous</property></not></enable>
+            <halign>left</halign>
+            <label>Record main window view</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+    
+        <hrule/>
+    
+        <text>
+            <label>Continuous replay</label>
+        </text>
+        
+        <checkbox>
+            <property>sim/replay/replay-main-window-position</property>
+            <halign>left</halign>
+            <label>Replay main window position</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+    
+        <checkbox>
+            <property>sim/replay/replay-main-window-size</property>
+            <halign>left</halign>
+            <label>Replay main window size</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+    
+        <checkbox>
+            <property>sim/replay/replay-main-view</property>
+            <halign>left</halign>
+            <label>Replay main window view</label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+    
+        <text>
+            <label></label>
+        </text>
+    
+    </group>
+
+</PropertyList>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <name>shuttle-main</name>
+  <inherits-from>Effects/space-combined</inherits-from>
+
+  <parameters>
+	<geo_light_r type="float"><use>/lighting/effects/geo-red</use></geo_light_r>
+	<geo_light_g type="float"><use>/lighting/effects/geo-green</use></geo_light_g>
+	<geo_light_b type="float"><use>/lighting/effects/geo-blue</use></geo_light_b>
+	<geo_light_x type="float"><use>/lighting/effects/geo-x</use></geo_light_x>
+	<geo_light_y type="float"><use>/lighting/effects/geo-y</use></geo_light_y>
+	<geo_light_z type="float"><use>/lighting/effects/geo-z</use></geo_light_z>
+	<geo_light_radius type="float"><use>/lighting/effects/geo-r</use></geo_light_radius>
+	<geo_ambience type="float"><use>/lighting/effects/geo-ambience</use></geo_ambience>
+  </parameters>
+
+
+</PropertyList>

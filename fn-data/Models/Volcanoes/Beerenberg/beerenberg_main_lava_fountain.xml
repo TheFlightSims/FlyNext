@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>
+
+<particlesystem>
+	 <name>beerenberg-main-lava-fountain</name>
+	 <texture>lava.png</texture>
+	 <emissive>true</emissive>
+	 <lighting>false</lighting>
+	 <x-m>0.0</x-m>
+	 <y-m>0.0</y-m>
+	 <z-m>0.0</z-m>
+	 <roll-deg>0.0</roll-deg>
+	 <pitch-deg>0.0</pitch-deg>
+	 <heading-deg>0.0</heading-deg>
+
+		 
+	 <attach>global</attach>
+	 
+	 <placer>
+		 <type>sector</type>
+		 <radius-min-m>0.0</radius-min-m>
+		 <radius-max-m>25.0</radius-max-m>
+		 <phi-min-deg>0.0</phi-min-deg>
+		 <phi-max-deg>360.0</phi-max-deg>
+	 </placer>
+	 
+	 <shooter>
+		 <theta-min-deg>0</theta-min-deg>
+		 <theta-max-deg>15</theta-max-deg>
+		 <phi-min-deg>0</phi-min-deg>
+		 <phi-max-deg>360</phi-max-deg>
+		<speed-mps>
+		<!--<value>60</value>-->
+		<property>/environment/volcanoes/beerenberg/main-strength</property>
+		<spread>150.0</spread>
+		</speed-mps>
+		 <rotation-speed>
+			<x-min-deg-sec>0</x-min-deg-sec>
+			<y-min-deg-sec>0</y-min-deg-sec>
+			<z-min-deg-sec>10</z-min-deg-sec>
+			<x-max-deg-sec>0</x-max-deg-sec>
+			<y-max-deg-sec>0</y-max-deg-sec>
+			<z-max-deg-sec>40</z-max-deg-sec>
+		 </rotation-speed>
+	 </shooter>
+	 
+	 <counter>
+		 <particles-per-sec>
+			 <property>/environment/volcanoes/beerenberg/main-quantity</property>
+			 <spread>0</spread>
+		 </particles-per-sec>
+	 </counter>
+	 
+	 <align>billboard</align>
+	 
+	 <particle>
+		 <start>
+			 <color>
+				<red>
+						<value>1.0</value>
+					</red>
+					<green>
+						<value>0.2</value>
+					</green>
+					<blue>
+						<value>0.2</value>
+					</blue>
+					<alpha>
+						<value>1.0</value>
+					</alpha>
+			 </color>
+			 <size>
+				 <value>4.0</value>
+			 </size>
+		 </start>
+		 <end>
+			 <color>
+				 <red>
+						<value>0.5</value>
+					</red>
+					<green>
+						<value>0.1</value>
+					</green>
+					<blue>
+						<value>0.1</value>
+					</blue>
+					<alpha>
+						<value>1.0</value>
+					</alpha>
+			 </color>
+			 <size>
+				 <value>4.0</value>
+			 </size>
+		 </end>
+		 <life-sec>
+			 <value>22</value>
+		 </life-sec>
+		 <mass-kg>200.0</mass-kg>
+		 <radius-m>0.50</radius-m>
+	 </particle>
+	 
+	 <program>
+		 <fluid>air</fluid>
+		 <gravity type="bool">true</gravity>
+		 <wind type="bool">true</wind>
+	 </program>
+	 
+</particlesystem>
+
+	<animation>
+ 		<object-name>beerenberg-main-lava-fountain</object-name>
+  		<type>rotate</type>
+  		<property>/environment/volcanoes/beerenberg/ash-main-alpha</property>
+  		<factor>1</factor>
+  		<center>
+   			<x-m>0</x-m>
+   			<y-m>0</y-m>
+   			<z-m>0</z-m>
+  		</center>
+  		<axis>
+   			<x>0</x>
+   			<y>1</y>
+   			<z>0</z>
+  		</axis>
+ 	</animation>
+	
+		<animation>
+ 		<object-name>beerenberg-main-lava-fountain</object-name>
+  		<type>rotate</type>
+  		<property>/environment/volcanoes/beerenberg/ash-main-beta</property>
+  		<factor>1</factor>
+  		<center>
+   			<x-m>0</x-m>
+   			<y-m>0</y-m>
+   			<z-m>0</z-m>
+  		</center>
+  		<axis>
+   			<x>1</x>
+   			<y>0</y>
+   			<z>0</z>
+  		</axis>
+ 	</animation>
+
+</PropertyList>

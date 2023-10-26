@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Boeing 777-200 Freighter</description>
+  <author>Ian(Yves) Tolosa. September 2016</author>
+  <path>Models/77F.ac</path>
+  <!-- Pitch Forward so nosewheel on ground -->
+  <offsets>
+    <pitch-deg>-0.95</pitch-deg>
+  </offsets>
+  <!-- Gear Showed only < 150 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/777/Effects/77F-LightMap</inherits-from>
+    <object-name>77F</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/77F-NavLights.xml</path>
+  </model>
+</PropertyList>

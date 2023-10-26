@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+  <!-- Light - White Flare-->
+  <PropertyList> 
+    
+	<path>light-white-flare.ac</path>
+    
+	<animation> 
+      <type>alpha-test</type>
+      <object-name>White-Light-Flare</object-name>
+      <alpha-factor>0.01</alpha-factor>
+    </animation>
+    
+	<animation> 
+      <type>billboard</type>
+      <spherical>true</spherical>
+      <object-name>White-Light-Flare</object-name>
+    </animation>
+    
+	<animation> 
+      <type>select</type>
+      <object-name>White-Light-Flare</object-name>
+      <condition> 
+        <greater-than> 
+          <property>systems/electrical/outputs/taxi-lights</property>
+          <value>15</value>
+        </greater-than>
+        <equals> 
+          <property>gear/gear/position-norm</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </animation>
+
+    <!-- Noshadow -->
+    <animation>
+      <type>noshadow</type>
+    </animation>
+
+    
+	<!--    *** LoD *** 
+    <animation> 
+      <type>range</type>
+      <object-name>Green-Flare</object-name>
+      <min-m>0</min-m>
+      <max-m>5000</max-m>
+    </animation>-->
+	
+  </PropertyList>

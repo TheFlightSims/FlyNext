@@ -1,0 +1,21 @@
+<style>
+</style>
+
+<div class="ui-widget-content ui-corner-all" data-bind="if: longDescription().length">
+    <div class="ui-widget-header ui-corner-all" data-bind="text: description"></div>
+    <div data-bind="text: longDescription"></div>
+</div>
+<table id="phi-aircraft-helptable" class="ui-widget-content ui-corner-all">
+    <caption class="ui-widget-header ui-corner-all" data-bind="text: helpTitle"></caption>
+    <tbody data-bind="foreach: helpContent">
+        <tr>
+            <!--  ko if: $data.type == 'line' || $data.type == 'text' -->
+            <td colspan="2" data-bind="html: $data.text"></td>
+            <!-- /ko -->
+            <!--  ko if: $data.type == 'key' -->
+            <td><span>Key</span><span data-bind="text: $data.name" style="padding: 0 1em 0 0.5em; font-weight: bold;"></span></td>
+            <td data-bind="text: $data.desc"></td>
+            <!-- /ko -->
+        </tr>
+    </tbody>
+</table>

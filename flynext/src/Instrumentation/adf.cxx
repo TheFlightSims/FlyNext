@@ -1,0 +1,281 @@
+// adf.cxx - distance-measuring equipment.
+// Written by David Megginson, started 2003.
+//
+// This file is in the Public Domain and comes with no warranty.
+
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
+#include <simgear/compiler.h>
+#include <simgear/math/sg_geodesy.hxx>
+#include <simgear/math/sg_random.hxx>
+#include <simgear/timing/sg_time.hxx>
+
+#include <Main/fg_props.hxx>
+#include <Main/util.hxx>
+#include <Navaids/navlist.hxx>
+
+#include "adf.hxx"
+#include <Sound/morse.hxx>
+#include <simgear/sound/sample_group.hxx>
+
+#include <iostream>
+#include <string>
+#include <sstream>
+
+using std::string;
+
+// Use a bigger number to be more responsive, or a smaller number
+// to be more sluggish.
+#define RESPONSIVENESS 0.5
+
+
+/**
+ * Fiddle with the reception range a bit.
+ *
+ * TODO: better reception at night (??).
+ */
+static double
+adjust_range (double transmitter_elevation_ft, double aircraft_altitude_ft,
+              double max_range_nm)
+{
+    double delta_elevation_ft =
+        aircraft_altitude_ft - transmitter_elevation_ft;
+    double range_nm = max_range_nm;
+
+                                // kludge slightly better reception at
+                                // altitude
+    if (delta_elevation_ft < 0)
+        delta_elevation_ft = 200;
+    if (delta_elevation_ft <= 1000)
+        range_nm *= sqrt(delta_elevation_ft / 1000);
+    else if (delta_elevation_ft >= 5000)
+        range_nm *= sqrt(delta_elevation_ft / 5000);
+    if (range_nm >= max_range_nm * 3)
+        range_nm = max_range_nm * 3;
+
+    double rand = sg_random();
+    return range_nm + (range_nm * rand * rand);
+}
+
+
+ADF::ADF (SGPropertyNode *node )
+    :
+    _time_before_search_sec(0),
+    _last_frequency_khz(-1),
+    _transmitter_valid(false),
+    _transmitter_pos(SGGeod::fromDeg(0, 0)),
+    _transmitter_cart(0, 0, 0),
+    _transmitter_range_nm(0),
+    _ident_count(0),
+    _last_ident_time(0),
+    _last_volume(-1),
+    _sgr(0)
+{
+    readConfig(node, "adf");
+}
+
+ADF::~ADF ()
+{
+}
+
+void
+ADF::init ()
+{
+    string branch = nodePath();
+    SGPropertyNode *node = fgGetNode(branch, true );
+
+    initServicePowerProperties(node);
+    
+    // instrument properties
+    _error_node         = node->getChild("error-deg", 0, true);
+    _mode_node          = node->getChild("mode", 0, true);
+    _volume_node        = node->getChild("volume-norm", 0, true);
+    _in_range_node      = node->getChild("in-range", 0, true);
+    _bearing_node       = node->getChild("indicated-bearing-deg", 0, true);
+    _ident_node         = node->getChild("ident", 0, true);
+    _ident_audible_node = node->getChild("ident-audible", 0, true);
+  
+    // frequency properties
+    SGPropertyNode *fnode = node->getChild("frequencies", 0, true);
+    _frequency_node       = fnode->getChild("selected-khz", 0, true);
+
+    // foreign simulator properties
+    _heading_node       = fgGetNode("/orientation/heading-deg", true);
+
+    // sound support (audible ident code)
+    auto smgr = globals->get_subsystem<SGSoundMgr>();
+    _sgr = smgr->find("avionics", true);
+    _sgr->tie_to_listener();
+
+    std::ostringstream temp;
+    temp << name() << number();
+    _adf_ident = temp.str();
+}
+
+void
+ADF::update (double delta_time_sec)
+{
+    // If it's off, don't waste any time.
+    if (!isServiceableAndPowered()) {
+        _in_range_node->setBoolValue(false);
+        _ident_node->setStringValue("");
+        return;
+    }
+
+    string mode = _mode_node->getStringValue();
+    if (mode == "ant" || mode == "test") set_bearing(delta_time_sec, 90);
+    if (mode != "bfo" && mode != "adf") {
+        _in_range_node->setBoolValue(false);
+        _ident_node->setStringValue("");
+        return;
+    }
+                                // Get the frequency
+    int frequency_khz = _frequency_node->getIntValue();
+    if (frequency_khz != _last_frequency_khz) {
+        _time_before_search_sec = 0;
+        _last_frequency_khz = frequency_khz;
+    }
+
+    SGGeod acPos(globals->get_aircraft_position());
+  
+                                // On timeout, scan again
+    _time_before_search_sec -= delta_time_sec;
+    if (_time_before_search_sec < 0)
+        search(frequency_khz, acPos);
+
+    if (!_transmitter_valid) {
+        _in_range_node->setBoolValue(false);
+        _ident_node->setStringValue("");
+        return;
+    }
+
+                                // Calculate the bearing to the transmitter
+  SGVec3d location = globals->get_aircraft_position_cart();
+    
+    double distance_nm = dist(_transmitter_cart, location) * SG_METER_TO_NM;
+    double range_nm = adjust_range(_transmitter_pos.getElevationFt(),
+                                   acPos.getElevationFt(),
+                                   _transmitter_range_nm);
+
+    if (distance_nm <= range_nm) {
+
+        double bearing, az2, s;
+        double heading = _heading_node->getDoubleValue();
+
+        geo_inverse_wgs_84(acPos, _transmitter_pos,
+                           &bearing, &az2, &s);
+        _in_range_node->setBoolValue(true);
+        _ident_node->setStringValue(_last_ident);
+
+        bearing -= heading;
+        if (bearing < 0)
+            bearing += 360;
+        set_bearing(delta_time_sec, bearing);
+
+        // adf ident sound
+        float volume;
+        if ( _ident_audible_node->getBoolValue() )
+            volume = _volume_node->getFloatValue();
+        else
+            volume = 0.0;
+
+        if ( volume != _last_volume ) {
+            _last_volume = volume;
+
+            SGSoundSample *sound;
+            sound = _sgr->find( _adf_ident );
+            if ( sound != NULL )
+                sound->set_volume( volume );
+            else
+                SG_LOG( SG_INSTR, SG_ALERT, "Can't find adf-ident sound" );
+        }
+
+        time_t cur_time = globals->get_time_params()->get_cur_time();
+        if ( _last_ident_time < cur_time - 30 ) {
+            _last_ident_time = cur_time;
+            _ident_count = 0;
+        }
+
+        if ( _ident_count < 4 ) {
+            if ( !_sgr->is_playing(_adf_ident) && (volume > 0.05) ) {
+                _sgr->play_once( _adf_ident );
+                ++_ident_count;
+            }
+        }
+    } else {
+        _in_range_node->setBoolValue(false);
+        _ident_node->setStringValue("");
+        _sgr->stop( _adf_ident );
+    }
+}
+
+void
+ADF::search (double frequency_khz, const SGGeod& pos)
+{
+    string ident = "";
+                                // reset search time
+    _time_before_search_sec = 1.0;
+
+  FGNavList::TypeFilter filter(FGPositioned::NDB);
+  FGNavRecord *nav = FGNavList::findByFreq(frequency_khz, pos, &filter);
+
+    _transmitter_valid = (nav != NULL);
+    if ( _transmitter_valid ) {
+        ident = nav->get_trans_ident();
+        if ( ident != _last_ident ) {
+            _transmitter_pos = nav->geod();
+            _transmitter_cart = nav->cart();
+            _transmitter_range_nm = nav->get_range();
+        }
+    }
+
+    if ( _last_ident != ident ) {
+        _last_ident = ident;
+        _ident_node->setStringValue(ident.c_str());
+
+        if ( _sgr->exists( _adf_ident ) ) {
+	    // stop is required! -- remove alone wouldn't stop immediately
+            _sgr->stop( _adf_ident );
+            _sgr->remove( _adf_ident );
+        }
+
+        SGSoundSample *sound;
+        sound = FGMorse::instance()->make_ident( ident, FGMorse::LO_FREQUENCY );
+        sound->set_volume(_last_volume = 0);
+        _sgr->add( sound, _adf_ident );
+
+        int offset = (int)(sg_random() * 30.0);
+        _ident_count = offset / 4;
+        _last_ident_time = globals->get_time_params()->get_cur_time() -
+            offset;
+    }
+}
+
+void
+ADF::set_bearing (double dt, double bearing_deg)
+{
+    double old_bearing_deg = _bearing_node->getDoubleValue();
+
+    while ((bearing_deg - old_bearing_deg) >= 180)
+        old_bearing_deg += 360;
+    while ((bearing_deg - old_bearing_deg) <= -180)
+        old_bearing_deg -= 360;
+    bearing_deg += _error_node->getDoubleValue();
+    bearing_deg =
+        fgGetLowPass(old_bearing_deg, bearing_deg, dt * RESPONSIVENESS);
+
+    _bearing_node->setDoubleValue(bearing_deg);
+}
+
+
+// Register the subsystem.
+#if 0
+SGSubsystemMgr::InstancedRegistrant<ADF> registrantADF(
+    SGSubsystemMgr::FDM,
+    {{"instrumentation", SGSubsystemMgr::Dependency::HARD}},
+    0.15);
+#endif
+
+// end of adf.cxx

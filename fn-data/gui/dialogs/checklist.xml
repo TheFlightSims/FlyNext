@@ -1,0 +1,607 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>checklist</name>
+  <layout>vbox</layout>
+  <x>-5</x>
+  <y>5</y>
+	<default-padding>1</default-padding>
+
+  <color>
+    <alpha type="float">1.0</alpha>
+  </color>
+
+  <nasal>
+    <open><![CDATA[
+      var dlgRoot = cmdarg();
+      var dlgname = dlgRoot.getNode("name").getValue();
+
+
+      # Update the checklist-combo with appropriate set of checklists for
+      # the user to select from
+      var setChecklistGroup = func(group_name) {
+        var combo = gui.findElementByName(dlgRoot, "checklist-combo");
+        combo.removeChildren("value");
+        var idx = 0;
+
+        foreach (var name; checklist_group[group_name]) {
+          combo.getChild("value", idx, 1).setValue(name);
+          idx = idx + 1;
+        }
+
+        var checklist_name = checklist_group[group_name][0];
+
+        var pgs = checklist_size[checklist_name];
+        if (pgs == nil) pgs = 1;
+
+        setprop("/sim/gui/dialogs/checklist/selected-checklist-group", group_name);
+        setprop("/sim/gui/dialogs/checklist/selected-checklist-max-pages", pgs);
+        setprop("/sim/gui/dialogs/checklist/selected-page-text", "1 / " ~ pgs);
+        setprop("sim/gui/dialogs/checklist/selected-checklist", checklist_name);
+        gui.dialog_update("checklist", "checklist-combo", "checklist-table-group");
+      };
+
+      var groups = props.globals.getNode("/sim/checklists", 1).getChildren("group");
+      var checklists = props.globals.getNode("/sim/checklists", 1).getChildren("checklist");
+      var checklist_size = {};
+      var checklist_group = {};
+      var current_group = nil;
+
+      # Set up the list of groups so the user can select a group and then
+      # a checklist.
+      var groups = props.globals.getNode("/sim/checklists").getChildren("group");
+
+      if (size(groups) > 0) {
+        foreach (var grp; groups) {
+          var name = grp.getNode("name", 1).getValue();
+          var checks = grp.getChildren("checklist");
+          foreach (var chk; checks) {
+            var title = chk.getNode("title", 1).getValue();
+            if (current_group == nil) current_group = name;
+            append(checklists, chk);
+            if (checklist_group[name] == nil) checklist_group[name] = [];
+            append(checklist_group[name], title);
+          }
+        }
+      } else {
+        checklists = props.globals.getNode("/sim/checklists").getChildren("checklist");
+        foreach (var chk; checklists) {
+          var title = chk.getNode("title", 1).getValue();
+          var grp = "Standard";
+          var items = [];
+          if (find("emergency", string.lc(title)) != -1) {
+            grp = "EMERGENCY";
+          }
+
+          if (current_group == nil) current_group = grp;
+
+          if (checklist_group[grp] == nil) checklist_group[grp] = [];
+          append(checklist_group[grp], title);
+        }
+      }
+
+      if (size(checklists) > 0) {
+
+        var current_checklist = getprop("sim/gui/dialogs/checklist/selected-checklist");
+        if (current_checklist == nil) {
+          current_checklist = checklists[0].getNode("title", 1).getValue();
+          setprop("sim/gui/dialogs/checklist/selected-checklist", current_checklist);
+    		  setprop("sim/gui/dialogs/checklist/selected-page", 0);
+        }
+
+        foreach (var grp; keys(checklist_group)) {
+          foreach (chklist; checklist_group[grp]) {
+            if (chklist == current_checklist) {
+              setChecklistGroup(grp);
+              setprop("sim/gui/dialogs/checklist/selected-checklist", current_checklist);
+            }
+          }
+        }
+
+        var combo = gui.findElementByName(dlgRoot, "checklist-group-combo");
+        var idx = 0;
+
+        foreach (var grp_name; sort(keys(checklist_group), func(a,b){string.icmp(a,b)})) {
+          combo.getChild("value", idx, 1).setValue(grp_name);
+          idx = idx + 1;
+        }
+
+        dlgRoot.setValues({"dialog-name": dlgname, "object-name": "checklist-group-combo"});
+				fgcommand("dialog-update", dlgRoot);
+
+        var group = gui.findElementByName(dlgRoot, "checklist-table-group");
+
+        var table_count = 0;
+
+        forindex (var idx; checklists) {
+          var checklist_name = checklists[idx].getNode("title", 1).getValue();
+
+          # Checklist may consist of one or more pages.
+          var pages = checklists[idx].getChildren("page");
+
+          if (size(pages) == 0) {
+            # Or no pages at all, in which case we need to create a checklist of one page
+            append(pages, checklists[idx]);
+					}
+
+					checklist_size[checklist_name] = size(pages);
+
+					if (idx == 0) {
+
+					  setprop("/sim/gui/dialogs/checklist/next-available", 1);
+						setprop("/sim/gui/dialogs/checklist/selected-checklist-max-pages", checklist_size[checklist_name]);
+						setprop("/sim/gui/dialogs/checklist/selected-page-text", "1 / " ~ checklist_size[checklist_name]);
+					}
+
+					forindex (var p; pages) {
+					  var c = pages[p];
+						var row = 0;
+
+						# Set up a new table, only visible when this checklist is selected.
+						var table = group.getChild("group", table_count, 1);
+						table.getNode("row", 1).setValue(0);
+						table.getNode("col", 1).setValue(0);
+						table.getNode("default-padding", 1).setValue(4);
+						table.getNode("layout", 1).setValue("table");
+						table.getNode("valign", 1).setValue("top");
+
+						# Set up conditional to only display when the checklist is selected
+						# and the page is correct.
+						var vis = table.getNode("visible", 1).getNode("and", 1);
+						var e = vis.getChild("equals", 0, 1);
+						e.getNode("property", 1).setValue("sim/gui/dialogs/checklist/selected-checklist");
+						e.getNode("value", 1).setValue(checklists[idx].getNode("title").getValue());
+						e = vis.getChild("equals", 1, 1);
+						e.getNode("property", 1).setValue("sim/gui/dialogs/checklist/selected-page");
+						e.getNode("value", 1).setValue(p);
+
+						var items = c.getChildren("item");
+						var txtcount = 0;
+						var btncount = 0;
+
+						forindex (var i; items) {
+							var item = items[i];
+
+							var t = table.getChild("text", txtcount, 1);
+							txtcount += 1;
+
+							var values = item.getChildren("value");
+
+							if ((size(values) == 0) or (values[0].getValue() == "")) {
+								# Single name element with no values. Used as title
+								t.getNode("halign", 1).setValue("center");
+								t.getNode("row", 1).setValue(row);
+								t.getNode("col", 1).setValue(0);
+								t.getNode("colspan", 1).setValue(2);
+								t.getNode("label", 1).setValue(item.getNode("name", 1).getValue());
+								row = row + 1;
+							} else {
+								t.getNode("halign", 1).setValue("left");
+								t.getNode("row", 1).setValue(row);
+								t.getNode("col", 1).setValue(0);
+								t.getNode("label", 1).setValue(item.getNode("name", 1).getValue());
+
+								forindex (var v; values) {
+									var t = table.getChild("text", txtcount, 1);
+									txtcount += 1;
+									t.getNode("halign", 1).setValue("right");
+									t.getNode("row", 1).setValue(row);
+									if (v > 0) {
+										# The second row of values can overlap with the
+										# first column if required - helps keep the
+										# checklist dialog as compact as possible
+										t.getNode("col", 1).setValue(0);
+										t.getNode("colspan", 1).setValue(2);
+									} else {
+										t.getNode("col", 1).setValue(1);
+									}
+
+                  if (isscalar(values[v].getValue())) {
+									  t.getNode("label", 1).setValue(values[v].getValue());
+                  } else {
+                    t.getNode("label", 1).setValue("");
+                  }
+
+									# If there's a complete node, it contains a condition
+									# that can be checked to ensure the checklist item is
+									# complete. We display this item in yellow while the
+									# condition is not met, and green once it is complete.
+
+									var condition = item.getNode("condition");
+
+									if (condition != nil) {
+										var vis = t.getNode("visible", 1).getNode("and", 1);
+										props.copy(condition, vis);
+										var c = t.getNode("color", 1);
+										c.getNode("red", 1).setValue(0.2);
+										c.getNode("green", 1).setValue(1.0);
+										c.getNode("blue", 1).setValue(0.2);
+
+
+										# Now create an amber version for when the condition
+										# is not met.
+										t = table.getChild("text", txtcount, 1);
+										txtcount += 1;
+
+										t.getNode("halign", 1).setValue("right");
+										t.getNode("row", 1).setValue(row);
+										if (v > 0) {
+											# The second row of values can overlap with the
+											# first column if required - helps keep the
+											# checklist dialog as compact as possible
+											t.getNode("col", 1).setValue(0);
+											t.getNode("colspan", 1).setValue(2);
+										} else {
+											t.getNode("col", 1).setValue(1);
+										}
+
+										t.getNode("label", 1).setValue(values[v].getValue());
+
+										c = t.getNode("color", 1);
+										c.getNode("red", 1).setValue(1.0);
+										c.getNode("green", 1).setValue(0.7);
+										c.getNode("blue", 1).setValue(0.2);
+
+										vis = t.getNode("visible", 1).getNode("not", 1).getNode("and", 1);
+										props.copy(condition, vis);
+									}
+
+									# If there is a marker node we display a small
+									# button that enables the marker.
+									var marker = item.getNode("marker");
+
+									if ((v == 0) and (marker != nil)) {
+									  var s = marker.getNode("scale");
+									  var scale = s != nil ? s.getValue() : 1;
+
+									  var btn = table.getChild("button", btncount, 1);
+									  btncount += 1;
+									  btn.getNode("row", 1).setValue(row);
+									  btn.getNode("col", 1).setValue(2);
+									  btn.getNode("pref-width", 1).setValue(20);
+									  btn.getNode("pref-height", 1).setValue(20);
+									  btn.getNode("padding", 1).setValue(0);
+									  btn.getNode("legend", 1).setValue("?");
+									  var binding = btn.getNode("binding", 1);
+									  binding.getNode("command", 1).setValue("nasal");
+									  binding.getNode("script", 1).setValue(
+									    "placeMarker(" ~ marker.getNode("x-m", 1).getValue() ~ ", " ~
+									                     marker.getNode("y-m", 1).getValue() ~ ", " ~
+									                     marker.getNode("z-m", 1).getValue() ~ ", " ~
+									                     scale  ~ ");");
+									}
+
+									# If there's one or more binding nodes we display a
+									# small button that executes the binding.  Used to
+									# demonstrate the checklist item
+									var bindings = item.getChildren("binding");
+
+									if ((v == 0) and (size(bindings) > 0)) {
+									  var btn = table.getChild("button", btncount, 1);
+									  btncount += 1;
+									  btn.getNode("row", 1).setValue(row);
+									  btn.getNode("col", 1).setValue(3);
+									  btn.getNode("pref-width", 1).setValue(20);
+									  btn.getNode("pref-height", 1).setValue(20);
+									  btn.getNode("padding", 1).setValue(1);
+									  btn.getNode("legend", 1).setValue(">");
+
+									  forindex (var bdg; bindings) {
+											var binding = btn.getChild("binding", bdg, 1);
+											props.copy(bindings[bdg], binding);
+										}
+									}
+
+									row = row + 1;
+								}
+
+								table_count = table_count + 1;
+							}
+						}
+          }
+        }
+
+        var s = getprop("/sim/gui/dialogs/checklist/selected-checklist");
+        setprop("/sim/gui/dialogs/checklist/selected-checklist-max-pages", checklist_size[s]);
+        var currentPage = getprop("/sim/gui/dialogs/checklist/selected-page");
+        setprop("/sim/gui/dialogs/checklist/next-available", 1);
+        setprop("/sim/gui/dialogs/checklist/selected-page-text", (currentPage + 1) ~ " / " ~ checklist_size[s]);
+
+      } else {
+				var group = gui.findElementByName(dlgRoot, "checklist-table-group");
+				var table = group.getNode("text", 1);
+				table.getNode("row", 1).setValue(0);
+				table.getNode("col", 1).setValue(0);
+				table.getNode("default-padding", 1).setValue(4);
+				table.getNode("layout", 1).setValue("table");
+				table.getNode("valign", 1).setValue("top");
+				table.getNode("halign", 1).setValue("center");
+				table.getNode("label", 1).setValue("No checklists exist for this aircraft");
+      }
+
+      var placeMarker = func(x,y,z,scale) {
+	      var markerN = props.globals.getNode("/sim/model/marker", 1);
+
+				markerN.setValues({
+					"x/value": x,
+					"y/value": y,
+					"z/value": z,
+					"scale/value": scale,
+					"arrow-enabled": 1,
+				});
+
+        # Determine offset to the marker.
+        var vx = getprop("/sim/current-view/x-offset-m");  # Left/right (+ve right)
+        var vy = getprop("/sim/current-view/y-offset-m");  # Up/Down (+ve up)
+        var vz = getprop("/sim/current-view/z-offset-m");  # Forward/backwards (+ve aft)
+
+        # BUT the marker has a different coordinate system!
+        # x = fore/aft (+ve aft)
+        # y = left/right (+ve right)
+        # z = up/down  (+ve up)
+
+        # So we need to do a coordinate transformation as we calculate the angles
+        var hdg = math.atan2(y-vx, x-vz) * R2D + 180;
+        var pitch = math.atan2((z-vy), math.sqrt((x-vz)*(x-vz) + (y-vx)*(y-vx))) * R2D;
+
+        if (! ((hdg > 160) and (hdg < 200))) {
+          # Making the assumption we're in the cockpit, there are limits to where we can look
+          # that are enforced by the view system.  So we can't look into the region of heading
+          # 160-200.
+          var v = props.Node.new();
+          v.setValues({
+            "heading-offset-deg" : hdg,
+            "pitch-offset-deg": pitch,
+          });
+          view.point.move(v);
+        }
+        
+      };
+
+
+      var nextPage = func() {
+        var currentPage = getprop("/sim/gui/dialogs/checklist/selected-page");
+        var s = getprop("/sim/gui/dialogs/checklist/selected-checklist");
+
+        if (currentPage < (checklist_size[s] - 1)) {
+          setprop("/sim/gui/dialogs/checklist/selected-page", currentPage + 1);
+        }
+
+        if (currentPage == (checklist_size[s] - 2)) {
+          setprop("/sim/gui/dialogs/checklist/next-available", 0);
+				}
+
+				setprop("/sim/gui/dialogs/checklist/selected-page-text", (currentPage + 2) ~ " / " ~ checklist_size[s]);
+      };
+
+      var previousPage = func() {
+        var currentPage = getprop("/sim/gui/dialogs/checklist/selected-page");
+
+        if (currentPage > 0) {
+          setprop("/sim/gui/dialogs/checklist/selected-page", currentPage - 1);
+        }
+
+				setprop("/sim/gui/dialogs/checklist/next-available", 1);
+				setprop("/sim/gui/dialogs/checklist/selected-page-text", currentPage ~ " / " ~ checklist_size[s]);
+      };
+
+      var setTransparency = func(updateDialog){
+          var alpha = (getprop("/sim/gui/dialogs/checklist/transparent") or 0);
+          dlgRoot.getNode("color/alpha").setValue(1-alpha*0.3);
+          var n = props.Node.new({ "dialog-name": "checklist" });
+          if (updateDialog)
+          {
+              fgcommand("dialog-close", n);
+              fgcommand("dialog-show", n);
+          }
+      };
+      setTransparency(0);
+
+    ]]></open>
+
+    <close><![CDATA[
+      # Hide the marker.
+      setprop("/sim/model/marker/arrow-enabled", 0);
+    ]]></close>
+  </nasal>
+
+  <group>
+    <layout>hbox</layout>
+    <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Aircraft Checklists</label>
+    </text>
+
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+
+    <!-- gap to left border -->
+    <!--text>
+      <halign>right</halign>
+      <label> </label>
+    </text-->
+
+    <text>
+      <halign>right</halign>
+      <label>Group:</label>
+    </text>
+
+    <combo>
+      <name>checklist-group-combo</name>
+      <property>/sim/gui/dialogs/checklist/selected-checklist-group</property>
+      <editable>false</editable>
+      <pref-width>130</pref-width>
+      <halign>fill</halign>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>checklist-group-combo</object-name>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+					var s = getprop("/sim/gui/dialogs/checklist/selected-checklist-group");
+          setChecklistGroup(s);
+        </script>
+			</binding>
+    </combo>
+
+    <text>
+      <halign>right</halign>
+      <label>Checklist:</label>
+    </text>
+
+    <combo>
+      <name>checklist-combo</name>
+      <property>/sim/gui/dialogs/checklist/selected-checklist</property>
+      <editable>false</editable>
+      <pref-width>180</pref-width>
+      <halign>fill</halign>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>checklist-combo</object-name>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+					var s = getprop("/sim/gui/dialogs/checklist/selected-checklist");
+
+					setprop("/sim/gui/dialogs/checklist/selected-checklist-max-pages", checklist_size[s]);
+					setprop("/sim/gui/dialogs/checklist/selected-page", 0);
+					setprop("/sim/gui/dialogs/checklist/next-available", 1);
+					setprop("/sim/gui/dialogs/checklist/selected-page-text", "1 / " ~ checklist_size[s]);
+
+        </script>
+			</binding>
+
+    </combo>
+
+    <!--empty><stretch>true</stretch></empty-->
+
+    <!-- gap to next element -->
+    <!--text>
+      <halign>right</halign>
+      <label> </label>
+    </text-->
+
+    <button>
+      <pref-width>90</pref-width>
+      <legend>Toggle marker</legend>
+      <binding>
+        <command>property-toggle</command>
+        <property>/sim/model/marker/arrow-enabled</property>
+      </binding>
+    </button>
+
+    <checkbox>
+        <label>Transparent</label>
+        <property>/sim/gui/dialogs/checklist/transparent</property>
+        <live>true</live>
+        <halign>right</halign>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>property-toggle</command>
+        </binding>
+        <binding>
+            <command>nasal</command>
+            <script>setTransparency(1);</script>
+        </binding>
+        <halign>right</halign>
+    </checkbox>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <default-padding>4</default-padding>
+    <halign>fill</halign>
+    <layout>table</layout>
+    <name>checklist-table-group</name>
+  </group>
+
+  <group>
+    <default-padding>5</default-padding>
+    <halign>fill</halign>
+    <layout>hbox</layout>
+
+    <visible>
+      <greater-than>
+        <property>/sim/gui/dialogs/checklist/selected-checklist-max-pages</property>
+        <value>1</value>
+			</greater-than>
+		</visible>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend>Previous page</legend>
+      <pref-height>24</pref-height>
+      <equal>true</equal>
+      <enable>
+        <greater-than>
+					<property>/sim/gui/dialogs/checklist/selected-page</property>
+					<value>0</value>
+				</greater-than>
+      </enable>
+      <binding>
+        <command>nasal</command>
+        <script>previousPage();</script>
+			</binding>
+		</button>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+		<text>
+		  <halign>center</halign>
+		  <label>XX/XX</label>
+		  <property>/sim/gui/dialogs/checklist/selected-page-text</property>
+		  <live>true</live>
+		</text>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend>Next page</legend>
+      <equal>true</equal>
+      <pref-height>24</pref-height>
+      <enable>
+				<property>/sim/gui/dialogs/checklist/next-available</property>
+				<value>1</value>
+      </enable>
+      <binding>
+        <command>nasal</command>
+        <script>nextPage();</script>
+			</binding>
+		</button>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+	</group>
+
+</PropertyList>

@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<PropertyList>
+    <nasal>
+	  <open>
+	  <![CDATA[
+            var self = cmdarg();
+			var icao = self.getNode("nasal/params/param/icao");
+			if (props.getNode("/sim/atc/freq-airport")!=nil) {
+                icao = props.getNode("/sim/atc/freq-airport");
+			}
+			var dialogTitle = sprintf("Airportfrequencies %s", icao.getValue());
+			self.getNode("text/label").setValue(dialogTitle);
+			var apt = airportinfo(icao.getValue());
+			var frequencies = apt.comms();
+			var textgroup = self.getNode("group").getNode("group-template");
+			var i = 0;
+			foreach (var c; frequencies) {
+				var target = self.getNode("group").getChild("group", i, 1);
+				props.copy(textgroup, target);
+				i = i + 1;
+				target.getNode("text/label").setValue(c.ident);
+				var formattedFreq = sprintf("%.3f MHz", c.frequency);
+				target.getNode("text[1]/label").setValue(formattedFreq);
+				target.getNode("button/binding/value").setValue(c.frequency);
+				target.getNode("button[1]/binding/value").setValue(c.frequency);
+				target.getNode("enabled").setValue(1);
+			}
+	  ]]>
+	  </open>
+	</nasal>
+	<name>atc-freq-display</name>
+	<layout>vbox</layout>
+
+	<text>
+		<label>TITLE ("ICAO Frequencies")</label>
+	</text>
+
+	<hrule/>
+
+	<group>
+		<name>frequency-list</name>
+		<layout>vbox</layout>
+		<!-- using one copy of group-template per frequency line -->
+		<group-template>
+			<enabled>false</enabled>
+			<layout>hbox</layout>
+			<text>
+				<halign>left</halign>
+				<label>LABEL</label>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<text>
+				<halign>right</halign>
+				<label>FREQUENCY</label>
+			</text>
+
+            <button>
+                <pref-width>50</pref-width>
+                <pref-height>22</pref-height>
+                <legend>COM1</legend>
+                <border>2</border>
+
+                <binding>
+                    <command>property-assign</command>
+                    <property>/instrumentation/comm/frequencies/selected-mhz</property>
+                    <value type="float">FREQUENCY</value>
+                </binding>
+            </button>
+
+            <button>
+                <pref-width>50</pref-width>
+                <pref-height>22</pref-height>
+                <legend>COM2</legend>
+                <border>2</border>
+
+                <binding>
+                    <command>property-assign</command>
+                    <property>/instrumentation/comm[1]/frequencies/selected-mhz</property>
+                    <value type="float">FREQUENCY</value>
+                </binding>
+            </button>
+		</group-template>
+	</group>
+
+	<button>
+		<legend>Close</legend>
+		<default>true</default>
+		<key>Esc</key>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+</PropertyList>

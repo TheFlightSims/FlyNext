@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/model-transparent</name>
+  <inherits-from>Effects/model-default</inherits-from>
+
+  <parameters>
+    <!-- ibl.glsl -->
+    <texture n="8">
+      <image>Textures/PBR/dfg_lut.dds</image>
+      <type>2d</type>
+      <filter>linear</filter>
+      <mag-filter>linear</mag-filter>
+      <wrap-s>clamp-to-edge</wrap-s>
+      <wrap-t>clamp-to-edge</wrap-t>
+      <internal-format>normalized</internal-format>
+    </texture>
+    <!-- shadows.glsl -->
+    <show-shadow-cascades>
+      <use>/sim/rendering/hdr/debug/show-shadow-cascades</use>
+    </show-shadow-cascades>
+    <normal-bias>
+      <use>/sim/rendering/hdr/shadows/normal-bias</use>
+    </normal-bias>
+    <sss-enabled>
+      <use>/sim/rendering/hdr/shadows/sss-enabled</use>
+    </sss-enabled>
+    <sss-step-count>
+      <use>/sim/rendering/hdr/shadows/sss-step-count</use>
+    </sss-step-count>
+    <sss-max-distance>
+      <use>/sim/rendering/hdr/shadows/sss-max-distance</use>
+    </sss-max-distance>
+    <sss-depth-bias>
+      <use>/sim/rendering/hdr/shadows/sss-depth-bias</use>
+    </sss-depth-bias>
+    <!-- exposure.glsl -->
+    <exposure-compensation>
+      <use>/sim/rendering/hdr/exposure-compensation</use>
+    </exposure-compensation>
+  </parameters>
+
+  <technique n="108">
+    <scheme>hdr-geometry</scheme>
+  </technique>
+  <technique n="118">
+    <scheme>hdr-shadow</scheme>
+  </technique>
+  <technique n="128">
+    <scheme>hdr-forward</scheme>
+    <pass>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+        <write-mask>false</write-mask>
+      </depth>
+      <texture-unit>
+        <unit>0</unit>
+        <type><use>texture[0]/type</use></type>
+        <image><use>texture[0]/image</use></image>
+        <filter><use>texture[0]/filter</use></filter>
+        <mag-filter><use>texture[0]/mag-filter</use></mag-filter>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+      </texture-unit>
+      <texture-unit>
+        <unit>8</unit>
+        <image><use>texture[8]/image</use></image>
+        <type><use>texture[8]/type</use></type>
+        <filter><use>texture[8]/filter</use></filter>
+        <mag-filter><use>texture[8]/mag-filter</use></mag-filter>
+        <wrap-s><use>texture[8]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[8]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[8]/internal-format</use></internal-format>
+      </texture-unit>
+      <blend>1</blend>
+      <rendering-hint>transparent</rendering-hint>
+      <cull-face><use>cull-face</use></cull-face>
+      <program>
+        <vertex-shader>Shaders/HDR/model_transparent.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/aerial_perspective.glsl</vertex-shader>
+        <fragment-shader>Shaders/HDR/model_transparent.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/shading_transparent.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/surface.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/ibl.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/shadows.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/sun.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/clustered.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>color_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>color_mode</name>
+        <type>int</type>
+        <value><use>material/color-mode</use></value>
+      </uniform>
+      <uniform>
+        <name>material_diffuse</name>
+        <type>float-vec4</type>
+        <value><use>material/diffuse</use></value>
+      </uniform>
+      <!-- shadows.glsl -->
+      <uniform>
+        <name>shadow_tex</name>
+        <type>sampler-2d-shadow</type>
+        <value type="int">10</value>
+      </uniform>
+      <uniform>
+        <name>debug_shadow_cascades</name>
+        <type>bool</type>
+        <value><use>show-shadow-cascades</use></value>
+      </uniform>
+      <uniform>
+        <name>normal_bias</name>
+        <type>float</type>
+        <value><use>normal-bias</use></value>
+      </uniform>
+      <uniform>
+        <name>sss_enabled</name>
+        <type>bool</type>
+        <value><use>sss-enabled</use></value>
+      </uniform>
+      <uniform>
+        <name>sss_step_count</name>
+        <type>int</type>
+        <value><use>sss-step-count</use></value>
+      </uniform>
+      <uniform>
+        <name>sss_max_distance</name>
+        <type>float</type>
+        <value><use>sss-max-distance</use></value>
+      </uniform>
+      <uniform>
+        <name>sss_depth_bias</name>
+        <type>float</type>
+        <value><use>sss-depth-bias</use></value>
+      </uniform>
+      <!-- ibl.glsl -->
+      <uniform>
+        <name>dfg_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">8</value>
+      </uniform>
+      <uniform>
+        <name>prefiltered_envmap_tex</name>
+        <type>sampler-cube</type>
+        <value type="int">9</value>
+      </uniform>
+      <!-- aerial_perspective.glsl -->
+      <uniform>
+        <name>aerial_perspective_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">11</value>
+      </uniform>
+      <!-- sun.glsl -->
+      <uniform>
+        <name>transmittance_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
+      </uniform>
+      <!-- exposure.glsl -->
+      <uniform>
+        <name>lum_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">14</value>
+      </uniform>
+      <uniform>
+        <name>exposure_compensation</name>
+        <type>float</type>
+        <value><use>exposure-compensation</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

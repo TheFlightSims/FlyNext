@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>Clemenceau</name>
+	<modal>false</modal>
+	<layout>vbox</layout>
+
+
+
+
+	<group>
+		<layout>hbox</layout>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<text>
+			<label>Clemenceau Controls</label>
+		</text>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<keynum>27</keynum>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+
+	<hrule/>
+
+	<group>
+		<layout>table</layout>
+
+		<text>
+			<label>Course</label>
+			<row>0</row>
+			<col>0</col>
+		</text>
+
+		<radio>
+			<row>1</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to launch course</label>
+			<property>/controls/clemenceau/turn-to-launch-hdg</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/clemenceau/turn-to-launch-hdg");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+						
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "Clemenceau")
+							{
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(v);
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-base-course").setBoolValue(0);
+							}
+						}
+
+						setprop("/controls/clemenceau/turn-to-base-course", 0);
+						setprop("/controls/clemenceau/turn-to-recovery-hdg", 0);
+				</script>
+			</binding>
+		</radio>
+
+		<radio>
+			<row>2</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to recovery course</label>
+			<property>/controls/clemenceau/turn-to-recovery-hdg</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/clemenceau/turn-to-recovery-hdg");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "Clemenceau")
+							{
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(v);
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-base-course").setBoolValue(0);
+							}
+						}
+
+						setprop("/controls/clemenceau/turn-to-base-course", 0);
+						setprop("/controls/clemenceau/turn-to-launch-hdg", 0);
+				</script>
+			</binding>
+		</radio>
+
+		<radio>
+			<row>3</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to base course</label>
+			<property>/controls/clemenceau/turn-to-base-course</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/clemenceau/turn-to-base-course");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "Clemenceau")
+							{
+							c.getNode("controls/turn-to-base-course").setBoolValue(v);
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(0);
+							}
+						}
+
+						setprop("/controls/clemenceau/turn-to-launch-hdg", 0);
+						setprop("/controls/clemenceau/turn-to-recovery-hdg", 0);
+				</script>
+			</binding>
+		</radio>
+		</group>
+
+		<hrule/>
+
+		<group>
+		<layout>table</layout>
+
+		<text>
+			<label>Equipment</label>
+			<row>0</row>
+			<col>0</col>
+		</text>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>1</row>
+			<col>0</col>
+			<label>Elevator 1</label>
+			<property>/controls/clemenceau/elevator[0]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>1</row>
+			<col>1</col>
+			<label>Elevator 2</label>
+			<property>/controls/clemenceau/elevator[1]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>0</col>
+			<label>JBD 1</label>
+			<property>/controls/clemenceau/jbd[0]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>1</col>
+			<label>JBD 2</label>
+			<property>/controls/clemenceau/jbd[1]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+
+
+		</group>
+
+
+
+
+	<hrule/>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>6</default-padding>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+
+		<button>
+			<legend>OK</legend>
+			<default>true</default>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Apply</legend>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Reset</legend>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Cancel</legend>
+			<equal>true</equal>
+			<key>Esc</key>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+	</group>
+</PropertyList>

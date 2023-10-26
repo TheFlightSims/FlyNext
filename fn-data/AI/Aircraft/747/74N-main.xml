@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Boeing 747-8 Freighter</description>
+  <author>Ian(Yves) Tolosa. Dec 2016 </author>
+  <path>Models/74N.ac</path>
+  <!-- Pitch Forward so nosewheel on ground -->
+  <offsets>
+    <pitch-deg>-0.5</pitch-deg>
+  </offsets>
+  <!-- Gear Showed only < 180 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>180</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/747/Effects/74N-LightMap</inherits-from>
+    <object-name>74N</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/74N-NavLights.xml</path>
+  </model>
+</PropertyList>

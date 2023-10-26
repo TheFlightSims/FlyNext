@@ -1,0 +1,7 @@
+<h3>Basic Troposphere Weather Conditions</h3>
+
+<div data-bind="foreach: topics, buttonset: { refreshOn: topics }">
+    <input type="radio" name="mygroup" data-bind="attr: { id: $data }, click: $parent.selectTopic" /> 
+    <label data-bind="attr: { 'for': $data }, text: $data"></label>
+</div>
+<div data-bind="component: { name: selectedComponent }"></div>

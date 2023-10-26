@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<model>
+ <path>lightning.xml</path>
+</model>
+
+<model>
+ <path>lightning1.xml</path>
+</model>
+
+<model>
+ <path>lightning2.xml</path>
+</model>
+
+	<animation>
+		<type>noshadow</type>
+	</animation>
+</PropertyList>

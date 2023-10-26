@@ -1,0 +1,63 @@
+include(CMakeFindDependencyMacro)
+
+find_dependency(ZLIB)
+find_dependency(LibLZMA)
+find_dependency(Threads)
+find_dependency(CURL)
+
+# OSG
+
+set(SIMGEAR_HEADLESS @SIMGEAR_HEADLESS@)
+set(SIMGEAR_SOUND @ENABLE_SOUND@)
+set(USE_AEONWAVE @USE_AEONWAVE@)
+set(SG_SOUND_USES_OPENALSOFT @SG_SOUND_USES_OPENALSOFT@)
+
+set(USE_SHADERVG @USE_SHADERVG@)
+if (USE_SHADERVG)
+endif()
+
+set(ENABLE_ASAN @ENABLE_ASAN@)
+set(SIMGEAR_SHARED @SIMGEAR_SHARED@)
+
+# SSE/SSE2 support
+
+set(ENABLE_SIMD @ENABLE_SIMD@)
+
+# SycloneDDS support
+set(SG_HAVE_DDS @SG_HAVE_DDS@)
+if(SG_HAVE_DDS)
+    find_dependency(CycloneDDS)
+endif()
+
+
+if (SIMGEAR_SOUND)
+  # find the sound dependency
+  if (USE_AEONWAVE)
+    find_dependency(AAX)
+  elseif(SG_SOUND_USES_OPENALSOFT)
+    # must force CONFIG mode when using OpenAL soft, to avoid picking
+    # the CMake supplied FindOpenAL and hence defaults to the system
+    # framework on macOS
+    find_dependency(OpenAL CONFIG)
+  else()
+    find_dependency(OpenAL)
+  endif()
+endif()
+
+# OpenRTI support
+set(ENABLE_RTI @ENABLE_RTI@)
+if(ENABLE_RTI)
+    find_dependency(PkgConfig)
+    if(PKG_CONFIG_FOUND)
+      pkg_check_modules(RTI IMPORTED_TARGET hla-rti13)
+    endif(PKG_CONFIG_FOUND)
+endif(ENABLE_RTI)
+
+# Alternative terrain engine based on pagedLOD
+
+set(ENABLE_GDAL @ENABLE_GDAL@)
+if (ENABLE_GDAL)
+  find_dependency(GDAL)
+endif()
+
+include("${CMAKE_CURRENT_LIST_DIR}/SimGearTargets.cmake")

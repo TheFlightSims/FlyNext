@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Bombardier Canadair Regional Jet CRJ700 (CL-600-2C10)</description>
+  <author>Ian (Yves) Tolosa, November 2019</author>
+  <path>Models/CR7.ac</path>
+  <!-- Pitch Forward so nosewheel on ground -->
+  <offsets>
+    <pitch-deg>-2.10</pitch-deg>
+  </offsets>
+  <!-- Gear Showed only < 150 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/CR7/Effects/CR7-LightMap</inherits-from>
+    <object-name>CR7</object-name>
+	<object-name>Gear</object-name>
+  </effect>
+    <!-- ALS Navigation Lights Objects -->
+    <model>
+    <path>Lights/CR7-NavLights.xml</path>
+  </model>
+</PropertyList>

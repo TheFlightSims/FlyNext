@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Boeing 747-400</description>
+  <author>Ian(Yves) Tolosa. Apr 2016 </author>
+  <path>Models/744.ac</path>
+  <!-- Gear Showed only < 180 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>180</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/747/Effects/744-LightMap</inherits-from>
+    <object-name>744</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/744-NavLights.xml</path>
+  </model>
+</PropertyList>

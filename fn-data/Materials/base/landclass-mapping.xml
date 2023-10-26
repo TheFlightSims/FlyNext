@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+  <map>
+    <description>111 - Continuous urban fabric</description>
+    <landclass>1</landclass>
+    <material-name>Urban</material-name>
+  </map>
+
+<map>
+  <description>112 - Discontinuous urban fabric</description>
+  <landclass>2</landclass>
+  <material-name>SubUrban</material-name>
+</map>
+
+<map>
+  <description>121 - Industrial or commercial units</description>
+  <landclass>3</landclass>
+  <material-name>Industrial</material-name>
+</map>
+
+<map>
+  <description>122 - Road and rail networks and associated land</description>
+  <landclass>4</landclass>
+  <material-name>Transport</material-name>
+</map>
+
+<map>
+  <description>123 - Port areas</description>
+  <landclass>5</landclass>
+  <material-name>Port</material-name>
+</map>
+
+<map>
+  <description>124 - Airports</description>
+  <landclass>6</landclass>
+  <material-name>Airport</material-name>
+</map>
+
+<map>
+  <description>131 - Mineral extraction sites</description>
+  <landclass>7</landclass>
+  <material-name>Gravel</material-name>
+</map>
+
+<map>
+  <description>132 - Dump sites</description>
+  <landclass>8</landclass>
+  <material-name>Gravel</material-name>
+</map>
+
+<map>
+  <description>133 - Construction sites</description>
+  <landclass>9</landclass>
+  <material-name>Construction</material-name>
+</map>
+
+<map>
+  <description>141 - Green urban areas</description>
+  <landclass>10</landclass>
+  <material-name>Greenspace</material-name>
+</map>
+
+<map>
+  <description>142 - Sport and leisure facilities</description>
+  <landclass>11</landclass>
+  <material-name>Greenspace</material-name>
+</map>
+
+<map>
+  <description>211 - Non-irrigated arable land</description>
+  <landclass>12</landclass>
+  <material-name>MixedCrop</material-name>
+</map>
+
+<map>
+  <description>212 - Permanently irrigated land</description>
+  <landclass>13</landclass>
+  <material-name>IrrCrop</material-name>
+</map>
+
+<map>
+  <description>213 - Rice fields</description>
+  <landclass>14</landclass>
+  <material-name>Rice</material-name>
+</map>
+
+<map>
+  <description>221 - Vineyards</description>
+  <landclass>15</landclass>
+  <material-name>Vineyard</material-name>
+</map>
+
+<map>
+  <description>222 - Fruit trees and berry plantations</description>
+  <landclass>16</landclass>
+  <material-name>Orchard</material-name>
+</map>
+
+<map>
+  <description>223 - Olive groves</description>
+  <landclass>17</landclass>
+  <material-name>Olives</material-name>
+</map>
+
+<map>
+  <description>231 - Pastures</description>
+  <landclass>18</landclass>
+  <material-name>MixedCropPastureCover</material-name>
+</map>
+
+<map>
+  <description>241 - Annual crops associated with permanent crops</description>
+  <landclass>19</landclass>
+  <material-name>MixedCrop</material-name>
+</map>
+
+<map>
+  <description>242 - Complex cultivation patterns</description>
+  <landclass>20</landclass>
+  <material-name>ComplexCrop</material-name>
+</map>
+
+<map>
+  <description>243 - Land principally occupied by agriculture with significant areas of natural vegetation</description>
+  <landclass>21</landclass>
+  <material-name>NaturalCrop</material-name>
+</map>
+
+<map>
+  <description>244 - Agro-forestry areas</description>
+  <landclass>22</landclass>
+  <material-name>AgroForest</material-name>
+</map>
+
+<map>
+  <description>311 - Broad-leaved forest</description>
+  <landclass>23</landclass>
+  <material-name>DeciduousBroadCover</material-name>
+</map>
+
+<map>
+  <description>312 - Coniferous forest</description>
+  <landclass>24</landclass>
+  <material-name>EvergreenForest</material-name>
+</map>
+
+<map>
+  <description>313 - Mixed forest</description>
+  <landclass>25</landclass>
+  <material-name>MixedForest</material-name>
+</map>
+
+<map>
+  <description>321 - Natural grasslands</description>
+  <landclass>26</landclass>
+  <material-name>Grassland</material-name>
+</map>
+
+<map>
+  <description>322 - Moors and heathland</description>
+  <landclass>27</landclass>
+  <material-name>Heath</material-name>
+</map>
+
+<map>
+  <description>323 - Sclerophyllous vegetation</description>
+  <landclass>28</landclass>
+  <material-name>Sclerophyllous</material-name>
+</map>
+
+<map>
+  <description>324 - Transitional woodland-shrub</description>
+  <landclass>29</landclass>
+  <material-name>ShrubCover</material-name>
+</map>
+
+<map>
+  <description>331 - Beaches - dunes - sands</description>
+  <landclass>30</landclass>
+  <material-name>Sand</material-name>
+</map>
+
+<map>
+  <description>332 - Bare rocks</description>
+  <landclass>31</landclass>
+  <material-name>BareTundraCover</material-name>
+</map>
+
+<map>
+  <description>333 - Sparsely vegetated areas</description>
+  <landclass>32</landclass>
+  <material-name>HerbTundra</material-name>
+</map>
+
+<map>
+  <description>334 - Burnt areas</description>
+  <landclass>33</landclass>
+  <material-name>Burnt</material-name>
+</map>
+
+<map>
+  <description>335 - Glaciers and perpetual snow</description>
+  <landclass>34</landclass>
+  <material-name>Glacier</material-name>
+</map>
+
+<map>
+  <description>411 - Inland marshes</description>
+  <landclass>35</landclass>
+  <material-name>Marsh</material-name>
+</map>
+
+<map>
+  <description>412 - Peat bogs</description>
+  <landclass>36</landclass>
+  <material-name>Bog</material-name>
+</map>
+
+<map>
+  <description>421 - Salt marshes</description>
+  <landclass>37</landclass>
+  <material-name>SaltMarsh</material-name>
+  <sea>true</sea>
+</map>
+
+<map>
+  <description>422 - Salines</description>
+  <landclass>38</landclass>
+  <material-name>Saline</material-name>
+  <water>true</water>
+  <sea>true</sea>
+</map>
+
+<map>
+  <description>423 - Intertidal flats</description>
+  <landclass>39</landclass>
+  <material-name>Littoral</material-name>
+  <water>true</water>
+  <sea>true</sea>
+</map>
+
+<map>
+  <description>511 - Water courses</description>
+  <landclass>40</landclass>
+  <material-name>Watercourse</material-name>
+  <water>true</water>
+</map>
+
+<map>
+  <description>512 - Water bodies</description>
+  <landclass>41</landclass>
+  <material-name>Lake</material-name>
+  <water>true</water>
+</map>
+
+<map>
+  <description>521 - Coastal lagoons</description>
+  <landclass>42</landclass>
+  <material-name>Lagoon</material-name>
+  <water>true</water>
+  <sea>true</sea>
+</map>
+
+<map>
+  <description>522 - Estuaries</description>
+  <landclass>43</landclass>
+  <material-name>Estuary</material-name>
+  <water>true</water>
+  <sea>true</sea>
+</map>
+
+<map>
+  <description>523 - Sea and ocean</description>
+  <landclass>44</landclass>
+  <material-name>Ocean</material-name>
+  <water>true</water>
+  <sea>true</sea>
+</map>
+
+<map>
+  <description>999 - NODATA</description>
+  <landclass>48</landclass>
+  <material-name>Ocean</material-name>
+  <water>true</water>
+</map>
+
+</PropertyList>

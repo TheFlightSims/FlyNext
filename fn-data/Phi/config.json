@@ -1,0 +1,33 @@
+{
+  "plugins": {
+    "Aircraft": {
+      "index": 100,
+      "component": "topics/Aircraft"
+    },
+
+    "Environment": {
+      "index": 200,
+      "component": "topics/Environment"
+    },
+
+    "Map": {
+      "index": 300,
+      "component": "topics/Map"
+    },
+
+    "Tools": {
+      "index": 400,
+      "component": "topics/Tools"
+    },
+
+    "Simulator": {
+      "index": 500,
+      "component": "topics/Simulator"
+    },
+
+    "Help": {
+      "index": 600,
+      "component": "topics/Help"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PropertyList>
+    <nasal>
+        <script>
+        
+        var opentrackToAxis = func(jsAxis,viewAxis,axisValue,axisFactor) {
+            var viewNumber = getprop("/sim/current-view/view-number-raw");
+            var viewInitialOffset = getprop("/sim/view["~viewNumber~"]/config/"~viewAxis~"-offset-m");
+            
+            if(viewInitialOffset == nil) {
+                viewInitialOffset = 0;
+            }
+       
+            setprop("/sim/current-view/"~viewAxis~"-offset-m", viewInitialOffset + ( axisValue * axisFactor ) );
+        }
+        
+        </script>
+    </nasal>
+
+  <propiedad type="string">1</propiedad>
+  <name type="string">opentrack headpose</name>
+  <axis n="0">
+    <desc type="string">View X Axis</desc>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var setting = cmdarg().getNode("setting").getValue();
+        var factor = cmdarg().getNode("factor").getValue();
+        opentrackToAxis(0, "x", setting, factor);
+      </script>
+      <factor type="double">-0.5</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+   <axis n="1">
+    <desc type="string">View Y Axis</desc>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var setting = cmdarg().getNode("setting").getValue();
+        var factor = cmdarg().getNode("factor").getValue();
+        opentrackToAxis(1, "y", setting, factor);
+      </script>
+      <factor type="double">0.5</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+   <axis n="2">
+    <desc type="string">View Z Axis</desc>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var setting = cmdarg().getNode("setting").getValue();
+        var factor = cmdarg().getNode("factor").getValue();
+        opentrackToAxis(2, "z", setting, factor);
+      </script>
+      <factor type="double">0.5</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+  <axis n="3">
+    <desc type="string">View Heading Axis</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/sim/current-view/goal-heading-offset-deg</property>
+      <factor type="double">-180</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+  <axis n="4">
+    <desc type="string">View Pitch Axis</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/sim/current-view/goal-pitch-offset-deg</property>
+      <factor type="double">180</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+   <axis n="5">
+    <desc type="string">View Roll Axis</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/sim/current-view/goal-roll-offset-deg</property>
+      <factor type="double">-180</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+</PropertyList>

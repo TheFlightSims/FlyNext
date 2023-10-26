@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Bombardier Dash-8, Series 300 (Model 311)</description>
+  <author>Ian Tolosa</author>
+  <path>Models/DH3.ac</path>
+  <!-- Tilt Aircraft so Nose Wheels touch ground -->
+  <offsets>
+    <pitch-deg>0.00</pitch-deg>
+  </offsets>
+ <!-- Show Gear if Airspeeed under 120 kts -->
+  <animation>
+    <type>select</type>
+    <object-name>DH3_Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>120</value>
+      </less-than>
+    </condition>
+  </animation>
+<!-- Show Propellers' Blur if Speed over 15 kts -->
+ <animation>
+    <type>select</type>
+    <object-name>DH3_Blur</object-name>
+    <condition>
+      <greater-than-equals>
+        <property>velocities/true-airspeed-kt</property>
+        <value>15</value>
+      </greater-than-equals>
+    </condition>
+  </animation>
+ <!-- Propellers rotate x8 factor or airspeed -->
+ <animation>
+    <type>spin</type>
+    <object-name>DH3_PropL</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>8</factor>
+    <center>
+      <x-m>-3.51536</x-m>
+      <y-m>-3.935</y-m>
+      <z-m>2.84855</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>spin</type>
+    <object-name>DH3_PropR</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>8</factor>
+    <center>
+      <x-m>-3.51536</x-m>
+      <y-m>3.935</y-m>
+      <z-m>2.84855</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <!-- Tail and Windows Illumination at Night Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/DH3/Effects/DH3-LightMap</inherits-from>
+    <object-name>DH3_Body</object-name>
+    <object-name>DH3_Gear</object-name>
+    <object-name>DH3_PropL</object-name>
+    <object-name>DH3_PropR</object-name>
+  </effect>
+  <!-- Add Navigation Red/Green/White Lights Objects -->
+  <model>
+    <path>Lights/DH3-NavLights.xml</path>
+  </model>
+</PropertyList>

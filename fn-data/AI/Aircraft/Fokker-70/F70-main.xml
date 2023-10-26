@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <description>Fokker 70</description>
+  <author>Ian (Yves) Tolosa based on model by Erik Hofman</author>
+  <path>Models/F70.ac</path>
+
+
+	<animation>
+		<type>select</type>
+		<object-name>Gear</object-name>
+		<condition>
+			<less-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>130</value>
+			</less-than>
+		</condition>
+	</animation> 
+
+</PropertyList>

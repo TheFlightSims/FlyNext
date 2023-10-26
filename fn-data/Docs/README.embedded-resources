@@ -1,0 +1,474 @@
+-*- coding: utf-8; fill-column: 72; -*-
+
+The Embedded Resources System
+=============================
+
+This document gives an overview of FlightGear's embedded resources
+system and related classes. For specific information on the C++
+functions, the reference documentation is in the corresponding header
+files.
+
+
+Contents
+--------
+
+1. The CharArrayStream and ZlibStream classes
+2. The “embedded resources” system
+3. About the XML resource declaration files
+4. The EmbeddedResourceProxy class
+
+
+Introduction
+------------
+
+The embedded resources system allows FlightGear to use data from files
+without relying on FG_ROOT to be set. This can be used, for instance, to
+grab the contents of XML files at FG build time, from any repository[1],
+and use said contents in the C++ code. The term “embedded” is used to
+avoid confusion with the ResourceProvider and ResourceManager classes
+provided by SimGear, which have nothing to do with the system described
+here.
+
+The embedded resources system relies on classes present in
+simgear/io/iostreams/{zlibstream.cxx,CharArrayStream.cxx}, which were
+implemented as a way to address a concern that embedding a few XML files
+in the fgfs binary could use precious memory. The resource compiler
+(fgrcc) compresses resources before writing them in C++ form---except
+for some extensions, and it's configurable on a per-resource basis
+anyway. Then, the EmbeddedResourceManager instance, which lives in the
+fgfs process, can decompress them on-the-fly, incrementally,
+transparently. So, there is really no reason to worry about memory
+consumption, even for several dozens of XML files.
+
+fgrcc is the resource compiler: it turns arbitrary files into C++ code
+the EmbeddedResourceManager can make use of, in order to “serve” the
+files' contents at runtime. It is named this way, because it fulfills
+the same role as Qt's rcc tool. It supports a thin superset of the
+XML-based format used by rcc for declaring resources[2][3].
+'fgrcc --help' gives a lot of info.
+
+
+1) The CharArrayStream and ZlibStream classes
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The CharArrayStream* files in simgear/io/iostreams/ implement
+CharArrayStreambuf and related IOStreams classes for working with char
+arrays, namely:
+  - CharArrayStreambuf    subclass of std::streambuf      stream buffer
+  - ROCharArrayStreambuf  subclass of CharArrayStreambuf  stream buffer
+  - CharArrayIStream      subclass of std::istream        input stream
+  - CharArrayOStream      subclass of std::ostream        output stream
+  - CharArrayIOStream     subclass of std::iostream       input/output stream
+
+(in the 'simgear' namespace, of course)
+
+CharArrayStreambuf is a stream buffer class allowing to read from, and
+write to char arrays (std::strstream has been deprecated since C++98).
+Contrary to std::strstream, this class does no dynamic allocation: it is
+very simple, strictly staying for both reads and writes within the
+bounds of the buffer specified in its constructor. Contrary to
+std::stringstream, CharArrayStreambuf allows one to work on an array of
+char (that could be static data, on the stack, whatever) without having
+to make a whole copy of it.
+
+ROCharArrayStreambuf is a read-only subclass of CharArrayStreambuf
+(useful for const-correctness). CharArrayIStream, CharArrayOStream and
+CharArrayIOStream are very simple convenience stream classes using
+either CharArrayStreambuf or ROCharArrayStreambuf as their associated
+stream buffer class.
+
+While these classes can be of general-purpose usefulness, the particular
+reason they have been written for is to make the embedded resources
+system clean and memory-friendly. Concretely, this system supports both
+compressed and uncompressed resources, all of which can be read from
+their respective static arrays like this (think pipelines):
+
+static char array
+(uncompressed       --------------->      data available via an std::istream
+ resource)          CharArrayIStream         or std::streambuf interface
+                 or ROCharArrayStreambuf
+
+static char array
+(compressed       ---------------> compressed data ------------------->    ditto
+ resource)        CharArrayIStream               ZlibDecompressorIStream
+                                              or ZlibDecompressorIStreambuf
+
+where ditto = uncompressed data available via an std::istream or
+              std::streambuf interface
+
+So, whether the resource data stored in static arrays by fgrcc is
+compressed or not, end-user code can read it in uncompressed form using
+an std::istream or std::streambuf interface, which means the resource
+never needs to be copied in memory a second time. This is particularly
+interesting with compressed resources, because:
+
+  1) The in-memory static data is much smaller in general than the
+     uncompressed contents, and it's the only one we really have to
+     “pay” for if one uses these stream-based interfaces.
+
+  2) The data is transparently decompressed on-demand as the end-user
+     code reads from the ZlibDecompressorIStream or
+     ZlibDecompressorIStreambuf instance.
+
+In other words, these CharArrayStream classes complement the ones in
+zlibstream.cxx and make it easy to implement all kinds of pipelines to
+incrementally read or write, and possibly on-the-fly compress or
+decompress data from or to in-memory buffers (cf.
+writeCompressedDataToBuffer() in
+simgear/simgear/embedded_resources/embedded_resources_test.cxx, or
+ResourceCodeGenerator::writeEncodedResourceContents() in
+flightgear/src/EmbeddedResources/fgrcc.cxx for examples).
+
+Since all of these provide standard IOStreams interfaces, they can be
+easily plugged into existing code. For instance, readXML() in
+simgear/simgear/xml/easyxml.cxx and readProperties() in
+simgear/props/props_io.cxx can incrementally read and parse data from an
+std::istream instance, and thus are able to directly read from a
+resource containing the compressed version of an XML file.
+
+This incremental stuff is of course really interesting with large
+resources... which probably won't be used in FlightGear, in order not to
+waste RAM[4][5]. The EmbeddedResourceManager also has a getString()
+method to simply get an std::string when you don't care about the fact
+that this operation, by std::string design, will necessarily make a copy
+of the whole resource contents (in uncompressed form in the case of a
+compressed resource). This getString() method should be convenient and
+quite acceptable for reasonably-sized resources.
+
+Finally, all of these classes---CharArray*Stream*, the classes in
+zlibstream.cxx, the EmbeddedResourceManager and related classes---can
+handle text and binary data in exactly the same way (std::string doesn't
+care, and neither do the other classes).
+
+
+2) The “embedded resources” system
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The embedded resources system works this way:
+
+  (1) The fgrcc resource compiler reads an XML file which has almost the
+      same syntax[2] as Qt's .qrc files[3] and writes a .cxx file
+      containing:
+        - static char arrays initialized with resource contents
+          (possibly compressed, this is automatic unless explicitly
+          specified in the XML file);
+        - a function definition containing calls to
+          EmbeddedResourceManager::addResource() that register each of
+          these resources with the EmbeddedResourceManager instance.
+
+      If you pass the --output-header-file option to fgrcc, it also
+      writes a header file that goes with the generated .cxx file. For
+      other options, see the output of 'fgrcc --help'.
+
+      It is quite possible to call fgrcc several times, each time with a
+      different (XML input file, .cxx/.hxx output files) tuple: for
+      instance, one call for resources present in the FlightGear repo,
+      and possibly another call for resources in FGData. The point of
+      this is that paths in the XML input file should be relative to
+      avoid being system-dependent, and fgrcc accepts a --root option to
+      indicate what you want them to be relative to, in order to let it
+      find the real files. Thus, on a first invocation of fgrcc, one can
+      make --root point to a path to the FlightGear repository when
+      building, and on the second call use it to indicate a path to the
+      FGData repository. Other variations are possible, of course.
+
+      Notes:
+
+        1) The example given here with FGData would *not* freeze the
+           FGData location at FG compile time; this is only to allow
+           files from FGData to be turned into generated .cxx files
+           inside the FG source tree, that will make their contents
+           available as embedded resources at runtime.
+
+        2) At the time of this writing, resources from the FlightGear
+           repository are compiled at build time, and resources from the
+           FGData repository are compiled offline using the
+           'rebuild-fgdata-embedded-resources' script[6] (a
+           convenience wrapper for fgrcc), before being committed to the
+           FlightGear repository.
+
+  (2) SimGear contains an EmbeddedResourceManager class with, among
+      others, createInstance() and instance() methods similar to the
+      ones of NavDataCache. See [7] for the corresponding code.
+
+      FlightGear creates an EmbeddedResourceManager instance at startup
+      and calls the various init functions generated by fgrcc, each of
+      which registers the resources present in its containing .cxx file
+      (using EmbeddedResourceManager::addResource()).
+
+      End-user FG code can then use EmbeddedResourceManager methods such
+      as getResource(), getString(), getStreambuf() and getIStream()
+      to access resource contents:
+        - getResource() returns an
+          std::shared_ptr<const AbstractEmbeddedResource>
+        - getString() returns an std::string
+        - getStreambuf() returns an std::unique_ptr<std::streambuf>
+        - getIStream() returns an std::unique_ptr<std::istream>
+
+      AbstractEmbeddedResource is an abstract base class that you can
+      think of as a resource descriptor: it points to (not contains!)
+      the resource data (which is normally of static storage class), and
+      contains + gives access to metadata such as the compression type
+      and resource size (compressed and uncompressed).
+
+     AbstractEmbeddedResource currently has two derived concrete
+     classes: RawEmbeddedResource for resources stored as-is
+     (uncompressed) and ZlibEmbeddedResource for resources compressed by
+     fgrcc. It's quite easy to add new subclasses if wanted, e.g. for
+     LZMA compression or other things.
+
+     Resource fetching requires two things:
+
+       - an std::string key (fgrcc manipulates them with SGPath, but the
+         EmbeddedResourceManager code in SimGear is so far completely
+         agnostic of the kind of data stored in keys; this could be
+         changed, though, if we wanted for example to be able to query
+         at runtime all available resources in a given “virtual
+         directory”);
+
+       - a “locale” name, similar to what FlightGear's XML translation
+         files and FGLocale use. We used double quotes here, because
+         fgrcc and the EmbeddedResourceManager expect “locale” names to
+         be of one of these forms:
+           * empty string: default locale, typically but not necessarily
+             English (it is “engineering English” in FlightGear, i.e.,
+             English written by programmers in the code, before
+             translators possibly fix it up :)
+           * en, fr, de, es, it...
+           * en_GB, en_US, fr_FR, fr_CA, de_DE, de_CH, it_IT...
+
+         There is no encoding part, contrary to POSIX locales, hence the
+         use of double quotes around the term “locale” in this context.
+
+     The FGLocale::getPreferredLanguage() method returns the preferred
+     “locale” in the form described above, according to user choice
+     (from fgfs' --language option) and/or settings (system locale).
+     This allows FG to tell the EmbeddedResourceManager the preferred
+     “locale” for resource fetching (same syntax as in Qt's rcc tool for
+     declaration in the XML file, using the 'lang' attribute on
+     'qresource' elements).
+
+     [ Regarding the default locale, the way things are currently set
+       up, I would use no 'lang' attribute for resources suitable for
+       English in the XML input file for fgrcc, except when a
+       country-specific variant is desired (en_GB, en_US, en_AU...). In
+       such a case, there should also be a generic variant with no
+       'lang' attribute declared for the same resource virtual path.
+       This matches what I did for FGLocale::getPreferredLanguage(),
+       that maps unset locales and locales such as C and C.UTF-8 to the
+       default locale for the EmbeddedResourceManager, which is the
+       empty string. This is a matter of policy, of course, and could be
+       changed if desired. ]
+
+     The EmbeddedResourceManager class has getLocale() and
+     selectLocale() methods to manage the _selected locale_. Each
+     resource-fetching method of this class (getResourceOrNullPtr(),
+     getResource(), getString(), getStreambuf() and getIStream()) has
+     two overloads:
+       - one taking only a virtual path (the key mentioned above);
+       - one taking a virtual path and a “locale” name.
+
+     (we'll write “locale” without enclosing double-quotes from now on,
+     otherwise it gets too painful to read; but we're *not* talking
+     about POSIX-style locales ending with an encoding part)
+
+     The first kind of overload uses the selected locale to look up the
+     resource, whereas the second kind uses the explicitly specified
+     locale. Then resource lookup behaves as one could expect. For
+     instance, assuming a resource is looked up for in the "fr_FR"
+     locale, then the EmbeddedResourceManager tries in this order:
+       - "fr_FR";
+       - if no resource has been registered for "fr_FR" with the provided
+         virtual path, it then tries with the "fr" locale;
+       - if this is also unsuccessful, it finally tries with the default
+         locale: "";
+       - if this third attempt fails, the resource-fetching method
+         throws an sg_exception, except for getResourceOrNullPtr(),
+         which returns a null
+         std::shared_ptr<const AbstractEmbeddedResource> instead.
+
+     To see how this is used, you can look at
+     simgear/simgear/embedded_resources/embedded_resources_test.cxx. The
+     only difference with real use is that in this file, resource
+     contents and registering calls with the EmbeddedResourceManager
+     have been written manually instead of by fgrcc. Apart from
+     embedded_resources_test.cxx, here are two examples of client usage
+     of the EmbeddedResourceManager:
+
+  (a) With EmbeddedResourceManager::getString():
+
+      #include <simgear/embedded_resources/EmbeddedResourceManager.hxx>
+      #include <simgear/debug/logstream.hxx>
+
+      [...]
+
+      const auto& resMgr = simgear::EmbeddedResourceManager::instance();
+      SG_LOG(SG_GENERAL, SG_INFO,
+             "Resource contents: '" <<
+             resMgr->getString("/virtual/path/to/resource") << "'");
+
+  (b) With EmbeddedResourceManager::getIStream():
+
+      #include <cstddef>              // std::size_t
+      #include <simgear/io/iostreams/sgstream.hxx>
+      #include <simgear/embedded_resources/EmbeddedResourceManager.hxx>
+
+      [...]
+
+      sg_ofstream outFile(SGPath("/tmp/whatever"));
+      if (!outFile) {
+        <handle open error>
+      }
+
+      const auto& resMgr = simgear::EmbeddedResourceManager::instance();
+      auto resStream = resMgr->getIStream("/virtual/path/to/resource");
+      // One possible way of handling errors from resStream[8]:
+      // resStream->exceptions(std::ios_base::badbit);
+
+      constexpr std::size_t bufSize = 4096;
+      std::unique_ptr<char[]> buf(new char[bufSize]); // intermediate buffer
+
+      do {
+        resStream->read(buf.get(), bufSize);
+        outFile.write(buf.get(), resStream->gcount());
+      } while (*resStream && outFile); // resStream *points* to an std::istream
+
+      <handle possible errors that might have caused to loop to stop
+      prematurely>
+
+
+3) About the XML resource declaration files
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You may want to read the output of 'fgrcc --help', which explains a few
+things, in particular how to write an XML resource declaration file that
+fgrcc can use. At the time of this writing, such files are already
+present as flightgear/src/EmbeddedResources/FlightGear-resources.xml and
+flightgear/src/EmbeddedResources/FGData-resources.xml in the FlightGear
+repository. In case you need resources from elsewhere, it's easy to add
+other XML resource declaration files:
+
+  1) If you want the .cxx/.hxx resource files to be automatically
+     generated as part of the FlightGear build:
+
+     Copy and adapt the add_custom_command() call in
+     flightgear/src/Main/CMakeLists.txt[9] that invokes fgrcc on
+     flightgear/src/EmbeddedResources/FlightGear-resources.xml.
+
+  2) In flightgear/src/Main/CMakeLists.txt, add paths for your new
+     fgrcc-generated .cxx and .hxx files to the SOURCES and HEADERS
+     CMake variables for the 'fgfs' target.
+
+  3) Assuming you passed for instance
+     --init-func-name=initFoobarEmbeddedResources in step 1, add a call
+     to initFoobarEmbeddedResources() after this code in fgMainInit()
+     (flightgear/src/Main/main.cxx):
+
+      simgear::EmbeddedResourceManager::createInstance();
+      initFlightGearEmbeddedResources();
+
+
+4) The EmbeddedResourceProxy class
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SimGear contains an EmbeddedResourceProxy class that allows one to
+access real files or embedded resources in a unified way. When using it,
+one can switch from one data source to the other with minimal code
+changes, possibly even at runtime (in which case there is obviously no
+code change at all).
+
+Sample usage (from FlightGear):
+
+  simgear::EmbeddedResourceProxy proxy(globals->get_fg_root(), "/FGData");
+  proxy.setUseEmbeddedResources(false); // can also be set via the constructor
+
+  std::string s = proxy.getString("/some/path");
+  std::unique_ptr<std::istream> streamp = proxy.getIStream("/some/path");
+
+This example would retrieve contents from the real file
+$FG_ROOT/some/path. If true had been passed in the
+proxy.setUseEmbeddedResources() call, it would instead have used the
+default-locale version of the embedded resource whose virtual path is
+/FGData/some/path.
+
+For more information about this class, see [10] and [11].
+
+
+Footnotes
+=========
+
+[1] E.g., FlightGear or FGData, as long as the path to the latter is
+    provided to the FG build system, which is currently possible but not
+    required (passing '-D FG_DATA_DIR:PATH=...' to CMake when
+    configuring the FlightGear build).
+
+[2] The differences with the QRC format[3] are explained in the output
+    of 'fgrcc --help'. Here is the relevant excerpt:
+
+,----
+| 1. The <!DOCTYPE RCC> declaration at the beginning should be omitted (or
+|    replaced with <!DOCTYPE FGRCC>, however such a DTD currently doesn't
+|    exist). I suggest to add an XML declaration instead, for instance:
+|
+|      <?xml version="1.0" encoding="UTF-8"?>
+|
+| 2. <RCC> and </RCC> must be replaced with <FGRCC> and </FGRCC>,
+|    respectively.
+|
+| 3. The FGRCC format supports a 'compression' attribute for each 'file'
+|    element. At the time of this writing, the allowed values for this
+|    attribute are 'none', 'zlib' and 'auto'. When set to a value that is
+|    not 'auto', this attribute of course bypasses the algorithm for
+|    determining whether and how to compress a given resource (algorithm
+|    which relies on the file extension).
+|
+| 4. Resource paths (paths to the real files, not virtual paths) are
+|    interpreted relatively to the directory specified with the --root
+|    option. If this option is not passed to 'fgrcc', then the default root
+|    directory is the one containing INFILE, which matches the behavior of
+|    Qt's 'rcc' tool.
+`----
+
+[3] http://doc.qt.io/qt-5/resources.html
+
+[4] The main reason why I wrote the classes in
+    simgear/simgear/io/iostreams/{CharArrayStream,zlibstream}.cxx is
+    thus not to maximize memory-efficiency with very large resources;
+    rather, it is to make the implementation of the following parts
+    simple, clean and modular:
+      - the resource compiler (fgrcc);
+      - the EmbeddedResourceManager.
+
+[5] The EmbeddedResourceManager architecture would make it quite easy to
+    also support runtime loading of resources from files (a thing the Qt
+    resource system supports), but it is not very clear how interesting
+    this would be, compared to having the files loaded from $FG_ROOT.
+    Well, maybe for large files [apt.dat.gz & Co] that we would want to
+    load but not see in the FGData repository at all. But then there
+    would be the requirement, of course, that “something” puts the files
+    in a clearly-defined, platform-dependent location known to the
+    EmbeddedResourceManager.
+
+[6] https://sourceforge.net/p/flightgear/fgmeta/ci/next/tree/python3-flightgear/rebuild-fgdata-embedded-resources
+
+[7] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/
+
+[8] We know that in some buggy C++ implementations, the
+    std::ios_base::failure exception can't be caught, at least not under
+    its name, due to some ABI compatibility mess:
+
+      https://gcc.gnu.org/bugzilla/show_bug.cgi?id=66145
+
+    However, it stills causes the program to abort, and since this
+    error handling technique makes for much more readable and less
+    error-prone code, I think it's still a good way to handle IOStreams
+    errors even now, unless you really need to *catch* the
+    std::ios_base::failure exception.
+
+[9] flightgear/CMakeModules/GenerateFlightgearResources.cmake in my
+    'i18n-and-init-work-v2' branch (not merged into 'next' at the time
+    of this writing).
+
+[10] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/EmbeddedResourceProxy.hxx
+
+[11] https://sourceforge.net/p/flightgear/simgear/ci/next/tree/simgear/embedded_resources/embedded_resources_test.cxx

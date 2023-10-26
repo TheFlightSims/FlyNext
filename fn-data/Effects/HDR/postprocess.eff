@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/postprocess</name>
+  <parameters>
+    <bloom-strength><use>/sim/rendering/hdr/bloom/strength</use></bloom-strength>
+    <debug-ev100><use>/sim/rendering/hdr/debug/display-ev100</use></debug-ev100>
+  </parameters>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/postprocess.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/aces.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>hdr_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>bloom_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>bloom_strength</name>
+        <type>float</type>
+        <value><use>bloom-strength</use></value>
+      </uniform>
+      <uniform>
+        <name>debug_ev100</name>
+        <type>bool</type>
+        <value><use>debug-ev100</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

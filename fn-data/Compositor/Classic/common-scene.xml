@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>scene</type>
+  <use-shadow-pass>csm0</use-shadow-pass>
+  <use-shadow-pass>csm1</use-shadow-pass>
+  <use-shadow-pass>csm2</use-shadow-pass>
+  <use-shadow-pass>csm3</use-shadow-pass>
+  <clustered-shading>
+    <tile-size>128</tile-size>
+    <depth-slices>1</depth-slices>
+    <num-threads>1</num-threads>
+    <max-pointlights>
+      <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+    </max-pointlights>
+    <max-spotlights>
+      <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
+    </max-spotlights>
+  </clustered-shading>
+  <binding>
+    <buffer>sun-shadowmap-atlas</buffer>
+    <unit>10</unit>
+    <condition>
+      <property>/sim/rendering/shadows/enabled</property>
+    </condition>
+  </binding>
+</PropertyList>

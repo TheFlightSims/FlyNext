@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+<!-- Regional definitions for Tropical South America regions -->
+<PropertyList>
+  <name>Tropical South America</name>
+
+  <area>
+    <lon1>-90.0</lon1>
+    <lon2>-30.0</lon2>
+    <lat1>-26.0</lat1>
+    <lat2>23.0</lat2>
+  </area>
+
+  <material>
+    <name>pa_shoulder</name>
+    <texture>Runway/pa_shoulder_latin_america.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>pa_shoulder_f</name>
+    <texture>Runway/pa_shoulder_f_latin_america.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+  
+  <material>
+    <name>pc_shoulder</name>
+    <texture>Runway/pc_shoulder_latin_america.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>pc_shoulder_f</name>
+    <texture>Runway/pc_shoulder_f_latin_america.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <name>Greenspace</name>
+    <effect>Effects/airfield</effect>
+    <texture-set>
+      <texture>Terrain/california-grass.png</texture>
+      <texture n="13">Terrain/california-grass.png</texture>
+      <texture n="14">Terrain/california-grass-hires.png</texture>
+      <texture n="15">Terrain/airport_grass_structure_overlay2.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <use_overlay>1</use_overlay>
+      <overlay_alpha>1.0</overlay_alpha>
+      <use_grain>1</use_grain>
+      <overlay_bias>0.0</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <overlay_layer_magnification>4.0</overlay_layer_magnification>
+      <grain_layer_magnification>60.0</grain_layer_magnification>
+    </parameters>
+    <xsize>128</xsize>
+    <ysize>128</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>Grassland</name>
+    <name>GrassCover</name>
+    <name>BareTundraCover</name>
+    <name>MixedTundraCover</name>
+    <name>Cemetery</name>
+    <name>Greenspace</name>
+    <name>NaturalCrop</name>
+    <texture-set>
+  		<texture>Terrain/california-grass.png</texture>    
+      <texture n="13">Terrain/california-rock.png</texture>  		  
+    </texture-set>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>MixedForestCover</name>
+    <name>MixedForest</name>
+    <name>RainForest</name>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>     
+    <name>DeciduousBroadCover</name>
+    <name>DeciduousForest</name>
+    <name>DeciduousNeedleCover</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/rock_red.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
+      <texture n="13">Terrain/rock_red.png</texture>
+    </texture-set>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture> 
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>35.0</tree-height-m>
+    <tree-width-m>30.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+  
+  <material>
+    <name>MixedCrop</name>
+    <name>MixedCropPastureCover</name>
+    <name>DryCropPastureCover</name>
+    <name>DryCrop</name>
+    <name>ComplexCrop</name>
+    <name>ShrubCover</name>
+    <name>ShrubGrassCover</name>
+    <name>ScrubCover</name>
+    <name>Scrub</name>
+    <effect>Effects/forest</effect>
+		<texture-set>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+			<texture n="11">Terrain/rainforest-patch.png</texture>
+			<texture n="12">Terrain/grass_dry2a.png</texture>
+      <texture n="13">Terrain/rock_red.png</texture>
+			<texture n="15">Terrain/airport_grass2.png</texture>
+    </texture-set>
+		<parameters>
+			<grain_strength>0.5</grain_strength>			
+			<hires_overlay_bias>-0.03</hires_overlay_bias>		
+		</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <wood-coverage>12000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>30.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+  
+  <material>
+    <effect>Effects/cropgrass</effect>
+    <name>Grassland</name>
+		<texture-set>
+			<texture>Terrain/grass_dry2a.png</texture>
+			<texture n="11">Terrain/rainforest-patch.png</texture>
+			<texture n="12">Terrain/rainforest-hawaii.png</texture>
+      <texture n="13">Terrain/rock_red.png</texture>
+			<texture n="15">Terrain/airport_grass2.png</texture>
+    </texture-set>
+		<parameters>
+			<grain_strength>0.5</grain_strength>			
+			<hires_overlay_bias>-0.1</hires_overlay_bias>		
+		</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <wood-coverage>25000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>25.0</tree-width-m>
+  </material>
+  
+  <material>
+    <effect>Effects/cropgrass</effect>
+    <name>HerbTundra</name>
+    <name>HerbTundraCover</name>
+		<texture-set>
+			<texture>Terrain/tundra-hawaii.png</texture>
+			<texture n="11">Terrain/rainforest-patch.png</texture>
+			<texture n="12">Terrain/rainforest-hawaii.png</texture>
+      <texture n="13">Terrain/rock_red.png</texture>
+			<texture n="15">Terrain/airport_grass2.png</texture>
+    </texture-set>
+		<parameters>
+			<grain_strength>0.5</grain_strength>			
+			<hires_overlay_bias>-0.1</hires_overlay_bias>		
+		</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <wood-coverage>25000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>25.0</tree-width-m>
+  </material>
+
+</PropertyList>

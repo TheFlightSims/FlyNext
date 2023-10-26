@@ -1,0 +1,614 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <name>location-in-air</name>
+  <layout>vbox</layout>
+  <halign>left</halign>
+
+  <nasal>
+    <open>
+      var p = props.globals.getNode("/sim/gui/dialogs/location-in-air/", 1);
+
+      if (getprop("/sim/presets/carrier") != nil and getprop("/sim/presets/carrier") != ""){
+        setprop("/sim/gui/dialogs/location-in-air/carrier-active",1);
+        setprop("/sim/gui/dialogs/location-in-air/airport",0);
+      } else {
+        setprop("/sim/gui/dialogs/location-in-air/carrier-active",0);
+        setprop("/sim/gui/dialogs/location-in-air/airport",1);
+      }
+      
+      var dlg_root = cmdarg();
+      var mode = {
+        airport: p.getNode("airport", 1),
+        lonlat:  p.getNode("lonlat", 1),
+        vor:     p.getNode("vor", 1),
+        ndb:     p.getNode("ndb", 1),
+        fix:     p.getNode("fix", 1),
+        carrier: p.getNode("carrier-active", 1),
+      };
+
+      var set_radio = func(m) {
+        foreach (var k; keys(mode)) {
+          mode[k].setBoolValue(m == k);
+        }
+      };
+
+      var initialized = 0;
+      foreach (var k; keys(mode)) {
+        if (mode[k].getType() == "NONE") {
+          mode[k].setBoolValue(0);
+        }
+        initialized += mode[k].getBoolValue();
+      }
+      if (!initialized) {
+        set_radio("airport");
+      }
+      var pickNearest = func(type,propname,freqpropname) {
+
+        var found = navinfo(type,getprop(propname));
+        if( found == nil or size(found) == 0 ) {
+          logrint(LOG_WARN, type, " ", getprop(propname), " NOT found");
+          setprop(propname, "");
+          setprop(freqpropname, "");
+          return;
+        }
+        setprop(propname, found[0].id);
+        setprop(freqpropname, found[0].frequency / 100.0);
+
+      }
+
+      var populateCarrierCombo = func() {
+        # Fill the carrier-selection combo box with a list of available carriers
+        var combo = gui.findElementByName( dlg_root, "carrier-selection" );
+        var carriers = props.globals.getNode( "/ai/models" );
+
+        combo.removeChildren("value");
+        if (carriers == nil) 
+          return;
+
+        foreach (var carrier; carriers.getChildren("carrier")) {
+          nameNode = carrier.getNode("name");
+          if(nameNode != nil and nameNode.getValue() != nil)
+          combo.addChild("value").setValue(nameNode.getValue());
+        }
+      };
+
+      var populateCarrierPositionCombo = func() {
+        # Fill the carrier-position-select combo box with the special values for
+        # final approach and abeam in-air positions, plus any catapults or parking
+        # positions available.
+        var combo = gui.findElementByName( dlg_root, "carrier-position-selection" );
+        var carriers = props.globals.getNode( "/ai/models" );
+
+        # Clear the box, as we may have selected a new carrier from the carrier selection
+        combo.removeChildren("value");
+        combo.addChild("value").setValue("FLOLS");
+        combo.addChild("value").setValue("Abeam");
+
+        if (carriers == nil) 
+          return;
+
+        foreach (var carrier; carriers.getChildren("carrier")) {
+          if (carrier.getNode("name", 1).getValue() == getprop("/sim/presets/carrier")) {
+            foreach (var parkpos; carrier.getChildren("parking-pos")) {
+              combo.addChild("value").setValue(parkpos.getNode("name", 1).getValue());
+            }
+          }
+        }
+      };
+
+      populateCarrierCombo();
+      populateCarrierPositionCombo();
+
+    </open>
+
+    <close># just kept for educational purposes :-)</close>
+  </nasal>
+
+  <group>
+    <layout>hbox</layout>
+    <empty>
+      <stretch>1</stretch>
+    </empty>
+
+    <text>
+      <label>Position Aircraft In Air</label>
+    </text>
+
+    <empty>
+      <stretch>1</stretch>
+    </empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule />
+
+  <group>
+    <layout>table</layout>
+    <group>
+      <default-padding>6</default-padding>
+      <row>0</row>
+      <col>1</col>
+      <layout>vbox</layout>
+      <radio>
+        <live>true</live>
+        <halign>left</halign>
+        <label>Airport:</label>
+        <property>/sim/gui/dialogs/location-in-air/airport</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("airport")</script>
+        </binding>
+      </radio>
+
+      <radio>
+        <label>Position:</label>
+        <halign>left</halign>
+        <live>true</live>
+        <property>/sim/gui/dialogs/location-in-air/lonlat</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("lonlat")</script>
+        </binding>
+      </radio>
+
+      <radio>
+        <label>VOR:</label>
+        <halign>left</halign>
+        <live>true</live>
+        <property>/sim/gui/dialogs/location-in-air/vor</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("vor")</script>
+        </binding>
+      </radio>
+
+      <radio>
+        <live>true</live>
+        <halign>left</halign>
+        <label>NDB:</label>
+
+        <property>/sim/gui/dialogs/location-in-air/ndb</property>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("ndb")</script>
+        </binding>
+      </radio>
+
+
+      <radio>
+        <label>Fix:</label>
+        <live>true</live>
+        <property>/sim/gui/dialogs/location-in-air/fix</property>
+        <halign>left</halign>
+
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("fix")</script>
+        </binding>
+      </radio>
+
+      <radio>
+        <live>true</live>
+        <label>Aircraft Carrier:</label>
+        <property>/sim/gui/dialogs/location-in-air/carrier-active</property>
+        <halign>left</halign>
+
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("carrier")</script>
+        </binding>
+      </radio>
+    </group>
+    <group>
+      <layout>table</layout>
+      <row>0</row>
+      <col>2</col>
+      <visible>
+        <property>/sim/gui/dialogs/location-in-air/airport</property>
+      </visible>
+      <text>
+        <row>0</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>Airport:</label>
+      </text>
+      <input>
+        <row>0</row>
+        <col>1</col>
+        <property>/sim/presets/airport-id</property>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("airport")</script>
+        </binding>
+      </input>
+      <text>
+        <row>1</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>  Runway:</label>
+      </text>
+      <input>
+        <row>1</row>
+        <col>1</col>
+        <property>/sim/presets/runway</property>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("airport")</script>
+        </binding>
+      </input>
+    </group>
+
+    <group>
+      <row>0</row>
+      <col>2</col>
+      <layout>table</layout>
+      <visible>
+        <property>/sim/gui/dialogs/location-in-air/lonlat</property>
+      </visible>
+      <text>
+        <row>0</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>Longitude:</label>
+      </text>
+      <input>
+        <row>0</row>
+        <col>1</col>
+        <property>/sim/presets/longitude-deg</property>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("lonlat")</script>
+        </binding>
+      </input>
+      <text>
+        <row>1</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>  Latitude:</label>
+      </text>
+      <input>
+        <row>1</row>
+        <col>1</col>
+        <property>/sim/presets/latitude-deg</property>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("lonlat")</script>
+        </binding>
+      </input>
+    </group>
+
+    <group>
+      <row>0</row>
+      <col>2</col>
+      <layout>table</layout>
+      <visible>
+        <property>/sim/gui/dialogs/location-in-air/vor</property>
+      </visible>
+      <text>
+        <row>0</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>VOR:</label>
+      </text>
+      <input>
+        <row>0</row>
+        <col>1</col>
+        <property>/sim/presets/vor-id</property>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("vor")</script>
+        </binding>
+      </input>
+
+    </group>
+
+
+    <group>
+      <row>0</row>
+      <col>2</col>
+      <layout>table</layout>
+      <visible>
+        <property>/sim/gui/dialogs/location-in-air/ndb</property>
+      </visible>
+      <text>
+        <row>0</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>NDB:</label>
+      </text>
+      <input>
+        <row>0</row>
+        <col>1</col>
+        <property>/sim/presets/ndb-id</property>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("ndb")</script>
+        </binding>
+      </input>
+    </group>
+
+    <group>
+      <row>0</row>
+      <col>2</col>
+      <layout>table</layout>
+      <visible>
+        <property>/sim/gui/dialogs/location-in-air/fix</property>
+      </visible>
+      <text>
+        <row>0</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>Fix:</label>
+      </text>
+      <input>
+        <row>0</row>
+        <col>1</col>
+        <property>/sim/presets/fix</property>
+        <binding>
+          <command>nasal</command>
+          <script>set_radio("fix")</script>
+        </binding>
+      </input>
+    </group>
+
+    <group>
+      <row>0</row>
+      <col>2</col>
+      <layout>table</layout>
+      <visible>
+        <property>/sim/gui/dialogs/location-in-air/carrier-active</property>
+      </visible>
+      <text>
+        <row>0</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>Carrier:</label>
+      </text>
+      <combo>
+        <name>carrier-selection</name>
+        <row>0</row>
+        <col>1</col>
+        <property>/sim/presets/carrier</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>carrier-selection</object-name>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>populateCarrierPositionCombo();</script>
+        </binding>
+      </combo>
+      <text>
+        <row>1</row>
+        <col>0</col>
+        <halign>right</halign>
+        <label>Position:</label>
+      </text>
+      <combo>
+        <name>carrier-position-selection</name>
+        <row>1</row>
+        <col>1</col>
+        <property>/sim/presets/carrier-position</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>carrier-position-selection</object-name>
+        </binding>
+      </combo>
+    </group>
+  </group>
+
+  <hrule/>
+
+  <text>
+    <label>Relative Position</label>
+  </text>
+
+  <group>
+    <layout>hbox</layout>
+
+    <group>
+      <layout>table</layout>
+      <text>
+        <row>0</row><col>0</col>
+        <halign>right</halign>
+        <label>  Distance (nm):</label>
+        <enable><not><property>/sim/gui/dialogs/location-in-air/lonlat</property></not></enable>
+      </text>
+      <input>
+        <row>0</row><col>1</col>
+        <property>/sim/presets/offset-distance-nm</property>
+        <enable><not><property>/sim/gui/dialogs/location-in-air/lonlat</property></not></enable>
+      </input>
+
+      <text>
+        <row>0</row><col>2</col>
+        <halign>right</halign>
+        <label>Azimuth (deg):</label>
+        <enable><not><property>/sim/gui/dialogs/location-in-air/lonlat</property></not></enable>
+      </text>
+      <input>
+        <row>0</row><col>3</col>
+        <property>/sim/presets/offset-azimuth-deg</property>
+        <enable><not><property>/sim/gui/dialogs/location-in-air/lonlat</property></not></enable>
+      </input>
+
+      <text>
+        <row>1</row><col>0</col>
+        <halign>right</halign>
+        <label>Altitude (ft):</label>
+      </text>
+      <input>
+        <row>1</row><col>1</col>
+        <property>/sim/presets/altitude-ft</property>
+      </input>
+
+      <text>
+        <row>1</row><col>2</col>
+        <halign>right</halign>
+        <label>  Glidepath (deg):</label>
+      </text>
+      <input>
+        <row>1</row><col>3</col>
+        <property>/sim/presets/glideslope-deg</property>
+      </input>
+
+      <text>
+        <row>2</row><col>0</col>
+        <halign>right</halign>
+        <label>Airspeed (kt):</label>
+      </text>
+      <input>
+        <row>2</row><col>1</col>
+        <property>/sim/presets/airspeed-kt</property>
+      </input>
+
+      <text>
+        <row>2</row><col>2</col>
+        <halign>right</halign>
+        <label>Heading (deg):</label>
+        <enable><not><property>/sim/gui/dialogs/location-in-air/airport</property></not></enable>
+      </text>
+      <input>
+        <row>2</row><col>3</col>
+        <enable><not><property>/sim/gui/dialogs/location-in-air/airport</property></not></enable>
+        <property>/sim/presets/heading-deg</property>
+      </input>
+    </group>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>10</default-padding>
+
+    <button>
+      <legend>OK</legend>
+      <default>true</default>
+      <equal>true</equal>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+
+          if (mode.carrier.getBoolValue()) {
+            setprop("/sim/presets/airport-id", "");
+            setprop("/sim/presets/runway", "");
+            setprop("/sim/presets/runway-requested", 0);
+          }
+          else if (!mode.airport.getBoolValue()) {
+            setprop("/sim/presets/carrier", "");
+            setprop("/sim/presets/parkpos", "");
+            setprop("/sim/presets/airport-id", "");
+            setprop("/sim/presets/runway", "");
+            setprop("/sim/presets/runway-requested", 0);
+          } else {
+            setprop("/sim/presets/carrier", "");
+            setprop("/sim/presets/heading-deg", 9999);
+            var runway = getprop("/sim/presets/runway");
+            if (runway != "") {
+              setprop("/sim/presets/runway-requested", 1);
+            }
+          }
+
+          if (!mode.lonlat.getBoolValue()) {
+            setprop("/sim/presets/longitude-deg", -9999);
+            setprop("/sim/presets/latitude-deg", -9999);
+          }
+
+          if (!mode.vor.getBoolValue()) {
+            setprop("/sim/presets/vor-id", "");
+          } else {
+            pickNearest("vor","/sim/presets/vor-id","/sim/presets/vor-freq");
+          }
+
+          if (!mode.ndb.getBoolValue()) {
+            setprop("/sim/presets/ndb-id", "");
+          } else {
+            pickNearest("ndb","/sim/presets/ndb-id","/sim/presets/ndb-freq");
+          }
+
+          if (!mode.fix.getBoolValue()) {
+            setprop("/sim/presets/fix", "");
+          }
+
+          var speedRequested = getprop("/sim/presets/airspeed-kt");
+          if (speedRequested > 0) {
+            setprop("/sim/presets/speed-set", "knots");
+          }
+
+        </script>
+      </binding>
+      <binding>
+        <command>reposition</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          ac = getprop("/sim/aircraft");
+          if (ac == "ufo") { return }
+
+          var eng = props.globals.getNode("/controls/engines");
+          if (eng != nil) {
+            foreach (c; eng.getChildren("engine")) {
+              c.getNode("magnetos", 1).setIntValue(3);
+              c.getNode("throttle", 1).setDoubleValue(0.5);
+            }
+          }
+        </script>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Cancel</legend>
+      <equal>true</equal>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+</PropertyList>

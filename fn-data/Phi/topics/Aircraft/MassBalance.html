@@ -1,0 +1,102 @@
+<style>
+.phi-mb-table {
+	margin-bottom: 1ex;
+	width: 100%;
+}
+
+.phi-mb-table-slider div {
+	font-size: 75%;
+}
+
+.phi-mb-table caption {
+	font-weight: bold;
+}
+
+.phi-mb-table-name {
+	text-align: left;
+	width: 8em;
+}
+
+.phi-mb-table-value {
+	width: 4em;
+	max-width: 4em;
+	text-align: right;
+}
+
+#phi-mb-tablecolumn {
+	min-width: 20em;
+    max-width: 30em;
+    width: 100%;
+    display: inline;
+	float: left;
+    padding-right: 1em;
+}
+
+#phi-mb-graphcolumn {
+	min-width: 300px;
+    max-width: 30em;
+    width: 100%;
+	float: left;
+    display: inline;
+}
+</style>
+<div id="phi-mb-tablecolumn">
+
+    <table id="phi-mb-fueltable" class="phi-mb-table ui-widget-content ui-corner-all">
+        <caption class="ui-widget-header ui-corner-all">Fuel Tanks</caption>
+        <thead>
+            <tr>
+                <th class="phi-mb-table-name">Name</th>
+                <th class="phi-mb-table-slider">Level</th>
+                <th class="phi-mb-table-value">GAL</th>
+                <th class="phi-mb-table-value">IN-LBS</th>
+
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: tanks">
+            <tr data-bind="ifnot: hidden">
+                <td class="phi-mb-table-name" data-bind="text: name"></td>
+                <td class="phi-mb-table-slider"><div
+                        data-bind="slider: { value: content, realtime: true, max: capacity, change: setTankLevel }"></div></td>
+                <td class="phi-mb-table-value" data-bind="text: content().toFixed(0)"></td>
+                <td class="phi-mb-table-value" data-bind="text: moment().toFixed(0)"></td>
+
+            </tr>
+        </tbody>
+    </table>
+    <table id="phi-mb-loadtable" class="phi-mb-table ui-widget-content ui-corner-all">
+        <caption class="ui-widget-header ui-corner-all">Payload</caption>
+        <thead>
+            <tr>
+                <th class="phi-mb-table-name">Name</th>
+                <th class="phi-mb-table-slider">Load</th>
+                <th class="phi-mb-table-value">LBS</th>
+                <th class="phi-mb-table-value">IN-LBS</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: loads">
+            <tr>
+                <td class="phi-mb-table-name" data-bind="text: name"></td>
+                <td class="phi-mb-table-slider"><div
+                        data-bind="slider: { value: mass, realtime: true, 'max': max, 'min': min, change: setLoad  }"></div></td>
+                <td class="phi-mb-table-value" data-bind="text: mass().toFixed(0)"></td>
+                <td class="phi-mb-table-value" data-bind="text: moment().toFixed(0)"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="phi-mb-graphcolumn">
+    <div class="ui-widget">
+        <div class="ui-widget-header ui-corner-all">Envelope</div>
+        <div class="ui-widget-content ui-corner-all">
+            <div style="height: 300px" data-bind="flotchart: { data: envelopeData, options: envelopeOptions, hover: hover }"></div>
+            <div data-bind="visible: hoverLabel">
+                <div>
+                    <span data-bind="text: hoverLabel"></span> <span data-bind="text: hoverMass().toFixed(0)"></span><span>lbs</span>
+                    <span data-bind="text: hoverCG().toFixed(0)"></span><span>@in</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

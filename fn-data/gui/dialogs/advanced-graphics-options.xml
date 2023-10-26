@@ -1,0 +1,1454 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>advanced-graphics-options</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
+  <default-padding>3</default-padding>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <text>
+      <label>Advanced Graphics Options</label>
+    </text>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend/>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
+    <group>
+      <layout>vbox</layout>
+
+      <group>
+        <layout>hbox</layout>
+        <text>
+          <label>General</label>
+          <halign>left</halign>
+        </text>
+        <hrule>
+          <stretch>true</stretch>
+        </hrule>
+      </group>
+
+      <text>
+        <halign>left</halign>
+        <label>Select Rendering Mode</label>
+      </text>
+
+      <!-- only for a gap -->
+      <group>
+        <layout>vbox</layout>
+        <default-padding>1</default-padding>
+        <text>
+          <label> </label>
+        </text>
+      </group>
+
+      <group>
+        <layout>hbox</layout>
+        <halign>left</halign>
+        <group>
+          <layout>table</layout>
+          <radio>
+            <row>0</row>
+            <col>0</col>
+            <halign>left</halign>
+            <name>low-spec-mode</name>
+            <property>/sim/gui/dialogs/advanced/mode/low-spec-mode</property>
+            <live>true</live>
+            <label>Low Specifications</label>
+            <binding>
+              <command>property-assign</command>
+              <property>/sim/gui/dialogs/advanced/mode/low-spec-mode</property>
+              <value>1</value>
+            </binding>
+            <binding>
+              <command>property-assign</command>
+              <property>/sim/gui/dialogs/advanced/mode/als-mode</property>
+              <value>0</value>
+            </binding>
+            <binding>
+              <command>property-assign</command>
+              <property>/sim/rendering/shaders/skydome</property>
+              <value>0</value>
+            </binding>
+          </radio>
+
+          <empty>
+            <row>0</row>
+            <col>1</col>
+            <stretch>true</stretch>
+          </empty>
+
+          <checkbox>
+            <row>0</row>
+            <col>2</col>
+            <halign>right</halign>
+            <name>use-shaders</name>
+            <property>/sim/rendering/shaders/use-shaders</property>
+            <label>Use Shaders</label>
+            <live>true</live>
+            <enable>
+              <not>
+                <property>/sim/rendering/shaders/skydome</property>
+              </not>
+            </enable>
+            <binding>
+              <command>dialog-apply</command>
+              <object-name>use-shaders</object-name>
+            </binding>
+          </checkbox>
+        </group>
+
+      </group>
+
+      <textbox>
+        <name>low-spec-description</name>
+        <halign>fill</halign>
+        <stretch>true</stretch>
+        <pref-width>400</pref-width>
+        <pref-height>90</pref-height>
+        <slider>15</slider>
+        <editable>false</editable>
+        <wrap>true</wrap>
+        <live>true</live>
+        <top-line>0</top-line>
+        <property>/sim/gui/dialogs/advanced/low-spec-description</property>
+      </textbox>
+
+
+      <group>
+        <layout>hbox</layout>
+        <halign>left</halign>
+
+        <radio>
+          <halign>left</halign>
+          <name>als-mode</name>
+          <property>/sim/gui/dialogs/advanced/mode/als-mode</property>
+          <live>true</live>
+          <label>Atmospheric Light Scattering (ALS)</label>
+          <binding>
+            <command>property-assign</command>
+            <property>/sim/gui/dialogs/advanced/mode/low-spec-mode</property>
+            <value>0</value>
+          </binding>
+          <binding>
+            <command>property-assign</command>
+            <property>/sim/gui/dialogs/advanced/mode/als-mode</property>
+            <value>1</value>
+          </binding>
+          <binding>
+            <command>property-assign</command>
+            <property>/sim/rendering/shaders/skydome</property>
+            <value>1</value>
+          </binding>
+        </radio>
+
+      </group>
+
+      <textbox>
+        <name>als-description</name>
+        <halign>fill</halign>
+        <stretch>true</stretch>
+        <pref-width>400</pref-width>
+        <pref-height>110</pref-height>
+        <slider>15</slider>
+        <editable>false</editable>
+        <wrap>true</wrap>
+        <live>true</live>
+        <top-line>0</top-line>
+        <property>/sim/gui/dialogs/advanced/als-description</property>
+      </textbox>
+
+      <hrule/>
+
+      <text>
+        <visible>
+          <not>
+            <property>/sim/rendering/shaders/skydome</property>
+          </not>
+        </visible>
+        <halign>left</halign>
+        <color>
+          <red>1.0</red>
+          <green>0.6</green>
+          <blue>0.6</blue>
+        </color>
+        <label>Some of these settings can only be changed when using ALS.</label>
+      </text>
+
+      <group>
+        <layout>table</layout>
+
+        <text>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>0</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Terrain Quality</label>
+        </text>
+        <combo>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>0</row>
+          <col>1</col>
+          <name>terrain-quality</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/terrain-quality</property>
+          <value>Low</value>
+          <value>Medium</value>
+          <value>High</value>
+          <value>Ultra</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>terrain-quality</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/terrain-quality");
+              if (val == "Medium") {
+                setprop("/sim/rendering/shaders/landmass", 4);
+                setprop("/sim/rendering/shaders/transition", 4);
+              } else if (val == "High") {
+                setprop("/sim/rendering/shaders/landmass", 5);
+                setprop("/sim/rendering/shaders/transition", 5);
+              } else if (val == "Ultra") {
+                setprop("/sim/rendering/shaders/landmass", 6);
+                setprop("/sim/rendering/shaders/transition", 6);
+              } else {
+                setprop("/sim/rendering/shaders/landmass", 3);
+                setprop("/sim/rendering/shaders/transition", 2);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>1</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Model Effects</label>
+        </text>
+        <combo>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>1</row>
+          <col>1</col>
+          <name>model-effects</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/model-effects</property>
+          <value>Disabled</value>
+          <value>Enabled</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>model-effects</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/model-effects");
+              if (val == "Enabled") {
+                setprop("/sim/rendering/shaders/model", 3);
+              } else {
+                setprop("/sim/rendering/shaders/model", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>2</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Water Effects</label>
+        </text>
+        <combo>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>2</row>
+          <col>1</col>
+          <name>water-effects</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/water-effects</property>
+          <value>Disabled</value>
+          <value>Low</value>
+          <value>High</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>water-effects</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/water-effects");
+              if (val == "Low") {
+                setprop("/sim/rendering/shaders/water", 4);
+              } else if (val == "High") {
+                setprop("/sim/rendering/shaders/water", 5);
+              } else {
+                setprop("/sim/rendering/shaders/water", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>4</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Clouds Detail</label>
+        </text>
+        <combo>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>4</row>
+          <col>1</col>
+          <name>clouds</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/clouds</property>
+          <value>Low</value>
+          <value>High</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>clouds</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/clouds");
+              if (val == "High") {
+                setprop("/sim/rendering/shaders/clouds", 1);
+              } else {
+                setprop("/sim/rendering/shaders/clouds", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>5</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Wind Effects</label>
+        </text>
+        <combo>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>5</row>
+          <col>1</col>
+          <name>wind-effects</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/wind-effects</property>
+          <value>Disabled</value>
+          <value>Enabled</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>wind-effects</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/wind-effects");
+              if (val == "Enabled") {
+                setprop("/sim/rendering/shaders/wind-effects", 2);
+              } else {
+                setprop("/sim/rendering/shaders/wind-effects", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>6</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Overlay</label>
+        </text>
+        <combo>
+          <enable>
+            <property>/sim/rendering/shaders/skydome</property>
+          </enable>
+          <row>6</row>
+          <col>1</col>
+          <name>overlay</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/overlay</property>
+          <value>Disabled</value>
+          <value>Enabled</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>overlay</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/overlay");
+              if (val == "Enabled") {
+                setprop("/sim/rendering/shaders/vegetation-effects", 1);
+              } else {
+                setprop("/sim/rendering/shaders/vegetation-effects", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <row>7</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Anti-aliasing</label>
+        </text>
+        <combo>
+          <row>7</row>
+          <col>1</col>
+          <name>anti-aliasing</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/anti-aliasing</property>
+          <value>Disabled</value>
+          <value>MSAA 2x</value>
+          <value>MSAA 4x</value>
+          <value>MSAA 8x</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>anti-aliasing</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/anti-aliasing");
+              if (val == "MSAA 2x") {
+                setprop("/sim/rendering/multi-sample-buffers", 1);
+                setprop("/sim/rendering/multi-samples", 2);
+              } else if (val == "MSAA 4x") {
+                setprop("/sim/rendering/multi-sample-buffers", 1);
+                setprop("/sim/rendering/multi-samples", 4);
+              } else if (val == "MSAA 8x") {
+                setprop("/sim/rendering/multi-sample-buffers", 1);
+                setprop("/sim/rendering/multi-samples", 8);
+              } else {
+                setprop("/sim/rendering/multi-sample-buffers", 0);
+                setprop("/sim/rendering/multi-samples", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+      </group>
+
+      <group>
+        <layout>vbox</layout>
+        <stretch>1</stretch>
+      </group>
+
+    </group>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
+    <vrule/>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
+    <group>
+      <layout>vbox</layout>
+
+      <group>
+        <layout>hbox</layout>
+        <text>
+          <label>Shadows and Lights</label>
+          <halign>left</halign>
+        </text>
+        <hrule>
+          <stretch>true</stretch>
+        </hrule>
+      </group>
+
+      <group>
+        <layout>table</layout>
+        <text>
+          <row>0</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Shadow Quality</label>
+        </text>
+        <text>
+          <row>0</row>
+          <col>1</col>
+          <label>                </label>
+        </text>
+        <combo>
+          <row>0</row>
+          <col>2</col>
+          <name>shadows</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/advanced/shadows</property>
+          <value>Disabled</value>
+          <value>Low</value>
+          <value>Medium</value>
+          <value>High</value>
+          <value>Ultra</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>shadows</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/advanced/shadows");
+              if (val == "Low") {
+                setprop("/sim/rendering/shadows/enabled", 1);
+                setprop("/sim/rendering/shadows/sun-atlas-size", 1024);
+              } else if (val == "Medium") {
+                setprop("/sim/rendering/shadows/enabled", 1);
+                setprop("/sim/rendering/shadows/sun-atlas-size", 2048);
+              } else if (val == "High") {
+                setprop("/sim/rendering/shadows/enabled", 1);
+                setprop("/sim/rendering/shadows/sun-atlas-size", 4096);
+              } else if (val == "Ultra") {
+                setprop("/sim/rendering/shadows/enabled", 1);
+                setprop("/sim/rendering/shadows/sun-atlas-size", 8192);
+              } else {
+                setprop("/sim/rendering/shadows/enabled", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+      </group>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Dynamic lighting</label>
+        <name>dynamic-lighting</name>
+        <property>/sim/rendering/dynamic-lighting/enabled</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>dynamic-lighting</object-name>
+        </binding>
+      </checkbox>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Limit the number of lights being displayed</label>
+        <name>limit-lights</name>
+        <property>/sim/gui/dialogs/advanced/limit-lights</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>limit-lights</object-name>
+        </binding>
+        <binding>
+          <command>nasal</command>
+          <script>
+            var limit_lights = getprop("/sim/gui/dialogs/advanced/limit-lights");
+            if (limit_lights) {
+              setprop("/sim/rendering/dynamic-lighting/max-pointlights", 8);
+              setprop("/sim/rendering/dynamic-lighting/max-spotlights", 8);
+            } else {
+              setprop("/sim/rendering/dynamic-lighting/max-pointlights", 1024);
+              setprop("/sim/rendering/dynamic-lighting/max-spotlights", 1024);
+            }
+          </script>
+        </binding>
+        <enable>
+          <property>/sim/rendering/dynamic-lighting/enabled</property>
+        </enable>
+      </checkbox>
+
+      <group>
+        <layout>hbox</layout>
+        <halign>right</halign>
+        <text>
+          <label>Maximum number of point lights</label>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+        </text>
+        <slider>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+          <name>max-lights</name>
+          <min>1</min>
+          <max>16</max>
+          <live>true</live>
+          <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>max-lights</object-name>
+          </binding>
+        </slider>
+        <text>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+        </text>
+      </group>
+
+      <group>
+        <layout>hbox</layout>
+        <halign>right</halign>
+        <text>
+          <label>Maximum number of spot lights</label>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+        </text>
+        <slider>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+          <name>max-lights</name>
+          <min>1</min>
+          <max>16</max>
+          <live>true</live>
+          <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>max-lights</object-name>
+          </binding>
+        </slider>
+        <text>
+          <enable>
+            <and>
+              <property>/sim/rendering/dynamic-lighting/enabled</property>
+              <property>/sim/gui/dialogs/advanced/limit-lights</property>
+            </and>
+          </enable>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
+        </text>
+      </group>
+
+      <group>
+        <layout>hbox</layout>
+        <text>
+          <label>Scenery Layers</label>
+          <halign>left</halign>
+        </text>
+        <hrule>
+          <stretch>true</stretch>
+        </hrule>
+      </group>
+
+      <group>
+        <layout>table</layout>
+
+        <text>
+          <row>0</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Pylons and power lines</label>
+        </text>
+        <combo>
+          <row>0</row>
+          <col>1</col>
+          <name>pylons</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/rendering/pylons</property>
+          <value>Disabled</value>
+          <value>Basic</value>
+          <value>Detailed</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>pylons</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/rendering/pylons");
+              if (val == "Detailed") {
+                setScenerySuffix("Pylons", 1);
+                setScenerySuffix("Details", 1);
+              } else if (val == "Basic") {
+                setScenerySuffix("Pylons", 1);
+                setScenerySuffix("Details", 0);
+              } else {
+                setScenerySuffix("Pylons", 0);
+                setScenerySuffix("Details", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <row>1</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Detailed Roads and Railways</label>
+        </text>
+        <combo>
+          <row>1</row>
+          <col>1</col>
+          <name>roads</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/rendering/roads</property>
+          <value>Disabled</value>
+          <value>Enabled</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>roads</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/rendering/roads");
+              if (val == "Enabled") {
+                setScenerySuffix("Roads", 1);
+              } else {
+                setScenerySuffix("Roads", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <row>2</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Buildings</label>
+        </text>
+        <combo>
+          <row>2</row>
+          <col>1</col>
+          <name>buildings</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/rendering/buildings</property>
+          <value>Disabled</value>
+          <value>Randomly Generated</value>
+          <value>OpenStreetMap Data</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>buildings</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/rendering/buildings");
+              if (val == "Disabled") {
+                setprop("/sim/rendering/random-buildings", 0);
+                setprop("/sim/rendering/osm-buildings", 0);
+                setScenerySuffix("Buildings", 0);
+              }
+
+              if (val == "Randomly Generated") {
+                setprop("/sim/rendering/random-buildings", 1);
+                setprop("/sim/rendering/osm-buildings", 0);
+                setScenerySuffix("Buildings", 0);
+              }
+
+              if (val == "OpenStreetMap Data") {
+                setprop("/sim/rendering/random-buildings", 0);
+                setprop("/sim/rendering/osm-buildings", 1);
+                setScenerySuffix("Buildings", 1);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <row>3</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Random Scenery Objects</label>
+        </text>
+        <combo>
+          <row>3</row>
+          <col>1</col>
+          <name>random-objects</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/rendering/random-objects</property>
+          <value>Disabled</value>
+          <value>Enabled</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>random-objects</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/rendering/random-objects");
+              if (val == "Enabled") {
+                setprop("/sim/rendering/random-objects", 1);
+              } else {
+                setprop("/sim/rendering/random-objects", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <row>4</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Autogenerated Vegetation</label>
+        </text>
+        <combo>
+          <row>4</row>
+          <col>1</col>
+          <name>random-vegetation</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/rendering/random-vegetation</property>
+          <value>Disabled</value>
+          <value>Ultra Low Density</value>
+          <value>Very Low Density</value>
+          <value>Low Density</value>
+          <value>Medium Density</value>
+          <value>High Density</value>
+          <value>Very High Density</value>
+          <value>Ultra High Density</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>random-vegetation</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/rendering/random-vegetation");
+              if (val == "Disabled") {
+                setprop("/sim/rendering/random-vegetation", 0);
+              }
+
+              if (val == "Ultra Low Density") {
+                setprop("/sim/rendering/random-vegetation", 1);
+                setprop("/sim/rendering/vegetation-density", 0.1);
+              }
+
+              if (val == "Very Low Density") {
+                setprop("/sim/rendering/random-vegetation", 1);
+                setprop("/sim/rendering/vegetation-density", 0.25);
+              }
+
+              if (val == "Low Density") {
+                setprop("/sim/rendering/random-vegetation", 1);
+                setprop("/sim/rendering/vegetation-density", 0.5);
+              }
+
+              if (val == "Medium Density") {
+                setprop("/sim/rendering/random-vegetation", 1);
+                setprop("/sim/rendering/vegetation-density", 1.0);
+              }
+
+              if (val == "High Density") {
+                setprop("/sim/rendering/random-vegetation", 1);
+                setprop("/sim/rendering/vegetation-density", 2.0);
+              }
+
+              if (val == "Very High Density") {
+                setprop("/sim/rendering/random-vegetation", 1);
+                setprop("/sim/rendering/vegetation-density", 4.0);
+              }
+
+              if (val == "Ultra High Density") {
+                setprop("/sim/rendering/random-vegetation", 1);
+                setprop("/sim/rendering/vegetation-density", 8.0);
+              }
+
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <row>5</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>OpenStreetMap Trees</label>
+        </text>
+        <combo>
+          <row>5</row>
+          <col>1</col>
+          <name>osm2city-trees</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/rendering/osm2city-trees</property>
+          <value>Disabled</value>
+          <value>Enabled</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>osm2city-trees</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/rendering/osm2city-trees");
+              if (val == "Enabled") {
+                setScenerySuffix("Trees", 1);
+              } else {
+                setScenerySuffix("Trees", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+
+
+        <text>
+          <row>6</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Vegetation Shadows</label>
+        </text>
+        <combo>
+          <row>6</row>
+          <col>1</col>
+          <name>vegetation-shadows</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/rendering/vegetation-shadows</property>
+          <value>Disabled</value>
+          <value>Enabled</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>vegetation-shadows</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/rendering/vegetation-shadows");
+              if (val == "Enabled") {
+                setprop("/sim/rendering/random-vegetation-shadows", 1);
+              } else {
+                setprop("/sim/rendering/random-vegetation-shadows", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <row>7</row>
+          <col>0</col>
+          <halign>left</halign>
+          <label>Scenery Objects</label>
+        </text>
+
+        <combo>
+          <row>7</row>
+          <col>1</col>
+          <name>placed-objects</name>
+          <pref-width>200</pref-width>
+          <property>/sim/gui/dialogs/rendering/placed-objects</property>
+          <value>Disabled</value>
+          <value>Enabled</value>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>placed-objects</object-name>
+          </binding>
+          <binding>
+            <command>nasal</command>
+            <script>
+              var val = getprop("/sim/gui/dialogs/rendering/placed-objects");
+              if (val == "Enabled") {
+                setScenerySuffix("Objects", 1);
+              } else {
+                setScenerySuffix("Objects", 0);
+              }
+            </script>
+          </binding>
+        </combo>
+
+        <text>
+          <row>8</row>
+          <col>0</col>
+          <colspan>2</colspan>
+          <halign>left</halign>
+          <color>
+            <red>1.0</red>
+            <green>0.6</green>
+            <blue>0.6</blue>
+          </color>
+          <label>Warning: Pylons, Detailed Roads, Buildings use a lot of memory</label>
+        </text>
+
+        <text>
+          <row>9</row>
+          <col>0</col>1
+          <colspan>2</colspan>
+          <halign>left</halign>
+          <color>
+            <red>1.0</red>
+            <green>0.6</green>
+            <blue>0.6</blue>
+          </color>
+          <label>and disk space, and are only available in limited areas.</label>
+        </text>
+      </group>
+
+      <group>
+        <layout>vbox</layout>
+        <stretch>1</stretch>
+      </group>
+
+      <group>
+        <layout>hbox</layout>
+        <text>
+          <label>Atmospheric Effects</label>
+          <halign>left</halign>
+        </text>
+        <hrule>
+          <stretch>true</stretch>
+        </hrule>
+      </group>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Particles (smoke, dust, spray)</label>
+        <name>particles</name>
+        <property>/sim/rendering/particles</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>particles</object-name>
+        </binding>
+      </checkbox>
+
+      <checkbox>
+        <halign>left</halign>
+        <label>Precipitation</label>
+        <name>precipitation</name>
+        <property>/sim/rendering/precipitation-gui-enable</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>precipitation</object-name>
+        </binding>
+      </checkbox>
+
+      <checkbox>
+        <halign>left</halign>
+        <enable>
+          <not>
+            <property>/nasal/local_weather/enabled</property>
+          </not>
+        </enable>
+        <label>3D clouds (required by Detailed Weather)</label>
+        <name>3d-clouds</name>
+        <property>/sim/rendering/clouds3d-enable</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>3d-clouds</object-name>
+        </binding>
+      </checkbox>
+
+      <group>
+        <layout>hbox</layout>
+        <halign>right</halign>
+        <text>
+          <label>Cloud density</label>
+          <enable>
+            <property>/sim/rendering/clouds3d-enable</property>
+          </enable>
+        </text>
+        <slider>
+          <name>cloud-density</name>
+          <min>0</min>
+          <max>1.0</max>
+          <step>0.05</step>
+          <property>/sim/rendering/clouds3d-density</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>cloud-density</object-name>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>/sim/rendering/clouds3d-enable</property>
+          </binding>
+          <binding>
+            <command>property-toggle</command>
+            <property>/sim/rendering/clouds3d-enable</property>
+          </binding>
+        </slider>
+        <text>
+          <enable>
+            <property>/sim/rendering/clouds3d-enable</property>
+          </enable>
+          <label>12345678</label>
+          <format>%.2f</format>
+          <live>true</live>
+          <property>/sim/rendering/clouds3d-density</property>
+        </text>
+      </group>
+
+      <group>
+        <layout>hbox</layout>
+        <halign>right</halign>
+        <text>
+          <label>Cloud visibility range</label>
+          <enable>
+            <property>/sim/rendering/clouds3d-enable</property>
+          </enable>
+        </text>
+        <slider>
+          <name>cloud-vis-range</name>
+          <min>1000.0</min>
+          <max>150000.0</max>
+          <property>/sim/rendering/clouds3d-vis-range</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>cloud-vis-range</object-name>
+          </binding>
+        </slider>
+        <text>
+          <enable>
+            <property>/sim/rendering/clouds3d-enable</property>
+          </enable>
+          <label>12345678</label>
+          <format>%.fm</format>
+          <live>true</live>
+          <property>/sim/rendering/clouds3d-vis-range</property>
+        </text>
+      </group>
+
+      <empty>
+        <stretch>1</stretch>
+      </empty>
+
+    </group>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label> </label>
+      </text>
+    </group>
+
+  </group>
+
+  <hrule/>
+
+  <group>
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+    <layout>hbox</layout>
+
+    <button>
+      <legend>Back</legend>
+      <binding>
+        <command>dialog-show</command>
+        <dialog-name>rendering</dialog-name>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+    <button>
+      <legend>Close</legend>
+      <default>true</default>
+      <key>Esc</key>
+      <binding>
+        <command>nasal</command>
+        <script>
+          if (getprop("/sim/rendering/scenery-reload-required")) {
+            fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
+          }
+          if (getprop("/sim/rendering/compositor-reload-required")) {
+            fgcommand("reload-compositor");
+          }
+        </script>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+  </group>
+
+  <nasal>
+    <open>
+      <![CDATA[
+      setprop("/sim/gui/dialogs/advanced/low-spec-description",
+              "The Low Specifications render mode provides low quality visuals " ~
+              "with maximum compatibility. This setting is recommended for " ~
+              "users with less powerful hardware or integrated video cards.");
+
+      setprop("/sim/gui/dialogs/advanced/als-description",
+              "Atmospheric Light Scattering uses a sophisticated physical " ~
+              "atmospheric model and several other effects to give realistic " ~
+              "rendering of large distances. It is recommended to run this " ~
+              "configuration on relatively powerful hardware.");
+
+      # General
+      if (getprop("/sim/rendering/shaders/skydome")) {
+          setprop("/sim/gui/dialogs/advanced/mode/low-spec-mode", 0);
+          setprop("/sim/gui/dialogs/advanced/mode/als-mode", 1);
+      } else {
+          setprop("/sim/gui/dialogs/advanced/mode/low-spec-mode", 1);
+          setprop("/sim/gui/dialogs/advanced/mode/als-mode", 0);
+      }
+
+      var landmass_val = getprop("/sim/rendering/shaders/landmass");
+      if (landmass_val <= 3) {
+          setprop("/sim/gui/dialogs/advanced/terrain-quality", "Low");
+      } else if (landmass_val <= 4) {
+          setprop("/sim/gui/dialogs/advanced/terrain-quality", "Medium");
+      } else if (landmass_val <= 5) {
+          setprop("/sim/gui/dialogs/advanced/terrain-quality", "High");
+      } else {
+          setprop("/sim/gui/dialogs/advanced/terrain-quality", "Ultra");
+      }
+
+      var model_val = getprop("/sim/rendering/shaders/model");
+      if (model_val < 1) {
+          setprop("/sim/gui/dialogs/advanced/model-effects", "Disabled");
+      } else {
+          setprop("/sim/gui/dialogs/advanced/model-effects", "Enabled");
+      }
+
+      var water_val = getprop("/sim/rendering/shaders/water");
+      if (water_val <= 3) {
+          setprop("/sim/gui/dialogs/advanced/water-effects", "Disabled");
+      } else if (water_val <= 4) {
+          setprop("/sim/gui/dialogs/advanced/water-effects", "Low");
+      } else {
+          setprop("/sim/gui/dialogs/advanced/water-effects", "High");
+      }
+
+      var clouds_val = getprop("/sim/rendering/shaders/clouds");
+      if (clouds_val < 1) {
+          setprop("/sim/gui/dialogs/advanced/clouds", "Low");
+      } else {
+          setprop("/sim/gui/dialogs/advanced/clouds", "High");
+      }
+
+      var wind_val = getprop("/sim/rendering/shaders/wind-effects");
+      if (wind_val < 1) {
+          setprop("/sim/gui/dialogs/advanced/wind-effects", "Disabled");
+      } else {
+          setprop("/sim/gui/dialogs/advanced/wind-effects", "Enabled");
+      }
+
+      var overlay_val = getprop("/sim/rendering/shaders/vegetation-effects");
+      if (overlay_val < 1) {
+          setprop("/sim/gui/dialogs/advanced/overlay", "Disabled");
+      } else {
+          setprop("/sim/gui/dialogs/advanced/overlay", "Enabled");
+      }
+
+      var anti_aliasing_val = getprop("/sim/rendering/multi-samples");
+      if (anti_aliasing_val == 2) {
+          setprop("/sim/gui/dialogs/advanced/anti-aliasing", "MSAA 2x");
+      } else if (anti_aliasing_val == 4) {
+          setprop("/sim/gui/dialogs/advanced/anti-aliasing", "MSAA 4x");
+      } else if (anti_aliasing_val == 8) {
+          setprop("/sim/gui/dialogs/advanced/anti-aliasing", "MSAA 8x");
+      } else {
+          setprop("/sim/gui/dialogs/advanced/anti-aliasing", "Disabled");
+      }
+
+      # Shadows
+      if (getprop("/sim/rendering/shadows/enabled")) {
+          var size = getprop("/sim/rendering/shadows/sun-atlas-size");
+          if (size <= 1024) {
+              setprop("/sim/gui/dialogs/advanced/shadows", "Low");
+          } else if (size <= 2048) {
+              setprop("/sim/gui/dialogs/advanced/shadows", "Medium");
+          } else if (size <= 4096) {
+              setprop("/sim/gui/dialogs/advanced/shadows", "High");
+          } else {
+              setprop("/sim/gui/dialogs/advanced/shadows", "Ultra");
+          }
+      } else {
+          setprop("/sim/gui/dialogs/advanced/shadows", "Disabled");
+      }
+
+      # Lights
+      setprop("/sim/gui/dialogs/advanced/limit-lights",
+        (getprop("/sim/rendering/dynamic-lighting/max-pointlights") < 1024) or (getprop("/sim/rendering/dynamic-lighting/max-spotlights") < 1024));
+
+
+      var getScenerySuffix = func(layer) {
+          var suffixes = props.globals.getNode("/sim/rendering", 1).getChildren("scenery-path-suffix");
+          #printf("Looking for suffix " ~ layer);
+
+          foreach (var p; suffixes) {
+              #printf("Checking suffix " ~ p.getNode("name",1).getValue());
+              #printf("Checking suffix enabled " ~ p.getNode("enabled",1).getValue());
+              if (p.getNode("name",1).getValue() == layer) {
+                  #printf("Found layer " ~ layer ~ " value: " ~ p.getNode("enabled", 1).getValue() ~ " " ~ p.getNode("enabled", 1).getBoolValue());
+                  return p.getNode("enabled", 1).getBoolValue();
+              }
+          }
+
+          return 0;
+      }
+
+      var setScenerySuffix = func(layer, enable) {
+          var suffixes = props.globals.getNode("/sim/rendering", 1).getChildren("scenery-path-suffix");
+          #printf("Setting scenery suffix" ~ layer ~ " to " ~ enable);
+
+          foreach (var p; suffixes) {
+              if (p.getNode("name",1).getValue() == layer) {
+                  #printf("Matched scenery suffix" ~ layer ~ " to " ~ enable);
+                  p.getNode("enabled", 1).setBoolValue(enable);
+              }
+          }
+      }
+
+      # Mapping from underlying properties to those used by the GUI.
+
+      if (getScenerySuffix("Details")) {
+          setprop("/sim/gui/dialogs/rendering/pylons", "Detailed");
+      } else if (getScenerySuffix("Pylons")) {
+          setprop("/sim/gui/dialogs/rendering/pylons", "Basic");
+      } else {
+          setprop("/sim/gui/dialogs/rendering/pylons", "Disabled");
+      }
+
+      if (getScenerySuffix("Roads")) {
+          setprop("/sim/gui/dialogs/rendering/roads", "Enabled");
+      } else {
+          setprop("/sim/gui/dialogs/rendering/roads", "Disabled");
+      }
+
+      if (getScenerySuffix("Buildings")) {
+          setprop("/sim/gui/dialogs/rendering/buildings", "OpenStreetMap Data");
+      } else if (getprop("/sim/rendering/random-buildings")) {
+          setprop("/sim/gui/dialogs/rendering/buildings", "Randomly Generated");
+      } else {
+          setprop("/sim/gui/dialogs/rendering/buildings", "Disabled");
+      }
+
+      if (getprop("/sim/rendering/random-objects")) {
+          setprop("/sim/gui/dialogs/rendering/random-objects", "Enabled");
+      } else {
+          setprop("/sim/gui/dialogs/rendering/random-objects", "Disabled");
+      }
+
+      if (getprop("/sim/rendering/random-vegetation")) {
+          var density = getprop("/sim/rendering/vegetation-density");
+          if (density < 0.2) {
+              setprop("/sim/gui/dialogs/rendering/random-vegetation", "Ultra Low Density");
+              # 0.1
+          } else if (density < 0.4) {
+              setprop("/sim/gui/dialogs/rendering/random-vegetation", "Very Low Density");
+              # 0.25
+          } else if (density < 0.8) {
+              setprop("/sim/gui/dialogs/rendering/random-vegetation", "Low Density");
+              # 0.5
+          } else if (density < 1.5) {
+              setprop("/sim/gui/dialogs/rendering/random-vegetation", "Medium Density");
+              # 1.0
+          } else if (density < 3.0) {
+              setprop("/sim/gui/dialogs/rendering/random-vegetation", "High Density");
+              # 2.0
+          } else if (density < 6.0) {
+              setprop("/sim/gui/dialogs/rendering/random-vegetation", "Very High Density");
+              # 4.0
+          } else {
+              setprop("/sim/gui/dialogs/rendering/random-vegetation", "Ultra High Density");
+              # 8.0
+          }
+      } else {
+          setprop("/sim/gui/dialogs/rendering/random-vegetation", "Disabled");
+      }
+
+      if (getScenerySuffix("Trees")) {
+          setprop("/sim/gui/dialogs/rendering/osm2city-trees", "Enabled");
+      } else {
+          setprop("/sim/gui/dialogs/rendering/osm2city-trees", "Disabled");
+      }
+
+      if (getprop("/sim/rendering/random-vegetation-shadows")) {
+          setprop("/sim/gui/dialogs/rendering/vegetation-shadows", "Enabled");
+      } else {
+          setprop("/sim/gui/dialogs/rendering/vegetation-shadows", "Disabled");
+      }
+
+      if (getScenerySuffix("Objects")) {
+          setprop("/sim/gui/dialogs/rendering/placed-objects", "Enabled");
+      } else {
+          setprop("/sim/gui/dialogs/rendering/placed-objects", "Disabled");
+      }
+      ]]>
+    </open>
+  </nasal>
+
+</PropertyList>

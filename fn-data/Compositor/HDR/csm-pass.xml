@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>csm</type>
+  <effect-scheme>hdr-shadow</effect-scheme>
+  <clear-mask>depth</clear-mask>
+  <!-- Only render objects with the CAST_SHADOW bit flag -->
+  <cull-mask>0x4</cull-mask>
+  <render-at-night>false</render-at-night>
+  <attachment>
+    <buffer>sun-shadowmap-atlas</buffer>
+    <component>depth</component>
+  </attachment>
+</PropertyList>

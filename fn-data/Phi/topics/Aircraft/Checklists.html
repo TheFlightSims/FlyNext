@@ -1,0 +1,17 @@
+<style>
+.phi-checklist-col2 {
+	float: right;
+}
+
+#checklists li {
+	padding-left: 0.2em;
+	padding-right: 0.2em;
+}
+</style>
+<div id='checklists' data-bind="foreach: checklists">
+    <h4 data-bind="text: title, css: { 'ui-state-error': abnormal }"></h4>
+    <ul data-bind="foreach: items">
+        <li><span class="phi-checklist-col1" data-bind="text: name"></span> <span class="phi-checklist-col2"
+            data-bind="text: value"></span></li>
+    </ul>
+</div>

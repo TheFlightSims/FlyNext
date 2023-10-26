@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <name>aurora_inner</name>
+  <inherits-from>Effects/planet-aurora</inherits-from>
+  <parameters>
+    <arc_id>1.0</arc_id>
+  </parameters>
+</PropertyList>

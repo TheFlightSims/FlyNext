@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!-- Regional definitions for Arctic sea regions -->
+<PropertyList>
+  <name>Greenland</name>
+
+  <!-- Greenland -->
+  <area>
+    <lon1>-60.0</lon1>
+    <lon2>-30.0</lon2>
+    <lat1>60.0</lat1>
+    <lat2>90.0</lat2>
+  </area>
+  
+  <condition>
+    <equals>
+      <property>sim/startup/season</property>
+      <value>summer</value>
+    </equals>
+  </condition>
+
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <effect>Effects/grass</effect>
+    <texture-set>
+      <texture>Terrain/airport-grass-summer2.png</texture>
+      <texture n="13">Terrain/airport-grass-summer2.png</texture>
+      <texture n="14">Terrain/airport_grass_structure_overlay1.png</texture>
+      <texture n="20">Terrain/airport-grass-summer2.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <overlay_layer_magnification>8.0</overlay_layer_magnification>
+      <overlay_alpha>1.0</overlay_alpha>
+    </parameters>
+    <xsize>256</xsize>
+    <ysize>256</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>Ocean</name>
+    <effect>Effects/water</effect>
+    <texture>Terrain/water.png</texture>
+    <xsize>400</xsize>
+    <ysize>400</ysize>
+    <object-group>
+      <range-m>40000</range-m>
+      <object>
+        <path>Models/Geometry/container_carrier.ac</path>
+        <coverage-m2>500000000</coverage-m2>
+        <heading-type>random</heading-type>
+      </object>
+    </object-group>
+    <object-group>
+      <range-m>40000</range-m>
+      <object>
+        <path>Models/Maritime/Ice/iceberg1.xml</path>
+        <path>Models/Maritime/Ice/iceberg2.xml</path>
+        <path>Models/Maritime/Ice/iceberg3.xml</path>
+        <coverage-m2>5000000</coverage-m2>
+        <heading-type>random</heading-type>
+      </object>
+    </object-group>
+      <ambient>
+      <r>0.0</r>
+      <g>0.0</g>
+      <b>0.0</b>
+      <a>1.0</a>
+    </ambient>
+    <diffuse>
+      <r>0.4</r>
+      <g>0.4</g>
+      <b>0.4</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.0</r>
+      <g>0.0</g>
+      <b>0.2</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>0</shininess>
+    <solid>0</solid>
+    <rolling-friction>2</rolling-friction>
+    <bumpiness>0.8</bumpiness>
+  </material>
+
+</PropertyList>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+	<name>Effects/ws30-road-mid</name>
+	<inherits-from>Effects/ws30-road</inherits-from>
+	<parameters n="0">
+		<road-traffic-density n="0">0.1</road-traffic-density>
+	</parameters>
+</PropertyList>

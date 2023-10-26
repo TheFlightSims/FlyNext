@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PropertyList include="76Y-main.xml">
+	<texture-path>Textures/AmazonAir</texture-path>
+	<!-- Show Winglets -->
+	<animation>
+		<type>select</type>
+		<object-name>Winglets</object-name>
+		<condition>
+			<equals>
+				<property>/sim/signals/fdm-initialized</property>
+				<value>1</value>
+			</equals>
+		</condition>
+	</animation>
+</PropertyList>

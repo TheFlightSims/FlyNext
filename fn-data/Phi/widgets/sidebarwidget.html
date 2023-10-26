@@ -1,0 +1,49 @@
+<style>
+.widget-header-button {
+	font-size: unset;
+}
+
+.widget-handle {
+	cursor: pointer;
+	font-weight: bold;
+}
+</style>
+<div data-bind="event: { mouseover: onMouseover, mouseout: onMouseout }">
+    <div class="ui-state-default widget-handle">
+        <button
+            data-bind="
+             button: { 
+                 icons: { 
+                     primary: pinned() ? 'ui-icon-pin-s' : 'ui-icon-pin-w' 
+                 }, 
+                 text: false
+             }, 
+             click: pin"
+            class="widget-header-button" title="Pin"></button>
+        <button
+            data-bind="
+            button: {
+                icons: {
+                    primary: 'ui-icon-newwin'
+                },
+                text: false
+            },
+            click: detach"
+            class="widget-header-button" title="Detach"></button>
+        <button style="float: right"
+            data-bind="
+            button: { 
+                icons: { 
+                    primary: 'ui-icon-circlesmall-close'
+                }, 
+                text: false
+            }, 
+            click: close"
+            class="widget-header-button" title="Close"></button>
+
+        <span data-bind="text: widget"></span>
+    </div>
+
+    <div class="phi-widget" data-bind="component: { name: widget }, visible: expanded"></div>
+
+</div>

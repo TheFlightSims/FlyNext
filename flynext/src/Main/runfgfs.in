@@ -1,0 +1,89 @@
+#!/usr/bin/perl
+#
+# runfg -- front end for setting up the FG_ROOT env variable and launching 
+#          the fg executable.
+#
+# Written by Curtis Olson, started September 1997.
+#
+# Copyright (C) 1997 - 1998  Curtis L. Olson  - http://www.flightgear.org/~curt
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# $Id$
+#---------------------------------------------------------------------------
+
+
+$prefix = "@prefix@";
+# print "-> $prefix\n";
+
+# potential names of Flight Gear executable to try
+@files = ( "fgfs", "fgfs.exe" );
+
+# search for the executable
+# potential paths where the executable may be found
+@paths = ( ".", "Simulator/Main", $prefix );
+
+$savepath = "";
+$savefile = "";
+
+foreach $path (@paths) {
+    foreach $file (@files) {
+	# print "'$savepath'\n";
+	if ( $savepath eq "" ) {
+	    # don't search again if we've already found one
+	    # print "checking $path" . "bin/$file and $path" . "$file\n";
+	    if ( -x "$path/bin/$file" ) {
+		$saveprefix = $path;
+		$savepath = "$path/bin";
+		$savefile = "$file";
+	    } elsif ( -x "$path/$file" ) {
+		$saveprefix = $path;
+		$savepath = "$path";
+		$savefile = "$file";
+	    }
+	} else {
+	    # print "skipping $path/bin/$file and $path/$file\n";
+	}
+    }
+}
+
+die "Cannot locate program.\n" if ( $savepath eq "" );
+
+
+# search for the "FlightGear" root directory
+@paths = ( $prefix, $saveprefix, $ENV{HOME} );
+
+$fg_root = "";
+
+foreach $path (@paths) {
+    # print "trying $path\n";
+
+    if ( $fg_root eq "" ) {
+	if ( -d "$path/FlightGear" ) {
+	    $fg_root = "$path/FlightGear";
+	} elsif ( -d "$path/share/FlightGear" ) {
+	    $fg_root = "$path/share/FlightGear";
+	}
+    }
+}
+
+die "Cannot locate FG root directory (data)\n" if ( $fg_root eq "" );
+
+# run Flight Gear
+print "Running $savepath/$savefile --fg-root=$fg_root @ARGV\n";
+exec("$savepath/$savefile --fg-root=$fg_root @ARGV");
+
+
+#---------------------------------------------------------------------------

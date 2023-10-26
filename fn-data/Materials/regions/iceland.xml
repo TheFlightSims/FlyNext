@@ -1,0 +1,487 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <name>Iceland</name>
+  <area>
+    <lon1>-25.0</lon1>
+    <lon2>-10.0</lon2>
+    <lat1>60.0</lat1>
+    <lat2>70.0</lat2>
+  </area>
+
+  <condition>
+    <equals>
+      <property>sim/startup/season</property>
+      <value>summer</value>
+    </equals>
+  </condition>
+
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <name>Greenspace</name>
+    <effect>Effects/grass</effect>
+    <texture-set>
+      <texture>Terrain/airport-grass-summer2.png</texture>
+      <texture n="13">Terrain/airport-grass-summer3.png</texture>
+      <texture n="14">Terrain/rocks-lava.png</texture>
+      <texture n="15">Terrain/airport_grass_structure_overlay1.png</texture>
+      <texture n="20">Terrain/airport-grass-summer3.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_layer_magnification>8.0</overlay_layer_magnification>
+      <overlay_bias>0.125</overlay_bias>
+      <overlay_alpha>0.75</overlay_alpha>
+      <use_color_overlay>0</use_color_overlay>
+      <use_grain>1</use_grain>
+      <grain_layer_magnification>8.0</grain_layer_magnification>
+      <max_grass_height>0.3</max_grass_height>
+      <grass_density>1.0</grass_density>
+      <grass_groups>2</grass_groups>
+      <grass_modulate_by_overlay>1</grass_modulate_by_overlay>
+      <grass_modulate_height_min>0.0</grass_modulate_height_min>
+    </parameters>
+    <xsize>256</xsize>
+    <ysize>256</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>Landmass</name>
+    <name>SomeSort</name>
+    <name>Island</name>
+    <name>Default</name>
+    <effect>Effects/landmass-scrub</effect>
+    <texture-set>
+      <texture>Terrain/pampas-shrub.png</texture>
+      <texture n="11">Terrain/lava_hires.png</texture>
+      <texture n="14">Terrain/lava1.png</texture>
+      <texture n="15">Terrain/iceland_grass-autumn.png</texture>
+      <texture n="13">Terrain/pampas-grass.png</texture>
+      <texture n="20">Terrain/herbtundra_iceland.png</texture>
+      <texture n="21">Terrain/rocks-lava.png</texture>
+    </texture-set>
+    <parameters>
+      <rock_strata>1</rock_strata>
+      <grit_alpha>0.4</grit_alpha>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.125</overlay_bias>
+      <overlay_alpha>0.75</overlay_alpha>
+      <use_color_overlay>1</use_color_overlay>
+      <use_grain>1</use_grain>
+      <overlay_hardness>1.0</overlay_hardness>
+      <overlay_density>0.8</overlay_density>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <wood-coverage>8000.0</wood-coverage>
+    <tree-texture>Trees/mixed-shrub.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>2.0</tree-height-m>
+    <tree-width-m>2.0</tree-width-m>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>BarrenCover</name>
+    <name>Rock</name>
+    <effect>Effects/terrain-overlay</effect>
+    <texture-set>
+      <texture>Terrain/rocks-lava.png</texture>
+      <texture n="11">Terrain/lava_hires.png</texture>
+      <texture n="14">Terrain/lava1.png</texture>
+      <texture n="15">Terrain/herbtundra_iceland.png</texture>
+      <texture n="13">Terrain/pampas-grass.png</texture>
+      <texture n="20">Terrain/herbtundra_iceland.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.125</overlay_bias>
+      <overlay_alpha>0.75</overlay_alpha>
+      <use_color_overlay>1</use_color_overlay>
+      <use_grain>1</use_grain>
+      <overlay_hardness>1.0</overlay_hardness>
+      <overlay_density>0.8</overlay_density>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <xsize>24000</xsize>
+    <ysize>12000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <shininess>2.5</shininess>
+    <rolling-friction>0.1</rolling-friction>
+    <friction-factor>0.7</friction-factor>
+    <bumpiness>0.1</bumpiness>
+  </material>
+
+  <material>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>
+    <name>MixedForestCover</name>
+    <name>MixedForest</name>
+    <name>DeciduousBroadCover</name>
+    <name>DeciduousForest</name>
+    <name>CropGrass</name>
+    <name>Grassland</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+     <texture>Terrain/deciduous-hires-autumn.png</texture>
+     <texture n="11">Terrain/iceland_grass-autumn.png</texture>
+     <texture n="12">Terrain/grass_green_hires-autumn.png</texture>
+     <texture n="13">Terrain/rocks-lava.png</texture>
+     <texture n="20">Terrain/rainforest-hawaii.png</texture>
+     <texture n="21">Terrain/rocks-lava.png</texture>
+    </texture-set>
+    <parameters>
+     <rock_strata>1</rock_strata>
+     <rotation_flag>random</rotation_flag>
+     <dot_density>0.1</dot_density>
+     <max_overlay_height>1.0</max_overlay_height>
+     <overlay_hardness>0.0</overlay_hardness>
+     <overlay_density>0.2</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+     <overlay_secondary_flag>1</overlay_secondary_flag>
+     <overlay_secondary_hardness>1.0</overlay_secondary_hardness>
+     <overlay_secondary_density>0.0</overlay_secondary_density>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <wood-coverage>8000.0</wood-coverage>
+    <tree-texture>Trees/deciduous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>15.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>0.85</bumpiness>
+  </material>
+
+  <material>
+    <name>Sand</name>
+    <effect>Effects/terrain-overlay</effect>
+    <texture-set>
+     <texture>Terrain/lava1.png</texture>
+     <texture n="12">Terrain/iceland_grass-autumn.png</texture>
+     <texture n="12">Terrain/lava_hires.png</texture>
+     <texture n="13">Terrain/rocks-desert.png</texture>
+     <texture n="15">Terrain/pampas-grass-hires.png</texture>
+     <texture n="20">Terrain/rocks-lava.png</texture>
+    </texture-set>
+    <parameters>
+     <max_overlay_height>1.0</max_overlay_height>
+     <overlay_hardness>1.0</overlay_hardness>
+     <overlay_density>-0.1</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <shininess>2.5</shininess>
+    <rolling-friction>0.1</rolling-friction>
+    <friction-factor>0.7</friction-factor>
+    <bumpiness>0.1</bumpiness>
+  </material>
+
+
+  <material>
+    <name>ShrubCover</name>
+    <name>ScrubCover</name>
+    <name>Scrub</name>
+    <effect>Effects/landmass-scrub</effect>
+    <texture-set>
+     <texture>Terrain/pampas-shrub.png</texture>
+     <texture n="11">Terrain/pampas-grass.png</texture>
+     <texture n="12">Terrain/shrub1-autumn.png</texture>
+     <texture n="13">Terrain/rocks-lava.png</texture>
+     <texture n="14">Terrain/pampas-grass-hires.png</texture>
+     <texture n="15">Terrain/pampas-grass-hires.png</texture>
+     <texture n="20">Terrain/herbtundra_iceland.png</texture>
+     <texture n="21">Terrain/rocks-lava.png</texture>
+    </texture-set>
+    <parameters>
+     <rock_strata>1</rock_strata>
+     <rotation_flag>random</rotation_flag>
+     <rotation_scale>1000.0</rotation_scale>
+     <grit_alpha>0.2</grit_alpha>
+     <dot_density>0.1</dot_density>
+     <overlay_scale>60.0</overlay_scale>
+     <transition_model>0.5</transition_model>
+     <hires_overlay_bias>-0.15</hires_overlay_bias>
+     <overlay_hardness>0.2</overlay_hardness>
+     <overlay_density>2.2</overlay_density>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <diffuse>
+     <r>0.86</r>
+     <g>0.86</g>
+     <b>0.86</b>
+     <a>1.0</a>
+    </diffuse>
+    <specular>
+     <r>0.1</r>
+     <g>0.1</g>
+     <b>0.1</b>
+     <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <light-coverage>20000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/mixed-shrub.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>2.0</tree-height-m>
+    <tree-width-m>2.0</tree-width-m>
+    <rolling-friction>0.6</rolling-friction>
+    <bumpiness>0.4</bumpiness>
+  </material>
+
+  <material>
+    <name>ShrubGrassCover</name>
+    <name>Heath</name>
+    <name>Sclerophyllous</name>
+    <effect>Effects/landmass-scrub</effect>
+    <texture-set>
+     <texture>Terrain/pampas-grass.png</texture>
+     <texture n="11">Terrain/lava_hires.png</texture>
+     <texture n="12">Terrain/shrub1-autumn.png</texture>
+     <texture n="13">Terrain/rocks-lava.png</texture>
+     <texture n="14">Terrain/pampas-grass-hires.png</texture>
+     <texture n="15">Terrain/pampas-grass.png</texture>
+     <texture n="20">Terrain/herbtundra_iceland.png</texture>
+     <texture n="21">Terrain/rocks-lava.png</texture>
+    </texture-set>
+    <parameters>
+     <rock_strata>1</rock_strata>
+     <rotation_flag>random</rotation_flag>
+     <rotation_scale>1000.0</rotation_scale>
+     <grit_alpha>0.2</grit_alpha>
+     <dot_density>0.1</dot_density>
+     <overlay_scale>60.0</overlay_scale>
+     <transition_model>0.5</transition_model>
+     <hires_overlay_bias>-0.15</hires_overlay_bias>
+     <overlay_hardness>0.2</overlay_hardness>
+     <overlay_density>2.2</overlay_density>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <diffuse>
+     <r>0.86</r>
+     <g>0.86</g>
+     <b>0.86</b>
+     <a>1.0</a>
+    </diffuse>
+    <specular>
+     <r>0.1</r>
+     <g>0.1</g>
+     <b>0.1</b>
+     <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <light-coverage>20000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/mixed-shrub.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>2.0</tree-height-m>
+    <tree-width-m>2.0</tree-width-m>
+    <rolling-friction>0.6</rolling-friction>
+    <bumpiness>0.4</bumpiness>
+  </material>
+
+  <material>
+    <name>DryLake</name>
+    <name>IntermittentReservoir</name>
+    <name>IntermittentLake</name>
+    <texture-set>
+     <texture>Terrain/lava_drylake.png</texture>
+     <texture n="12">Terrain/iceland_grass-autumn.png</texture>
+     <texture n="12">Terrain/lava_drylake.png</texture>
+     <texture n="15">Terrain/pampas-grass-hires.png</texture>
+    </texture-set>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.04</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+  </material>
+
+  <material>
+    <name>Marsh</name>
+    <name>HerbWetlandCover</name>
+    <name>WoodedWetlandCover</name>
+    <name>Bog</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+     <texture>Terrain/marsh4a-autumn.png</texture>
+     <texture n="12">Terrain/iceland_grass-autumn.png</texture>
+     <texture n="12">Terrain/grass_hires.png</texture>
+     <texture n="15">Terrain/pampas-grass-hires.png</texture>
+     <texture n="20">Terrain/rainforest-hawaii.png</texture>
+    </texture-set>
+    <parameters>
+     <grain_strength>0.9</grain_strength>
+     <intrinsic_wetness>0.3</intrinsic_wetness>
+     <overlay_hardness>0.0</overlay_hardness>
+     <overlay_density>0.1</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <solid>1</solid>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>2.0</tree-height-m>
+    <tree-width-m>2.0</tree-width-m>
+    <light-coverage>40000000.0</light-coverage>
+    <friction-factor>0.8</friction-factor>
+    <rolling-friction>0.3</rolling-friction>
+    <bumpiness>0.2</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>Littoral</name>
+    <name>FloodLand</name>
+    <name>SaltMarsh</name>
+    <effect>Effects/water</effect>
+    <texture-set>
+     <texture>Terrain/marsh4a-autumn.png</texture>
+     <texture n="12">Terrain/iceland_grass-autumn.png</texture>
+     <texture n="12">Terrain/iceland_grass.png</texture>
+     <texture n="15">Terrain/pampas-grass-hires.png</texture>
+     <texture n="20">Terrain/rainforest-hawaii.png</texture>
+    </texture-set>
+    <texture-set>
+      <texture>Terrain/tidal.png</texture>
+      <texture n="10">Terrain/wash.png</texture>
+      <texture n="14">Terrain/sand_overlay.png</texture>
+      <texture n="15">Terrain/pampas-grass-hires.png</texture>
+      <texture n="20">Terrain/sand6_hires.png</texture>
+    </texture-set>
+    <parameters>
+      <ice_cover><use>/environment/sea/surface/delta-T-tide</use></ice_cover>
+      <grit_alpha>0.4</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <overlay_layer_magnification>60.0</overlay_layer_magnification>
+      <overlay_alpha>1.21</overlay_alpha>
+      <use_grain>0</use_grain>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <solid>1</solid>
+    <light-coverage>40000000.0</light-coverage>
+    <friction-factor>0.8</friction-factor>
+    <rolling-friction>0.3</rolling-friction>
+    <bumpiness>0.2</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>HerbTundraCover</name>
+    <name>HerbTundra</name>
+    <effect>Effects/terrain-overlay</effect>
+    <texture-set>
+     <texture>Terrain/herbtundra_iceland.png</texture>
+     <texture n="11">Terrain/iceland_grass-autumn.png</texture>
+     <texture n="12">Terrain/rocks-lava.png</texture>
+     <texture n="15">Terrain/pampas-grass-hires.png</texture>
+     <texture n="20">Terrain/rainforest-hawaii.png</texture>
+    </texture-set>
+    <parameters>
+     <dot_size>5.0</dot_size>
+     <grain_strength>0.9</grain_strength>
+     <hires_overlay_bias>-0.15</hires_overlay_bias>
+     <overlay_hardness>0.0</overlay_hardness>
+     <overlay_density>0.1</overlay_density>
+     <overlay_scale>2.0</overlay_scale>
+     <overlay_brightness_top>1.0</overlay_brightness_top>
+     <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+     <r>0.93</r>
+     <g>0.95</g>
+     <b>0.93</b>
+     <a>1.0</a>
+    </diffuse>
+    <specular>
+     <r>0.1</r>
+     <g>0.12</g>
+     <b>0.1</b>
+     <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.8</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.15</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+</PropertyList>

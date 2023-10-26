@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<!-- Sound control dialog -->
+
+<PropertyList>
+  <name>scenery-sources</name>
+  <modal>false</modal>
+  <width>1000</width>
+  <layout>vbox</layout>
+
+  <group>
+    <layout>hbox</layout>
+	  <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Scenery Sources</label>
+    </text>
+
+	  <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <name>source-table</name>
+    <layout>table</layout>
+    <halign>fill</halign>
+
+    <text>
+      <row>0</row>
+      <col>0</col>
+      <label>Directory</label>
+      <padding>10</padding>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>1</col>
+      <label>Source</label>
+      <padding>10</padding>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>2</col>
+      <label>License</label>
+      <padding>10</padding>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>3</col>
+      <label>URL</label>
+      <padding>10</padding>
+    </text>
+
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>10</default-padding>
+
+    <button>
+      <legend>Close</legend>
+      <default>true</default>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <nasal>
+    <open><![CDATA[
+      var dlg_root = cmdarg();
+
+      # Fill the table of scenery sources
+      var table = gui.findElementByName( dlg_root, "source-table" );
+      var row = 1;
+      var sources = props.globals.getNode( "scenery/sources" );
+      if( sources != nil ) {
+        var dirs = sources.getChildren("directory");
+        forindex (var i; dirs ) {
+          var path = dirs[i].getValue("path");
+          var path_txt = table.addChild("text");
+          path_txt.setValues( { row: row, col: 0, label: path, padding: 5, halign: "left"} );
+
+          var source = dirs[i].getChildren("source");
+          forindex (var j; source) {
+            var name = source[j].getValue("name");
+            var link = source[j].getValue("link");
+            var license = source[j].getValue("license");
+
+            var name_txt = table.addChild("text");
+            name_txt.setValues( { row: row, col: 1, label: name, padding: 5, halign: "left"} );
+
+            var license_txt = table.addChild("text");
+            license_txt.setValues( { row: row, col: 2, label: license, padding: 5, halign: "left"} );
+
+
+            if (link != "") {
+              var button = table.addChild("button");
+              button.setValues( { row: row, col: 3, legend: "Website", padding: 5, halign: "left",
+                binding: { command: "open-browser", url: link } 
+              } );
+            }
+
+            row +=1;
+          }
+        }
+      } else {
+        var txt = table.addChild("text");
+        txt.setValues( { row: row, col: 0, colspan: 4, label: "No scenery source attributions found", padding: 10, halign: "center"} );
+      }
+    ]]></open>
+  </nasal>
+
+</PropertyList>

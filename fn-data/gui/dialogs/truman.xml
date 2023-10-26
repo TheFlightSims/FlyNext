@@ -1,0 +1,404 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>Truman</name>
+	<modal>false</modal>
+	<layout>vbox</layout>
+
+
+
+
+	<group>
+		<layout>hbox</layout>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<text>
+			<label>USS Harry S. Truman Controls</label>
+		</text>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<keynum>27</keynum>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+
+	<hrule/>
+
+	<group>
+		<layout>table</layout>
+
+		<text>
+			<label>Course</label>
+			<row>0</row>
+			<col>0</col>
+		</text>
+
+		<radio>
+			<row>1</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to launch course</label>
+			<property>/controls/truman/turn-to-launch-hdg</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/truman/turn-to-launch-hdg");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "Truman")
+							{
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(v);
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-base-course").setBoolValue(0);
+							}
+						}
+
+						setprop("/controls/truman/turn-to-base-course", 0);
+						setprop("/controls/truman/turn-to-recovery-hdg", 0);
+				</script>
+			</binding>
+		</radio>
+
+		<radio>
+			<row>2</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to recovery course</label>
+			<property>/controls/truman/turn-to-recovery-hdg</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/truman/turn-to-recovery-hdg");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "Truman")
+							{
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(v);
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-base-course").setBoolValue(0);
+							}
+						}
+						setprop("/controls/truman/turn-to-base-course", 0);
+						setprop("/controls/truman/turn-to-launch-hdg", 0);
+				</script>
+			</binding>
+		</radio>
+
+		<radio>
+			<row>3</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to base course</label>
+			<property>/controls/truman/turn-to-base-course</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/truman/turn-to-base-course");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "Truman")
+							{
+							c.getNode("controls/turn-to-base-course").setBoolValue(v);
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(0);
+							}
+						}
+						setprop("/controls/truman/turn-to-launch-hdg", 0);
+						setprop("/controls/truman/turn-to-recovery-hdg", 0);
+
+				</script>
+			</binding>
+		</radio>
+		</group>
+
+		<hrule/>
+
+		<group>
+		<layout>table</layout>
+
+		<text>
+			<label>Equipment</label>
+			<row>0</row>
+			<col>0</col>
+		</text>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>1</row>
+			<col>0</col>
+			<label>Elevator 1</label>
+			<property>/controls/truman/elevator[0]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>1</row>
+			<col>1</col>
+			<label>Elevator 2</label>
+			<property>/controls/truman/elevator[1]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>1</row>
+			<col>2</col>
+			<label>Elevator 3</label>
+			<property>/controls/truman/elevator[2]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>1</row>
+			<col>3</col>
+			<label>Elevator 4</label>
+			<property>/controls/truman/elevator[3]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>2</row>
+			<col>0</col>
+			<label>Door 1</label>
+			<property>/controls/truman/door[0]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>2</row>
+			<col>1</col>
+			<label>Door 2</label>
+			<property>/controls/truman/door[1]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>2</row>
+			<col>2</col>
+			<label>Door 3</label>
+			<property>/controls/truman/door[2]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>2</row>
+			<col>3</col>
+			<label>Door 4</label>
+			<property>/controls/truman/door[3]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>0</col>
+			<label>JBD 1</label>
+			<property>/controls/truman/jbd[0]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>1</col>
+			<label>JBD 2</label>
+			<property>/controls/truman/jbd[1]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>2</col>
+			<label>JBD 3</label>
+			<property>/controls/truman/jbd[2]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>3</row>
+			<col>3</col>
+			<label>JBD 4</label>
+			<property>/controls/truman/jbd[3]/state</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		</group>
+
+
+		<hrule/>
+
+		<group>
+		<layout>table</layout>
+
+		<text>
+			<label>Options</label>
+			<row>0</row>
+			<col>0</col>
+		</text>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>1</row>
+			<col>0</col>
+			<label>Enable Deck Park</label>
+			<property>/controls/truman/deck-park</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>1</row>
+			<col>1</col>
+			<label>Enable Crew</label>
+			<property>/controls/truman/crew</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>2</row>
+			<col>0</col>
+			<label>Deck lights</label>
+			<property>/controls/truman/lights</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		<checkbox>
+			<halign>left</halign>
+			<row>2</row>
+			<col>1</col>
+			<label>Enable Wave motion</label>
+			<property>/controls/truman/wave-motion</property>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</checkbox>
+
+		</group>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+
+
+
+
+	<hrule/>
+
+
+
+	<hrule/>
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>6</default-padding>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+
+		<button>
+			<legend>OK</legend>
+			<default>true</default>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Apply</legend>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Reset</legend>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Cancel</legend>
+			<equal>true</equal>
+			<key>Esc</key>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+	</group>
+</PropertyList>

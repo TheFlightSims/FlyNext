@@ -1,0 +1,139 @@
+# Copyright 2020 Benedikt Wolf
+# This file is part of FlightGear.
+#
+# FlightGear is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# FlightGear is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
+
+
+To install this instrument into your aircraft, you need to do the following:
+
+1.	Add flarm.nas to your aircraft's list of included nasal files:
+	<nasal>
+		...
+		<flarm>
+			<file>Aircraft/Instruments-3d/glider/flarm/flarm.nas</file>
+		</flarm>
+		...
+	</nasal>
+	** Note that it is important to put the file into <flarm></flarm> tags, as the animation xml may in the future reference the instrument by that name
+2.	Add the model to your aircraft:
+		There are two models available, the standard, full-size FLARM and a smaller FLARM (v3) display for integration into a panel.
+		You can use either or both of these:
+	<model>
+		<path>Aircraft/Instruments-3d/glider/flarm/v3_display/flarm_v3.xml</path>
+		...
+	</model>
+	<model>
+		<path>Aircraft/Instruments-3d/glider/flarm/traditional/flarm_traditional.xml</path>
+		...
+	</model>
+3.	If you are using a custom electric system, make sure the FLARM is supplied at /systems/electrical/outputs/flarm when appropriate
+4.	Add sound effects for this FLARM, e.g. by using the block below and adjusting it to fit:
+
+<flarm_info>
+	<name>flarm new contact</name>
+	<mode>once</mode>
+	<path>Aircraft/Instruments-3d/glider/flarm/flarm_new_contact.wav</path>
+	<condition>
+		<and>
+			<greater-than>
+				<property>systems/electrical/outputs/flarm</property>
+				<value>9</value>
+			</greater-than>
+			<equals>
+				<property>instrumentation/flarm/new-contact</property>
+				<value>0</value>
+			</equals>
+		</and>
+	</condition>
+	<!-- Put the position of your FLARM loudspeaker here -->
+	<position>
+		<x>-1.35</x>
+		<y>0.0</y>
+		<z>0.1</z>
+	</position>
+</flarm_info>
+<flarm_info>
+	<name>flarm new contact 2</name>
+	<mode>once</mode>
+	<path>Aircraft/Instruments-3d/glider/flarm/flarm_new_contact.wav</path>
+	<condition>
+		<and>
+			<greater-than>
+				<property>systems/electrical/outputs/flarm</property>
+				<value>9</value>
+			</greater-than>
+			<equals>
+				<property>instrumentation/flarm/new-contact</property>
+				<value>1</value>
+			</equals>
+		</and>
+	</condition>
+	<!-- Put the position of your FLARM loudspeaker here -->
+	<position>
+		<x>-1.35</x>
+		<y>0.0</y>
+		<z>0.1</z>
+	</position>
+</flarm_info>
+
+<flarm_warn>
+	<name>flarm warn 1</name>
+	<mode>looped</mode>
+	<path>Aircraft/Instruments-3d/glider/flarm/flarm1.wav</path>
+	<condition>
+		<and>
+			<greater-than>
+				<property>systems/electrical/outputs/flarm</property>
+				<value>9</value>
+			</greater-than>
+			<equals>
+				<property>instrumentation/flarm/warn</property>
+				<value>1</value>
+			</equals>
+		</and>
+	</condition>
+	<!-- Put the position of your FLARM loudspeaker here -->
+	<position>
+		<x>-1.35</x>
+		<y>0.0</y>
+		<z>0.1</z>
+	</position>
+</flarm_warn>
+
+<flarm_warn>
+	<name>flarm warn 2</name>
+	<mode>looped</mode>
+	<path>Aircraft/Instruments-3d/glider/flarm/flarm2.wav</path>
+	<condition>
+		<and>
+			<greater-than>
+				<property>systems/electrical/outputs/flarm</property>
+				<value>9</value>
+			</greater-than>
+			<equals>
+				<property>instrumentation/flarm/warn</property>
+				<value>2</value>
+			</equals>
+		</and>
+	</condition>
+	<!-- Put the position of your FLARM loudspeaker here -->
+	<position>
+		<x>-1.35</x>
+		<y>0.0</y>
+		<z>0.1</z>
+	</position>
+</flarm_warn>
+
+
+## Please report any bugs, issues and improvements either to the mailing list of FlightGear forum so they can be fixed/included in the shared version of this instrument

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>quad</type>
+  <clear-mask>depth</clear-mask>
+  <condition>
+    <property>/sim/rendering/hdr/debug/show-gbuffer</property>
+  </condition>
+</PropertyList>

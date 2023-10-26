@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Airbus A300-600</description>
+  <author>Ian(Yves) Tolosa. Dec 2018 </author>
+  <path>Models/AB6.ac</path>
+  <!-- Pitch Forward so nosewheel on ground -->
+  <offsets>
+    <pitch-deg>-1.1</pitch-deg>
+  </offsets>
+  <!-- Gear Showed only < 180 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>180</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/A300/Effects/AB6-LightMap</inherits-from>
+    <object-name>AB6</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/AB6-NavLights.xml</path>
+  </model>
+</PropertyList>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/smaa-edge-detection</name>
+  <technique n="1">
+    <pass>
+      <stencil>
+        <function>always</function>
+        <value>1</value>
+        <pass>replace</pass>
+      </stencil>
+      <program>
+        <vertex-shader>Shaders/HDR/smaa_edge_detection.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/smaa_edge_detection.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>color_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

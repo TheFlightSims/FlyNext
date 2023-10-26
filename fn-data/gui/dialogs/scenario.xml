@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<!--
+ This file is part of FlightGear, the free flight simulator
+ http://www.flightgear.org/
+
+ Copyright (C) 2010 Torsten Dreyer, Torsten (at) t3r _dot_ de
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License as
+ published by the Free Software Foundation; either version 2 of the
+ License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ General Public License for more details.
+-->
+
+<PropertyList>
+  <name>scenario</name>
+  <modal>false</modal>
+  <layout>vbox</layout>
+  <resizable>false</resizable>
+  <default-padding>3</default-padding>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty><stretch>true</stretch></empty>
+
+    <text>
+      <label>AI Traffic and Scenario Settings</label>
+    </text>
+
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <legend></legend>
+      <key>Esc</key>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>vbox</layout>
+    <halign>left</halign>
+
+    <checkbox>
+      <halign>left</halign>
+      <label>Enable AI traffic</label>
+      <name>enable-ai-traffic</name>
+      <property>/sim/traffic-manager/enabled</property>
+      <live>true</live>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>enable-ai-traffic</object-name>
+      </binding>
+    </checkbox>
+
+    <group>
+      <layout>vbox</layout>
+      <visible>
+        <not-equals>
+          <property>/sim/traffic-manager/enabled</property>
+          <value>0</value>
+        </not-equals>
+      </visible>
+      <checkbox>
+        <name>enable-ai-wake</name>
+        <halign>left</halign>
+        <label>Enable AI aerodynamic wake</label>
+        <property>/fdm/ai-wake/enabled</property>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>enable-ai-wake</object-name>
+        </binding>
+      </checkbox>
+
+      <group>
+        <layout>hbox</layout>
+        <visible>
+          <not-equals>
+            <property>/fdm/ai-wake/enabled</property>
+            <value>0</value>
+          </not-equals>
+        </visible>
+        <text>
+          <halign>left</halign>
+          <label>Max. radius of interaction (nm)</label>
+        </text>
+
+        <input>
+          <property>/fdm/ai-wake/max-radius-nm</property>
+          <enable>
+            <property>/fdm/ai-wake/enabled</property>
+          </enable>
+          <binding>
+            <command>dialog-apply</command>
+          </binding>
+        </input>
+      </group>
+    </group>
+  </group>
+
+  <hrule />
+
+  <group>
+    <layout>hbox</layout>
+
+    <!-- only for a gap -->
+    <group>
+      <layout>vbox</layout>
+      <default-padding>1</default-padding>
+      <text>
+        <label></label>
+      </text>
+    </group>
+
+    <group>
+      <name>column0</name>
+      <layout>vbox</layout>
+    </group>
+
+    <group>
+      <layout>vbox</layout>
+      <name>column1</name>
+    </group>
+
+    <group>
+      <layout>vbox</layout>
+      <name>column2</name>
+    </group>
+
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+      <halign>center</halign>
+
+    <button>
+      <legend>Close</legend>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <empty><stretch>true</stretch></empty>
+  </group>
+
+  <nasal>
+    <open><![CDATA[
+      var dlg_root = cmdarg();
+
+      var isEnabledScenario = func(scenario) {
+        foreach( var n; props.globals.getNode("sim/ai",1).getChildren("scenario") )
+          if( n.getValue() == scenario )
+            return 1;
+        return 0;
+      };
+
+      var processScenario = func(nr, col, rootN) {
+        var descriptionN = rootN.getNode("description");
+        var nameN = rootN.getNode("name");
+        var description = descriptionN != nil ? descriptionN.getValue() : "";
+        var scenarioId = rootN.getNode("id").getValue();
+
+        var propertyRoot = props.globals.getNode("sim/gui/dialogs/scenario",1).getChild( "scenario", nr, 1 );
+        propertyRoot.getNode("selected",1).setBoolValue(isEnabledScenario(scenarioId));
+        propertyRoot.getNode("name",1).setValue(scenarioId);
+
+        var group = gui.findElementByName( dlg_root, "column"~math.mod(col,3) ).getChild("group", nr, 1 );
+        group.getNode("layout",1).setValue("hbox");
+        var cb = group.getNode("checkbox",1);
+        cb.getNode("property",1).setValue(propertyRoot.getNode("selected").getPath());
+        var label = nameN.getValue();
+
+        cb.getNode("label",1).setValue(label);
+        cb.getNode("name",1).setValue(scenarioId);
+        
+        var applyBind = cb.addChild("binding", 0);
+        applyBind.getNode("command", 1).setValue("dialog-apply");
+        
+        var bind = cb.addChild("binding", 1);
+        bind.getNode("command", 1).setValue("load-scenario");
+        bind.getNode("name", 1).setValue(scenarioId);
+        bind.getNode("load-property", 1).setValue(propertyRoot.getNode("selected").getPath());
+        
+        #cb.getNode("enable/property",1).setValue("/sim/ai/scenarios-enabled");
+        
+        group.getNode("empty",1).getNode("stretch",1).setValue("true");
+      }
+
+      var path = getprop("/sim/fg-root") ~ "/AI";
+      scenarios = [];
+
+      foreach(var s; props.globals.getNode("sim/ai/scenarios",1).getChildren("scenario")){
+        append(scenarios, s);
+      }
+      # sort the scenarios into alpha order.
+      scenarios = sort (scenarios, func (a,b) {cmp(a.getNode("name").getValue(), b.getNode("name").getValue());});
+      
+      # display in three columns top-to-bottom
+      ssz = size(scenarios);
+      colsz = math.round(ssz/3);
+      coli = 0;
+      col = 0;
+
+      for(i=0;i<size(scenarios);i += 1) {
+        processScenario( i, col, scenarios[i]);
+        coli += 1;
+        if (coli > colsz){
+          coli = 0;
+          col += 1;
+        }
+      }
+    ]]></open>
+
+    <close><![CDATA[
+    ]]></close>
+
+  </nasal>
+</PropertyList>
+

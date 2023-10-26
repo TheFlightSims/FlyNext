@@ -1,0 +1,106 @@
+AISim uses a 6-degree of freedom, linear coefficient resolver model.
+
+
+All units are imperial.
+The aero reference point is always located at (0.0, 0.0, 0.0).
+Center of gravity is relative to the aero reference point.
+All other positions are relative to the center of gravity.
+
+Positions are in inches and in the JSBSim structural frame:
+X is positive aft
+Y is positive right
+Z is positive up
+
+Up to 4 engines and up to 4 gear positions (contact points) can be defined.
+AISim always adds an extra contact point at the aero reference point.
+
+Configuration files are in JSON format.
+Any parameter which is omitted is set to zero.
+
+AeromatiC++ version 3.3.12 or later also outputs to AISim JSON format.
+
+An example of a configuration file for the Cessna 172p is given below.
+Note that JSON does not support comments. So the semicolon and text following
+it in this example are just for clarity and should be removed or omitted when
+using it with AISim.
+=============================================================================
+{
+  "c172p"   : 1.0,			; name and version number
+
+  "Sw"      : 174.0,			; wing area (ft2)
+  "cbar"    : 5.3,			; root chord (ft)
+  "bw"      : 35.8,			; wing span (ft)
+
+  "mass"    : 2300.0,			; mass (lbs)
+  "Ixx"     : 948.0,			; inertia along the x axis (slug*ft2)
+  "Iyy"     : 1346.0,			; inertia along the y axis (slug*ft2)
+  "Izz"     : 1967.0,			; inertia along the z axis (slug*ft2)
+  "Ixz"     : 0.0,			; inertia along the xz axis (slug*ft2)
+
+  "cg"      : [ -2.4, 0.0, 22.9 ],	; CG relative to AR (in)
+
+  "engine"  : [ 
+  {
+    "pos"     : [ -78.7, 0.0, 22.9 ],	; enginge pos relative to CG (in)
+    "dir"     : [ 0.0, 0.0, 0.0 ],	; thruster direction (degrees)
+
+    "FT_max"  : 615.6,			; max thrust at sea level (lbs)
+    "MT_max"  : -37.3,			; max thruster torque (lb-ft)
+    "rpm_max" : 3002.1			; max propeller revolutions per minute
+  } ],
+
+  "gear"    : [ 
+  {
+    "pos"     : [ -90.3, 0.0, -56.7 ],	; gear pos relative to CG (in)
+    "spring"  : 690.0,			; gear spring factor (lbs/ft)
+    "damp"    : 345.0			; gear damping factor (lbs/ft/sec)
+  },
+  {
+    "pos"     : [ 5.3, -38.7, -56.7 ],
+    "spring"  : 2300.0, 
+    "damp"    : 1150.0
+  },
+  {
+    "pos"     : [ 5.3, 38.7, -56.7 ],
+    "spring"  : 2300.0, 
+    "damp"    : 1150.0
+  } ],
+
+  "de_max"  : 17.5,			; max elevator deflection (degrees)
+  "dr_max"  : 20.0,			; max rudder deflection (degrees)
+  "da_max"  : 20.0,			; max aileron deflection (degrees)
+  "df_max"  : 40.0,			; max flap deflection (degrees)
+
+  "CLmin"   : 0.31,
+  "CLa"     : 5.143,
+  "CLadot"  : 1.7,
+  "CLq"     : 3.9,
+  "CLdf"    : 0.4000,
+
+  "CDmin"   : 0.031,
+  "CDa"     : 0.1581,
+  "CDb"     : 0.17,
+  "CDi"     : 0.054,
+  "CDdf"    : 0.0300,
+
+  "CYb"     : -0.31,
+  "CYp"     : 0.037,
+  "CYr"     : 0.21,
+  "CYdr"    : 0.187,
+
+  "Clb"     : -0.089,
+  "Clp"     : -0.47,
+  "Clr"     : 0.096,
+  "Clda"    : 0.178,
+  "Cldr"    : 0.0147,
+
+  "Cma"     : -0.89,
+  "Cmadot"  : -5.2,
+  "Cmq"     : -12.4,
+  "Cmde"    : -1.28,
+
+  "Cnb"     : 0.065,
+  "Cnp"     : -0.03,
+  "Cnr"     : -0.099,
+  "Cndr"    : -0.0657
+}

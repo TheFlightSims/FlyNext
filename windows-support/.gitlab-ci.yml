@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: James Turner <james@flightgear.org>
+#
+# SPDX-License-Identifier: GPL-2.0
+
+windows_build_msvc140:
+  stage: build
+  tags:
+    - windows
+  script:
+    - echo Hello
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR
+
+

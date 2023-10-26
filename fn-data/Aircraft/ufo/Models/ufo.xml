@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>ufo.ac</path>
+
+ <animation>
+  <type>select</type>
+  <condition>
+   <or>
+    <equals>
+     <property>/sim/flight-model</property>
+     <value>ufo</value>
+    </equals>
+    <property>/sim/model/always-show-in-MP</property>
+   </or>
+  </condition>
+ </animation>
+
+ <animation>
+  <type>select</type>
+  <condition>
+   <property>/sim/model/display-grid</property>
+  </condition>
+  <object-name>GridBottom</object-name>
+  <object-name>GridFront</object-name>
+  <object-name>GridPort</object-name>
+  <object-name>GridRear</object-name>
+  <object-name>GridStarboard</object-name>
+  <object-name>GridTop</object-name>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>body</object-name>
+  <property>/velocities/airspeed-kt</property>
+  <factor>0.00025</factor>
+  <min>0.2</min>
+  <max>0.7</max>
+ </animation>
+
+ <animation>
+  <type>spin</type>
+  <object-name>body</object-name>
+  <object-name>green_navigation_lights</object-name>
+  <object-name>red_navigation_lights</object-name>
+  <object-name>propulsion_lights</object-name>
+  <property>/velocities/airspeed-kt</property>
+  <factor>0.004</factor>
+  <center>
+   <x-m>0</x-m>
+   <y-m>0</y-m>
+   <z-m>0</z-m>
+  </center>
+  <axis>
+   <x>0</x>
+   <y>0</y>
+   <z>1</z>
+  </axis>
+  </animation>
+  <model>
+    <name>Port nav</name>
+    <path>ufo-pointlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo port nav light</name>
+        <power-source>/controls/lighting/nav-lights</power-source>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <heading-deg>0</heading-deg>
+        <r>0.95</r>
+        <g>0.5</g>
+        <b>0.5</b>
+        <a>1.0</a>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>0.0</x-m>
+      <y-m>-3.3</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>Starboard nav</name>
+    <path>ufo-pointlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo starboard nav light</name>
+        <power-source>/controls/lighting/nav-lights</power-source>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <r>0.5</r>
+        <g>0.95</g>
+        <b>0.5</b>
+        <a>1.0</a>
+        <heading-deg>0</heading-deg>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>3.3</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>Port light</name>
+    <path>ufo-spotlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo port light</name>
+        <power-source>/controls/lighting/landing-lights</power-source>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <heading-deg>22</heading-deg>
+        <r>0.95</r>
+        <g>0.5</g>
+        <b>0.5</b>
+        <a>1.0</a>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>-0.50</x-m>
+      <y-m>-2.5</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>Starboard light</name>
+    <path>ufo-spotlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo starboard light</name>
+        <power-source>/controls/lighting/landing-lights</power-source>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <r>0.5</r>
+        <g>0.95</g>
+        <b>0.5</b>
+        <a>1.0</a>
+        <heading-deg>-22</heading-deg>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>-0.50</x-m>
+      <y-m>2.5</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>Nose light</name>
+    <path>ufo-spotlight.xml</path>
+    <overlay>
+      <params>
+        <name>Ufo nose light</name>
+        <x-m>0</x-m>
+        <y-m>0</y-m>
+        <z-m>0</z-m>
+        <heading-deg>0</heading-deg>
+      </params>
+    </overlay>
+    <offsets>
+      <x-m>-2.8</x-m>
+      <y-m>0</y-m>
+      <z-m>-0.45</z-m>
+    </offsets>
+  </model>
+</PropertyList>

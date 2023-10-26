@@ -1,0 +1,427 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    <name>devel-extensions</name>
+    <modal>false</modal>
+    <layout>vbox</layout>
+    <default-padding>5</default-padding>
+
+    <nasal>
+        <open>
+            <![CDATA[
+            var osg_debug = [
+                [0, "- Off"],
+                [1, "- Show Frame Rate"],
+                [2, "+ Viewer Graph"],
+                [3, "+ Camera"],
+                [4, "+ Viewer Scene"],
+            ];
+            var osg_stats = cmdarg().getChildren("group")[1].getChildren("group")[0].getChildren("combo")[0];
+            var i = 0;
+
+            foreach (var s; osg_debug) {
+                var nm = s[0] ~ " " ~ s[1];
+                # print("setting node to ", nm);
+                osg_stats.getNode("value[" ~ i ~ "]", 1).setValue(nm);
+                if (i == getprop("/sim/rendering/on-screen-statistics")) {
+                    setprop("/sim/gui/dialogs/devel-extensions/on-screen-statistics", nm);
+                }
+                i += 1;
+            }
+
+            var updateOSG_stats = func(n) {
+                var sel_mode = n.getValue();
+                if (sel_mode == nil) {
+                    return;
+                }
+                print("\nupdate OSG debug ", sel_mode);
+
+                foreach (var s; osg_debug) {
+                    if (s[0] == sel_mode) {
+                        print(" >> ", s[1]);
+                        setprop("/sim/gui/dialogs/devel-extensions/on-screen-statistics", s[0] ~ " " ~ s[1]);
+                        gui.dialog_update("devel-extensions", "OSGdebug");
+                        break;
+                    }
+                }
+                # print("OSG Debug ", getprop("/sim/gui/dialogs/devel-extensions/on-screen-statistics"));
+            };
+
+            # listen for results arriving
+            setlistener("/sim/rendering/on-screen-statistics", updateOSG_stats);
+            ]]>
+        </open>
+
+        <close>
+        </close>
+    </nasal>
+
+    <!--new debug dialog
+
+    multiplayer debug checkboxes
+    loopback
+    log outgoing properties 2
+    dump & 4
+    trace incoming properties.
+
+    log level / systems.
+
+    osg debug (0,1,2,3,4)
+
+    reload shaders.-->
+
+    <!-- Title bar with close button -->
+    <group>
+        <layout>hbox</layout>
+        <default-padding>1</default-padding>
+
+        <empty>
+            <stretch>true</stretch>
+        </empty>
+
+        <text>
+            <label>Configure Development Extensions</label>
+        </text>
+
+        <empty>
+        <stretch>true</stretch>
+        </empty>
+
+        <button>
+            <legend/>
+            <key>Esc</key>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+
+    <hrule/>
+
+    <group>
+        <layout>vbox</layout>
+        <halign>left</halign>
+
+        <checkbox>
+            <halign>left</halign>
+            <label>Enable development dialog widgets (HUD and rendering dialog)</label>
+            <property>/sim/gui/devel-widgets</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+
+        <checkbox>
+            <halign>left</halign>
+            <label>Enable '/'-key property handler (see $FG_ROOT/Nasal/prop_key_handler.nas)</label>
+            <property>/sim/input/property-key-handler</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </checkbox>
+
+        <!--muultiplayer debug checkboxes
+        loopback
+        log outgoing properties 2
+        dump & 4
+        trace incoming properties.-->
+        <halign>left</halign>
+        <checkbox>
+            <halign>left</halign>
+            <label>Local loopback of model</label>
+            <property>/sim/gui/debug/multiplayer-loopback</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                <![CDATA[
+                    setprop("/sim/multiplay/debug-level", (getprop("/sim/multiplay/debug-level") or 0) ^ 1);
+                    setprop("/sim/gui/debug/multiplayer-loopback", getprop("/sim/multiplay/debug-level") & 1);
+                ]]>
+                </script>
+            </binding>
+        </checkbox>
+
+        <group>
+            <layout>table</layout>
+            <halign>left</halign>
+
+            <text>
+                <row>0</row>
+                <col>0</col>
+                <label>OSG statistics</label>
+                <halign>right</halign>
+            </text>
+            <combo>
+                <row>0</row>
+                <col>1</col>
+                <pref-width>300</pref-width>
+                <halign>left</halign>
+                <name>OSGdebug</name>
+                <property>/sim/gui/dialogs/devel-extensions/on-screen-statistics</property>
+                <editable>false</editable>
+                <binding>
+                    <command>dialog-apply</command>
+                </binding>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                    <![CDATA[
+                        print("OSG Debug ", getprop("/sim/gui/dialogs/devel-extensions/on-screen-statistics"));
+                        var selval = substr(getprop("/sim/gui/dialogs/devel-extensions/on-screen-statistics"), 0, 1);
+                        print("Set osg debug ", selval);
+                        setprop("/sim/rendering/on-screen-statistics", selval);
+                    ]]>
+                    </script>
+                </binding>
+            </combo>
+
+            <text>
+                <row>1</row>
+                <col>0</col>
+                <label>OSG log level</label>
+                <halign>right</halign>
+            </text>
+            <combo>
+                <row>1</row>
+                <col>1</col>
+                <pref-width>300</pref-width>
+                <halign>left</halign>
+                <name>OSGLog</name>
+                <property>/sim/rendering/osg-notify-level</property>
+                <value>DEBUG_FP</value>
+                <value>DEBUG_INFO</value>
+                <value>INFO</value>
+                <value>NOTICE</value>
+                <value>WARN</value>
+                <value>FATAL</value>
+                <editable>false</editable>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>OSGLog</object-name>
+                </binding>
+            </combo>
+
+            <text>
+                <row>2</row>
+                <col>0</col>
+                <label>FG log level</label>
+                <halign>right</halign>
+            </text>
+            <combo>
+                <row>2</row>
+                <col>1</col>
+                <pref-width>300</pref-width>
+                <halign>left</halign>
+                <name>SGLogging</name>
+                <property>/sim/logging/priority</property>
+                <value>alert</value>
+                <value>warn</value>
+                <value>info</value>
+                <value>debug</value>
+                <value>bulk</value>
+                <editable>false</editable>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>SGLogging</object-name>
+                </binding>
+            </combo>
+        </group>
+    </group>
+
+    <group>
+        <layout>table</layout>
+        <halign>left</halign>
+
+        <button>
+            <row>0</row>
+            <col>0</col>
+            <halign>fill</halign>
+            <legend>New Canvas Map</legend>
+            <binding>
+                <command>nasal</command>
+                <script>canvas.MapStructure_selfTest();</script>
+            </binding>
+        </button>
+        <button>
+            <row>0</row>
+            <col>1</col>
+            <halign>fill</halign>
+            <legend>Canvas widgets factory</legend>
+            <binding>
+                <command>nasal</command>
+                <script>globals.widgets_factory_dialog_instance = canvas.WidgetsFactoryDialog.new();</script>
+            </binding>
+        </button>
+        <button>
+            <row>0</row>
+            <col>2</col>
+            <halign>fill</halign>
+            <legend>Canvas property tree browser</legend>
+            <binding>
+                <command>nasal</command>
+                <script>globals.propertyTreeBrowserInstance = canvas.PropertyTreeBrowser.new();</script>
+            </binding>
+        </button>
+        <button>
+            <row>1</row>
+            <col>0</col>
+            <halign>fill</halign>
+            <legend>Reload Nasal canvas module</legend>
+            <binding>
+                <command>nasal-reload</command>
+                <module>canvas</module>
+            </binding>
+        </button>
+    </group>
+
+    <group>
+        <layout>table</layout>
+        <halign>left</halign>
+
+        <button>
+            <row>0</row>
+            <col>0</col>
+            <halign>fill</halign>
+            <legend>Reload GUI</legend>
+            <name>reload-gui</name>
+            <binding>
+                <command>reinit</command>
+                <subsystem>gui</subsystem>
+            </binding>
+        </button>
+
+        <button>
+            <row>0</row>
+            <col>1</col>
+            <halign>fill</halign>
+            <name>reload-input</name>
+            <legend>Reload Input</legend>
+            <binding>
+                <command>reinit</command>
+                <subsystem>input</subsystem>
+            </binding>
+        </button>
+
+        <button>
+            <row>0</row>
+            <col>2</col>
+            <halign>fill</halign>
+            <name>reload-hud</name>
+            <legend>Reload Hud</legend>
+            <binding>
+                <command>reinit</command>
+                <subsystem>hud</subsystem>
+            </binding>
+        </button>
+
+        <button>
+            <row>0</row>
+            <col>3</col>
+            <halign>fill</halign>
+            <name>reload-panel</name>
+            <legend>Reload Panel</legend>
+            <binding>
+                <command>panel-load</command>
+            </binding>
+        </button>
+
+        <button>
+            <row>1</row>
+            <col>0</col>
+            <halign>fill</halign>
+            <name>reload-autopilot</name>
+            <legend>Reload Autopilot</legend>
+            <binding>
+                <command>reinit</command>
+                <subsystem>xml-autopilot</subsystem>
+            </binding>
+        </button>
+
+        <button>
+            <row>1</row>
+            <col>1</col>
+            <halign>fill</halign>
+            <name>reload-network</name>
+            <legend>Reload Network</legend>
+            <binding>
+                <command>reinit</command>
+                <subsystem>io</subsystem>
+            </binding>
+        </button>
+
+        <button>
+            <row>1</row>
+            <col>2</col>
+            <halign>fill</halign>
+            <name>reload-model</name>
+            <legend>Reload Aircraft Model</legend>
+            <binding>
+                <command>reinit</command>
+                <subsystem>aircraft-model</subsystem>
+            </binding>
+        </button>
+
+        <button>
+            <row>1</row>
+            <col>3</col>
+            <halign>fill</halign>
+            <name>reload-shaders</name>
+            <legend>Reload Shaders</legend>
+            <binding>
+                <command>reload-shaders</command>
+            </binding>
+        </button>
+
+        <button>
+            <row>2</row>
+            <col>0</col>
+            <halign>fill</halign>
+            <name>reload-materials</name>
+            <legend>Reload Materials</legend>
+            <binding>
+                <command>reload-materials</command>
+            </binding>
+        </button>
+
+        <button>
+            <row>2</row>
+            <col>1</col>
+            <halign>fill</halign>
+            <name>reload-scenery</name>
+            <legend>Reload Scenery</legend>
+            <binding>
+                <command>reinit</command>
+                <subsystem>scenery</subsystem>
+            </binding>
+        </button>
+
+        <button>
+            <row>2</row>
+            <col>2</col>
+            <halign>fill</halign>
+            <name>reload-compositor</name>
+            <legend>Reload Compositor</legend>
+            <binding>
+                <command>reload-compositor</command>
+            </binding>
+        </button>
+    </group>
+
+    <button>
+        <legend>Close</legend>
+        <default>true</default>
+        <key>Esc</key>
+        <binding>
+            <command>dialog-apply</command>
+        </binding>
+        <binding>
+            <command>dialog-close</command>
+        </binding>
+    </button>
+</PropertyList>

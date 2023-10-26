@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!-- Author Ian (Yves Tolosa) - AUG 2018 -->
+<PropertyList>
+  <!-- Position ALS Navigation Lights -->
+  <model>
+    <name>nav-right</name>
+    <path>AI/Lights/procedural_light_nav_right.xml</path>
+    <offsets>
+      <x-m>10.5257</x-m>
+      <y-m>38.1556</y-m>
+      <z-m>7.67743</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>nav-left</name>
+    <path>AI/Lights/procedural_light_nav_left.xml</path>
+    <offsets>
+      <x-m>10.5257</x-m>
+      <y-m>-38.1556</y-m>
+      <z-m>7.67743</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>nav-tail</name>
+    <path>AI/Lights/procedural_light_nav_tail.xml</path>
+    <offsets>
+      <x-m>35.5</x-m>
+      <y-m>0</y-m>
+      <z-m>8.31777</z-m>
+    </offsets>
+  </model>
+  <!-- Position ALS Strobes -->
+  <model>
+    <name>strobe-right</name>
+    <path>AI/Lights/procedural_light_strobe_right.xml</path>
+    <offsets>
+      <x-m>15.9576</x-m>
+      <y-m>39.8448</y-m>
+      <z-m>8.15137</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>strobe-left</name>
+    <path>AI/Lights/procedural_light_strobe_left.xml</path>
+    <offsets>
+      <x-m>15.9576</x-m>
+      <y-m>-39.8448</y-m>
+      <z-m>8.15137</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>strobe-tail</name>
+    <path>AI/Lights/procedural_light_strobe_tail.xml</path>
+    <offsets>
+      <x-m>36.5</x-m>
+      <y-m>0</y-m>
+      <z-m>8.31777</z-m>
+    </offsets>
+  </model>
+  <!-- Position Beacons -->
+  <model>
+    <name>beacon-top</name>
+    <path>AI/Lights/procedural_light_beacon_top.xml</path>
+    <offsets>
+      <x-m>-10.3672</x-m>
+      <y-m>0</y-m>
+      <z-m>11.4076</z-m>
+    </offsets>
+  </model>
+  <model>
+    <name>beacon-bottom</name>
+    <path>AI/Lights/procedural_light_beacon_bottom.xml</path>
+    <offsets>
+      <x-m>-0.3725</x-m>
+      <y-m>0</y-m>
+      <z-m>1.58512</z-m>
+    </offsets>
+  </model>
+  <!-- Group Lights for Shared Animations -->
+  <animation>
+    <name>NavGrouped</name>
+    <object-name>nav-right</object-name>
+    <object-name>nav-left</object-name>
+    <object-name>nav-tail</object-name>
+  </animation>
+  <animation>
+    <name>StrobeGrouped</name>
+    <object-name>strobe-right</object-name>
+    <object-name>strobe-left</object-name>
+    <object-name>strobe-tail</object-name>
+  </animation>
+  <animation>
+    <name>BeaconGrouped</name>
+    <object-name>beacon-top</object-name>
+    <object-name>beacon-bottom</object-name>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>NavGrouped</object-name>
+    <nopreview />
+    <condition>
+      <property>controls/lighting/nav-lights</property>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>StrobeGrouped</object-name>
+    <nopreview />
+    <condition>
+      <property>controls/lighting/strobe</property>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>BeaconGrouped</object-name>
+    <nopreview />
+    <condition>
+      <property>controls/lighting/beacon</property>
+    </condition>
+  </animation>
+
+</PropertyList>

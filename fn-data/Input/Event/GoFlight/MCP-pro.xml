@@ -1,0 +1,614 @@
+<PropertyList>
+
+  <name>GoFlight MCP Pro</name>
+  <name>MCP Pro</name>
+  <debug-events type="bool">false</debug-events>
+
+  <nasal>
+    <open>
+      <![CDATA[
+
+      var altitudeAlphanumeric = func() { return goflight.mcp.altitudeData(); }
+      var headingAlphanumeric = func() { return goflight.mcp.headingData(); }
+      var courseAlphanumeric = func() { return goflight.mcp.course1Data(); }
+      var course2Alphanumeric = func() { return goflight.mcp.course2Data(); }
+      var speedAlphanumeric = func() { return goflight.mcp.speedData(); }
+      var vspeedAlphanumeric = func() { return goflight.mcp.vsData(); }
+
+        ]]>
+    </open>
+  </nasal>
+
+  <event>
+    <name>display-brightness</name>
+    <setting>
+      <property>/input/goflight/mcp/brightness</property>
+    </setting>
+  </event>
+
+
+  <event>
+    <name>rel-dial-0</name>
+    <binding>
+      <command>property-adjust</command>
+      <property>/autopilot/settings/heading-bug-deg</property>
+      <wrap type="bool">true</wrap>
+      <min>0</min>
+      <max>359</max>
+    </binding>
+    <interpolater>
+      <mirrored type="bool">true</mirrored>
+      <entry>
+        <ind>0</ind>
+        <dep>0</dep>
+      </entry>
+      <entry>
+        <ind>1</ind>
+        <dep>1</dep>
+      </entry>
+      <entry>
+        <ind>2</ind>
+        <dep>5</dep>
+      </entry>
+      <entry>
+        <ind>3</ind>
+        <dep>10</dep>
+      </entry>
+      <entry>
+        <ind>4</ind>
+        <dep>30</dep>
+      </entry>
+    </interpolater>
+  </event>
+
+  <event>
+    <name>rel-dial-1</name>
+    <binding>
+      <command>property-adjust</command>
+      <property>/instrumentation/nav[0]/radials/selected-deg</property>
+      <wrap type="bool">true</wrap>
+      <min>0</min>
+      <max>359</max>
+    </binding>
+    <interpolater>
+          <mirrored type="bool">true</mirrored>
+      <entry>
+        <ind>0</ind>
+        <dep>0</dep>
+      </entry>
+      <entry>
+        <ind>1</ind>
+        <dep>1</dep>
+      </entry>
+      <entry>
+        <ind>2</ind>
+        <dep>5</dep>
+      </entry>
+      <entry>
+        <ind>3</ind>
+        <dep>10</dep>
+      </entry>
+      <entry>
+        <ind>4</ind>
+        <dep>30</dep>
+      </entry>
+    </interpolater>
+  </event>
+
+  <event>
+    <name>rel-dial-2</name>
+    <binding>
+      <command>property-adjust</command>
+      <property>/autopilot/settings/vertical-speed-fpm</property>
+      <factor type="double">-50</factor>
+       <min>-8000</min>
+      <max>12000</max>
+    </binding>
+    <interpolater>
+          <mirrored type="bool">true</mirrored>
+
+      <entry>
+        <ind>0</ind>
+        <dep>0</dep>
+      </entry>
+      <entry>
+        <ind>1</ind>
+        <dep>1</dep>
+      </entry>
+      <entry>
+        <ind>2</ind>
+        <dep>2</dep>
+      </entry>
+      <entry>
+        <ind>3</ind>
+        <dep>4</dep>
+      </entry>
+      <entry>
+        <ind>4</ind>
+        <dep>10</dep>
+      </entry>
+    </interpolater>
+  </event>
+
+  <event>
+    <name>rel-dial-3</name>
+    <binding>
+      <command>nasal</command>
+      <script>goflight.mcp.adjustSpeed(cmdarg().getNode("offset").getValue())</script>
+    </binding>
+    <interpolater>
+          <mirrored type="bool">true</mirrored>
+
+      <entry>
+        <ind>0</ind>
+        <dep>0</dep>
+      </entry>
+      <entry>
+        <ind>1</ind>
+        <dep>1</dep>
+      </entry>
+      <entry>
+        <ind>2</ind>
+        <dep>5</dep>
+      </entry>
+      <entry>
+        <ind>3</ind>
+        <dep>10</dep>
+      </entry>
+      <entry>
+        <ind>4</ind>
+        <dep>20</dep>
+      </entry>
+    </interpolater>
+
+  </event>
+
+  <event>
+    <name>rel-dial-4</name>
+    <binding>
+      <command>property-adjust</command>
+      <property>/instrumentation/nav[1]/radials/selected-deg</property>
+      <wrap type="bool">true</wrap>
+      <min>0</min>
+      <max>359</max>
+    </binding>
+    <interpolater>
+          <mirrored type="bool">true</mirrored>
+
+      <entry>
+        <ind>0</ind>
+        <dep>0</dep>
+      </entry>
+      <entry>
+        <ind>1</ind>
+        <dep>1</dep>
+      </entry>
+      <entry>
+        <ind>2</ind>
+        <dep>5</dep>
+      </entry>
+      <entry>
+        <ind>3</ind>
+        <dep>10</dep>
+      </entry>
+      <entry>
+        <ind>4</ind>
+        <dep>30</dep>
+      </entry>
+    </interpolater>
+  </event>
+
+  <event>
+    <name>rel-dial-5</name>
+    <interpolater>
+          <mirrored type="bool">true</mirrored>
+
+      <entry>
+        <ind>0</ind>
+        <dep>0</dep>
+      </entry>
+      <entry>
+        <ind>1</ind>
+        <dep>1</dep>
+      </entry>
+      <entry>
+        <ind>2</ind>
+        <dep>10</dep>
+      </entry>
+      <entry>
+        <ind>3</ind>
+        <dep>20</dep>
+      </entry>
+      <entry>
+        <ind>4</ind>
+        <dep>40</dep>
+      </entry>
+    </interpolater>
+    <binding>
+      <command>nasal</command>
+      <script>
+        var x = cmdarg().getNode("offset").getValue();
+        goflight.mcp.adjustAltitude(x * 50);
+      </script>
+    </binding>
+  </event>
+
+  <report>
+    <report-id type="int">9</report-id>
+    <watch>/input/goflight/mcp/refresh</watch>
+    <nasal-function>altitudeAlphanumeric</nasal-function>
+  </report>
+
+  <report>
+    <report-id type="int">7</report-id>
+    <watch>/input/goflight/mcp/refresh-headings</watch>
+    <nasal-function>headingAlphanumeric</nasal-function>
+  </report>
+
+  <report>
+    <report-id type="int">3</report-id>
+    <watch>/input/goflight/mcp/refresh-headings</watch>
+    <nasal-function>courseAlphanumeric</nasal-function>
+  </report>
+
+  <report>
+    <report-id type="int">11</report-id>
+    <watch>/input/goflight/mcp/refresh</watch>
+    <nasal-function>vspeedAlphanumeric</nasal-function>
+  </report>
+
+  <report>
+    <report-id type="int">5</report-id>
+    <watch>/input/goflight/mcp/refresh</watch>
+    <nasal-function>speedAlphanumeric</nasal-function>
+  </report>
+
+  <report>
+    <report-id type="int">13</report-id>
+    <watch>/input/goflight/mcp/refresh-headings</watch>
+    <nasal-function>course2Alphanumeric</nasal-function>
+  </report>
+
+  <!-- LED driver properties - these are generated from individual 
+ bool properties by the LEDWatcher helper class above -->
+  <event>
+    <name>led-misc-0</name>
+    <setting>
+      <property>/input/goflight/mcp/led[0]</property>
+    </setting>
+  </event>
+
+  <event>
+    <name>led-misc-1</name>
+    <setting>
+      <property>/input/goflight/mcp/led[1]</property>
+    </setting>
+  </event>
+
+  <event>
+    <name>led-misc-2</name>
+    <setting>
+      <property>/input/goflight/mcp/led[2]</property>
+    </setting>
+  </event>
+
+  <event>
+    <name>led-misc-3</name>
+    <setting>
+      <property>/input/goflight/mcp/led[3]</property>
+    </setting>
+  </event>
+
+  <event>
+    <name>button-1</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 1")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-2</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 2")</script>
+    </binding>enable
+  </event>
+
+  <event>
+    <name>button-3</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 3")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-4</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 4")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-5</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 5")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-6</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 6")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-7</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 7")</script>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-8</name>
+    <binding>
+      <command>nasal</command>
+      <script>print("Button 8")</script>
+    </binding>
+  </event>
+
+  <event>
+    <desc>Speed</desc>
+    <name>button-9</name>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>speed</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-10</name>
+    <desc>Level Change</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>level-change</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-11</name>
+    <desc>Heading</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>heading</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-12</name>
+    <desc>Approach</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>approach</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-13</name>
+    <desc>Altitude</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>altitude-hold</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-14</name>
+    <desc>Vertical Speed</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>vs</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-15</name>
+    <desc>Disengage Bar</desc>
+    <binding>
+      <command>property-assign</command>
+      <property>/input/goflight/mcp/ap-disengage</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/input/goflight/mcp/ap-disengage</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </event>
+
+
+  <event>
+    <name>button-16</name>
+    <desc>F/O FD Enable</desc>
+    <binding>
+      <command>property-assign</command>
+      <property>/input/goflight/mcp/fo-fd-enabled</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/input/goflight/mcp/fo-fd-enabled</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <name>button-17</name>
+    <desc>Altitude Intervention</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>altitude-intervention</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-18</name>
+    <desc>CWS-A</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>cws-a</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-19</name>
+    <desc>CWS-B</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>cws-b</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-20</name>
+    <desc>IAS knob push</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>speed-push</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-21</name>
+    <desc>HDG knob push</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>heading-push</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-22</name>
+    <desc>Altitude Knob Push</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>altitude-select</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-23</name>
+    <desc>Captain's FD Enable</desc>
+    <binding>
+      <command>property-assign</command>
+      <property>/input/goflight/mcp/captain-fd-enabled</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/input/goflight/mcp/captain-fd-enabled</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <name>button-24</name>
+    <desc>N1 select</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>n1</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-25</name>
+    <desc>VNAV</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>vnav</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-26</name>
+    <desc>LNAV</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>lnav</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-27</name>
+    <desc>CMD A</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>command-a</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-28</name>
+    <desc>CMD B</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>command-b</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-29</name>
+    <desc>AT arm</desc>
+    <binding>
+      <command>property-assign</command>
+      <property>/input/goflight/mcp/autothrottle-armed</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/input/goflight/mcp/autothrottle-armed</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <name>button-30</name>
+    <desc>Soeed crossover</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>speed-crossover</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-31</name>
+    <desc>Speed intervention</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>speed-intervention</button>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-32</name>
+    <desc>VOR / Localizer</desc>
+    <binding>
+      <command>goflight-mcp-button</command>
+      <button>vor</button>
+    </binding>
+  </event>
+</PropertyList>

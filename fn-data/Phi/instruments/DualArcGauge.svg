@@ -1,0 +1,62 @@
+<!--  don't add the xml-declaration here -->
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" class="dualarcgauge"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-10 -10 120 55"
+    preserveAspectRatio="xMinYMin meet">
+        
+    <text class="dualarcgauge-label" x="50" y="35" stroke="black"
+        font-size="5" text-anchor="middle" data-bind="text: label"></text>
+        
+    <g data-bind="foreach: markers">
+        <text class="dualarcgauge-marker"
+            data-bind="attr: { x: getX, y: getY, 'text-anchor': anchor, 'fill': color }, text: label"
+            font-size="5"></text>
+    </g>
+    
+    <g data-bind="foreach: arcs">
+      <path class="dualarcgauge-scale-arc"  stroke-linecap="butt"
+        data-bind="attr: { stroke: color, d: 'M' + getStartXY + ' A 47.5 47.5 0 0 1 ' + getEndXY }"
+        stroke-width="5" fill="none" />
+    </g>
+
+    <g data-bind="foreach: ticks">
+      <path class="dualarcgauge-scale-tick" stroke-linecap="butt"
+        data-bind="attr: { stroke: color, 'stroke-width': width, d: 'M' + getStartXY + ' L ' + getEndXY }" fill="none" />
+    </g>
+    
+    <!--  Scale Outline -->
+    <path class="dualarcgauge-scale-stroke"
+        d="M11,29.5 a 45,45 0 0 1 78,0 L93.3,27 A 50,50 0 0 0 6.7,27 z"
+        stroke="black" stroke-width="0.5" fill="none" />
+    
+    <!-- Needle 1 -->
+    <g
+        data-bind="attr { transform: 'rotate('+ (rightRotationNorm()*120-60) +',50,52)' }">
+        <path d="M45,25 l4.5,-8.66 v-10 h1 v10 l4.5,8.66z" stroke="black"
+            stroke-width="0.5" fill="white" />
+        <text x="50" y="23.7" stroke="none" fill="black" font-size="6"
+            text-anchor="middle">R</text>
+    </g>
+    
+    <!-- Needle 2 -->
+    <g
+        data-bind="attr { transform: 'rotate('+ (leftRotationNorm()*120-60) +',50,52)' }">
+        <path d="M45,16 l5,-8.66 l5,8.66z" stroke="black" stroke-width="0.5"
+            fill="white" />
+        <text x="50" y="14.7" stroke="none" fill="black" font-size="6"
+            text-anchor="middle">L</text>
+    </g>
+    
+    <!-- Left Label -->
+    <g class="dualarcgauge-value">
+        <rect x="-9" y="-9" width="20" height="10" rx="2" ry="2" />
+        <text x="10" y="-1" stroke="black" font-size="8" text-anchor="end"
+            data-bind="text: leftText"></text>
+    </g>
+    
+    <!-- Right Label -->
+    <g class="dualarcgauge-value">
+        <rect x="89" y="-9" width="20" height="10" rx="2" ry="2" />
+        <text x="108" y="-1" stroke="black" font-size="8" text-anchor="end"
+            data-bind="text: rightText"></text>
+    </g>
+</svg>

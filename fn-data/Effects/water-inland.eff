@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+	<name>Effects/water-inland</name>
+	<inherits-from>Effects/water</inherits-from>
+	<parameters>
+		<use_specified_water_shallowness type="int">0</use_specified_water_shallowness>
+                <water_shallowness type="float">1.0</water_shallowness>
+		<use_specified_floor_color type="int">0</use_specified_floor_color>
+		<floor_color type="vec3d">0.1608 0.2588 0.1765</floor_color>
+                <ocean_flag>0</ocean_flag>
+	</parameters>
+</PropertyList>

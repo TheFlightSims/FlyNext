@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/fxaa</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/fxaa.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/fxaa.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>color_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>quad</type>
+  <condition>
+    <equals>
+      <property>/sim/rendering/hdr/antialiasing-technique</property>
+      <value type="int">2</value>
+    </equals>
+  </condition>
+</PropertyList>

@@ -1,0 +1,37 @@
+<div>
+    <fieldset>
+        <legend>AI</legend>
+        <div>
+            <input type="checkbox" id="sim-config-aitraffic-on" data-bind="button: { refreshOn: aiEnabled }, checked: aiEnabled">
+            <label for="sim-config-aitraffic-on" data-bind="css: { 'ui-state-active': aiEnabled }">AI Traffic</label>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Multiplayer</legend>
+        
+        <div>
+            <label for="sim-config-multiplayer-callsign">Callsign</label> <span
+                class="ui-spinner ui-widget ui-widget-content ui-corner-all"> <input class="ui-spinner-input"
+                id="sim-config-multiplayer-callsign" data-bind="value: callsign, disable: online" maxlength="8">
+            </span>
+            <input type="checkbox" id="sim-config-multiplayer-hidereplay"
+                data-bind="button: { refreshOn: multiplayerHideReplay }, checked: multiplayerHideReplay"> <label
+                for="sim-config-multiplayer-hidereplay" data-bind="css: { 'ui-state-active': multiplayerHideReplay }">Hide
+                replay sessions over MP</label>
+        </div>
+        <div>
+            <button data-bind="button: { disabled: offline, label: 'Disconnect from ' + selectedServer() }, click: toggleConnect"></button>
+        </div>
+        <div>
+            <button data-bind="button: { disabled: online }, click: toggleConnect">Connect to</button>
+            <select data-bind="enable: offline
+                               value: selectedServer, 
+                               options: serverList, 
+                               optionsText: 'longname',
+                               optionsValue: 'longname',
+                               "></select>
+        </div>
+
+    </fieldset>
+    <!--div data-bind="text: ko.toJSON($data)"></div-->
+</div>

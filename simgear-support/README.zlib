@@ -1,0 +1,8 @@
+zlib is prerequisite for compiling SimGear and FlightGear.  You can fetch
+the latest version of zlib from:
+
+    http://www.zlib.net
+
+Most modern unix distributions (and cygwin) come with a version of zlib
+already installed or available to install as a package.
+

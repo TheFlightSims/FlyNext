@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/smaa-neighborhood-blending</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/smaa_neighborhood_blending.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/smaa_neighborhood_blending.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>color_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>blend_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

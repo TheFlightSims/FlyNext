@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<PropertyList include="MD80-main.xml">
+  <texture-path>Textures/American</texture-path>
+</PropertyList>

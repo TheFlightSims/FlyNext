@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="320"
+   height="240"
+   viewBox="0 0 320 240"
+   id="svg4345"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="S3_start.svg">
+  <defs
+     id="defs4347" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#5a5a5a"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="50.791612"
+     inkscape:cy="64.18833"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1680"
+     inkscape:window-height="991"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata4350">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-812.36216)">
+    <rect
+       style="fill:#000000"
+       id="black"
+       width="35.561291"
+       height="94.830109"
+       x="118.33147"
+       y="850.34448" />
+    <path
+       id="yellow"
+       style="fill:#fbfc46"
+       d="m 118.33147,850.34448 11.85376,0 0,11.85376 -11.85376,0 z m 0,23.70755 11.85376,0 0,11.85375 -11.85376,0 z m 0,23.70749 11.85376,0 0,11.85375 -11.85376,0 z m 0,23.70758 11.85376,0 0,11.85375 -11.85376,0 z m 23.70754,-71.12262 11.85375,0 0,11.85376 -11.85375,0 z m 0,23.70755 11.85375,0 0,11.85375 -11.85375,0 z m 0,23.70749 11.85375,0 0,11.85375 -11.85375,0 z m 0,23.70758 11.85375,0 0,11.85375 -11.85375,0 z m -11.85378,-59.26886 11.85378,0 0,11.85379 -11.85378,0 z m 0,23.70754 11.85378,0 0,11.85374 -11.85378,0 z m 0,23.70749 11.85378,0 0,11.85383 -11.85378,0 z m 0,23.70758 11.85378,0 0,11.85374 -11.85378,0 z"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#427ebf"
+       d="m 164.52247,863.39844 c -0.78803,0 -1.42245,0.6344 -1.42245,1.42245 l 0,4.77114 0,5.20087 0,16.1063 0,9.92746 0,29.8715 c 0,0.78804 0.63442,1.42246 1.42245,1.42246 l 13.83928,0 c 0.78803,0 1.42245,-0.63442 1.42245,-1.42246 l 0,-28.44904 24.61137,0 c 0.78805,0 1.42245,-0.63441 1.42245,-1.42246 l 0,-9.92746 c 0,-0.78805 -0.6344,-1.42246 -1.42245,-1.42246 l -24.61137,0 0,-13.26138 26.52279,0 c 0.78805,0 1.42246,-0.63442 1.42246,-1.42246 l 0,-9.97201 c 0,-0.78805 -0.63441,-1.42245 -1.42246,-1.42245 l -41.78452,0 z"
+       id="F"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:23.03198624px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="31.094612"
+       y="970.12781"
+       id="text6129"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan6131"
+         x="31.094612"
+         y="970.12781">LX S3 vario simulation</tspan></text>
+  </g>
+</svg>

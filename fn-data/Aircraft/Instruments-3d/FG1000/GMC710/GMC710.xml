@@ -1,0 +1,774 @@
+<?xml version="1.0" ?>
+
+<PropertyList>
+
+  <path>GMC710.ac</path>
+
+  <animation>
+    <object-name>case</object-name>
+    <object-name>knob.ALT</object-name>
+    <object-name>knob.CRS1</object-name>
+    <object-name>knob.CRS2</object-name>
+    <object-name>knob.HDG</object-name>
+    <object-name>led.ALT</object-name>
+    <object-name>led.AP</object-name>
+    <object-name>led.APR</object-name>
+    <object-name>led.BANK</object-name>
+    <object-name>led.BC</object-name>
+    <object-name>led.FD</object-name>
+    <object-name>led.FLC</object-name>
+    <object-name>led.HDG</object-name>
+    <object-name>led.NAV</object-name>
+    <object-name>led.SPD</object-name>
+    <object-name>led.VNV</object-name>
+    <object-name>led.VS</object-name>
+    <object-name>led.YD</object-name>
+    <object-name>screws</object-name>
+    <object-name>softkey.ALT</object-name>
+    <object-name>softkey.AP</object-name>
+    <object-name>softkey.APR</object-name>
+    <object-name>softkey.BANK</object-name>
+    <object-name>softkey.BC</object-name>
+    <object-name>softkey.FD</object-name>
+    <object-name>softkey.FLC</object-name>
+    <object-name>softkey.HDG</object-name>
+    <object-name>softkey.NAV</object-name>
+    <object-name>softkey.SPD</object-name>
+    <object-name>softkey.VNV</object-name>
+    <object-name>softkey.VS</object-name>
+    <object-name>softkey.XFER</object-name>
+    <object-name>softkey.YD</object-name>
+    <object-name>wheel.ALT</object-name>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>case</object-name>
+    <object-name>knob.ALT</object-name>
+    <object-name>knob.CRS1</object-name>
+    <object-name>knob.CRS2</object-name>
+    <object-name>knob.HDG</object-name>
+    <object-name>led.ALT</object-name>
+    <object-name>led.AP</object-name>
+    <object-name>led.APR</object-name>
+    <object-name>led.BANK</object-name>
+    <object-name>led.BC</object-name>
+    <object-name>led.FD</object-name>
+    <object-name>led.FLC</object-name>
+    <object-name>led.HDG</object-name>
+    <object-name>led.NAV</object-name>
+    <object-name>led.SPD</object-name>
+    <object-name>led.VNV</object-name>
+    <object-name>led.VS</object-name>
+    <object-name>led.YD</object-name>
+    <object-name>screws</object-name>
+    <object-name>softkey.ALT</object-name>
+    <object-name>softkey.AP</object-name>
+    <object-name>softkey.APR</object-name>
+    <object-name>softkey.BANK</object-name>
+    <object-name>softkey.BC</object-name>
+    <object-name>softkey.FD</object-name>
+    <object-name>softkey.FLC</object-name>
+    <object-name>softkey.HDG</object-name>
+    <object-name>softkey.NAV</object-name>
+    <object-name>softkey.SPD</object-name>
+    <object-name>softkey.VNV</object-name>
+    <object-name>softkey.VS</object-name>
+    <object-name>softkey.XFER</object-name>
+    <object-name>softkey.YD</object-name>
+    <object-name>wheel.ALT</object-name>
+    <condition>
+      <property>controls/lighting/instrument-lights</property>
+      <property>controls/electric/battery-switch</property>
+    </condition>
+    <emission>
+      <factor-prop>controls/lighting/floods-lights</factor-prop>
+      <blue>  0.2 </blue>
+      <red>   0.2 </red>
+      <green> 0.2 </green>
+    </emission>
+  </animation>
+
+
+  <animation>
+    <type>knob</type>
+    <object-name>knob.ALT</object-name>
+    <value>0</value>
+    <action>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>ALT_INNER</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>Alt</tooltip-id>
+        <label>Change Altitude</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>knob.CRS1</object-name>
+    <object-name>knob.CRS2</object-name>
+    <action>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>CRS</notification>
+      </binding>
+    </action>
+    <shift-action>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>CRS_CENTER</notification>
+        <offset>1</offset>
+      </binding>
+    </shift-action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>CRS</tooltip-id>
+        <label>Change Nav Course (Shift to center)</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>knob.HDG</object-name>
+    <action>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>HEADING</notification>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/fg1000/GMC710/heading-bug-deg</property>
+        <factor>15</factor>
+      </binding>
+    </action>
+    <shift-action>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>HEADING_PRESS</notification>
+      </binding>
+    </shift-action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>HDG</tooltip-id>
+        <label>Change heading bug (Shift to sync)</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>knob.HDG</object-name>
+    <property>instrumentation/fg1000/GMC710/heading-bug-deg</property>
+    <center>
+      <x-m>0.010199</x-m>
+      <y-m>-0.100565</y-m>
+      <z-m>0.012796</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.ALT</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/vertical-mode</property>
+        <value>ALTS</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.ALT</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/vertical-mode</property>
+        <value>ALT</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.AP</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/autopilot-enabled</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.APR</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/altitude-mode</property>
+        <value>GS</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <!-- This should be for the Low Bank AFCS function to limit bank angles, which isn't implemented yet -->
+    <object-name>led.BANK</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/low-bank</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <!-- This should be for the Back Course AFCS function to fly the back-course of an ILS, which isn't implemented yet -->
+    <object-name>led.BC</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/altitude-mode</property>
+        <value>BC</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.FD</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/flight-director-enabled</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.FLC</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/vertical-mode</property>
+        <value>FLC</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.HDG</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/lateral-mode</property>
+        <value>HDG</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+
+  <animation>
+    <type>material</type>
+    <object-name>led.NAV</object-name>
+    <condition>
+      <or>
+        <equals>
+          <property>/autopilot/annunciator/lateral-mode</property>
+          <value>GPS</value>
+        </equals>
+        <equals>
+          <property>/autopilot/annunciator/lateral-mode</property>
+          <value>LOC</value>
+        </equals>
+        <equals>
+          <property>/autopilot/annunciator/lateral-mode</property>
+          <value>VOR</value>
+        </equals>
+      </or>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.SPD</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/vertical-mode</property>
+        <value>FLC</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.VNV</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/vertical-mode</property>
+        <value>GS</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.VS</object-name>
+    <condition>
+      <equals>
+        <property>/autopilot/annunciator/vertical-mode</property>
+        <value>VS</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>    
+    <object-name>led.YD</object-name>
+    <condition>
+      <equals>
+        <!-- Yaw Damper not yet implemented -->
+        <property>/autopilot/annunciator/yaw-damper</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <emission>
+      <red>   0 </red>
+      <green> 1 </green>
+      <blue>  0 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.ALT</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>ALT</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.R1</tooltip-id>
+        <label>Select AP Altitude mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.AP</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>AP</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L0</tooltip-id>
+        <label>Toggle Autopilot</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.APR</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>APR</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L3</tooltip-id>
+        <label>Select AP Approach mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.BANK</object-name>
+<!-- Low bank setting not yet implemented -->
+<!--
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>APR</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+-->    
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L3</tooltip-id>
+        <label>Select AP Low Bank mode (not implemented)</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.BC</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>BC</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.R3</tooltip-id>
+        <label>Select AP Backcourse mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.FD</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>FD</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.R0</tooltip-id>
+        <label>Toggle Flight Director</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.FLC</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>FLC</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L5</tooltip-id>
+        <label>Select AP Flight Level mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.HDG</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>HDG</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L1</tooltip-id>
+        <label>Select AP Heading mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.NAV</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>NAV</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L2</tooltip-id>
+        <label>Select AP NAV mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.SPD</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>FLC</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L2</tooltip-id>
+        <label>Select AP NAV mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.VNV</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>VNV</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.R2</tooltip-id>
+        <label>Select AP Vertical Navigation mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.VS</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>VS</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L4</tooltip-id>
+        <label>Select AP Vertical Speed mode</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.XFER</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>NAV_FREQ_TRANSFER</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AsSwitchNav</tooltip-id>
+        <label>Swap active and standby NAV frequencies</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.YD</object-name>
+<!-- Yaw Damper not yet implemented -->
+<!--
+    <action>
+      <button>0</button>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>YD</notification>
+        <offset>1</offset>
+      </binding>
+    </action>
+-->    
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.L3</tooltip-id>
+        <label>Toggle yaw damper (not implemented)</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>knob</type>    
+    <object-name>wheel.ALT</object-name>
+    <property>instrumentation/fg1000/GMC710/trim-wheel</property>
+    <center>
+      <x-m>0.000474</x-m>
+      <y-m>0.05451</y-m>
+      <z-m>0.018825</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+    <action>
+      <binding>
+        <command>property-adjust</command>
+        <property>instrumentation/fg1000/GMC710/trim-wheel</property>
+        <factor>-10</factor>
+      </binding>
+    </action>
+    <increase>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>NOSE_DOWN</notification>
+        <offset>1</offset>
+      </binding>
+    </increase>
+    <decrease>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>1</device>
+        <notification>NOSE_UP</notification>
+        <offset>1</offset>
+      </binding>
+    </decrease>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>AP.R4</tooltip-id>
+        <label>AP Nose Trim</label>
+      </binding>
+    </hovered>
+  </animation>
+
+</PropertyList>

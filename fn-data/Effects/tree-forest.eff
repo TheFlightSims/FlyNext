@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/tree-forest</name>
+  <inherits-from>Effects/tree</inherits-from>
+	<parameters>
+		<use_tree_shadows>true</use_tree_shadows>
+		<use_forest_effect>true</use_forest_effect>
+		<tree_patches>true</tree_patches>
+	</parameters>
+</PropertyList>

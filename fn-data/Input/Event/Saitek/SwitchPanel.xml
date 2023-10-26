@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+
+<!--
+****************************************************************
+*Re: Joystick xml codes Library project - open for contributi
+*Postby FCar » Sun May 29, 2016 6:28 am
+*
+*Saitek Switch Panel Event XML file:
+****************************************************************
+-->
+
+<PropertyList>
+
+  <name>Saitek Pro Flight Switch Panel</name>
+  <name>HOLTEK Saitek Pro Flight Switch Panel</name>
+  <debug-events type="bool">true</debug-events>
+
+  <event>
+    <name>button-0</name>
+    <desc>Battery master</desc>
+    <binding>
+      <command>property-assign</command>
+      <property>/controls/switches/master-bat</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/switches/master-bat</property>
+        <value>false</value>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <name>button-1</name>
+    <desc>Alternator master</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/switches/master-alt</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/switches/master-alt</property>
+        <value>false</value>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <name>button-2</name>
+    <desc>Avionics master</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/switches/master-avionics</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/switches/master-avionics</property>
+        <value>false</value>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <name>button-5</name>
+    <desc>Pitot heat</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/anti-ice/pitot-heat</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/anti-ice/pitot-heat</property>
+        <value>false</value>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <name>button-7</name>
+    <desc>Instruments light</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/lighting/instruments-norm</property>
+      <value>1.0</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/lighting/instruments-norm</property>
+        <value>0.0</value>
+      </binding>
+   </mod-up>
+  </event>
+
+  <event>
+    <name>button-8</name>
+    <desc>Beacon</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/lighting/beacon</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/lighting/beacon</property>
+        <value>false</value>
+      </binding>
+   </mod-up>
+  </event>
+
+  <event>
+    <name>button-9</name>
+    <desc>Navigation lights</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/lighting/nav-lights</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/lighting/nav-lights</property>
+        <value>false</value>
+      </binding>
+   </mod-up>
+  </event>
+
+  <event>
+    <name>button-266</name>
+    <desc>Strobe</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/lighting/strobe</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/lighting/strobe</property>
+        <value>false</value>
+      </binding>
+   </mod-up>
+  </event>
+
+  <event>
+    <name>button-267</name>
+    <desc>Taxi light</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/lighting/taxi-light</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/lighting/taxi-light</property>
+        <value>false</value>
+      </binding>
+   </mod-up>
+  </event>
+
+  <event>
+    <name>button-268</name>
+    <desc>Landing lights</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/lighting/landing-lights</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/lighting/landing-lights</property>
+        <value>false</value>
+      </binding>
+   </mod-up>
+  </event>
+
+  <event>
+    <name>button-side</name>
+    <desc>Gear</desc>
+    <binding>
+      <command>nasal</command>
+      <script>controls.gearDown(1)</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>controls.gearDown(0)</script>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <name>button-269</name>
+    <desc>Magnetos off</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/switches/magnetos</property>
+      <value>0</value>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-270</name>
+    <desc>Magnetos right</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/switches/magnetos</property>
+      <value>1</value>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-271</name>
+    <desc>Magnetos right</desc>
+    <binding>
+      <command>property-assign</command>
+      <property>/controls/switches/magnetos</property>
+      <value>2</value>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-left</name>
+    <desc>Magnetos both</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/switches/magnetos</property>
+      <value>3</value>
+    </binding>
+  </event>
+
+  <event>
+    <name>button-right</name>
+    <desc>Starter</desc>
+     <binding>
+      <command>property-assign</command>
+      <property>/controls/switches/starter</property>
+      <value>true</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>/controls/switches/starter</property>
+        <value>false</value>
+      </binding>
+    </mod-up>
+   </event>
+
+</PropertyList>

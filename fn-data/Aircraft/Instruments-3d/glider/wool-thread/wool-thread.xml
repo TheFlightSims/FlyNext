@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<path>wool-thread.ac</path>
+	
+	<animation>
+		<type>noshadow</type>
+		<object-name>wool-thread</object-name>
+		<object-name>adhesive</object-name>
+	</animation>
+	
+	<params>
+		<use-prop type="string">instrumentation/yawstring</use-prop>
+	</params>
+
+	<animation>
+		<type>texrotate</type>
+		<object-name>wool-thread</object-name>
+		<property alias="../../params/use-prop"/>
+		<factor>1</factor>
+		<center>
+			<x>0.5</x>
+			<y>0.5</y>
+			<z>0.5</z>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+
+</PropertyList>
+
+

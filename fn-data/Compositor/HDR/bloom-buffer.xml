@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>2d</type>
+  <width>screen</width>
+  <height>screen</height>
+  <format>rgb16f</format>
+  <min-filter>linear</min-filter>
+  <mag-filter>linear</mag-filter>
+  <wrap-s>clamp-to-edge</wrap-s>
+  <wrap-t>clamp-to-edge</wrap-t>
+</PropertyList>

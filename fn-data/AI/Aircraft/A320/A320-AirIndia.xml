@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!-- author - Brett Harrison -->
+<PropertyList include="A320-main.xml">
+
+ <texture-path>Textures/AirIndia</texture-path>
+  
+</PropertyList>

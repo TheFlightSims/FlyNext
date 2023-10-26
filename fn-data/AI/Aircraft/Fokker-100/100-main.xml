@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <description>Fokker 100</description>
+  <author>Ian (Yves) Tolosa based on model by Erik Hofman</author>
+  <path>Models/100.ac</path>
+  
+   <offsets>
+	<pitch-deg>-0.75</pitch-deg>   
+  </offsets>
+
+	<animation>
+		<type>select</type>
+		<object-name>Gear</object-name>
+		<condition>
+			<less-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>145</value>
+			</less-than>
+		</condition>
+	</animation> 
+
+</PropertyList>

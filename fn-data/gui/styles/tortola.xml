@@ -1,0 +1,340 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    <!-- possible font names:
+		"default", "FIXED_8x13", "FIXED_9x15", "TIMES_10", "TIMES_24",
+		"HELVETICA_10", "HELVETICA_12", "HELVETICA_14", "HELVETICA_18",
+		"SANS_12B", and all font file names from $FG_ROOT/Fonts/, such as
+		"helvetica_bold.txf". "size" and "slant" take only effect on
+		texture fonts.
+		
+	Colors for boxes:
+		mid  FOREGROUND
+  		hi   HIGHLIGHT 
+  		lo   BACKGROUND
+
+  		Almost a new theme - not using any of the old inline bitmapped fonts because
+  		they flicker on AMD hardware. As I can't find what's causing that instead
+  		not using those fonts fixes the problem.
+  		I also think it looks nice, but MRDA.
+  		Richard Harrison; 2017-09-17
+	-->
+    <name>Tortola</name>
+
+    <fonts>
+        <gui>
+            <!--<name type="string">accid.txf</name>
+      <size type="float">10</size>-->
+            <name type="string">accid.txf</name>
+            <size type="float">16</size>
+            <slant type="float">0</slant>
+        </gui>
+
+        <splash>
+            <name type="string">AvantGarde-Demi.txf</name>
+            <size type="float">15</size>
+            <slant type="float">0</slant>
+        </splash>
+        <gui-small>
+            <name>AvantGarde-Demi.txf</name>
+            <size>12</size>
+        </gui-small>
+        <mp-list>
+            <name>AvantGarde-Demi.txf</name>
+            <size>12</size>
+        </mp-list>
+
+        <model-view>
+            <name>AvantGarde-Demi.txf</name>
+            <size>12</size>
+        </model-view>
+
+        <replay>
+            <name>AvantGarde-Demi.txf</name>
+            <size>11</size>
+        </replay>
+        <stopwatch>
+            <name type="string">accid.txf</name>
+            <size type="float">20</size>
+            <slant type="float">0</slant>
+        </stopwatch>
+        <gui-large>
+            <name type="string">accid.txf</name>
+            <size type="float">17</size>
+            <slant type="float">0</slant>
+        </gui-large>
+
+        <fixed>
+            <name>monoMMM_5.txf</name>
+            <size>6</size>
+        </fixed>
+        <nasal-editor>
+            <name>monoMMM_5.txf</name>
+            <size>6</size>
+        </nasal-editor>
+
+        <message-display>
+            <name type="string">accid.txf</name>
+            <size type="float">16</size>
+            <slant type="float">0</slant>
+        </message-display>
+
+        <screen>
+            <name type="string">accid.txf</name>
+            <size type="float">16</size>
+            <slant type="float">0</slant>
+        </screen>
+
+    </fonts>
+
+    <colors>
+        <!-- default colors for all GUI objects -->
+        <background>
+            <red type="float">0.21</red>
+            <green type="float">0.212</green>
+            <blue type="float">0.221</blue>
+            <alpha type="float">0.95</alpha>
+        </background>
+
+        <foreground>
+            <red type="float">0.9</red>
+            <green type="float">0.9</green>
+            <blue type="float">0.9</blue>
+            <alpha type="float">1.0</alpha>
+        </foreground>
+
+        <highlight>
+            <red type="float">0.21</red>
+            <green type="float">0.212</green>
+            <blue type="float">0.221</blue>
+            <alpha type="float">1.0</alpha>
+        </highlight>
+
+        <label>
+            <red type="float">0.9</red>
+            <green type="float">0.9</green>
+            <blue type="float">0.9</blue>
+            <alpha type="float">1.0</alpha>
+        </label>
+
+        <!--<legend>
+            <red type="float">0.0</red>
+            <green type="float">0.0</green>
+            <blue type="float">0.0</blue>
+            <alpha type="float">1.0</alpha>
+        </legend>-->
+
+        <misc>
+            <red type="float">0.0</red>
+            <green type="float">0.0</green>
+            <blue type="float">0.0</blue>
+            <alpha type="float">1.0</alpha>
+        </misc>
+
+        <hrule>
+            <red type="float">0.0</red>
+            <green type="float">0.0</green>
+            <blue type="float">0.0</blue>
+            <alpha type="float">1.0</alpha>
+        </hrule>
+
+        <vrule>
+            <red type="float">0.0</red>
+            <green type="float">0.0</green>
+            <blue type="float">0.0</blue>
+            <alpha type="float">1.0</alpha>
+        </vrule>
+
+        <checkbox-foreground>
+            <red type="float">0.51</red>
+            <green type="float">0.511</green>
+            <blue type="float">0.61</blue>
+            <alpha type="float">1.0</alpha>
+        </checkbox-foreground>
+
+        <combo-background>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </combo-background>
+
+        <editfield>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </editfield>
+
+        <combo-editfield>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </combo-editfield>
+
+        <select-editfield>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </select-editfield>
+
+        <textbox-editable>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </textbox-editable>
+
+        <text-background>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </text-background>
+
+        <checkbox-highlight>
+            <!-- box frame -->
+            <red type="float">0.51</red>
+            <green type="float">0.511</green>
+            <blue type="float">0.61</blue>
+            <alpha type="float">1.0</alpha>
+        </checkbox-highlight>
+
+        <text-highlight>
+            <red type="float">0.51</red>
+            <green type="float">0.511</green>
+            <blue type="float">0.61</blue>
+            <alpha type="float">1.0</alpha>
+        </text-highlight>
+
+        <textbox-highlight>
+            <red type="float">0.51</red>
+            <green type="float">0.511</green>
+            <blue type="float">0.61</blue>
+            <alpha type="float">1.0</alpha>
+        </textbox-highlight>
+
+        <radio-foreground>
+            <red type="float">0.51</red>
+            <green type="float">0.511</green>
+            <blue type="float">0.61</blue>
+            <alpha type="float">1.0</alpha>
+        </radio-foreground>
+
+        <radio-highlight>
+            <red type="float">0.51</red>
+            <green type="float">0.511</green>
+            <blue type="float">0.61</blue>
+            <alpha type="float">1.0</alpha>
+        </radio-highlight>
+
+        <slider-foreground>
+            <red type="float">0.571</red>
+            <green type="float">0.57</green>
+            <blue type="float">0.57</blue>
+            <alpha type="float">1.0</alpha>
+        </slider-foreground>
+
+        <slider-background>
+            <red type="float">0.571</red>
+            <green type="float">0.57</green>
+            <blue type="float">0.57</blue>
+            <alpha type="float">1.0</alpha>
+        </slider-background>
+
+        <slider-highlight>
+            <red type="float">0.371</red>
+            <green type="float">0.37</green>
+            <blue type="float">0.37</blue>
+            <alpha type="float">1.0</alpha>
+        </slider-highlight>
+
+        <input-background>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </input-background>
+
+        <input-foreground>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </input-foreground>
+
+        <input-highlight>
+            <red type="float">0.31</red>
+            <green type="float">0.312</green>
+            <blue type="float">0.321</blue>
+            <alpha type="float">1.0</alpha>
+        </input-highlight>
+
+        <input-misc>
+            <!-- cursor -->
+            <red type="float">1.0</red>
+            <green type="float">0.0</green>
+            <blue type="float">0.0</blue>
+            <alpha type="float">1.0</alpha>
+        </input-misc>
+
+        <textbox-background>
+            <red type="float">0.21</red>
+            <green type="float">0.212</green>
+            <blue type="float">0.221</blue>
+            <alpha type="float">1.0</alpha>
+        </textbox-background>
+
+        <textbox-foreground>
+            <red type="float">0.21</red>
+            <green type="float">0.212</green>
+            <blue type="float">0.221</blue>
+            <alpha type="float">1.0</alpha>
+        </textbox-foreground>
+
+        <textbox-highlight>
+            <!-- outer box and second color internall-->
+            <red type="float">0.23</red>
+            <green type="float">0.232</green>
+            <blue type="float">0.231</blue>
+            <alpha type="float">1.0</alpha>
+        </textbox-highlight>
+
+        <list-background>
+            <red type="float">0.21</red>
+            <green type="float">0.212</green>
+            <blue type="float">0.221</blue>
+            <alpha type="float">1.0</alpha>
+        </list-background>
+
+        <list-foreground>
+            <red type="float">0.21</red>
+            <green type="float">0.212</green>
+            <blue type="float">0.221</blue>
+            <alpha type="float">1.0</alpha>
+        </list-foreground>
+
+        <list-highlight>
+            <red type="float">0.23</red>
+            <green type="float">0.232</green>
+            <blue type="float">0.231</blue>
+            <alpha type="float">1.0</alpha>
+        </list-highlight>
+
+        <!-- splash screen colors -->
+
+        <splash-font>
+            <red type="float">1.0</red>
+            <green type="float">0.9</green>
+            <blue type="float">0.0</blue>
+        </splash-font>
+
+        <splash-screen>
+            <red type="float">0.0</red>
+            <green type="float">0.0</green>
+            <blue type="float">0.0</blue>
+        </splash-screen>
+    </colors>
+</PropertyList>

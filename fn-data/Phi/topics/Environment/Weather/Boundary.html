@@ -1,0 +1,26 @@
+<table class="ui-widget-content ui-corner-all">
+    <thead>
+        <tr>
+            <th>Altitude (ft)</th>
+            <th colspan="2">Wind (dir/kt)</th>
+            <th>Vis (m)</th>
+            <th>Temp (&deg;C)</th>
+            <th>Dewp (&deg;C)</th>
+            <th>Turbulence</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: layerData">
+        <tr>
+            <td><input data-bind="spinner: { value: altitude }" style="width: 4em;"></td>
+            <td><input data-bind="spinner: { value: windDir }" style="width: 2em;"></td>
+            <td><input data-bind="spinner: { value: windSpeed }" style="width: 1.5em;"></td>
+            <td><input data-bind="spinner: { value: visibility }" style="width: 4em;"></td>
+            <td><input data-bind="spinner: { value: temperature }" style="width: 1.5em;"></td>
+            <td><input data-bind="spinner: { value: dewpoint }" style="width: 1.5em;"></td>
+            <td><select
+                data-bind="value: turbulenceValue, selectmenu: {}, options: turbulence, optionsValue: 'id', optionsText: 'text'"
+                style="width: 10em;"></select></td>
+        </tr>
+    </tbody>
+</table>
+

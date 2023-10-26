@@ -1,0 +1,164 @@
+#ifndef _PARSE_H
+#define _PARSE_H
+
+#include <setjmp.h>
+
+#include "nasal.h"
+#include "data.h"
+#include "code.h"
+
+enum tok {
+    TOK_TOP = 1,
+    TOK_AND,
+    TOK_OR,
+    TOK_NOT,
+    TOK_BIT_AND,
+    TOK_BIT_OR,
+    TOK_BIT_XOR,
+    TOK_BIT_NEG,
+    TOK_LPAR,
+    TOK_RPAR,
+    TOK_LBRA,
+    TOK_RBRA,
+    TOK_LCURL,
+    TOK_RCURL,
+    TOK_MUL,
+    TOK_PLUS,
+    TOK_MINUS,
+    TOK_NEG,
+    TOK_DIV,
+    TOK_CAT,
+    TOK_COLON,
+    TOK_DOT,
+    TOK_COMMA,
+    TOK_SEMI,
+    TOK_ASSIGN,
+    TOK_LT,
+    TOK_LTE,
+    TOK_EQ,
+    TOK_NEQ,
+    TOK_GT,
+    TOK_GTE,
+    TOK_IF,
+    TOK_ELSIF,
+    TOK_ELSE,
+    TOK_FOR,
+    TOK_FOREACH,
+    TOK_WHILE,
+    TOK_RETURN,
+    TOK_BREAK,
+    TOK_CONTINUE,
+    TOK_FUNC,
+    TOK_SYMBOL,
+    TOK_LITERAL,
+    TOK_EMPTY,
+    TOK_NIL,
+    TOK_TRUE,
+    TOK_FALSE,
+    TOK_ELLIPSIS,
+    TOK_QUESTION,
+    TOK_VAR,
+    TOK_PLUSEQ,
+    TOK_MINUSEQ,
+    TOK_MULEQ,
+    TOK_DIVEQ,
+    TOK_CATEQ,
+    TOK_BIT_ANDEQ,
+    TOK_NULL_CHAIN,
+    TOK_NULL_ACCESS,
+    TOK_BIT_OREQ,
+    TOK_BIT_XOREQ,
+    TOK_FORINDEX
+};
+
+// Precedence rules
+enum { PREC_BINARY=1, PREC_REVERSE, PREC_PREFIX, PREC_SUFFIX };
+
+struct Token {
+    enum tok type;
+    int line;
+    char* str;
+    int strlen;
+    int rule;
+    double num;
+    struct Token* next;
+    struct Token* prev;
+    struct Token* children;
+    struct Token* lastChild;
+};
+
+struct Parser {
+    // Handle to the Nasal interpreter
+    struct Context* context;
+
+    char* err;
+    int errLine;
+    jmp_buf jumpHandle;
+
+    // The parse tree ubernode
+    struct Token tree;
+
+    // The input buffer
+    char* buf;
+    int   len;
+
+    // Input file parameters (for generating pretty stack dumps)
+    naRef srcFile;
+    int firstLine;
+
+    // Chunk allocator.  Throw away after parsing.
+    void** chunks;
+    int* chunkSizes;
+    int nChunks;
+    int leftInChunk;
+
+    // Computed line number table for the lexer
+    int* lines;
+    int  nLines;
+
+    struct CodeGenerator* cg;
+};
+
+struct CodeGenerator {
+    int lastLine;
+
+    // Accumulated byte code array
+    unsigned short* byteCode;
+    int codesz;
+    int codeAlloced;
+
+    // Inst. -> line table, stores pairs of {ip, line}
+    unsigned short* lineIps;
+    int nLineIps; // number of pairs
+    int nextLineIp;
+
+    int* argSyms;
+    int* optArgSyms;
+    int* optArgVals;
+    naRef restArgSym;
+
+    // Stack of "loop" frames for break/continue statements
+    struct {
+        int breakIP;
+        int contIP;
+        struct Token* label;
+    } loops[MAX_MARK_DEPTH];
+    int loopTop;
+
+    // Dynamic storage for constants, to be compiled into a static table
+    naRef consts;
+};
+
+void naParseError(struct Parser* p, char* msg, int line);
+void naParseInit(struct Parser* p);
+void* naParseAlloc(struct Parser* p, int bytes);
+void naParseDestroy(struct Parser* p);
+void naLex(struct Parser* p);
+int naLexUtf8C(char* s, int len, int* used); /* in utf8lib.c */
+naRef naCodeGen(struct Parser* p, struct Token* block, struct Token* arglist);
+
+void naParse(struct Parser* p);
+
+
+
+#endif // _PARSE_H

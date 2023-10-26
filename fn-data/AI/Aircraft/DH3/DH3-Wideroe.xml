@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<PropertyList include="DH3-main.xml">
+ <texture-path>Textures/Wideroe</texture-path>
+
+</PropertyList>

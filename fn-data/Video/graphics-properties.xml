@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+Declare behaviour of various graphics properties. This captures
+information common to all the different graphics presets, and
+avoids hard-coding these lists in C++.
+
+Various lists need to be defined:
+
+ - the 'scenery reload required' list : properties which do not take effect until
+ the scenery is reloaded
+ - the 'restart required' list : properties which only take ffect upon restarting
+  the simulator.
+
+In each case, the property paths are treated as prefixes; i.e any concrete property
+whose full path matches one of these prefixes, will be considered as within that
+particular list.
+-->
+
+<PropertyList>
+
+    <save-to-file>
+        <!-- General -->
+        <property>/sim/rendering/shaders/skydome</property>
+        <property>/sim/rendering/shaders/use-shaders</property>
+        <property>/sim/rendering/shaders/landmass</property>
+        <property>/sim/rendering/shaders/transition</property>
+        <property>/sim/rendering/shaders/model</property>
+        <property>/sim/rendering/shaders/water</property>
+        <property>/sim/rendering/shaders/clouds</property>
+        <property>/sim/rendering/shaders/wind-effects</property>
+        <property>/sim/rendering/shaders/vegetation-effects</property>
+        <property>/sim/rendering/multi-sample-buffers</property>
+        <property>/sim/rendering/multi-samples</property>
+        <!-- Shadows -->
+        <property>/sim/rendering/shadows/enabled</property>
+        <property>/sim/rendering/shadows/sun-atlas-size</property>
+        <!-- Lights -->
+        <property>/sim/rendering/dynamic-lighting/enabled</property>
+        <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+        <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
+        <!-- Scenery -->
+        <property>/sim/rendering/scenery-path-suffix[0]/enabled</property> <!-- Pylons -->
+        <property>/sim/rendering/scenery-path-suffix[1]/enabled</property> <!-- Roads -->
+        <property>/sim/rendering/scenery-path-suffix[2]/enabled</property> <!-- Buildings -->
+        <property>/sim/rendering/scenery-path-suffix[3]/enabled</property> <!-- Objects -->
+        <property>/sim/rendering/scenery-path-suffix[4]/enabled</property> <!-- Details -->
+        <property>/sim/rendering/scenery-path-suffix[5]/enabled</property> <!-- Trees -->
+        <property>/sim/rendering/osm-buildings</property>
+        <property>/sim/rendering/random-objects</property>
+        <property>/sim/rendering/random-buildings</property>
+        <property>/sim/rendering/random-vegetation</property>
+        <property>/sim/rendering/random-vegetation-shadows</property>
+        <property>/sim/rendering/vegetation-density</property>
+        <!-- Atmospheric Effects -->
+        <property>/sim/rendering/particles</property>
+        <property>/sim/rendering/precipitation-gui-enable</property>
+        <property>/sim/rendering/clouds3d-enable</property>
+    </save-to-file>
+
+    <scenery-reload-required>
+        <property>/scenery/use-vpb</property>
+        <property>/scenery/elevation-mesh/lod-range-factor</property>
+        <property>/scenery/elevation-mesh/constraint-gap-m</property>
+        <property>/sim/rendering/photoscenery/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[0]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[1]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[2]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[3]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[4]/enabled</property>
+        <property>/sim/rendering/scenery-path-suffix[5]/enabled</property>
+        <property>/sim/rendering/osm-buildings</property>
+        <property>/sim/rendering/random-objects</property>
+        <property>/sim/rendering/random-buildings</property>
+        <property>/sim/rendering/random-vegetation</property>
+        <property>/sim/rendering/random-vegetation-shadows</property>
+        <property>/sim/rendering/vegetation-density</property>
+    </scenery-reload-required>
+
+    <compositor-reload-required>
+        <property>/sim/rendering/shadows/enabled</property>
+        <property>/sim/rendering/shadows/sun-atlas-size</property>
+        <property>/sim/rendering/dynamic-lighting/enabled</property>
+        <property>/sim/rendering/dynamic-lighting/max-pointlights</property>
+        <property>/sim/rendering/dynamic-lighting/max-spotlights</property>
+        <property>/sim/vr/mirror-enabled</property>
+        <property>/sim/vr/mirror-mode</property>
+    </compositor-reload-required>
+
+    <restart-required>
+        <property>/sim/rendering/multi-sample-buffers</property>
+        <property>/sim/rendering/multi-samples</property>
+    </restart-required>
+
+</PropertyList>

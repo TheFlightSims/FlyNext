@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+
+<!-- Author Jonathan Redpath - Fleet & Timetable as of JUN 1st 2017 -->
+
+<trafficlist>
+	<aircraft>
+        <model>Aircraft/767/767-SBA.xml</model>
+        <livery>SBA</livery>
+        <airline>BBR</airline>
+        <home-port>SVMI</home-port>
+        <required-aircraft>767BBR</required-aircraft>
+        <actype>763</actype>
+        <offset>0</offset>
+        <radius>24</radius>
+        <flighttype>gate</flighttype>
+        <performance-class>jet_transport</performance-class>
+        <registration>YV-528T</registration>
+        <heavy>true</heavy>
+    </aircraft>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1518</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>0/10:00:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>0/13:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1521</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>0/16:30:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>0/21:00:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1520</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>0/23:00:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>1/01:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1515</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>1/10:00:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>1/14:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1516</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>1/16:30:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>1/19:00:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1525</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>1/21:00:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>2/01:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1518</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>2/11:00:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>2/13:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1521</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>2/16:30:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>2/21:00:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1520</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>2/23:00:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>3/01:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1515</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>3/10:00:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>3/14:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1516</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>3/16:30:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>3/19:00:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1525</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>3/21:00:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>4/01:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1518</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>4/11:00:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>4/13:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1521</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>4/16:30:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>4/21:00:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1520</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>4/23:00:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>5/01:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1525</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>5/03:30:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>5/08:00:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1518</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>5/10:00:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>5/13:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1521</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>5/16:30:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>5/21:00:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1520</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>5/23:00:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>6/01:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	
+	<flight>
+		<callsign>SANTA BARBARA 1515</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>6/10:00:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>6/14:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1516</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>KMIA</port>
+			<time>6/16:30:00</time>
+		</departure>
+		<cruise-alt>350</cruise-alt>
+		<arrival>
+			<port>SVMI</port>
+			<time>6/19:00:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+	<flight>
+		<callsign>SANTA BARBARA 1525</callsign>
+		<required-aircraft>767BBR</required-aircraft>
+		<fltrules>IFR</fltrules>
+		<departure>
+			<port>SVMI</port>
+			<time>6/21:00:00</time>
+		</departure>
+		<cruise-alt>360</cruise-alt>
+		<arrival>
+			<port>KMIA</port>
+			<time>0/01:30:00</time>
+		</arrival>
+		<repeat>WEEK</repeat>
+	</flight>
+	
+</trafficlist>

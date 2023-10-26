@@ -1,0 +1,25 @@
+<style>
+.phi-datetime-2digits {
+	width: 2em;
+}
+</style>
+<fieldset>
+    <legend>Time of today</legend>
+    <!--  ko foreach: timesOfToday -->
+    <button data-bind="text: $data, click: $parent.setTimeOfToday">Clock Time</button>
+    <!-- /ko -->
+</fieldset>
+<fieldset>
+    <legend>Date and Time</legend>
+    <div>
+        Current System Time is: <span data-bind="text: timeAsString"></span>
+    </div>
+
+    <div data-bind="datepicker: { value: simTimeAsLocalTime, onSelect: onDateSelect }"></div>
+    <div class="input-group clockpicker">
+    <input type="text" class="form-control" value="18:00">
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+</div>
+</fieldset>

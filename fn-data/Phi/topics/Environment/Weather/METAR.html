@@ -1,0 +1,9 @@
+<div id="weather-scenarios" data-bind="foreach: scenarios">
+    <h3 data-bind="text: name"></h3>
+    <p>
+        <button data-bind="button: { }, click: $parent.selectScenario ">Select</button><br /> 
+        <span data-bind="text: description"></span><br /> 
+        <span style="font-weight: bold">METAR: </span> 
+        <span style="font-style: italic" data-bind="text: metar"></span>
+    </p>
+</div>

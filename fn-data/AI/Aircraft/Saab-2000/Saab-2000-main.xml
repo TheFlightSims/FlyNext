@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <description>Saab-2000</description>
+  <author>Brett Harrison</author>
+ <path>Models/Saab-2000.ac</path>
+  
+     <animation>
+   		<type>select</type>
+		<object-name>gear</object-name>
+		<condition>
+			<less-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>150</value>
+			</less-than>
+		</condition>
+	</animation>
+   
+  <animation>
+    <name>leftprop</name>
+    <object-name>left-prop</object-name>
+    <object-name>left-blur</object-name>
+    <object-name>left-boss</object-name>	
+  </animation>  
+  
+ <animation>
+    <type>select</type>
+    <object-name>left-blur</object-name>
+    <condition>
+      <greater-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>50</value>
+      </greater-than>
+    </condition>
+  </animation>
+    
+      <animation>
+    <type>select</type>
+    <object-name>left-prop</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>60</value>
+      </less-than>
+    </condition>
+  </animation>   
+ 
+      <animation>
+    <type>spin</type>
+    <object-name>leftprop</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>6</factor>
+    <center>
+      <x-m> -4.1630 </x-m>
+      <y-m> -4.1059 </y-m>
+      <z-m> 2.4649 </z-m>
+    </center>
+    <axis>
+      <x> 1.000 </x>
+      <y>  0.000 </y>
+      <z>  0.000 </z>
+    </axis>
+  </animation> 
+  
+   
+  <animation>
+    <name>rightprop</name>
+    <object-name>right-prop</object-name>
+    <object-name>right-blur</object-name>
+    <object-name>right-boss</object-name>	
+  </animation>  
+  
+ <animation>
+    <type>select</type>
+    <object-name>right-blur</object-name>
+    <condition>
+      <greater-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>50</value>
+      </greater-than>
+    </condition>
+  </animation>
+    
+      <animation>
+    <type>select</type>
+    <object-name>right-prop</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>60</value>
+      </less-than>
+    </condition>
+  </animation>   
+ 
+      <animation>
+    <type>spin</type>
+    <object-name>rightprop</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>6</factor>
+    <center>
+      <x-m> -4.1630 </x-m>
+      <y-m> 4.1059 </y-m>
+      <z-m> 2.4649 </z-m>
+    </center>
+    <axis>
+      <x> -1.000 </x>
+      <y>  0.000 </y>
+      <z>  0.000 </z>
+    </axis>
+  </animation>   
+  
+</PropertyList>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- FlightGear menu: English (=default) language resource -->
+
+<!-- Style tips:  Aim to keep to a single phrase/sentence which is not terminated with a . -->
+<PropertyList>
+	<tip n="0">Drag while holding the right mouse button to look around</tip>
+	<tip n="1">Hold Ctrl while looking around to move the view up, down, left or right</tip>
+	<tip n="2">Press a/A to adjust the simulation speed</tip>
+	<tip n="3">Press x/X to zoom in and out</tip>
+	<tip n="4">Find frequencies of nearby ATC services from the Radios dialog</tip>
+	<tip n="5">Press v to change your viewpoint, Ctrl-V to return to the cockpit</tip>
+	<tip n="6">Press F3 to take a screenshot</tip>
+	<tip n="7">Join the FlightGear community at http://forum.flightgear.org</tip>
+	<tip n="8">Press h to bring up a Heads Up Display</tip>
+	<tip n="9">Show or hide the menu bar by pressing F10</tip>
+	<tip n="10">Frame-rate too low? - try disabling AI traffic</tip>
+	<tip n="11">Select Environment → Weather to fly in different weather</tip>
+	<tip n="12">Press F12 to change the radio frequencies easily</tip>
+	<tip n="13">Look around by holding down the right mouse button and moving the mouse</tip>
+	<tip n="14">Select Multiplayer → Multiplayer Settings to join the shared flight environment</tip>
+	<tip n="15">Can't get the engine started? - see Help → Aircraft Checklists</tip>
+	<tip n="16">Drag while holding the middle and right mouse buttons to move the viewpoint</tip>
+	<tip n="17">Press / to explore the internals of the simulator</tip>
+	<tip n="18">Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</tip>
+</PropertyList>

@@ -1,0 +1,355 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <!-- Weather tiles -->
+  <name>local_weather_winds</name>
+  <modal>false</modal>
+  <resizable>false</resizable>
+  <layout>vbox</layout>
+  <default-padding>3</default-padding>
+
+  <!-- Title bar with close button -->
+  <group>
+    <layout>hbox</layout>
+    <default-padding>3</default-padding>
+    <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Wind Configuration</label>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+    <!-- gap -->
+    <text>
+      <label></label>
+    </text>
+
+    <text>
+      <label>Specify Aloft Wind Layers:</label>
+    </text>
+
+    <text>
+      <label>          Lat:</label>
+    </text>
+
+    <input>
+       <width>80</width>
+       <property>/local-weather/tmp/ipoint-latitude-deg</property>
+    </input>
+
+
+    <text>
+     <label>           Lon:</label>
+    </text>
+
+    <input>
+       <width>80</width>
+       <property>/local-weather/tmp/ipoint-longitude-deg</property>
+    </input>
+
+  </group>
+
+  <group>
+    <layout>table</layout>
+    <halign>center</halign>
+
+    <text>
+      <row>0</row>
+      <col>0</col>
+      <pref-width>50</pref-width>
+      <label>    </label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>1</col>
+      <pref-width>50</pref-width>
+      <label>   0 </label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>2</col>
+      <halign>center</halign>
+      <pref-width>50</pref-width>
+      <label>FL50</label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>3</col>
+      <pref-width>50</pref-width>
+      <label>FL100</label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>4</col>
+      <pref-width>50</pref-width>
+      <label>FL180</label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>5</col>
+      <pref-width>50</pref-width>
+      <label>FL240</label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>6</col>
+      <pref-width>50</pref-width>
+      <label>FL300</label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>7</col>
+      <pref-width>50</pref-width>
+      <label>FL340</label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>8</col>
+      <pref-width>50</pref-width>
+      <label>FL390</label>
+    </text>
+
+    <text>
+      <row>0</row>
+      <col>9</col>
+      <pref-width>50</pref-width>
+      <label>FL450</label>
+    </text>
+
+    <text>
+      <row>1</row>
+      <col>0</col>
+      <label>Direction</label>
+    </text>
+
+    <input>
+      <row>1</row>
+      <col>1</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL0-wind-from-heading-deg</property>
+    </input>
+
+    <input>
+      <row>1</row>
+      <col>2</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL50-wind-from-heading-deg</property>
+    </input>
+
+    <input>
+      <row>1</row>
+      <col>3</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL100-wind-from-heading-deg</property>
+    </input>
+
+    <input>
+      <row>1</row>
+      <col>4</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL180-wind-from-heading-deg</property>
+    </input>
+
+    <input>
+      <row>1</row>
+      <col>5</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL240-wind-from-heading-deg</property>
+    </input>
+
+    <input>
+      <row>1</row>
+      <col>6</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL300-wind-from-heading-deg</property>
+    </input>
+
+    <input>
+      <row>1</row>
+      <col>7</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL340-wind-from-heading-deg</property>
+    </input>
+
+    <input>
+      <row>1</row>
+      <col>8</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL390-wind-from-heading-deg</property>
+    </input>
+
+    <input>
+      <row>1</row>
+      <col>9</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL450-wind-from-heading-deg</property>
+    </input>
+
+    <text>
+      <row>2</row>
+      <col>0</col>
+      <label>Speed (kt)</label>
+    </text>
+
+    <input>
+      <row>2</row>
+      <col>1</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL0-windspeed-kt</property>
+    </input>
+
+    <input>
+      <row>2</row>
+      <col>2</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL50-windspeed-kt</property>
+    </input>
+
+    <input>
+      <row>2</row>
+      <col>3</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL100-windspeed-kt</property>
+    </input>
+
+    <input>
+      <row>2</row>
+      <col>4</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL180-windspeed-kt</property>
+    </input>
+
+    <input>
+      <row>2</row>
+      <col>5</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL240-windspeed-kt</property>
+    </input>
+
+    <input>
+      <row>2</row>
+      <col>6</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL300-windspeed-kt</property>
+    </input>
+
+    <input>
+      <row>2</row>
+      <col>7</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL340-windspeed-kt</property>
+    </input>
+
+    <input>
+      <row>2</row>
+      <col>8</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL390-windspeed-kt</property>
+    </input>
+
+    <input>
+      <row>2</row>
+      <col>9</col>
+      <pref-width>50</pref-width>
+      <property>/local-weather/tmp/FL450-windspeed-kt</property>
+    </input>
+
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <halign>left</halign>
+
+    <empty>
+      <stretch>true</stretch>
+    </empty>
+
+    <button>
+      <legend>  OK  </legend>
+      <!--<default>true</default>-->
+      <equal>true</equal>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Set Waypoint</legend>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>nasal</command>
+        <script>
+          if (local_weather.wind_model_flag == 5)
+          {local_weather.set_aloft_wrapper();}
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Clear Waypoints</legend>
+      <binding>
+        <command>nasal</command>
+        <script>
+          props.globals.getNode("local-weather/interpolation", 1).removeChildren("wind");
+          setprop("/local-weather/interpolation/ipoint-number",0);
+        </script>
+      </binding>
+    </button>
+
+    <button>
+      <legend>Cancel</legend>
+      <default>true</default>
+      <equal>true</equal>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <text>
+      <label>  Waypoints:</label>
+    </text>
+
+    <text>
+      <label>MMMM</label>
+      <live>true</live>
+      <property>/local-weather/interpolation/ipoint-number</property>
+    </text>
+
+  </group>
+
+</PropertyList>

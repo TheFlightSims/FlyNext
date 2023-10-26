@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Embraer Regional Jet 195</description>
+  <author>Ian(Yves) Tolosa, Original Model Innis Cunningham</author>
+  <path>Models/E95.ac</path>
+  <!-- Show Gear if Speed < 150 kts -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/E95/Effects/E95-LightMap</inherits-from>
+    <object-name>E95</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/E95-NavLights.xml</path>
+  </model>
+</PropertyList>

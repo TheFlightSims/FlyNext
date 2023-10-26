@@ -1,0 +1,80 @@
+/*
+ * SPDX-License-Identifier: CC0-1.0
+ * 
+ * airspeed_indicator.hxx - a regular ASI tied to the static port.
+ * Written by David Megginson, started 2002.
+ * Last modified by Eric van den Berg, 24 Nov 2012
+ * 
+ * This file is in the Public Domain and comes with no warranty.
+*/
+
+#pragma once
+
+#ifndef __cplusplus
+# error This library requires C++
+#endif
+
+#include <simgear/props/props.hxx>
+#include <simgear/structure/subsystem_mgr.hxx>
+
+// forward decls
+class FGEnvironmentMgr;
+
+/**
+ * Model an airspeed indicator tied to the pitot and static ports.
+ *
+ * Input properties:
+ *
+ * /instrumentation/"name"/serviceable
+ * "pitot_port"/total-pressure-inhg
+ * "static_port"/pressure-inhg
+ * /environment/density-slugft3
+ *
+ * Output properties:
+ *
+ * /instrumentation/"name"/indicated-speed-kt
+ * /instrumentation/"name"/true-speed-kt
+ * /instrumentation/"name"/indicated-mach
+ */
+class AirspeedIndicator : public SGSubsystem
+{
+public:
+    AirspeedIndicator ( SGPropertyNode *node );
+    virtual ~AirspeedIndicator ();
+
+    // Subsystem API.
+    void init() override;
+    void reinit() override;
+    void update(double dt) override;
+
+    // Subsystem identification.
+    static const char* staticSubsystemClassId() { return "airspeed-indicator"; }
+
+private:
+    void computeMach();
+
+    std::string _name;
+    unsigned int _num;
+    std::string _total_pressure;
+    std::string _static_pressure;
+    bool _has_overspeed;
+    std::string _pressure_alt_source;
+    double _ias_limit;
+    double _mach_limit;
+    double _alt_threshold;
+
+    SGPropertyNode_ptr _ias_limit_node;
+    SGPropertyNode_ptr _mach_limit_node;
+    SGPropertyNode_ptr _alt_threshold_node;
+    SGPropertyNode_ptr _serviceable_node;
+    SGPropertyNode_ptr _total_pressure_node;
+    SGPropertyNode_ptr _static_pressure_node;
+    SGPropertyNode_ptr _density_node;
+    SGPropertyNode_ptr _speed_node;
+    SGPropertyNode_ptr _airspeed_limit;
+    SGPropertyNode_ptr _pressure_alt;
+    SGPropertyNode_ptr _mach_node;
+    SGPropertyNode_ptr _tas_node;
+
+    FGEnvironmentMgr* _environmentManager;
+};

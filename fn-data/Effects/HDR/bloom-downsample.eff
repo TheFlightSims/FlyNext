@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/bloom-downsample</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/quad_matrix.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/bloom_downsample.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>is_first_downsample</name>
+        <type>bool</type>
+        <value><use>is-first-downsample</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

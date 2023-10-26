@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<!--	LX Vario S3 simulation by Benedikt Wolf (D-ECHO)
+		thanks to:	Gilberto Agostinho (texture work)
+				WooT (AR3201 and ILEC-Sc7 that was used as a base)
+				Joshua Davidson (canvas basic structure from A320)
+				Colin Geniet (SoundPitchController)
+				
+	#### Version	06/2023
+	-->
+<PropertyList>
+	<name>S3</name>
+	<path>S3.ac</path>
+	<!--
+	<animation>
+		<type>material</type>
+		<object-name>S3.display</object-name>
+		<emission>
+			<red>1</red>
+			<green>1</green>
+			<blue>1</blue>
+			<factor-prop>/instrumentation/s3/brightness</factor-prop>
+		</emission>
+	</animation>-->
+	<effect>
+		<inherits-from>Effects/model-interior-display</inherits-from>
+		<parameters>
+			<dirt-factor>1.0</dirt-factor>
+			<contrast>0.75</contrast>
+		</parameters>
+		<object-name>S3.display</object-name>
+	</effect>
+	<!--   Main Knob    -->
+	<animation>
+		<type>pick</type>
+		<object-name>S3.main_knob</object-name>
+		<action>
+			<button>0</button>
+			<binding>
+				<command>property-toggle</command>
+				<property>instrumentation/s3/knob-pushed</property>
+			</binding>
+			<mod-up>
+				<binding>
+					<command>property-toggle</command>
+					<property>instrumentation/s3/knob-pushed</property>
+				</binding>
+			</mod-up>
+		</action>
+		<action>
+			<button>3</button>
+			<binding>
+				<condition>
+					<equals>
+						<property>instrumentation/s3/start</property>
+						<value>1</value>
+					</equals>
+				</condition>
+				<command>property-adjust</command>
+				<property>instrumentation/s3/volume</property>
+				<step>0.05</step>
+				<min>0</min>
+				<max>1</max>
+			</binding>
+			<binding>
+				<command>property-adjust</command>
+				<property>instrumentation/s3/knob</property>
+				<step>5</step>
+			</binding>
+		</action>
+		<action>
+			<button>4</button>
+			<binding>
+				<condition>
+					<equals>
+						<property>instrumentation/s3/start</property>
+						<value>1</value>
+					</equals>
+				</condition>
+				<command>property-adjust</command>
+				<property>instrumentation/s3/volume</property>
+				<step>-0.05</step>
+				<min>0</min>
+				<max>1</max>
+			</binding>
+			<binding>
+				<command>property-adjust</command>
+				<property>instrumentation/s3/knob</property>
+				<step>-5</step>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>translate</type>
+		<object-name>S3.main_knob</object-name>
+		<property>instrumentation/s3/knob-pushed</property>
+		<factor>-0.001</factor>
+		<axis>
+			<x>1</x>
+		</axis>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>S3.main_knob</object-name>
+		<property>instrumentation/s3/knob</property>
+		<factor>5</factor>
+		<center>
+			<y-m>-0.02386</y-m>
+			<z-m>-0.02375</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<!--	Vario needle	-->
+	<animation>
+		<type>rotate</type>
+		<object-name>S3.vario_needle</object-name>
+		<property>instrumentation/s3/needle-deg</property>
+		<center>
+			<y-m>0.0</y-m>
+			<z-m>0.0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>S3.vario_needle</object-name>
+		<property>instrumentation/s3/start</property>
+		<interpolation>
+			<entry><ind> 0 </ind><dep>  0 </dep></entry>
+			<entry><ind> 0.1 </ind><dep> -12 </dep></entry>
+			<entry><ind> 0.3 </ind><dep> 120 </dep></entry>
+			<entry><ind> 0.6 </ind><dep> -120 </dep></entry>
+			<entry><ind> 0.9 </ind><dep> 12 </dep></entry>
+			<entry><ind> 1 </ind><dep> 0 </dep></entry>
+		</interpolation>
+		<center>
+			<y-m>0.0</y-m>
+			<z-m>0.0</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+	
+</PropertyList>

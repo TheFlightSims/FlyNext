@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/bloom-downsample-rest</name>
+  <inherits-from>Effects/HDR/bloom-downsample</inherits-from>
+  <parameters>
+    <is-first-downsample type="bool">false</is-first-downsample>
+  </parameters>
+</PropertyList>

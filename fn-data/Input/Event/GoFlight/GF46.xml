@@ -1,0 +1,175 @@
+<PropertyList>
+
+  <name>GoFlight GF-46</name>
+  <debug-events type="bool">false</debug-events>
+
+<nasal>
+  <open>
+    <![CDATA[
+
+    var transponderNode = props.globals.getNode("/instrumentation/transponder/id-code", 1);
+    var modeNode = props.globals.getNode("/instrumentation/transponder/inputs/knob-mode", 1);
+    var identNode = props.globals.getNode("/instrumentation/transponder/inputs/ident-btn", 1);
+    var brightnessNode = props.globals.getNode("/input/goflight/gf46/brightness", 8);
+
+    var formatTransponder = func(squawk)
+    {
+      var s = sprintf("%04d  ", squawk);
+      return goflight.reverseBytes(goflight.bytesForString(s, 6));
+    }
+
+    var displaySevenSegment = func() {
+      if (modeNode.getValue() == 0) {
+        # OFF, blank display
+        return goflight.bytesForString("      ", 6);
+      }
+      return formatTransponder(transponderNode.getValue());
+    }
+
+    var modeNames = ['OFF ', 'STBY', 'TEST', 'XPDR', ' TA ', 'TARA'];
+    var displayFourteenSegment = func() {
+      var mode = modeNode.getValue();
+      return goflight.formatFourteenSegment(modeNames[mode], 4);
+    }
+ 
+    var powerOfTen = [1, 10, 100, 1000];
+    var powerOfEight = [1, 8, 64, 512];
+
+    # adapted from gui/dialogs/radios.xml
+    var extractDigit = func(code, index) {
+      return math.mod(code / powerOfTen[index], 10);
+    }
+
+    var extractOctal = func(code, index) {
+      return math.mod(code / powerOfEight[index], 8);
+    }
+
+    var adjustIdCode = func(offset) {
+      var code = transponderNode.getValue();
+
+      # convert ID code to decimal
+      var decCode = 0;
+      for (var i=0; i<3; i +=1) {
+        decCode += extractDigit(code, i) * powerOfEight[i];
+      }
+
+      # apply offset and clamp
+      decCode = math.clamp(decCode + offset, 0, 4095);
+
+      # convert back to octal-as-decimal
+      code = 0;
+      for (var i=0; i<3; i +=1) {
+        code += extractOctal(decCode, i) * powerOfTen[i];
+      }
+
+      transponderNode.setIntValue(code);
+    }
+ 
+    ]]>
+  </open>
+</nasal>
+
+
+<!--
+adding item:rel-dial, bits: 0:8, report=1
+adding item:rel-dial-1, bits: 8:8, report=1
+adding item:button-1, bits: 16:1, report=1
+adding item:undefined-0, bits: 17:1, report=1
+adding item:undefined-0-1, bits: 18:1, report=1
+adding item:undefined-0-2, bits: 19:1, report=1
+adding item:undefined-0-3, bits: 20:1, report=1
+adding item:undefined-0-4, bits: 21:1, report=1
+adding item:undefined-0-5, bits: 22:1, report=1
+adding item:undefined-0-6, bits: 23:1, report=1
+
+
+adding item:undefined-0-5, bits: 22:1, report=1
+adding item:undefined-0-6, bits: 23:1, report=1
+Unhandled HID alphanumeric usage:54
+adding item:unknown, bits: 0:4, report=2
+Unhandled HID alphanumeric usage:53
+adding item:unknown-1, bits: 4:4, report=2
+Unhandled HID alphanumeric usage:69
+adding item:unknown-2, bits: 8:1, report=2
+adding item:undefined-0-7, bits: 9:1, report=2
+adding item:undefined-0-8, bits: 10:1, report=2
+adding item:undefined-0-9, bits: 11:1, report=2
+adding item:undefined-0-10, bits: 12:1, report=2
+adding item:undefined-0-11, bits: 13:1, report=2
+adding item:undefined-0-12, bits: 14:1, report=2
+adding item:undefined-0-13, bits: 15:1, report=2
+adding item:display-data, bits: 0:16, report=3
+adding item:display-data-1, bits: 16:16, report=3
+adding item:display-data-2, bits: 32:16, report=3
+adding item:display-data-3, bits: 48:16, report=3
+Unhandled HID alphanumeric usage:54
+adding item:unknown-3, bits: 0:4, report=4
+Unhandled HID alphanumeric usage:53
+adding item:unknown-4, bits: 4:4, report=4
+Unhandled HID alphanumeric usage:67
+adding item:unknown-5, bits: 8:1, report=4
+
+-->
+  <event>
+    <name>rel-dial-0</name>
+    <binding>
+      <command>nasal</command>
+      <script>adjustIdCode(cmdarg().getNode("setting").getValue())</script>
+    </binding>
+
+    <interpolater>
+        <mirrored type="bool">true</mirrored>
+      <entry><ind>0</ind><dep>0</dep></entry>
+      <entry><ind>1</ind><dep>1</dep></entry>
+      <entry><ind>2</ind><dep>10</dep></entry>
+      <entry><ind>3</ind><dep>100</dep></entry>
+      <entry><ind>4</ind><dep>1000</dep></entry>
+    </interpolater>
+  </event>
+
+<event>
+  <name>rel-dial-1</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/instrumentation/transponder/inputs/knob-mode</property>
+    <min>0</min>
+    <max>5</max>
+  </binding>
+</event>
+
+ <report>
+  <report-id type="int">3</report-id>
+  <watch>/instrumentation/transponder/inputs/knob-mode</watch>
+  <nasal-function>displayFourteenSegment</nasal-function>
+</report>
+
+<report>
+  <report-id type="int">5</report-id>
+  <watch>/instrumentation/transponder/id-code</watch>
+  <watch>/instrumentation/transponder/inputs/knob-mode</watch>
+  <nasal-function>displaySevenSegment</nasal-function>
+</report>  
+
+  <event>
+    <name>display-brightness</name>
+    <setting>
+      <property>/input/goflight/gf46/brightness</property>
+    </setting>
+  </event>
+
+  <event>
+    <desc>Ident</desc>
+    <name>button-1</name>
+    <binding>
+      <command>nasal</command>
+      <script>identNode.setBoolValue(1);</script>
+    </binding>
+    <mod-up>
+        <binding>
+          <command>nasal</command>
+          <script>identNode.setBoolValue(0);</script>
+      </binding>
+      </mod-up>
+  </event>
+
+</PropertyList>

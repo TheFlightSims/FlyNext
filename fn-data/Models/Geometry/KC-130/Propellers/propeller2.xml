@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+ <path>propeller.ac</path>
+<!-- #### 
+ <animation>
+   <name>heliceD</name>
+   <object-name>bol</object-name>   
+   <object-name>propdisc</object-name>
+   <object-name>propblur</object-name>
+ </animation>   
+#### -->
+ 
+ 
+
+ <animation>
+   <type>spin</type>
+   <object-name>propdisc</object-name>
+   <object-name>propblur</object-name>
+   <object-name>bol</object-name>
+   <property>/sim/time/elapsed-sec</property>
+   <factor>10800</factor>    <!-- #### 1800RPM = 30RPS i.e. factor 10800 #### -->
+   <center>
+     <x-m> 0.0 </x-m>
+     <y-m> 0.0 </y-m>
+     <z-m> 0.0 </z-m>
+   </center>
+   <axis>
+     <x> 1.0 </x>
+     <y> 0.0 </y>
+     <z> 0.0 </z>
+   </axis>
+ </animation>
+
+</PropertyList>

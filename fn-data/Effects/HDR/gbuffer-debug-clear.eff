@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/gbuffer-debug-clear</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/debug_gbuffer_clear.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
+</PropertyList>

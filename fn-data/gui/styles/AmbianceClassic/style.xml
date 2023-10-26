@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+<!--
+	<folders>
+		<decoration type="string">decoration</decoration>
+		<widgets    type="string">widgets</widgets>
+	</folders>
+-->
+	<colors>
+		<!-- Window decoration colors -->
+		<title>
+			<red   type="float">0.275</red>
+			<green type="float">0.271</green>
+			<blue  type="float">0.251</blue>
+		</title>
+		<title-unfocused>
+			<red   type="float">0.235</red>
+			<green type="float">0.231</green>
+			<blue  type="float">0.216</blue>
+		</title-unfocused>
+		<title-text>
+			<red   type="float">0.875</red>
+			<green type="float">0.859</green>
+			<blue  type="float">0.824</blue>
+		</title-text>
+		<title-text-unfocused>
+			<red   type="float">0.502</red>
+			<green type="float">0.490</green>
+			<blue  type="float">0.471</blue>
+		</title-text-unfocused>
+		<title-highlight>
+			<red   type="float">0.365</red>
+			<green type="float">0.361</green>
+			<blue  type="float">0.341</blue>
+		</title-highlight>
+		<title-highlight-unfocused>
+			<red   type="float">0.278</red>
+			<green type="float">0.275</green>
+			<blue  type="float">0.259</blue>
+		</title-highlight-unfocused>
+
+		<!-- default colors for all GUI objects -->
+		<bg_color>
+			<red   type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue  type="float">0.941</blue>
+		</bg_color>
+
+
+
+		<fg_color>
+			<red   type="float">0.298</red>
+			<green type="float">0.298</green>
+			<blue  type="float">0.298</blue>
+		</fg_color>
+
+		<fg_color_shadow>
+			<red   type="float">0.398</red>
+			<green type="float">0.38</green>
+			<blue  type="float">0.398</blue>
+		</fg_color_shadow>
+
+		<text_color>
+			<red   type="float">0.235</red>
+			<green type="float">0.235</green>
+			<blue  type="float">0.235</blue>
+		</text_color>
+
+		<text_color_selected>
+			<red   type="float">1</red>
+			<green type="float">1</green>
+			<blue  type="float">1</blue>
+		</text_color_selected>
+
+		<text_color_bg_selected>
+			<red   type="float">0.3</red>
+			<green type="float">0.3</green>
+			<blue  type="float">1</blue>
+		</text_color_bg_selected>
+		
+		<backdrop_text_color_bg_selected>
+			<red   type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue  type="float">0.5</blue>
+		</backdrop_text_color_bg_selected>
+
+		<backdrop_fg_color>
+			<red   type="float">0.428</red>
+			<green type="float">0.427</green>
+			<blue  type="float">0.427</blue>
+		</backdrop_fg_color>
+
+		<button_bg_color>
+			<red   type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue  type="float">0.941</blue>
+		</button_bg_color>
+
+		<button_backdrop_bg_color>
+			<red   type="float">0.934</red>
+			<green type="float">0.930</green>
+			<blue  type="float">0.926</blue>
+		</button_backdrop_bg_color>
+
+		<button_bg_color_down>
+			<red   type="float">0.88</red>
+			<green type="float">0.87</green>
+			<blue  type="float">0.86</blue>
+		</button_bg_color_down>
+
+		<button_bg_color_hover>
+			<red   type="float">0.996</red>
+			<green type="float">0.992</green>
+			<blue  type="float">0.988</blue>
+		</button_bg_color_hover>
+
+		<button_bg_color_insensitive>
+			<red   type="float">0.89</red>
+			<green type="float">0.89</green>
+			<blue  type="float">0.89</blue>
+		</button_bg_color_insensitive>
+		
+		<tab_widget_tab_button_border>
+			<red type="float">0.905</red>
+			<green type="float">0.897</green>
+			<blue type="float">0.885</blue>
+		</tab_widget_tab_button_border>
+		
+		<tab_widget_tab_button_selected_indicator_selected>
+			<red type="float">0.11</red>
+			<green type="float">0.42</green>
+			<blue type="float">0.8</blue>
+		</tab_widget_tab_button_selected_indicator_selected>
+		
+		<tab_widget_tab_button_selected_indicator_unselected_hovered>
+			<red type="float">0.41</red>
+			<green type="float">0.42</green>
+			<blue type="float">0.43</blue>
+		</tab_widget_tab_button_selected_indicator_unselected_hovered>
+		
+		<tab_widget_tab_button_bg_focused>
+			<red type="float">0.86</red>
+			<green type="float">0.855</green>
+			<blue type="float">0.85</blue>
+		</tab_widget_tab_button_bg_focused>
+		
+		<tab_widget_tab_button_bg_unfocused>
+			<red type="float">0.9</red>
+			<green type="float">0.895</green>
+			<blue type="float">0.89</blue>
+		</tab_widget_tab_button_bg_unfocused>
+		
+		<tab_widget_tab_button_bg_hovered>
+			<red type="float">0.93</red>
+			<green type="float">0.925</green>
+			<blue type="float">0.92</blue>
+		</tab_widget_tab_button_bg_hovered>
+		
+		<tab_widget_tab_button_bg_selected>
+			<red type="float">0.96</red>
+			<green type="float">0.955</green>
+			<blue type="float">0.95</blue>
+		</tab_widget_tab_button_bg_selected>
+		
+		<menu_item_fg>
+			<red type="float">0.298</red>
+			<green type="float">0.298</green>
+			<blue type="float">0.298</blue>
+		</menu_item_fg>
+		
+		<menu_item_fg_disabled>
+			<red type="float">0.89</red>
+			<green type="float">0.89</green>
+			<blue type="float">0.89</blue>
+		</menu_item_fg_disabled>
+		
+		<menu_item_fg_hovered>
+			<red type="float">0.95</red>
+			<green type="float">0.95</green>
+			<blue type="float">0.95</blue>
+		</menu_item_fg_hovered>
+		
+		<menu_item_bg>
+			<red type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue type="float">0.941</blue>
+		</menu_item_bg>
+		
+		<menu_item_bg_hovered>
+			<red type="float">0.15</red>
+			<green type="float">0.15</green>
+			<blue type="float">1</blue>
+		</menu_item_bg_hovered>
+		
+		<menu_item_submenu_indicator>
+			<red type="float">0</red>
+			<green type="float">0</green>
+			<blue type="float">0</blue>
+		</menu_item_submenu_indicator>
+		
+		<menu_item_submenu_indicator_hovered>
+			<red type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue type="float">0.941</blue>
+		</menu_item_submenu_indicator_hovered>
+		
+		<list_item_fg>
+			<red type="float">0.298</red>
+			<green type="float">0.298</green>
+			<blue type="float">0.298</blue>
+		</list_item_fg>
+		
+		<list_item_fg_selected>
+			<red type="float">0.95</red>
+			<green type="float">0.95</green>
+			<blue type="float">0.95</blue>
+		</list_item_fg_selected>
+		
+		<list_item_bg>
+			<red type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue type="float">0.941</blue>
+		</list_item_bg>
+		
+		<list_item_bg_selected>
+			<red type="float">0.15</red>
+			<green type="float">0.15</green>
+			<blue type="float">1</blue>
+		</list_item_bg_selected>
+		
+		<radio_button_bg_color>
+			<red   type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue  type="float">0.941</blue>
+		</radio_button_bg_color>
+		
+		<radio_button_bg_color_hovered>
+			<red   type="float">0.989</red>
+			<green type="float">0.985</green>
+			<blue  type="float">0.981</blue>
+		</radio_button_bg_color_hovered>
+		
+		<radio_button_selected_indicator_bg_color>
+			<red type="float">1</red>
+			<green type="float">1</green>
+			<blue type="float">1</blue>
+		</radio_button_selected_indicator_bg_color>
+		
+		<radio_button_selected_indicator_bg_color_hovered>
+			<red type="float">0.95</red>
+			<green type="float">0.95</green>
+			<blue type="float">0.95</blue>
+		</radio_button_selected_indicator_bg_color_hovered>
+		
+		<radio_button_selected_indicator_bg_color_disabled>
+			<red type="float">0.9</red>
+			<green type="float">0.9</green>
+			<blue type="float">0.9</blue>
+		</radio_button_selected_indicator_bg_color_disabled>
+		
+		<radio_button_selected_indicator_border_color>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</radio_button_selected_indicator_border_color>
+		
+		<radio_button_selected_indicator_color>
+			<red type="float">0.25</red>
+			<green type="float">0.25</green>
+			<blue type="float">1</blue>
+		</radio_button_selected_indicator_color>
+		
+		<radio_button_selected_indicator_color_disabled>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">1</blue>
+		</radio_button_selected_indicator_color_disabled>
+		
+		<switch_bg_color>
+			<red type="float">0.9</red>
+			<green type="float">0.9</green>
+			<blue type="float">0.9</blue>
+		</switch_bg_color>
+		
+		<switch_bg_color_disabled>
+			<red type="float">1</red>
+			<green type="float">1</green>
+			<blue type="float">1</blue>
+		</switch_bg_color_disabled>
+		
+		<switch_bg_color_checked>
+			<red type="float">0.3</red>
+			<green type="float">0.3</green>
+			<blue type="float">1</blue>
+		</switch_bg_color_checked>
+		
+		<switch_bg_border_color>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</switch_bg_border_color>
+		
+		<switch_thumb_color>
+			<red   type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue  type="float">0.941</blue>
+		</switch_thumb_color>
+		
+		<switch_thumb_border_color>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</switch_thumb_border_color>
+		
+		<slider_ticks>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</slider_ticks>
+
+		<dial_knob_bg>
+			<red type="float">0.949</red>
+			<green type="float">0.945</green>
+			<blue type="float">0.941</blue>
+		</dial_knob_bg>
+
+		<dial_knob_bg_backdrop>
+			<red type="float">0.934</red>
+			<green type="float">0.930</green>
+			<blue type="float">0.926</blue>
+		</dial_knob_bg_backdrop>
+
+		<dial_knob_bg_focused>
+			<red type="float">0.966</red>
+			<green type="float">0.962</green>
+			<blue type="float">0.958</blue>
+		</dial_knob_bg_focused>
+
+		<dial_knob_bg_hovered>
+			<red   type="float">0.966</red>
+			<green type="float">0.962</green>
+			<blue  type="float">0.988</blue>
+		</dial_knob_bg_hovered>
+
+		<dial_knob_bg_focused_hovered>
+			<red   type="float">0.986</red>
+			<green type="float">0.982</green>
+			<blue  type="float">0.998</blue>
+		</dial_knob_bg_focused_hovered>
+
+		<dial_knob_bg_disabled>
+			<red type="float">0.89</red>
+			<green type="float">0.89</green>
+			<blue type="float">0.89</blue>
+		</dial_knob_bg_disabled>
+
+		<dial_knob_border>
+			<red type="float">0.6</red>
+			<green type="float">0.6</green>
+			<blue type="float">0.6</blue>
+		</dial_knob_border>
+
+		<dial_knob_border_hovered>
+			<red type="float">0.65</red>
+			<green type="float">0.65</green>
+			<blue type="float">0.65</blue>
+		</dial_knob_border_hovered>
+
+		<dial_knob_border_focused>
+			<red type="float">0.83</red>
+			<green type="float">0.54</green>
+			<blue type="float">0.43</blue>
+		</dial_knob_border_focused>
+
+		<dial_knob_border_focused_hovered>
+			<red type="float">0.79</red>
+			<green type="float">0.41</green>
+			<blue type="float">0.25</blue>
+		</dial_knob_border_focused_hovered>
+
+		<dial_knob_border_disabled>
+			<red type="float">0.71</red>
+			<green type="float">0.71</green>
+			<blue type="float">0.71</blue>
+		</dial_knob_border_disabled>
+
+		<dial_ticks>
+			<red type="float">0.5</red>
+			<green type="float">0.5</green>
+			<blue type="float">0.5</blue>
+		</dial_ticks>
+	</colors>
+
+	<sizes>
+		<margin type="int">5</margin>
+		<frame-radius type="int">5</frame-radius>
+
+		<!-- inset is 4x the margin-->
+		<text-inset>
+			<base>margin</base>
+			<factor type="double">3.0</factor>
+		</text-inset>
+
+		<base-font-size type="int">14</base-font-size>
+		<list-font-size type="int">14</list-font-size>
+		<list-item-height type="int">24</list-item-height>
+
+	</sizes>
+</PropertyList>

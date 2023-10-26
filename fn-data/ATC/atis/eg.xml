@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!--
+ This file is part of FlightGear, the free flight simulator
+ http://www.flightgear.org/
+
+ Copyright (C) 2014  Curtis L. Olson  - http://www.flightgear.org/~curt
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License as
+ published by the Free Software Foundation; either version 2 of the
+ License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ General Public License for more details.
+-->
+
+<PropertyList>
+  <station-starts-with>eg</station-starts-with>
+  <atis>
+    <section include="sections/airport-information.xml"/>
+    <text>Time </text><token>time</token><text>. </text>
+    <text>Runway in use </text>
+    <if>
+      <equals>
+        <token>rwy-land</token>
+        <token>rwy-to</token>
+      </equals>
+      <then>
+        <token>rwy-to</token>
+        <text>.. </text>
+      </then>
+      <else>
+        <token>rwy-land</token>
+        <text> arrivals, </text>
+        <token>rwy-to</token>
+        <text> departures.. </text>
+      </else>
+    </if>
+    <text>Expect </text><token>approach-type</token><text>approach. </text>
+    <text>Surface winned </text>
+    <if>
+      <equals>
+        <token>wind-speed-kn</token>
+        <text>zero</text>
+      </equals>
+      <then>
+        <text>kaam.. </text>
+      </then>
+      <else>
+        <token>wind-dir</token>
+        <text>, </text>
+        <token>wind-speed-kn</token>
+        <text> knots. </text>
+      </else>
+    </if>
+    <section include="sections/wind-variation.xml"/>
+    <section include="sections/gusts.xml"/>
+    <section include="sections/cavok.xml"/>
+    <section include="sections/visibility-km.xml"/>
+    <section include="sections/phenomena.xml"/>
+    <section include="sections/clouds.xml"/>
+    <section include="sections/temperature-plus.xml"/>
+    <text>QNH </text>
+    <token>qnh</token>
+    <text>. </text>
+    <text>Transition level flight level </text>
+    <token>transition-level</token>
+    <text>. </text>
+    <section include="sections/trend.xml"/>
+    <text>Acknowledge receipt of information </text>
+    <token>id</token>
+    <text> and advise aircraft type on first contact.. </text>
+  </atis>
+</PropertyList>

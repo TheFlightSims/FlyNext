@@ -1,0 +1,51 @@
+Köppen_Geiger climate map of the world:
+------------------------------------------------------------------------------
+Website:  http://koeppen-geiger.vu-wien.ac.at/present.htm
+Download: http://koeppen-geiger.vu-wien.ac.at/Rcode/Map_KG-Global.zip
+
+World terrain elevation data:
+https://visibleearth.nasa.gov/images/73934/topography
+
+Total precipitations per annum, over land:
+https://commons.wikimedia.org/wiki/File:World_precip_annual.png
+
+
+The red channel of the image contans the Köppen-Geiger code.
+The green channel of the image contains the world elevation map.
+The blue channel of the image contains annual precipitation.
+
+ASICII
+CODE      description
+-----------------------------------------------------
+ 1     Af   equatorial, fully humid
+ 2     Am   equatorial, monsoonal
+ 3     As   equatorial, summer dry
+ 4     Aw   equatorial, winter dry
+ 5     BSh  arid, steppe, hot arid
+ 6     BSk  arid, steppe, cold arid
+ 7     BWh  arid, desert, hot arid
+ 8     BWk  arid, desert, cold arid
+ 9     Cfa  warm temperature, fully humid hot summer
+10     Cfb  warm temperature, fully humid, warm summer
+11     Cfc  warm temperature, fully humid, cool summer
+12     Csa  warm temperature, summer dry, hot summer
+13     Csb  warm temperature, summer dry, warm summer
+14     Csc  warm temperature, summer dry, cool summer
+15     Cwa  warm temperature, winter dry, hot summer
+16     Cwb  warm temperature, winter dry, warm summer
+17     Cwc  warm temperature, winter dry, cool summer
+18     Dfa  snow, fully humid, hot summer
+19     Dfb  snow, fully humid, warm summer, warm summer
+20     Dfc  snow, fully humid, cool summer, cool summer
+21     Dfd  snow, fully humid, extremely continetal
+22     Dsa  snow, summer dry, hot summer
+23     Dsb  snow, summer dry, warm summer
+24     Dsc  snow, summer dry, cool summer
+25     Dsd  snow, summer dry, extremely continetal
+26     Dwa  snow, winter dry, hot summer
+27     Dwb  snow, winter dry, warm summer
+28     Dwc  snow, winter dry, cool summer
+29     Dwd  snow, winter dry, extremely continetal
+30     EF   polar frost
+31     ET   polar tundra
+32     Ocean (converted to 0 in the image file)

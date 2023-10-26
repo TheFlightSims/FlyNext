@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+
+  <path>KC-130.ac</path>
+
+ <multiplay>
+  <refuel>
+   <type>probe</type>
+  </refuel>
+ </multiplay>
+
+ <animation>
+  <object-name>Hose</object-name>
+  <object-name>Drogue</object-name>
+  <enable-hot>false</enable-hot>
+ </animation>
+
+<!-- ####  
+  <model>
+    <path>Aircraft/C130/Models/effects/trail/trail1.xml</path>
+    <offsets>
+      <x-m>  0.170 </x-m>
+      <y-m> -9.821 </y-m>
+      <z-m>  2.916 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+  
+  <model>
+    <path>Aircraft/C130/Models/effects/trail/trail2.xml</path>
+    <offsets>
+      <x-m>  0.170 </x-m>
+      <y-m> -4.926 </y-m>
+      <z-m>  2.916 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+  
+  <model>
+    <path>Aircraft/C130/Models/effects/trail/trail3.xml</path>
+    <offsets>
+      <x-m> 0.170 </x-m>
+      <y-m> 4.926 </y-m>
+      <z-m> 2.916 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+
+  
+  <model>
+    <path>Aircraft/C130/Models/effects/trail/trail4.xml</path>
+    <offsets>
+      <x-m> 0.170 </x-m>
+      <y-m> 9.821 </y-m>
+      <z-m> 2.916 </z-m>
+      <roll-deg>    0 </roll-deg>
+      <pitch-deg>   0 </pitch-deg>
+      <heading-deg> 0 </heading-deg>
+    </offsets>
+  </model>
+##### -->
+  
+
+  <model>
+    <path>Models/Geometry/KC-130/Propellers/propeller1.xml</path>
+    <offsets>
+      <x-m> -3.764 </x-m>
+      <y-m> -9.821 </y-m>
+      <z-m>  3.622 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Models/Geometry/KC-130/Propellers/propeller2.xml</path>
+    <offsets> 
+      <x-m> -3.764 </x-m>
+      <y-m> -4.926 </y-m>
+      <z-m>  3.622 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Models/Geometry/KC-130/Propellers/propeller3.xml</path>
+    <offsets>
+      <x-m> -3.764 </x-m>
+      <y-m>  4.926 </y-m>
+      <z-m>  3.622 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Models/Geometry/KC-130/Propellers/propeller4.xml</path>
+    <offsets>
+      <x-m> -3.764 </x-m>
+      <y-m>  9.821 </y-m>
+      <z-m>  3.622 </z-m>
+    </offsets>
+  </model>
+
+ 
+  
+ <!-- ####  #### -->
+
+  <model>
+    <path>Models/Geometry/KC-130/light/beacon.xml</path>
+    <offsets>
+      <x-m> 12.588 </x-m>
+      <y-m>  0.000 </y-m>
+      <z-m> 11.168 </z-m>
+    </offsets>
+	 <condition>
+   <greater-than>
+    <property>/sim/time/sun-angle-rad</property>
+    <value>1.54</value>
+   </greater-than>
+  </condition>
+  </model>
+
+  <model>
+    <path>Models/Geometry/KC-130/light/RedLight.xml</path>
+    <offsets>
+      <x-m>  -0.235 </x-m>
+      <y-m> -20.146 </y-m>
+      <z-m>   4.208 </z-m>
+    </offsets>
+	 <condition>
+   <greater-than>
+    <property>/sim/time/sun-angle-rad</property>
+    <value>1.54</value>
+   </greater-than>
+  </condition>
+  </model>
+
+  <model>
+    <path>Models/Geometry/KC-130/light/GreenLight.xml</path>
+    <offsets>
+      <x-m> -0.235 </x-m>
+      <y-m> 20.146 </y-m>
+      <z-m>  4.208 </z-m>
+    </offsets>
+	 <condition>
+   <greater-than>
+    <property>/sim/time/sun-angle-rad</property>
+    <value>1.54</value>
+   </greater-than>
+  </condition>
+  </model>
+
+  <model>
+    <path>Models/Geometry/KC-130/light/StrobeWhite.xml</path>
+    <offsets>
+      <x-m>  -0.135 </x-m>
+      <y-m> -20.146 </y-m>
+      <z-m>   4.208 </z-m>
+    </offsets>
+	 <condition>
+   <greater-than>
+    <property>/sim/time/sun-angle-rad</property>
+    <value>1.54</value>
+   </greater-than>
+  </condition>
+  </model>
+
+  <model>
+    <path>Models/Geometry/KC-130/light/StrobeWhite.xml</path>
+    <offsets>
+      <x-m> -0.135 </x-m>
+      <y-m> 20.146 </y-m>
+      <z-m>  4.208 </z-m>
+    </offsets>
+	 <condition>
+   <greater-than>
+    <property>/sim/time/sun-angle-rad</property>
+    <value>1.54</value>
+   </greater-than>
+  </condition>
+  </model>
+
+
+</PropertyList>
+

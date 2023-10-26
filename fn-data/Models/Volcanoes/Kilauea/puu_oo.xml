@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+
+<!-- Lava fountain and sulfur smoke at the Puu Oo crater of Kilauea -->
+
+
+<PropertyList>
+
+  <!--<nasal>
+    <load><![CDATA[
+	
+		var puu_oo_loop_flag = 1;
+	
+		var puu_oo_loop = func (strength, tgt_strength) {
+
+		if (puu_oo_loop_flag == 0) 
+			{
+			print("Ending Puu Oo eruption simulation.");
+			return;
+			}
+		
+		if (rand() > 0.99) {tgt_strength = 100.0;}
+
+		tgt_strength = tgt_strength - 0.5;
+		if (tgt_strength < 40.0) {tgt_strength = 40.0;}
+
+		var step = 5.0;
+
+		if (math.abs(strength - tgt_strength) < 5.0) {step = 1.0;}
+
+		if (strength < tgt_strength) 
+			{strength += step;}
+		else
+			{strength -= step;}
+
+		setprop("/environment/volcanoes/kilauea/puu-oo-eruption-strength", strength);
+		setprop("/environment/volcanoes/kilauea/puu-oo-eruption-quantity", int(0.5*strength));
+
+
+		settimer(func {puu_oo_loop(strength, tgt_strength);}, 0.1);
+		}
+
+		puu_oo_state_manager = func {
+		
+			print ("Puu Oo state manager");
+			var state = getprop("/environment/volcanoes/kilauea/puu-oo-activity");
+			
+			if (state == 3)
+				{
+				print("Starting Puu Oo eruption simulation.");
+				puu_oo_loop_flag = 1;
+				puu_oo_loop(50.0, 50.0);
+				}
+			else
+				{
+				puu_oo_loop_flag = 0;
+				}
+		
+		}
+		
+		# call state manager once to get correct autosaved behavior, otherwise use listener
+		
+		puu_oo_state_manager();
+		
+		setlistener("/environment/volcanoes/kilauea/puu-oo-activity", puu_oo_state_manager);
+		
+		
+	
+	    ]]>
+	</load>
+
+    <unload><![CDATA[
+		print("Unloading Puu Oo volcano management.");
+		pu_oo_loop_flag = 0;
+    ]]>
+	</unload>
+
+  </nasal>-->
+
+  <path>kilauea.ac</path>
+   <offsets>
+      <x-m>0.00</x-m>
+      <y-m>0.00</y-m>
+      <z-m>8.00</z-m>
+   </offsets>
+   
+   <animation>
+    <type>select</type>
+	<object-name>Lava</object-name>
+   <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/puu-oo-activity</property>
+			<value>0</value>
+		</greater-than>
+   </condition>
+   </animation>
+   
+   <effect>
+   	<object-name>Lava</object-name>
+	<inherits-from>Effects/model-combined-deferred</inherits-from>
+   </effect>
+
+   <animation>
+  	<type>scale</type>
+	<object-name>Lava</object-name>
+  	<x-offset>120.0</x-offset>
+  	<y-offset>120.0</y-offset>
+  	<z-offset>2.0</z-offset>
+   </animation>
+   
+    <animation>
+     <type>material</type>
+	 <object-name>Lava</object-name>
+      <emission>
+            <red>   0.4 </red>
+            <green> 0.32 </green>
+            <blue>  0.32 </blue>
+        </emission>
+    </animation>
+	
+	<model>
+	  <path>puu_oo_smoke.xml</path>
+      <offsets>
+        <x-m>-20.0</x-m>
+        <y-m>20.0</y-m>
+        <z-m>140.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/puu-oo-activity</property>
+			<value>0</value>
+		</greater-than>
+       </condition>
+    </model>
+	
+	<model>
+	  <path>puu_oo_lava_fountain.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/puu-oo-activity</property>
+			<value>2</value>
+		</greater-than>
+       </condition>
+    </model>
+	
+	<model>
+	  <path>puu_oo_lava_fountain2.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/puu-oo-activity</property>
+			<value>2</value>
+		</greater-than>
+       </condition>
+    </model>
+	
+	<model>
+	  <path>kilauea_lava_fountain.xml</path>
+      <offsets>
+        <x-m>30.0</x-m>
+        <y-m>-20.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/puu-oo-activity</property>
+			<value>1</value>
+		</greater-than>
+       </condition>
+    </model>
+
+ 
+
+
+</PropertyList>

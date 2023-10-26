@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html manifest="phi.appcache" lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Phi (FI) - The FlightGear User Interface</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Phi (FI)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link rel="manifest" href="manifest.json">
+<!-- non-retina iPhone pre iOS 7 -->
+<link rel="apple-touch-icon" href="images/FI_logo-57.png" sizes="57x57">
+<!-- non-retina iPad vor iOS 7 -->
+<link rel="apple-touch-icon" href="images/FI_logo-72.png" sizes="72x72">
+<!-- non-retina iPad iOS 7 -->
+<link rel="apple-touch-icon" href="images/FI_logo-76.png" sizes="76x76">
+<!-- retina iPhone pre iOS 7 -->
+<link rel="apple-touch-icon" href="images/FI_logo-114.png" sizes="114x114">
+<!-- retina iPhone iOS 7 -->
+<link rel="apple-touch-icon" href="images/FI_logo-120.png" sizes="120x120">
+<!-- retina iPad pre iOS 7 -->
+<link rel="apple-touch-icon" href="images/FI_logo-144.png" sizes="144x144">
+<!-- retina iPad iOS 7 -->
+<link rel="apple-touch-icon" href="images/FI_logo-152.png" sizes="152x152">
+<!--Android-->
+<link rel="shortcut icon" href="images/FI_logo-196.png" sizes="196x196">
+
+<link rel="stylesheet" type="text/css" href="/Fonts/LiberationFonts/LiberationFonts.css">
+<link rel="stylesheet" href="3rdparty/leaflet-0.7.7/leaflet.css" />
+<link rel="stylesheet" href="3rdparty/clockpicker/jquery-clockpicker.min.css" />
+<link id="ui-theme" rel="stylesheet" href="3rdparty/jquery-ui-themes-1.11.2/themes/smoothness/jquery-ui.min.css" />
+
+<style>
+* {
+	font-family: 'Liberation Sans';
+}
+
+html, body, #wrapper {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+#toolbar {
+	background: url('images/FI_logo.svg') no-repeat left #427ebf;
+	height: 75px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	padding-left: 100px;
+	color: white;
+}
+
+#content {
+	position: absolute;
+	top: 75px;
+	bottom: 14pt;
+	width: 100%;
+}
+
+#widgetarea {
+    overflow-y: auto;
+	position: fixed;
+	top: 104px;
+	right: 0;
+	width: 220px;
+	bottom: 14pt;
+}
+
+#statusbar {
+	background-color: gray;
+	position: fixed;
+	width: 100%;
+	height: 14pt;
+	bottom: 0;
+	text-align: center;
+}
+
+#statusbar a {
+        color: black;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 1px;
+}
+
+#statusbar a:active {
+	color: black;
+}
+
+#statusbar a:visited {
+	color: black;
+}
+
+#statusbar a:hover {
+        color: black;
+	padding: 0;
+        border: 1px dotted silver;
+}
+
+.htabs {
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	height: 29px;
+	background: #427ebf;
+}
+
+.htabs ul {
+	list-style: none;
+	text-align: left;
+	margin: 0;
+	padding: 0 0 0 100px;
+}
+
+.htabs ul li {
+	background-color: #bbb;
+	background-image: linear-gradient(180deg, #fff, #bbb);
+	float: left;
+	width: 6em;
+	height: 25px;
+	margin-left: 2px;
+	margin-right: 2px;
+	border-left: 2px solid #888;
+	border-right: 2px solid #888;
+	border-top: 2px solid #888;
+	border-bottom: 2px solid #888;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	color: #888;
+	padding: 5px;
+	text-align: center;
+}
+
+.htabs ul li a, .htabs ul li a:visited {
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	display: block;
+	color: #888;
+}
+
+.htabs ul li:hover {
+	color: #444;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.htabs ul li.selected {
+	background-color: #eee;
+	background-image: linear-gradient(180deg, #fff, #eee);
+	border-bottom: 2px solid #eee;
+	color: #444;
+	font-weight: bold;
+}
+
+.htabs ul li a {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	font-size: 18px;
+	padding-top: 1px;
+	text-align: center;
+}
+
+#htabs-content {
+	position: absolute;
+	top: 29px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #eee;
+	padding: 10px 230px 10px 10px;
+}
+
+.vtabs {
+	float: left;
+	margin: 0px;
+	padding: 0px;
+	width: 100px;
+	background-color: #eee;
+	height: 100%;
+}
+
+.vtabs ul {
+	list-style: none;
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+.vtabs ul li {
+	background: #427ebf;
+	background-image: linear-gradient(to bottom, #d3d9e0, #427ebf);
+	border-radius: 10px;
+	box-shadow: 0px 7px 9px #666666;
+	color: #eee;
+	font-size: 18px;
+	padding: 5px 7px 5px 7px;
+	margin: 10px 0;
+	text-decoration: none;
+}
+
+.vtabs ul li:hover {
+	cursor: pointer;
+	color: #000;
+	background-image: linear-gradient(to bottom, #fcfcf4, #fbfc46);
+}
+
+.vtabs ul li.selected {
+	background-image: linear-gradient(to bottom, #fcfcf4, #fbfc46);
+	color: #000;
+}
+
+#vtabs-content {
+	margin-left: 140px;
+	padding: 5px;
+	overflow: auto;
+	height: 100%;
+}
+
+.right-floating {
+	float: right;
+}
+
+.switcher_container {
+	padding-right: 5px;
+	float: right;
+}
+
+.switcher_list {
+}
+
+.switcher_label {
+	display: none;
+}
+</style>
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="toolbar">
+            <h1>Phi - The FlightGear User Interface</h1>
+        </div>
+        <div id="content">
+            <div class="tabs htabs">
+                <ul data-bind="foreach: topics">
+                    <li
+                        data-bind="text: $data,
+                   css: { selected: $data == $root.selectedTopic() },
+                   click: $root.selectTopic">
+                    </li>
+                </ul>
+                <div class="right-floating" data-bind="buttonset: {}">
+                    <button data-bind="button: { icons: { primary: 'ui-icon-refresh' }, text: false }, click: refresh" title="Refresh Page"></button>
+                    <button data-bind="button: { icons: { primary: 'ui-icon-pause' }, text: false}, click: doPause" title="Pause"></button>
+                    <button data-bind="button: { icons: { primary: 'ui-icon-play' }, text: false}, click: doUnpause" title="Play"></button>
+                    <div id="ui-theme-switcher"></div>
+                </div>
+            </div>
+            <div id="htabs-content" data-bind="component: { name: selectedTopic, params: { topic: selectedSubtopic } }"></div>
+        </div>
+        <div id="widgetarea" data-bind="foreach: widgets">
+              <sidebarwidget params="widget: $data">
+              </sidebarwidget>
+        </div>
+        <div id="statusbar">
+            <span>FlightGear. Fly free, be happy. <a href="http://www.flightgear.org/">http://www.flightgear.org/</a></span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" async="async" data-main="./main" src="3rdparty/require/require.js"></script>
+
+</html>
+
+

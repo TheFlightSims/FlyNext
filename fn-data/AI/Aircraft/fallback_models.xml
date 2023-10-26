@@ -1,0 +1,195 @@
+﻿<?xml version="1.0"?>
+<!--
+  Fallback models for use when an MP client does not have a particular model
+  downloaded.
+
+  The transmitting aircraft sets /sim/model/fallback-model-index
+
+  The receiving client looks up
+
+  /sim/multiplay/fallback-models/modexl[/sim/model/fallback-model-index]
+
+  to determine the path to the model.
+
+  To provide some structure, the indexes are partitioned as follows:
+
+  0       Default.  Will also be used if an AI model is not found
+  1-50   Single engine GA aircraft
+  51-100 Multi-engine GA aircraft
+  101-150 Business Jets
+  151-200 Turboprop airliners
+  201-250 Twin engined narrow body jet airliners
+  251-300 Twin engined wide body jet airliners
+  301-350 Four engined jet narrow body airliners
+  351-400 Four engined jet wide body airliners
+  401-450 Single engine prop military aircraft
+  451-500 Multi-engine prop military aircraft
+  501-550 Jet combat aircraft
+  551-600 Military large aircraft (tankers, transports)
+  601-700 Helicopters
+  701-800 Other
+  801-900 Maritime
+-->
+<PropertyList>
+
+<!-- Default aircraft.  Will also be used if an AI model is not found -->
+<model n="0" type="string">/Models/Geometry/glider.ac</model>
+
+<!-- 1-50   Single engine GA aircraft -->
+<model n="1" type="string">AI/Aircraft/c172/c-fgfs.xml</model>
+<model n="2" type="string">AI/Aircraft/c177/c177-g-brdo.xml</model>
+<model n="3" type="string">AI/Aircraft/c182/Models/c182-dpm.xml</model>
+<model n="4" type="string">AI/Aircraft/c182rg/Models/c182rg-ai.xml</model>
+<model n="5" type="string">AI/Aircraft/Cessna208Caravan/Models/Cessna208-ai.xml</model>
+<model n="6" type="string">AI/Aircraft/Cub/Models/Cub-ai.xml</model>
+<model n="7" type="string">AI/Aircraft/DR400/Models/dr400-ai.xml</model>
+<model n="8" type="string">AI/Aircraft/ercoupe/Models/ercoupe-ai.xml</model>
+<model n="9" type="string">AI/Aircraft/FK9MK2/Models/fk9mk2-ai.xml</model>
+<model n="10" type="string">AI/Aircraft/Fokker-S-11/Models/s11-ai.xml</model>
+<model n="11" type="string">AI/Aircraft/pa-28/pa-28-hb-png.xml</model>
+
+<!-- 51-100 Multi-engine GA aircraft -->
+<model n="51" type="string">AI/Aircraft/beech-200/beech-200-234.xml</model>
+<model n="52" type="string">AI/Aircraft/beech99/Models/beech99-ai.xml</model>
+<model n="53" type="string">AI/Aircraft/BNI/BNI-LoganAir.xml</model>
+<model n="54" type="string">AI/Aircraft/c310/Models/c310-ai.xml</model>
+<model n="55" type="string">AI/Aircraft/c310u3a/Models/c310u3a-ai.xml</model>
+<model n="56" type="string">AI/Aircraft/Cessna337/Models/Cessna337-N53472ai.xml</model>
+<model n="57" type="string">AI/Aircraft/Cessna-421-Golden-Eagle/Models/c421-ai.xml</model>
+<model n="58" type="string">AI/Aircraft/Diamond-Da42/Models/da42-ai.xml</model>
+
+<!-- 101-150 Business Jets -->
+<model n="101" type="string">AI/Aircraft/BAe-125/Models/bae125-ai.xml</model>
+<model n="102" type="string">AI/Aircraft/Bombardier-Challenger/Bombardier-Challenger-AirDolomiti.xml</model>
+<model n="104" type="string">AI/Aircraft/Citation-Bravo/Models/Bravo-ai.xml</model>
+<model n="105" type="string">AI/Aircraft/CR2/CR2-Default.xml</model>
+<model n="106" type="string">AI/Aircraft/Embraer-Legacy/Embraer-Legacy-AirFrance.xml</model>
+
+<!-- 151-200 Turboprop airliners -->
+<model n="151" type="string">AI/Aircraft/AT4/AT4-Default.xml</model>
+<model n="152" type="string">AI/Aircraft/AT7/AT7-default.xml</model>
+<model n="153" type="string">AI/Aircraft/DH3/DH3-AirNewZealand.xml</model>
+<model n="154" type="string">AI/Aircraft/b1900d/Models/B1900D.xml</model>
+<model n="155" type="string">AI/Aircraft/DH4/DH4-Wideroe.xml</model>
+<model n="156" type="string">AI/Aircraft/DH7/DH7-ScandinavianAirlines.xml</model>
+<model n="157" type="string">AI/Aircraft/DHT/DHT-AirVanuatu.xml</model>
+<model n="158" type="string">AI/Aircraft/JS41/JS41-default.xml</model>
+<model n="159" type="string">AI/Aircraft/Saab-2000/Saab-2000-default.xml</model>
+<model n="160" type="string">AI/Aircraft/SF3/SF3-WestJet.xml</model>
+
+
+<!-- 201-250 Twin engined narrow body jet airliners -->
+<model n="201" type="string">AI/Aircraft/717/717-Qantas.xml</model>
+<model n="202" type="string">AI/Aircraft/733/733-Norwegian.xml</model>
+<model n="203" type="string">AI/Aircraft/735/735-Default.xml</model>
+<model n="204" type="string">AI/Aircraft/736/736-Default.xml</model>
+<model n="205" type="string">AI/Aircraft/738/738-Aeroflot.xml</model>
+<model n="206" type="string">AI/Aircraft/738/738-ANA.xml</model>
+<model n="207" type="string">AI/Aircraft/739/73J-Default.xml</model>
+<model n="208" type="string">AI/Aircraft/757/757-200-American.xml</model>
+<model n="209" type="string">AI/Aircraft/A300/A300-default.xml</model>
+<model n="210" type="string">AI/Aircraft/A310/A310-default.xml</model>
+<model n="211" type="string">AI/Aircraft/A319/A319-default.xml</model>
+<model n="212" type="string">AI/Aircraft/A320/A320-default.xml</model>
+<model n="213" type="string">AI/Aircraft/A321/A321-default.xml</model>
+<model n="214" type="string">AI/Aircraft/ERJ145/ERJ145-default.xml</model>
+<model n="215" type="string">AI/Aircraft/E95/E95-Default.xml</model>
+<model n="216" type="string">AI/Aircraft/Fokker-100/Fokker-100-KLM.xml</model>
+<model n="217" type="string">AI/Aircraft/Fokker-50/fokker50-KLM.xml</model>
+<model n="218" type="string">AI/Aircraft/Fokker-70/fokker70-KLM.xml</model>
+<model n="219" type="string">AI/Aircraft/MD80/MD80-American.xml</model>
+<model n="220" type="string">AI/Aircraft/MD90/MD90-JAL.xml</model>
+<model n="221" type="string">AI/Aircraft/tu154b/Model/tu154b-model.xml</model>
+<model n="222" type="string">AI/Aircraft/727/Models/727-200.xml</model>
+
+    <!-- 251-300 Twin engined wide body jet airliners -->
+<model n="251" type="string">AI/Aircraft/767/767-JAL.xml</model>
+<model n="252" type="string">AI/Aircraft/777/777-fallback.xml</model>
+<model n="253" type="string">AI/Aircraft/787/788-Qatar.xml</model>
+<model n="254" type="string">AI/Aircraft/A332/A332-Emirates.xml</model>
+<model n="255" type="string">AI/Aircraft/A333/A333-KLM.xml</model>
+<model n="256" type="string">AI/Aircraft/A350/359-Finnair.xml</model>
+<model n="257" type="string">AI/Aircraft/E70/ERJ170-Siberian.xml</model>
+<model n="258" type="string">AI/Aircraft/E90/E90-JetBlue.xml</model>
+
+<!-- 301-350 Four engined jet narrow body airliners -->
+<model n="301" type="string">AI/Aircraft/Bae146-200/Bae146-200-Lufthansa.xml</model>
+<model n="302" type="string">AI/Aircraft/BAE146-300/BAE146-300-Brussels.xml</model>
+
+<!-- 351-400 Four engined jet wide body airliners -->
+<model n="351" type="string">AI/Aircraft/747/744-Lufthansa.xml</model>
+<model n="352" type="string">AI/Aircraft/747/74F-Saudia.xml</model>
+<model n="353" type="string">AI/Aircraft/A342/A342-RoyalJordanian.xml</model>
+<model n="354" type="string">AI/Aircraft/A343/A343-CathayPacific.xml</model>
+<model n="355" type="string">AI/Aircraft/A345/A345-SingaporeAirlines.xml</model>
+<model n="356" type="string">AI/Aircraft/A346/A346-Iberia.xml</model>
+<model n="357" type="string">AI/Aircraft/A380/388-AirFrance.xml</model>
+
+<!-- 401-450 Single engine prop military aircraft -->
+<model n="401" type="string">AI/Aircraft/A6M2/Models/a6m2-anim.xml</model>
+<model n="402" type="string">AI/Aircraft/bf109/Models/bf109g-model.xml</model>
+<model n="403" type="string">AI/Aircraft/Hurricane/Models/hurricane_model.xml</model>
+<model n="404" type="string">AI/Aircraft/Spitfire/Models/spitfire_model.xml</model>
+
+<!-- 451-500 Multi-engine prop military aircraft -->
+<model n="451" type="string">AI/Aircraft/b29/Models/b29-model.xml</model>
+
+<!-- 501-550 Jet combat aircraft -->
+<model n="501" type="string">AI/Aircraft/A-10/Models/A-10.xml</model>
+<model n="502" type="string">AI/Aircraft/Buccaneer/Models/buccaneer-lowpoly.xml</model>
+<model n="503" type="string">AI/Aircraft/eurofighter/Models/Typhoon.xml</model>
+<model n="504" type="string">AI/Aircraft/f16/Models/f16-Wingman.xml</model>
+<model n="505" type="string">AI/Aircraft/Hunter/Models/hunter-model.xml</model>
+<model n="506" type="string">AI/Aircraft/Lightning/Models/lightning-model.xml</model>
+<model n="507" type="string">AI/Aircraft/seahawk/Models/seahawk-3d-model.xml</model>
+
+<model n="514" type="string">AI/Aircraft/f-14b/Models/f-14b.xml</model>
+<model n="515" type="string">AI/Aircraft/F-15/Models/F-15.xml</model>
+<model n="516" type="string">AI/Aircraft/f16/Models/f-16.xml</model>
+<model n="518" type="string">AI/Aircraft/F-18/Models/F-18.xml</model>
+<model n="519" type="string">AI/Aircraft/F-4/F-4.xml</model>
+<model n="520" type="string">AI/Aircraft/T-38/Models/T38-model.xml</model> <!-- T-38 is 520-->
+<model n="521" type="string">AI/Aircraft/MiG-21bis/Models/MiG-21bis.xml</model>
+<model n="522" type="string">AI/Aircraft/JA37/Models/JA-37.xml</model>
+<model n="524" type="string">Models/Geometry/A4-F/A4-F.xml</model>
+<model n="525" type="string">AI/Aircraft/T-38/Models/F-5.xml</model>
+<model n="526" type="string">Models/Geometry/KA6-D/A6-D-lowpoly.xml</model>
+<model n="527" type="string">AI/Aircraft/Mirage2000/m2000-5_lowpoly.xml</model>
+<model n="528" type="string">AI/Aircraft/Jaguar-GR1/jaguar-gr1-low.xml</model>
+
+<!-- 551-600 Military large aircraft (tankers, transports) -->
+<model n="551" type="string">AI/Aircraft/E-2C/Models/E-2C-model.xml</model>
+<model n="552" type="string">AI/Aircraft/vulcanb2/Models/vulcanb2.xml</model>
+
+<model n="571" type="string">AI/Aircraft/SR-71/Blackbird-SR71A.xml</model>
+
+  <!-- 601-700 Helicopters (placeholder) -->
+
+<!-- 701-800 Other -->
+<model n="701" type="string">AI/Aircraft/Arup-S2/Models/arup-s2-ai.xml</model>
+<model n="702" type="string">AI/Aircraft/balloon/balloon2.xml</model>
+<model n="703" type="string">AI/Aircraft/Beechcraft-Staggerwing/Models/model17-ai.xml</model>
+<model n="705" type="string">AI/Aircraft/bocian/Models/bocian-model.xml</model>
+<model n="706" type="string">AI/Aircraft/centrair-101/Centrair-101-F-CHGR.xml</model>
+<model n="707" type="string">AI/Aircraft/cri-cri/Models/MC-15-ai.xml</model>
+<model n="708" type="string">AI/Aircraft/Dragonfly/Models/Dragonfly-ai.xml</model>
+<model n="709" type="string">AI/Aircraft/Dromader/Models/M18B_Dromader-ai.xml</model>
+<model n="710" type="string">AI/Aircraft/G-164/Models/G-164A-ai.xml</model>
+<model n="711" type="string">AI/Aircraft/Gee-Bee/Models/geebee-ai.xml</model>
+
+<!-- Special case as the ufo is always installed and light enough not to need a separate
+AI model.  We also want to load it in preference to the default glider because it will
+then be invisible to other MP players who are not in a UFO themselves. -->
+<model n="712" type="string">Aircraft/ufo/Models/ufo.xml</model>
+
+<model n="801" type="string">AI/Maritime/MP-Carriers/mp-nimitz-0.xml</model>
+<model n="802" type="string">AI/Maritime/MP-Carriers/mp-vinson-0.xml</model>
+<model n="803" type="string">AI/Maritime/MP-Carriers/mp-eisenhower-0.xml</model>
+<model n="804" type="string">AI/Maritime/MP-Carriers/mp-truman-0.xml</model>
+<model n="805" type="string">AI/Maritime/MP-Carriers/mp-clemenceau-0.xml</model>
+<model n="806" type="string">AI/Maritime/MP-Carriers/mp-foch-0.xml</model>
+<model n="807" type="string">AI/Maritime/MP-Carriers/mp-kuznetsov-0.xml</model>
+<model n="808" type="string">AI/Maritime/MP-Carriers/mp-liaoning-0.xml</model>
+<model n="809" type="string">AI/Maritime/MP-Carriers/mp-sanantonio-0.xml</model>
+
+</PropertyList>

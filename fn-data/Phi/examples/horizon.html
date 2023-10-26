@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>FlightGear - Phi Example</title>
+
+
+<style type="text/css" media="screen">
+
+html, body, #wrapper {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	overflow: hidden;
+}
+
+body {
+	background-color: #337cf8;
+}
+
+#ground {
+	padding: 0;
+	margin: 0;
+	background-color: brown;
+	position: absolute;
+	top: 50%;
+	bottom: -200%;
+	left: -10%;
+	right: -10%;
+	background: brown;
+}
+
+#airspeed {
+	position: absolute;
+	left: 25%;
+	width: 4em;
+	top: 10%;
+	bottom: 10%;
+}
+
+#altitude {
+	position: absolute;
+	right: 25%;
+	width: 4em;
+	top: 10%;
+	bottom: 10%;
+}
+
+#marker {
+	position: absolute;
+	left: 30%;
+	right: 30%;
+	top: 50%;
+	height: 4px;
+	transform: translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+
+    <!-- always use a wrapper div to get a handle for the knockout bindings -->
+    <div id="wrapper">
+
+   <!--  add a brown box for the ground
+   check http://knockoutjs.com/documentation/style-binding.html for the data-bind syntax 
+   -->
+        <div id="ground" data-bind="style: { transform: groundTransform }">
+          <div style="width: 100%; padding: 0; margin: 0; border: 1px solid white;"></div>
+       </div>
+
+       <div id="marker">
+         <div style="width: 30%; float: left; height: 100%; border: 4px solid yellow; border-style: outset; border-radius: 2px; background-color: yellow; box-sizing: border-box;"></div>
+         <div style="width: 30%; float: right; height: 100%; border: 4px solid yellow; border-style: outset; border-radius: 2px; background-color: yellow; box-sizing: border-box;"></div>
+       </div>
+
+       <div id="airspeed">
+         <!-- put the airspeed indicator here -->
+       </div>
+       <div id="altitude">
+         <!-- put the altitude indicator here -->
+       </div>
+    </div>
+
+</body>
+
+<!--  
+  this is the only script tag required, require.js takes care of loading everyting needed
+  first thing requirejs does is to load the script defined in the data-main attribute, "./horizon.js" in
+  our case. Note: the ".js" extension gets added automatically.
+ -->
+<script type="text/javascript" async="async" data-main="./horizon" src="/3rdparty/require/require.js"></script>
+</html>

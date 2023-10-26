@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>quad</type>
+  <effect>Effects/HDR/bloom-downsample-rest</effect>
+</PropertyList>

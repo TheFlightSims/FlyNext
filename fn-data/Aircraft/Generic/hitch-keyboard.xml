@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PropertyList>
+	<key n="23">
+		<name>Ctrl-w</name>
+		<desc>Place winch in front of aircraft and start it</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				towing.setWinchPositionAuto();
+				settimer(towing.runWinch, 1);
+			</script>
+		</binding>
+	</key>
+	<key n="119">
+		<name>w</name>
+		<desc>Increase winch speed</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				towing.winch_faster();
+			</script>
+		</binding>
+	</key>
+	<key n="87">
+		<name>Shift-W</name>
+		<desc>Decrease winch speed</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				towing.winch_slower();
+			</script>
+		</binding>
+	</key>
+	<key n="15">
+		<name>Ctrl-o</name>
+		<desc>Find aircraft for aerotow</desc>
+		<binding>
+			<command>nasal</command>
+			<script>
+				towing.findBestAIObject();
+			</script>
+		</binding>
+	</key>
+	<key n="111">
+		<name>o</name>
+		<desc>Open hook</desc>
+		<binding>
+			<command>property-assign</command>
+			<property>/sim/hitches/hook-open</property>
+			<value type="bool">true</value>
+		</binding>
+		<binding>
+			<command>nasal</command>
+			<script>
+				towing.releaseHitch("winch");
+				towing.releaseHitch("aerotow");
+			</script>
+		</binding>
+		<mod-up>
+			<binding>
+				<command>property-assign</command>
+				<property>/sim/hitches/hook-open</property>
+				<value type="bool">false</value>
+			</binding>
+		</mod-up>
+	</key>
+</PropertyList>

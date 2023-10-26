@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<!-- Author Ian Tolosa - Timetable of JAN 2018 - PAX & Cargo -->
+<trafficlist>
+  <aircraft>
+    <model>Aircraft/733/733-AirNauru.xml</model>
+    <livery>RON</livery>
+    <airline>RON</airline>
+    <home-port>YBBN</home-port>
+    <required-aircraft>RON-733</required-aircraft>
+    <actype>733</actype>
+    <offset>0</offset>
+    <radius>15</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>VH-ONU</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/733/733-AirNauru.xml</model>
+    <livery>RON</livery>
+    <airline>RON</airline>
+    <home-port>YBBN</home-port>
+    <required-aircraft>RON-733</required-aircraft>
+    <actype>733</actype>
+    <offset>0</offset>
+    <radius>15</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>VH-PNI</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/733/733-AirNauru.xml</model>
+    <livery>RON</livery>
+    <airline>RON</airline>
+    <home-port>YBBN</home-port>
+    <required-aircraft>RON-733</required-aircraft>
+    <actype>733</actype>
+    <offset>0</offset>
+    <radius>15</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>VH-XNU</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/733/733-AirNauru.xml</model>
+    <livery>RON</livery>
+    <airline>RON</airline>
+    <home-port>YBBN</home-port>
+    <required-aircraft>RON-733</required-aircraft>
+    <actype>733</actype>
+    <offset>0</offset>
+    <radius>15</radius>
+    <flighttype>gate</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>VH-YNU</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <aircraft>
+    <model>Aircraft/733/73F-AirNauru.xml</model>
+    <livery>RON</livery>
+    <airline>RON</airline>
+    <home-port>YBBN</home-port>
+    <required-aircraft>RON-73F</required-aircraft>
+    <actype>73F</actype>
+    <offset>0</offset>
+    <radius>15</radius>
+    <flighttype>cargo</flighttype>
+    <performance-class>jet_transport</performance-class>
+    <registration>VH-VLI</registration>
+    <heavy>No</heavy>
+  </aircraft>
+  <flight>15
+<callsign>ON002</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>15
+<port>YBBN</port><time>2/21:00:00</time></departure>15
+<cruise-alt>390</cruise-alt><arrival>15
+<port>ANYN</port><time>3/01:35:00</time></arrival>15
+<repeat>WEEK</repeat>
+15</flight>
+  <flight>16
+<callsign>ON001</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>16
+<port>ANYN</port><time>3/02:40:00</time></departure>16
+<cruise-alt>400</cruise-alt><arrival>16
+<port>YBBN</port><time>3/07:15:00</time></arrival>16
+<repeat>WEEK</repeat>
+16</flight>
+  <flight>17
+<callsign>ON922</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>17
+<port>YBBN</port><time>3/21:19:00</time></departure>17
+<cruise-alt>390</cruise-alt><arrival>17
+<port>ANYN</port><time>4/01:27:00</time></arrival>17
+<repeat>WEEK</repeat>
+17</flight>
+  <flight>1
+<callsign>ON400</callsign><required-aircraft>RON-73F</required-aircraft><fltrules>IFR</fltrules><departure>1
+<port>YBBN</port><time>4/14:01:00</time></departure>1
+<cruise-alt>390</cruise-alt><arrival>1
+<port>ANYN</port><time>4/18:36:00</time></arrival>1
+<repeat>WEEK</repeat>
+1</flight>
+  <flight>2
+<callsign>ON400</callsign><required-aircraft>RON-73F</required-aircraft><fltrules>IFR</fltrules><departure>2
+<port>ANYN</port><time>4/19:35:00</time></departure>2
+<cruise-alt>390</cruise-alt><arrival>2
+<port>NGTA</port><time>4/20:50:00</time></arrival>2
+<repeat>WEEK</repeat>
+2</flight>
+  <flight>3
+<callsign>ON401</callsign><required-aircraft>RON-73F</required-aircraft><fltrules>IFR</fltrules><departure>3
+<port>NGTA</port><time>4/22:20:00</time></departure>3
+<cruise-alt>400</cruise-alt><arrival>3
+<port>ANYN</port><time>4/23:35:00</time></arrival>3
+<repeat>WEEK</repeat>
+3</flight>
+  <flight>7
+<callsign>ON002</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>7
+<port>YBBN</port><time>4/10:00:00</time></departure>7
+<cruise-alt>390</cruise-alt><arrival>7
+<port>AGGH</port><time>4/13:30:00</time></arrival>7
+<repeat>WEEK</repeat>
+7</flight>
+  <flight>8
+<callsign>ON002</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>8
+<port>AGGH</port><time>4/14:15:00</time></departure>8
+<cruise-alt>390</cruise-alt><arrival>8
+<port>ANYN</port><time>4/16:05:00</time></arrival>8
+<repeat>WEEK</repeat>
+8</flight>
+  <flight>9
+<callsign>ON001</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>9
+<port>ANYN</port><time>4/18:30:00</time></departure>9
+<cruise-alt>400</cruise-alt><arrival>9
+<port>YBBN</port><time>4/23:05:00</time></arrival>9
+<repeat>WEEK</repeat>
+9</flight>
+  <flight>18
+<callsign>ON921</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>18
+<port>ANYN</port><time>4/02:45:00</time></departure>18
+<cruise-alt>400</cruise-alt><arrival>18
+<port>YBBN</port><time>4/07:19:00</time></arrival>18
+<repeat>WEEK</repeat>
+18</flight>
+  <flight>19
+<callsign>ON018</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>19
+<port>NFFN</port><time>4/13:00:00</time></departure>19
+<cruise-alt>405</cruise-alt><arrival>19
+<port>ANYN</port><time>4/16:10:00</time></arrival>19
+<repeat>WEEK</repeat>
+19</flight>
+  <flight>20
+<callsign>ON041</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>20
+<port>ANYN</port><time>4/17:15:00</time></departure>20
+<cruise-alt>390</cruise-alt><arrival>20
+<port>NGTA</port><time>4/18:30:00</time></arrival>20
+<repeat>WEEK</repeat>
+20</flight>
+  <flight>21
+<callsign>ON041</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>21
+<port>NGTA</port><time>4/19:15:00</time></departure>21
+<cruise-alt>405</cruise-alt><arrival>21
+<port>PKMJ</port><time>4/20:30:00</time></arrival>21
+<repeat>WEEK</repeat>
+21</flight>
+  <flight>22
+<callsign>ON041</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>22
+<port>PKMJ</port><time>4/21:15:00</time></departure>22
+<cruise-alt>400</cruise-alt><arrival>22
+<port>PTPN</port><time>4/23:30:00</time></arrival>22
+<repeat>WEEK</repeat>
+22</flight>
+  <flight>4
+<callsign>ON401</callsign><required-aircraft>RON-73F</required-aircraft><fltrules>IFR</fltrules><departure>4
+<port>ANYN</port><time>5/00:20:00</time></departure>4
+<cruise-alt>400</cruise-alt><arrival>4
+<port>YBBN</port><time>5/05:00:00</time></arrival>4
+<repeat>WEEK</repeat>
+4</flight>
+  <flight>5
+<callsign>ON500</callsign><required-aircraft>RON-73F</required-aircraft><fltrules>IFR</fltrules><departure>5
+<port>YBBN</port><time>5/14:01:00</time></departure>5
+<cruise-alt>390</cruise-alt><arrival>5
+<port>ANYN</port><time>5/18:00:00</time></arrival>5
+<repeat>WEEK</repeat>
+5</flight>
+  <flight>6
+<callsign>ON501</callsign><required-aircraft>RON-73F</required-aircraft><fltrules>IFR</fltrules><departure>6
+<port>ANYN</port><time>5/19:22:00</time></departure>6
+<cruise-alt>400</cruise-alt><arrival>6
+<port>YBBN</port><time>6/00:07:00</time></arrival>6
+<repeat>WEEK</repeat>
+6</flight>
+  <flight>10
+<callsign>ON345</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>10
+<port>YBBN</port><time>5/21:30:00</time></departure>10
+<cruise-alt>395</cruise-alt><arrival>10
+<port>YSNF</port><time>5/23:45:00</time></arrival>10
+<repeat>WEEK</repeat>
+10</flight>
+  <flight>11
+<callsign>ON345</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>11
+<port>YSNF</port><time>6/00:45:00</time></departure>11
+<cruise-alt>395</cruise-alt><arrival>11
+<port>NZAA</port><time>6/01:35:00</time></arrival>11
+<repeat>WEEK</repeat>
+11</flight>
+  <flight>12
+<callsign>ON346</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>12
+<port>NZAA</port><time>6/02:35:00</time></departure>12
+<cruise-alt>405</cruise-alt><arrival>12
+<port>YSNF</port><time>6/05:25:00</time></arrival>12
+<repeat>WEEK</repeat>
+12</flight>
+  <flight>13
+<callsign>ON346</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>13
+<port>YSNF</port><time>6/06:25:00</time></departure>13
+<cruise-alt>405</cruise-alt><arrival>13
+<port>YBBN</port><time>6/08:40:00</time></arrival>13
+<repeat>WEEK</repeat>
+13</flight>
+  <flight>23
+<callsign>ON042</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>23
+<port>PTPN</port><time>6/18:20:00</time></departure>23
+<cruise-alt>390</cruise-alt><arrival>23
+<port>PKMJ</port><time>6/20:35:00</time></arrival>23
+<repeat>WEEK</repeat>
+23</flight>
+  <flight>24
+<callsign>ON042</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>24
+<port>PKMJ</port><time>6/21:25:00</time></departure>24
+<cruise-alt>395</cruise-alt><arrival>24
+<port>NGTA</port><time>6/22:40:00</time></arrival>24
+<repeat>WEEK</repeat>
+24</flight>
+  <flight>25
+<callsign>ON042</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>25
+<port>NGTA</port><time>6/23:50:00</time></departure>25
+<cruise-alt>400</cruise-alt><arrival>25
+<port>ANYN</port><time>0/01:05:00</time></arrival>25
+<repeat>WEEK</repeat>
+25</flight>
+  <flight>27
+<callsign>ON002</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>27
+<port>YBBN</port><time>6/20:00:00</time></departure>27
+<cruise-alt>390</cruise-alt><arrival>27
+<port>ANYN</port><time>0/00:35:00</time></arrival>27
+<repeat>WEEK</repeat>
+27</flight>
+  <flight>26
+<callsign>ON017</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>26
+<port>ANYN</port><time>0/02:30:00</time></departure>26
+<cruise-alt>395</cruise-alt><arrival>26
+<port>NFFN</port><time>0/05:40:00</time></arrival>26
+<repeat>WEEK</repeat>
+26</flight>
+  <flight>28
+<callsign>ON001</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>28
+<port>ANYN</port><time>0/02:05:00</time></departure>28
+<cruise-alt>400</cruise-alt><arrival>28
+<port>AGGH</port><time>0/03:55:00</time></arrival>28
+<repeat>WEEK</repeat>
+28</flight>
+  <flight>29
+<callsign>ON001</callsign><required-aircraft>RON-733</required-aircraft><fltrules>IFR</fltrules><departure>29
+<port>AGGH</port><time>0/04:40:00</time></departure>29
+<cruise-alt>400</cruise-alt><arrival>29
+<port>YBBN</port><time>0/07:55:00</time></arrival>29
+<repeat>WEEK</repeat>
+29</flight>
+</trafficlist>

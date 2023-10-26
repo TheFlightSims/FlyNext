@@ -1,0 +1,17 @@
+<div class="ui-widget ui-corner-all" data-bind="foreach: watches">
+    <div class="ui-widget-header">
+        Stopwatch
+        <button style="float: right" 
+                data-bind="button: { 
+                    icons: { 
+                        primary: 'ui-icon-newwin'
+                    }, 
+                    text: false
+                }, 
+                click: $parent.toDialog"
+                title="Detach"
+                ></button>
+    </div>
+    <div class="ui-widget-content ui-corner-all" data-bind="component: { name: 'Stopwatch' }"></div>
+</div>
+<button data-bind="button: { label: 'Add', icons: { primary: ' ui-icon-plusthick' } }, click: addWatch"></button>

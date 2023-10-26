@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <name>light-switches</name>
+  <layout>vbox</layout>
+  <resizable>true</resizable>
+  <prefered-width>200</prefered-width>
+  <!-- title bar -->
+  <group>
+    <layout>hbox</layout>
+    <empty>
+      <stretch>1</stretch>
+    </empty>
+    <text>
+      <label>Default light switches</label>
+    </text>
+    <empty>
+      <stretch>1</stretch>
+    </empty>
+    <button>
+      <legend>X</legend>
+      <key>Esc</key>
+      <pref-width>20</pref-width>
+      <pref-height>20</pref-height>
+      <border>2</border>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+  <hrule/>
+  <checkbox>
+    <halign>left</halign>
+    <label>Beacon</label>
+    <property>/controls/lighting/beacon</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  <checkbox>
+    <halign>left</halign>
+    <label>Nav lights</label>
+    <property>/controls/lighting/nav-lights</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  <checkbox>
+    <halign>left</halign>
+    <label>Taxi light</label>
+    <property>/controls/lighting/taxi-light</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  <checkbox>
+    <halign>left</halign>
+    <label>Landing lights</label>
+    <property>/controls/lighting/landing-lights</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  <checkbox>
+    <halign>left</halign>
+    <label>Strobe</label>
+    <property>/controls/lighting/strobe</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  <checkbox>
+    <halign>left</halign>
+    <label>Logo lights</label>
+    <property>/controls/lighting/logo-lights</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  <checkbox>
+    <halign>left</halign>
+    <label>Turn off lights</label>
+    <property>/controls/lighting/turn-off-lights</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  <checkbox>
+    <halign>left</halign>
+    <label>Formation lights</label>
+    <property>/controls/lighting/formation-lights</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </checkbox>
+  <slider>
+    <halign>left</halign>
+    <label>Panel</label>
+    <property>/controls/lighting/panel-norm</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </slider>
+  <slider>
+    <halign>left</halign>
+    <label>Instruments</label>
+    <property>/controls/lighting/instruments-norm</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </slider>
+  <slider>
+    <halign>left</halign>
+    <label>Dome</label>
+    <property>/controls/lighting/dome-norm</property>
+    <live type="bool">true</live>
+    <binding>
+      <command>dialog-apply</command>
+    </binding>
+  </slider>
+</PropertyList>

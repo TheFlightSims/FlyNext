@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/tree-european-mixed</name>
+  <inherits-from>Effects/tree</inherits-from>
+	<parameters>
+		<num_deciduous_trees>4</num_deciduous_trees>
+	</parameters>
+</PropertyList>

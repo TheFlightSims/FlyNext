@@ -1,0 +1,111 @@
+<div>
+    <style>
+.holding-patter-navaid {
+	stroke: none;
+	fill: cyan;
+}
+
+.holding-pattern-direct {
+	fill: green;
+}
+
+.holding-pattern-teardrop {
+	fill: red;
+}
+
+.holding-pattern-parallel {
+	fill: blue;
+}
+
+.holding-pattern-legend {
+	fill: white;
+	font-size: 7px;
+	text-anchor: middle;
+}
+
+.holding-pattern-racetrack {
+	fill: none;
+	stroke-width: 1px;
+	stroke: yellow;
+}
+
+.holding-pattern-heading {
+	fill: none;
+	stroke-width: 2px;
+	stroke: #c0c0c0;
+	stroke-linecap: round;
+	stroke-linejoin: miter;
+	stroke-dasharray: 2, 3;
+}
+
+.holding-deginput {
+	width: 2em;
+}
+</style>
+    <fieldset>
+        <legend>Holding Pattern</legend>
+        <table style="display: inline; float: left;">
+            <tbody>
+                <tr>
+                    <td>Inbound Track</td>
+                    <td><input maxlength="3" class="holding-deginput"
+                        data-bind="spinner: { value: inboundTrack, spin: inboundTrackSpin }"></td>
+                </tr>
+                <tr>
+                    <td>Heading</td>
+                    <td><input maxlength="3" class="holding-deginput"
+                        data-bind="spinner: { value: heading, spin: headingSpin }"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input id="holding-type-nonstandard" type="radio" name="holdingtype"
+                        data-bind="button: {}, event: { change: setNonStandard }"> <label for="holding-type-nonstandard">Non-Std<br />
+                            (Left)</label> <input id="holding-type-standard" type="radio" name="holdingtype" checked="checked"
+                        data-bind="button: {},  event: { change: setStandard }"> <label for="holding-type-standard">Standard<br />
+                            (Right)</label></td>
+                </tr>
+            </tbody>
+
+        </table>
+        <div style="display: inline; float: left; width: 300px; height: 300px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100"
+                preserveAspectRatio="xMinYMin meet">
+            <g data-bind="attr: { transform: holdingTransform }">
+                <path d="M50,50 l37.58770483143634,13.680805733026748 A40,40, 0 0,1 12.41229516856366,36.31919426697327 z"
+                    class="holding-pattern-direct" />
+                <path d="M50,50 l-37.587704831436334,-13.680805733026759 A40,40, 0 0,1 49.99999999999999,10 z"
+                    class="holding-pattern-teardrop" />
+                <path d="M50,50 l-9.797174393178826e-15,-40 A40,40, 0 0,1 87.58770483143635,63.68080573302672 z"
+                    class="holding-pattern-parallel" />
+                <path d="M 50 50 a 7.5 7.5 0 0 1 15 0 v30 a 7.5 7.5 0 0 1 -15 0 z M50 55 l 2 5 h -4 z M65 75 l -2 -5 h4 z"
+                    class="holding-pattern-racetrack" />
+            </g>
+            <g data-bind="attr: { transform: holdingTransform }, visible: nonStandard">
+                <path d="M50,50 l37.58770483143634,-13.680805733026748 A40,40, 0 0,1 12.41229516856366,63.6808057331 z"
+                    class="holding-pattern-direct" />
+                <path d="M50,50 l0,-40 A40,40, 0 0,1 87.58770483143635,36.31919426697327 z" class="holding-pattern-teardrop" />
+                <path d="M50,50 l-37.587704831436334,13.680805733026759 A40,40, 0 0,1 50,10 z" class="holding-pattern-parallel" />
+                <path d="M 50 50 a 7.5 7.5 0 0 0 -15 0 v 30 a 7.5 7.5 0 0 0 15 0 z M50 55 l 2 5 h -4 z M35 75 l -2 -5 h4 z"
+                    class="holding-pattern-racetrack" />
+            </g>
+            <circle cx="50" cy="50" r="2.5" class="holding-patter-navaid" />
+       
+            <g data-bind="attr: { transform: trackTransform }">
+                <path data-bind="attr: { d: trackDraw }" class="holding-pattern-heading" />
+            </g>
+            <rect x="0" y="92" rx="2" ry="2" width="30" height="8" class="holding-pattern-direct" />
+            <text x="15" y="98" class="holding-pattern-legend">direct</text>
+   
+            <rect x="35" y="92" rx="2" ry="2" width="30" height="8" class="holding-pattern-teardrop" />
+            <text x="50" y="98" class="holding-pattern-legend">teardrop</text>
+   
+            <rect x="70" y="92" rx="2" ry="2" width="30" height="8" class="holding-pattern-parallel" />
+            <text x="85" y="98" class="holding-pattern-legend">parallel</text>
+        </svg>
+        </div>
+
+    </fieldset>
+    <!-- 
+    <div data-bind="text: entry"></div>
+    <div data-bind="text: ko.toJSON($data)"></div>
+    -->
+</div>

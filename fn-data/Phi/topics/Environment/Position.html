@@ -1,0 +1,115 @@
+<style>
+.ui-autocomplete {
+	max-height: 300px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+}
+
+.metric {
+	font-style: italic;
+	font-size: 90%;
+}
+</style>
+<fieldset data-bind="visible: hasAirports">
+    <legend>Search (enter at least two characters of airport name or id)</legend>
+    <input type="text" data-bind="autocomplete: { minLength: 2, source: airports, select: onSelect }" style="width: 100%;">
+</fieldset>
+<h1 data-bind="visible: isLoading">Please wait... Loading Airports...</h1>
+<div style="" data-bind="with: selectedAirport">
+    <div style="float: left;">
+        <div style="font-size: 20pt; font-weight: bold;" data-bind="text: id"></div>
+        <div>
+            <span style="font-size: 12pt; font-weight: normal;">Apt Elev </span> <span style="font-size: 14pt; font-weight: bold;"
+                data-bind="text: elevation"></span> <span style="font-size: 14pt; font-weight: bold;">&apos;</span>
+        </div>
+        <div>
+            <span style="font-size: 12pt; font-weight: normal;" data-bind="text: arpFormatted"></span>
+        </div>
+    </div>
+    <div style="float: right;">
+        <div>
+            <span style="font-size: 20pt; font-weight: normal; float: right" data-bind="text: name"></span>
+        </div>
+        <div>
+            <span style="float: right">
+                 <a data-bind="button: { text: false, icons: { primary: 'ui-icon-extlink' }}, 
+                               attr { href: 'http://ourairports.com/airports/' + id() + '/' }"
+                    target="_bank">View on ourairports.com</a>
+            </span>
+            <!--
+      <span style="font-size: 20pt; font-weight: bold;" data-bind="text: city"></span> 
+      <span style="font-size: 20pt; font-weight: bold;">, </span>
+      <span style="font-size: 20pt; font-weight: bold;" data-bind="text: country"></span>
+-->
+        </div>
+    </div>
+</div>
+<div class="ui-helper-clearfix"></div>
+
+<fieldset data-bind="with: selectedAirport, visible: selectedAirport">
+    <legend>Communication</legend>
+    <table style="width: 100%">
+        <tr data-bind="foreach: comm">
+            <td>
+                <div data-bind="text: name" style="text-align: center"></div>
+                <div data-bind="foreach: frequencies" style="text-align: center">
+                    <span data-bind="text: $data"></span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</fieldset>
+
+<fieldset data-bind="visible: selectedAirport">
+    <div id="phi-environment-position-map" style="height: 400px;"></div>
+</fieldset>
+
+<fieldset data-bind="with: selectedAirport, visible: selectedAirport">
+    <legend>Runway Information</legend>
+    <table style="width: 100%">
+        <thead>
+            <tr>
+                <th style="text-align: left">RWY</th>
+                <th style="text-align: right">True</th>
+                <th style="text-align: left">Surface</th>
+                <th style="text-align: left">Length</th>
+                <th style="text-align: left">Width</th>
+                <th style="text-align: left">Displ. Threshold</th>
+                <th style="text-align: left">Stopway</th>
+                <th style="text-align: left"></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: runway">
+            <tr>
+                <td><span data-bind="text: id"></span></td>
+                <td style="text-align: right;"><span data-bind="text: heading"></span>&deg;</td>
+                <td><span data-bind="text: surface"></span></td>
+                <td><span data-bind="text: lengthFt"></span>ft <span data-bind="text: lengthM" class="metric"></span><span
+                    class="metric">m</span></td>
+                <td><span data-bind="text: widthFt"></span>ft <span data-bind="text: widthM" class="metric"></span><span
+                    class="metric">m</span></td>
+                <td>
+                    <span data-bind="visible: hasDisplacedThreshold">
+                        <span data-bind="text: displacedThresholdFt"></span>ft <span data-bind="text: displacedThresholdM"
+                        class="metric"></span><span class="metric">m</span>
+                    </span>
+                </td>
+                <td>
+                    <span data-bind="visible: hasStopway">
+                        <span data-bind="text: stopwayFt"></span>ft <span data-bind="text: stopwayM" class="metric"></span><span
+                        class="metric">m</span>
+                    </span>
+                </td>
+                <td><button
+                        data-bind="button: { text: false, icons: { primary: 'ui-icon-arrowreturnthick-1-e' } }, click: $parent.gotoRwy">Restart
+                        here</button></td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
+
+<fieldset data-bind="visible: metarValid">
+    <legend>Weather</legend>
+    <div data-bind="text: metar"></div>
+</fieldset>

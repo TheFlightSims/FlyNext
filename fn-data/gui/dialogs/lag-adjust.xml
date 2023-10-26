@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>
+    <name>lag-adjust</name>
+    <layout>vbox</layout>
+    <resizable>false</resizable>
+
+
+    <!-- titlebar -->
+    <group>
+        <layout>hbox</layout>
+        <empty><stretch>1</stretch></empty>
+
+        <text>
+            <label>Lag Correction Settings</label>
+        </text>
+
+        <empty><stretch>1</stretch></empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+    <hrule/>
+
+    <!-- main dialog area -->
+    <group>
+		<layout>table</layout>
+        <halign>center</halign>
+
+		<text>
+          <row>0</row>
+          <col>0</col>
+          <halign>right</halign>
+          <label>Master switch:</label>
+        </text>
+		<checkbox>
+            <row>0</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <name>master</name>
+            <property>/sim/multiplay/lag/master</property>
+            <live>true</live>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>master</object-name>
+            </binding>
+        </checkbox>
+
+        <button>
+            <row>0</row>
+            <col>3</col>
+            <legend>help (in browser)</legend>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    fgcommand("open-browser", props.Node.new({ "url": "http://wiki.flightgear.org/Real_Time_manual" }))
+                </script>
+            </binding>
+        </button>
+
+		<text>
+          <row>1</row>
+          <col>0</col>
+          <halign>right</halign>
+          <label>Lag adjustment:</label>
+        </text>
+        <slider>
+          <row>1</row>
+          <col>1</col>
+          <name>lag-adjustment</name>
+          <min>-0.1</min>
+          <max>0.15</max>
+          <step>0.001</step>
+          <property>/sim/multiplay/lag/offset</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>lag-adjustment</object-name>
+          </binding>
+        </slider>
+        <text>
+          <!--<visible>
+            <property>/sim/multiplay/online</property>
+          </visible> -->
+          <row>1</row>
+          <col>3</col>
+          <halign>left</halign>
+          <label>MMMMMMMMMMMMMMMMMM</label>
+          <format>%.3f s</format>
+          <property>/sim/multiplay/lag/offset</property>
+          <live>true</live>
+        </text>
+
+        <text>
+            <row>2</row>
+            <col>0</col>
+            <label>Apply to close mp</label>
+            <halign>right</halign>
+        </text>
+        <checkbox>
+            <row>2</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <name>apply-close</name>
+            <property>/sim/multiplay/lag/apply-close</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>apply-close</object-name>
+            </binding>
+        </checkbox>
+        <slider>
+          <row>2</row>
+          <col>2</col>
+          <name>range</name>
+          <min>1</min>
+          <max>15</max>
+          <step>0.1</step>
+          <property>/sim/multiplay/lag/range</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>range</object-name>
+          </binding>
+        </slider>
+		<text>
+          <!-- <visible>
+            <property>/sim/multiplay/online</property>
+          </visible> -->
+          <row>2</row>
+          <col>3</col>
+          <halign>left</halign>
+          <label>MMMMMMMMMMMMMMMMMMMMM</label>
+          <format>%.1f nm</format>
+          <property>/sim/multiplay/lag/range</property>
+          <live>true</live>
+        </text>
+
+        <text>
+            <row>3</row>
+            <col>0</col>
+            <label>Spectator mode</label>
+            <halign>right</halign>
+        </text>
+        <checkbox>
+            <row>3</row>
+            <col>1</col>
+            <colspan>2</colspan>
+            <halign>left</halign>
+            <name>spectator</name>
+            <!-- <label>Hide replay sessions over MP (less annoying to other players)</label> -->
+            <property>/sim/multiplay/lag/spectator</property>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>spectator</object-name>
+            </binding>
+        </checkbox>
+        <slider>
+          <row>3</row>
+          <col>2</col>
+          <name>spectator-offset</name>
+          <min>0</min>
+          <max>1</max>
+          <step>0.05</step>
+          <property>/sim/multiplay/lag/spectator-offset</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>spectator-offset</object-name>
+          </binding>
+        </slider>
+		<text>
+          <!-- <visible>
+            <property>/sim/multiplay/online</property>
+          </visible> -->
+          <row>3</row>
+          <col>3</col>
+          <halign>left</halign>
+          <label>MMMMMMMMMMMMMMMMMMMMM</label>
+          <format>%.2f s</format>
+          <property>/sim/multiplay/lag/spectator-offset</property>
+          <live>true</live>
+        </text>
+
+        <text>
+            <row>4</row>
+            <col>0</col>
+            <label>Clock offset</label>
+            <halign>right</halign>
+        </text>
+
+        <input>
+          <name>clock-offset</name>
+          <row>4</row>
+          <col>1</col>
+          <width>75</width>
+          <height>25</height>
+          <label>Seconds</label>
+          <live>true</live>
+          <property>/sim/time/mp-clock-offset-sec</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>clock-offset</object-name>
+          </binding>
+        </input>
+
+        <text>
+            <row>5</row>
+            <col>0</col>
+            <label>Max sim time /frame</label>
+            <halign>right</halign>
+        </text>
+
+        <input>
+          <name>max-simtime</name>
+          <row>5</row>
+          <col>1</col>
+          <width>45</width>
+          <height>25</height>
+          <label>Seconds</label>
+          <live>true</live>
+          <property>/sim/max-simtime-per-frame</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>max-simtime</object-name>
+          </binding>
+        </input>
+    </group>
+
+</PropertyList>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <comment>
+    Attitude information for ForeFlight or Garmin Pilot.
+
+    Broadcast (or send to specific IP) via UDP on port 49002 at 4-10 Hz:
+
+    --generic=socket,out,10,255.255.255.255,49002,udp,foreflight-xatt
+
+    See https://www.foreflight.com/support/network-gps/
+ </comment>
+  <generic>
+    <output>
+      <line_separator>newline</line_separator>
+      <var_separator>,</var_separator>
+      <chunk>
+        <name>Record type (XATT) and simulator name</name>
+        <format>XATTFlightGear</format>
+      </chunk>
+      <chunk>
+        <name>Heading (degrees true)</name>
+        <type>float</type>
+        <format>%.1f</format>
+        <node>/orientation/heading-deg</node>
+      </chunk>
+      <chunk>
+        <name>Pitch (degrees up)</name>
+        <type>float</type>
+        <format>%.1f</format>
+        <node>/orientation/pitch-deg</node>
+      </chunk>
+      <chunk>
+        <name>Roll (degrees up)</name>
+        <type>float</type>
+        <format>%.1f</format>
+        <node>/orientation/roll-deg</node>
+      </chunk>
+    </output>
+  </generic>
+</PropertyList>

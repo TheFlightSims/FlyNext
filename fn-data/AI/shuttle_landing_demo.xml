@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <scenario>
+
+  <name>Space Shuttle landing at KEDW</name>
+  <description>
+     The Space Shuttle returns from entry interface to a landing at KEDW
+  </description>
+
+  <entry>
+   <callsign>Atlantis</callsign>
+   <type>aircraft</type>
+   <class>shuttle</class>
+   <model>Aircraft/SpaceShuttle/SpaceShuttle.xml</model>
+   <flightplan>shuttle_land_KEDW.xml</flightplan>
+   <repeat>1</repeat>
+  </entry>
+
+ </scenario>
+
+</PropertyList>

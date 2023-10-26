@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/histogram-column</name>
+  <parameters>
+    <!-- exposure.glsl -->
+    <exposure-compensation>
+      <use>/sim/rendering/hdr/exposure-compensation</use>
+    </exposure-compensation>
+  </parameters>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/quad_notexcoord.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/histogram_column.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/color.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/histogram.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>hdr_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <!-- exposure.glsl -->
+      <uniform>
+        <name>lum_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">14</value>
+      </uniform>
+      <uniform>
+        <name>exposure_compensation</name>
+        <type>float</type>
+        <value><use>exposure-compensation</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

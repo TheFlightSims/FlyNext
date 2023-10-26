@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name type="string">CH THROTTLE QUADRANT</name>
+  <name type="string">CH Throttle Quadrant</name>
+  <name type="string">CH PRODUCTS CH THROTTLE QUADRANT</name>
+
+  <!-- On Linux, the throttles are mapped   0 1 2 3 4 5
+       On Windows, the throttles are mapped 0 1 2 5 4 3 -->
+  <axis>
+    <name>Lever 0</name>
+    <number>
+      <unix>0</unix>
+      <windows>0</windows>
+      <mac>0</mac>
+    </number>
+    <desc type="string">Throttle 1</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.perEngineSelectedAxisHandler(0)(0);</script>
+    </binding>
+  </axis>
+  <axis>
+    <name>Lever 1</name>
+    <number>
+      <unix>1</unix>
+      <windows>1</windows>
+      <mac>1</mac>
+    </number>
+    <desc type="string">Throttle 2</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.perEngineSelectedAxisHandler(0)(1);</script>
+    </binding>
+  </axis>
+  <axis>
+    <name>Lever 2</name>
+    <number>
+      <unix>2</unix>
+      <windows>2</windows>
+      <mac>2</mac>
+    </number>
+    <desc type="string">Mixture 1</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.perEngineSelectedAxisHandler(2)(0);</script>
+    </binding>
+  </axis>
+  <axis>
+    <name>Lever 3</name>
+    <number>
+      <unix>3</unix>
+      <windows>5</windows>
+      <mac>3</mac>
+    </number>
+    <desc type="string">Mixture 2</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.perEngineSelectedAxisHandler(2)(1);</script>
+    </binding>
+  </axis>
+  <axis>
+    <name>Lever 4</name>
+    <number>
+      <unix>4</unix>
+      <windows>4</windows>
+      <mac>4</mac>
+    </number>
+    <desc type="string">Propeller 1</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.perEngineSelectedAxisHandler(1)(0);</script>
+    </binding>
+  </axis>
+  <axis>
+    <name>Lever 5</name>
+    <number>
+      <unix>5</unix>
+      <windows>3</windows>
+      <mac>5</mac>
+    </number>
+    <desc type="string">Propeller 2</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.perEngineSelectedAxisHandler(1)(1);</script>
+    </binding>
+  </axis>
+  <button>
+    <desc type="string">Flaps Up</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.flapsDown(-1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.flapsDown(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="1">
+    <desc type="string">Flaps Down</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.flapsDown(1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.flapsDown(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="2">
+    <desc type="string">Spoilers Retract</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">
+        controls.stepSpoilers(-1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.stepSpoilers(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="3">
+    <desc type="string">Spoilers Deploy</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.stepSpoilers(1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.stepSpoilers(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="4">
+    <desc type="string">Slats Retract</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.stepSlats(-1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.stepSlats(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="5">
+    <desc type="string">Slats Deploy</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.stepSlats(1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.stepSlats(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="6">
+    <desc type="string">Gear Up</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.gearDown(-1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.gearDown(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="7">
+    <desc type="string">Gear Down</desc>
+    <repeatable type="string">false</repeatable>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.gearDown(1);</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.gearDown(0);</script>
+      </binding>
+    </mod-up>
+  </button>
+</PropertyList>

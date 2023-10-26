@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+Legacy Effect for Project Rembrandt.
+It's kept for backwards compatibility and should not be used on new projects.
+-->
+<PropertyList>
+  <name>Effects/model-combined-deferred</name>
+  <inherits-from>Effects/model-combined</inherits-from>
+</PropertyList>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Boeing 767-300 Freighter</description>
+  <author>Ian(Yves) Tolosa. Mar 2016 </author>
+  <path>Models/76Y.ac</path>
+  <!-- Pitch Forward so nosewheel on ground -->
+  <offsets>
+    <pitch-deg>-0.3</pitch-deg>
+  </offsets>
+  <!-- Gear Showed only < 150 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/767/Effects/76Y-LightMap</inherits-from>
+    <object-name>76Y</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/76Y-NavLights.xml</path>
+  </model>
+</PropertyList>

@@ -1,0 +1,965 @@
+<?xml version="1.0"?>
+<!-- Version: 01/2023 -->
+
+<PropertyList>
+	<name>hitch_dialog</name>
+	<layout>vbox</layout>
+	<default-padding>5</default-padding>
+	<modal>false</modal>
+	<width>500</width>
+	
+
+	<nasal>
+		<open><![CDATA[
+			var w_type = props.globals.getNode("/sim/hitches/winch/type", 1);
+			var w_cofo = props.globals.initNode("/sim/hitches/winch/constant-force", 0, "BOOL");
+			var w_cosp = props.globals.initNode("/sim/hitches/winch/constant-speed", 0, "BOOL");
+
+			var w_type_ls = setlistener( w_type, func{
+				if( w_type.getIntValue() == 0 ){
+					w_cofo.setBoolValue( 1 );
+					w_cosp.setBoolValue( 0 );
+				} else {
+					w_cofo.setBoolValue( 0 );
+					w_cosp.setBoolValue( 1 );
+				}
+			});
+
+			var w_cofo_ls = setlistener( w_cofo, func{
+				if( w_cofo.getBoolValue() ){
+					w_type.setIntValue( 0 );
+				} else {
+					w_type.setIntValue( 1 );
+				}
+			});
+
+			var w_cosp_ls = setlistener( w_cosp, func{
+				if( w_cosp.getBoolValue() ){
+					w_type.setIntValue( 1 );
+				} else {
+					w_type.setIntValue( 0 );
+				}
+			});
+
+			if( w_type.getIntValue() == 0 ){
+				w_cofo.setBoolValue( 1 );
+				w_cosp.setBoolValue( 0 );
+			} else {
+				w_cofo.setBoolValue( 0 );
+				w_cosp.setBoolValue( 1 );
+			}
+			]]>
+		</open>
+		<close>
+			removelistener( w_type_ls );
+			removelistener( w_cofo_ls );
+			removelistener( w_cosp_ls );
+		</close>
+	</nasal>
+
+	<!-- Title Bar -->
+	<group>
+		<layout>hbox</layout>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+		<text>
+			<label>Hitch Configuration (Aerotow and Winch)</label>
+		</text>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+		<button>
+			<legend/>
+			<key>Esc</key>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<border>2</border>
+			<binding>
+				<command>nasal</command>
+				<script>towing.write_config();</script>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+	
+	<hrule/>
+	<hrule/>
+	
+	<group>
+		<layout>hbox</layout>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+		<text>
+			<label>Aerotow Settings</label>
+		</text>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Rope Elastic Constant</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>100000N</label>
+				<live>true</live>
+				<format>%6dN</format>
+				<property>/sim/hitches/aerotow/tow/elastic-constant</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>0N</label>
+				</text>
+			</group>
+			<slider>
+				<name>aerotow_elastic_constant</name>
+				<property>/sim/hitches/aerotow/tow/elastic-constant</property>
+				<min>0</min>
+				<max>100000</max>
+				<step>10</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>100000N</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Weight per Meter</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>1.000kg/m</label>
+				<live>true</live>
+				<format>%1.3fkg/m</format>
+				<property>/sim/hitches/aerotow/tow/weight-per-m-kg-m</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>0.0kg/m</label>
+				</text>
+			</group>
+			<slider>
+				<name>aerotow_weight_m</name>
+				<property>/sim/hitches/aerotow/tow/weight-per-m-kg-m</property>
+				<min>0</min>
+				<max>1</max>
+				<step>0.001</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>1.0kg/m</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Length</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>200m</label>
+				<live>true</live>
+				<format>%3dm </format>
+				<property>sim/hitches/aerotow/tow/length</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>5m</label>
+				</text>
+			</group>
+			<slider>
+				<name>aerotow_tow_length</name>
+				<property>sim/hitches/aerotow/tow/length</property>
+				<min>5</min>
+				<max>200</max>
+				<step>5</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>200m</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Rope Diameter</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>50.0mm</label>
+				<live>true</live>
+				<format>%3.1fmm</format>
+				<property>/sim/hitches/aerotow/rope/rope-diameter-mm</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>0.0mm</label>
+				</text>
+			</group>
+			<slider>
+				<name>aerotow_rope_diameter</name>
+				<property>/sim/hitches/aerotow/rope/rope-diameter-mm</property>
+				<min>0</min>
+				<max>50</max>
+				<step>0.5</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>50.0mm</label>
+				</text>
+			</group>
+		</group>
+	</group>
+
+
+	<hrule/>
+
+	<group>
+		<layout>hbox</layout>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+		<text>
+			<label>Winch Settings</label>
+		</text>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+	</group>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Winch Type</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<checkbox>
+				<name>const_force</name>
+				<label>constant force</label>
+				<live>1</live>
+				<property>/sim/hitches/winch/constant-force</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>const_force</object-name>
+				</binding>
+			</checkbox>
+			<checkbox>
+				<name>const_speed</name>
+				<label>constant speed</label>
+				<live>1</live>
+				<property>/sim/hitches/winch/constant-speed</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>const_speed</object-name>
+				</binding>
+			</checkbox>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Rope Elastic Constant</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>100000N</label>
+				<live>true</live>
+				<format>%6dN</format>
+				<property>/sim/hitches/winch/tow/elastic-constant</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>0N</label>
+				</text>
+			</group>
+			<slider>
+				<name>winch_elastic_constant</name>
+				<property>/sim/hitches/winch/tow/elastic-constant</property>
+				<min>0</min>
+				<max>100000</max>
+				<step>10</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>100000N</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Weight per Meter</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>1.000kg/m</label>
+				<live>true</live>
+				<format>%1.3fkg/m</format>
+				<property>/sim/hitches/winch/tow/weight-per-m-kg-m</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>0.0kg/m</label>
+				</text>
+			</group>
+			<slider>
+				<name>winch_weight_m</name>
+				<property>/sim/hitches/winch/tow/weight-per-m-kg-m</property>
+				<min>0</min>
+				<max>1</max>
+				<step>0.001</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>1.0kg/m</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Initial Length</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>2000m</label>
+				<live>true</live>
+				<format>%4.0fm </format>
+				<property>/sim/hitches/winch/winch/initial-tow-length-m</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>20m</label>
+				</text>
+			</group>
+			<slider>
+				<name>winch_tow_length</name>
+				<property>/sim/hitches/winch/winch/initial-tow-length-m</property>
+				<min>20</min>
+				<max>2000</max>
+				<step>5</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>2000m</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Rope Diameter</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>50.0mm</label>
+				<live>true</live>
+				<format>%2.1fmm</format>
+				<property>/sim/hitches/winch/rope/rope-diameter-mm</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>0.0mm</label>
+				</text>
+			</group>
+			<slider>
+				<name>winch_rope_diameter</name>
+				<property>/sim/hitches/winch/rope/rope-diameter-mm</property>
+				<min>0</min>
+				<max>50</max>
+				<step>0.5</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>50.0mm</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Max. Length</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>2000m</label>
+				<live>true</live>
+				<format>%4.0fm </format>
+				<property>/sim/hitches/winch/winch/max-tow-length-m</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>20m</label>
+				</text>
+			</group>
+			<slider>
+				<name>max_tow_length</name>
+				<property>/sim/hitches/winch/winch/max-tow-length-m</property>
+				<min>20</min>
+				<max>2000</max>
+				<step>5</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>2000m</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Max. Spool Speed</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>80 m/s</label>
+				<live>true</live>
+				<format>%2d m/s</format>
+				<property>sim/hitches/winch/winch/max-spool-speed-m-s</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>5 m/s</label>
+				</text>
+			</group>
+			<slider>
+				<name>max_spool_speed</name>
+				<property>sim/hitches/winch/winch/max-spool-speed-m-s</property>
+				<min>5</min>
+				<max>80</max>
+				<step>5</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>80 m/s</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Force Acceleration</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>5000 N/s</label>
+				<live>true</live>
+				<format>%4d N/s</format>
+				<property>sim/hitches/winch/winch/force-acceleration-N-s</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>100 N/s</label>
+				</text>
+			</group>
+			<slider>
+				<name>force_accel</name>
+				<property>sim/hitches/winch/winch/force-acceleration-N-s</property>
+				<min>100</min>
+				<max>5000</max>
+				<step>100</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>5000 N/s</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Spool Acceleration</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>50.0 m/s^2</label>
+				<live>true</live>
+				<format>%3.1f m/s^2</format>
+				<property>sim/hitches/winch/winch/spool-acceleration-m-s-s</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>1.0 m/s^2</label>
+				</text>
+			</group>
+			<slider>
+				<name>spool_accel</name>
+				<property>sim/hitches/winch/winch/spool-acceleration-m-s-s</property>
+				<min>1</min>
+				<max>50</max>
+				<step>1</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>50.0 m/s^2</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Max. Unspool Speed</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>100 m/s</label>
+				<live>true</live>
+				<format>%3d m/s</format>
+				<property>sim/hitches/winch/winch/max-unspool-speed-m-s</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>5 m/s</label>
+				</text>
+			</group>
+			<slider>
+				<name>max_unspool_speed</name>
+				<property>sim/hitches/winch/winch/max-unspool-speed-m-s</property>
+				<min>0</min>
+				<max>10000</max>
+				<step>100.</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>100 m/s</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Max. Force</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>10000N</label>
+				<live>true</live>
+				<format>%5dN</format>
+				<property>/sim/hitches/winch/winch/max-force-N</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>0N</label>
+				</text>
+			</group>
+			<slider>
+				<name>max_force</name>
+				<property>/sim/hitches/winch/winch/max-force-N</property>
+				<min>0</min>
+				<max>10000</max>
+				<step>100.</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>10000N</label>
+				</text>
+			</group>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Max. Power</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<text>
+				<label>300 kW</label>
+				<live>true</live>
+				<format>%3d kW</format>
+				<property>/sim/hitches/winch/winch/max-power-kW</property>
+				<color>
+					<red>0.2</red>
+					<green>0.9</green>
+					<blue>0.2</blue>
+				</color>
+			</text>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<vrule/>
+			<group>
+				<width>60</width>
+				<text>
+					<label>0 kW</label>
+				</text>
+			</group>
+			<slider>
+				<name>max_power</name>
+				<property>/sim/hitches/winch/winch/max-power-kW</property>
+				<min>0</min>
+				<max>300</max>
+				<step>1</step>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<group>
+				<width>60</width>
+				<text>
+					<label>300 kW</label>
+				</text>
+			</group>
+		</group>
+	</group>
+
+
+	<hrule/>
+
+	<group>
+		<layout>hbox</layout>
+		<text>
+			<halign>left</halign>
+			<label>Show winch messages</label>
+		</text>
+		<group>
+			<layout>hbox</layout>
+			<halign>right</halign>
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+			<checkbox>
+				<name>msg_launch_signaller</name>
+				<label>Launch signaller</label>
+				<live>1</live>
+				<property>/sim/hitches/winch/messages/launch-signaller</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>msg_launch_signaller</object-name>
+				</binding>
+			</checkbox>
+			<checkbox>
+				<name>msg_winch_driver</name>
+				<label>Winch driver</label>
+				<live>1</live>
+				<property>/sim/hitches/winch/messages/winch-driver</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>msg_winch_driver</object-name>
+				</binding>
+			</checkbox>
+		</group>
+	</group>
+	<group>
+		<layout>hbox</layout>
+		<halign>right</halign>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+		<checkbox>
+			<name>msg_pilot</name>
+			<label>Pilot</label>
+			<live>1</live>
+			<property>/sim/hitches/winch/messages/pilot</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>msg_pilot</object-name>
+			</binding>
+		</checkbox>
+		<checkbox>
+			<name>msg_remote_ac</name>
+			<label>Tow Aircraft</label>
+			<live>1</live>
+			<property>/sim/hitches/winch/messages/remote-ac</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>msg_remote_ac</object-name>
+			</binding>
+		</checkbox>
+	</group>
+
+	<hrule/>
+	<hrule/>
+	
+	<!-- Bottom Line -->
+	<group>
+		<layout>hbox</layout>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+		<button>
+			<legend>Close</legend>
+			<binding>
+				<command>nasal</command>
+				<script>towing.write_config();</script>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+	</group>
+	
+</PropertyList>

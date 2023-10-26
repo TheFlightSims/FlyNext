@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/copy-prev-luminance</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/quad_notexcoord.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/copy_prev_luminance.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>lum_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

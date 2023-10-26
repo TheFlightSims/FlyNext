@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>volcanoes</name>
+	<layout>vbox</layout>
+	<default-padding>1</default-padding>
+	<modal>false</modal>
+	<width>400</width>
+
+	<empty>
+		<pref-height>6</pref-height>
+	</empty>
+
+	<text>
+		<label>Nearby volcanic activity</label>
+	</text>
+
+	<empty>
+		<pref-height>4</pref-height>
+	</empty>
+
+	<hrule/>
+
+ <group>
+    <layout>table</layout>
+	
+	
+	<checkbox>
+      <name>enable-volcanoes</name>
+ 	  <row>0</row>
+      <col>0</col>
+	  <halign>left</halign>
+      <property>/environment/volcanoes/enable-volcanoes</property>
+      <label>enable volcanic activity</label>
+      <live>true</live>
+ 	  <binding>
+              <command>dialog-apply</command>
+              <object-name>enable-volcanoes</object-name>
+          </binding>
+    </checkbox>
+	
+	</group>
+	
+	<empty>
+		<pref-height>8</pref-height>
+	</empty>
+	
+	<group>
+    <layout>table</layout>
+  
+    <text>
+      <label>Select a nearby volcano from the list to set its activity</label>
+      <halign>left</halign>
+      <row>0</row>
+      <col>0</col>
+    </text>
+
+  	<combo>
+       		 <row>2</row>
+        	 <col>0</col>
+        	 <name>object-selection</name>
+        	 <halign>left</halign>
+        	 <stretch>true</stretch>
+        	 <pref-width>380</pref-width>
+        	 <property>/environment/volcanoes/volcano-selected</property>
+        	 <properties>/environment/volcanoes/volcanoes-nearby/</properties>
+			 <value>Kilauea</value>
+        	 <binding>
+             	 	<command>dialog-apply</command>
+          	 	<object-name>object-selection</object-name>
+        	 </binding>
+      	</combo>
+
+
+
+</group>
+
+
+        <empty>
+		<pref-height>12</pref-height>
+	</empty>
+
+	<hrule/>
+
+	<empty>
+		<pref-height>20</pref-height>
+	</empty>
+
+ <group>
+    <layout>table</layout>
+
+	<button>
+       		<row>0</row>
+        	<col>0</col>
+		<legend>OK</legend>
+		<default>true</default>
+		<equal>true</equal>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+
+		 <binding>
+			<command>nasal</command>
+			<script>
+			var obj_dlg_id = getprop("/environment/volcanoes/volcano-selected");
+
+			var dlg = gui.Dialog.new(obj_dlg_id);
+			dlg.open();
+					
+			</script>
+		</binding>
+
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+
+	<button>
+       		<row>0</row>
+        	<col>1</col>
+		<legend>Close</legend>
+		<default>true</default>
+		<key>Esc</key>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+
+</group>
+
+</PropertyList>

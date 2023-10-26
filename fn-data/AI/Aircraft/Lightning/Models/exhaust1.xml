@@ -1,0 +1,81 @@
+<?xml version = '1.0' ?>
+<PropertyList>
+
+	<!-- Exhaust no1 -->
+
+	<path>exhaust.ac</path>
+
+	<effect>
+		<inherits-from>Effects/model-transparent</inherits-from>
+		<object-name>exhaust</object-name>
+	</effect>
+
+	<animation>
+		<type>select</type>
+		<object-name>noshadow.Exhaust</object-name>
+		<object-name>noshadow.Exhaust1</object-name>
+		<condition>
+			<greater-than>
+				<property>engines/engine[0]/n1</property>
+				<value>1</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>select</type>
+		<object-name>noshadow.Exhaust</object-name>
+		<object-name>noshadow.Exhaust1</object-name>
+		<condition>
+			<and>
+				<property>engines/engine[0]/augmentation</property>
+				<greater-than>
+					<property>sim/current-view/view-number</property>
+					<value>0</value>
+				</greater-than>
+			</and>
+		</condition>
+	</animation>
+
+	<animation>
+		<type>spin</type>
+		<object-name>exhaust</object-name>
+		<property>engines/engine[0]/n1</property>
+		<factor>10</factor>
+		<x-offset>0</x-offset>
+		<y-offset>0</y-offset>
+		<z-offset>0</z-offset>
+		<center>
+			<x-m>16.2709</x-m>
+			<y-m>0</y-m>
+			<z-m>-0.43068</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>scale</type>
+		<object-name>noshadow.Exhaust</object-name>
+		<object-name>noshadow.Exhaust1</object-name>
+		<property>controls/engines/engine[0]/throttle</property>
+		<interpolation>
+			<entry>
+				<ind>0.88</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.9</ind>
+				<dep>0.93</dep>
+			</entry>
+			<entry>
+				<ind>1.0</ind>
+				<dep>1.0</dep>
+			</entry>
+		</interpolation>
+	</animation>
+
+</PropertyList>

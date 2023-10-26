@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Embraer Regional Jet 175</description>
+  <author>Ian(Yves) Tolosa. Feb 2016 </author>
+  <path>Models/ERJ175.ac</path>
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+    <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/E70/Effects/E75-LightMap</inherits-from>
+    <object-name>E75</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/E75-NavLights.xml</path>
+  </model>
+</PropertyList>

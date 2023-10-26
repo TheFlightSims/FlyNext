@@ -1,0 +1,881 @@
+This document describes how FlightGear searches and loads scenery, how to
+add static objects to the scenery as well as the syntax of *.stg files.
+
+
+
+
+Contents ----------------------------------------------------------------------
+
+1  scenery path
+2  terrasync
+
+3  stg files
+   3.1  OBJECT_BASE
+   3.2  OBJECT
+   3.4  OBJECT_SHARED / OBJECT_SHARED_AGL
+   3.3  OBJECT_STATIC / OBJECT_STATIC_AGL
+   3.5  OBJECT_SIGN /OBJECT_SIGN_AGL
+   3.6  BUILDING_ROUGH / BUILDING_DETAILED
+   3.7  ROAD_ROUGH / ROAD_DETAILED
+   3.8  RAILWAY_ROUGH / RAILWAY_DETAILED
+   3.9  BUILDING_LIST
+   3.10 TREE_LIST
+   3.11 LINEAR_FEATURE_LIST
+   3.12 OBJECT_LIGHT
+   3.13 LIGHT_LIST
+
+4  model manager ("/models/model")
+   4.1  static objects
+   4.2  dynamic objects
+   4.3  loading/unloading at runtime
+
+5  tools for object placing
+   5.1  calc-tile.pl
+   5.2  ufo scenery object editor
+
+6  embedded Nasal
+   6.1  static models
+   6.2  AI models
+
+
+
+
+1 scenery path ----------------------------------------------------------------
+
+FlightGear loads scenery by default from the Scenery/ subdirectory of its
+data directory. The path to this data directory can be set via environment
+variable FG_ROOT or the --fg-root option. The scenery path can be set
+independently via environment variable FG_SCENERY or option --fg-scenery.
+The order of precedence is as follows:
+
+  --fg-scenery=/some/dir         ... highest priority
+  $FG_SCENERY
+  $FG_ROOT/Scenery/              ... lowest priority
+
+
+A scenery specification may be a list of paths, separated by the OS-specific
+path separator (colon on Unix/OSX, semicolon on MS Windows). The paths are
+searched in the order from left to right:
+
+  FG_SCENERY=/first/dir:/second/dir:/third/dir
+                                     (likewise with --fg-scenery option)
+
+Each of the scenery paths normally contains a set of directories, each containing
+a particular scenery type :
+
+ Terrain/ containing the terrain mesh and airport data
+ Objects/ containing placed scenery objects such as large landmarks, bridges
+ Pylons/  containing electricity pylon Models
+ Roads/   containing detailed road and railways
+ Buildings/ containing osm2city-generated buildings
+
+The user can control at runtime which of these directories is actually loaded
+via the property tree:
+/sim/rendering/scenery-path-suffix[n]/name      defines the name of the sub-directory
+/sim/rendering/scenery-path-suffix[n]/enabled   indicates whether it is loaded.
+
+hese properties are typically set in the Rendering Options menu.
+
+In turn each of these contains a tree of directories breaking down the world into
+10x10 degree and then 1x1 degree chunks.  E.g. Terrain/w130n30/w123n37/
+
+For backwards compatibility reasons, the top level can alternatively just
+contain 10x10 degree directories.  E.g. w130n30/w123n37/
+
+Note that as soon as any of the scenery-path-suffix directories is found, any
+10x10 directory on the same hierarchy level will be ignored!
+
+This example shows which directories are used to search for scenery:
+
+  $ ls /first/dir
+  w130n30/                   searched
+
+  $ ls /second/dir
+  Objects/                   searched
+  Terrain/                   searched
+  w130n30/                   *not* searched
+
+  $ ls /third/dir
+  Terrain/                   searched
+  w130n30/                   *not* searched
+
+
+Within the 1x1 degree chunks, the ground is further broken up into "tiles" of
+approx 20x20km. If FlightGear searches for a particular "tile" file, let's say for
+"w130n30/w123n37/942050.stg", then (using the above examples) it looks
+into
+
+  /first/dir/w130n30/w123n37/942050.stg             (A)
+
+  /second/dir/Terrain/w130n30/w123n37/942050.stg      (B)\__ same path element
+  /second/dir/Objects/w130n30/w123n37/942050.stg      (C)/      /second/dir
+  /second/dir/Pylons/w130n30/w123n37/942050.stg       (D)/
+  /second/dir/Roads/w130n30/w123n37/942050.stg        (E)/
+  /second/dir/Buildings/w130n30/w123n37/942050.stg    (F)/
+
+  /third/dir/Terrain/w130n30/w123n37/942050.stg       (G)
+
+As soon as it finds an OBJECT_BASE entry it only finishes this
+path element and then stops scanning. So, if (B) contains an entry
+"OBJECT_BASE 942050.btg, then the other directories in /second/dir (C, D, E, F)
+will be read.  But (G) will *not*!
+
+This searching behavior is usually used to collect user-downloaded scenery first,
+then to read automatically downloaded scenery (see terrasync
+below), then standard scenery and objects that came with the distribution.
+So a typical scenery path specification could look like this:
+
+  FG_SCENERY=$HOME/.fgfs/Scenery:$HOME/.fgfs/TerraSync:$FG_ROOT/Scenery
+
+The first path would then be populated by the user with unpacked scenery
+archives downloaded various sources.
+
+Using a private directory for downloaded add-on scenery and adding
+that path to FG_SCENERY is the preferred way. This separates default
+data from locally added data, and makes administration and later updates
+easier.
+
+HINT: if you want to see where FlightGear is searching and finding
+terrain/objects, start it with the --log-level=info option.
+
+2 terrasync -------------------------------------------------------------------
+
+FlightGear can download scenery on-the-fly.  Simply select "Download scenery
+automatically" from the launcher, or use --enable-terrasync from the commandline.
+By default this will add $HOME/.fgfs/TerraSync to the scenery path.
+
+Note, however, that if it downloads scenery for the area around your
+starting location, then you'll only see that after the next start, or
+after you flew or teleported to a distant location and then back.
+
+2.1 .dirindex -----------------------------------------------------------------
+
+To save having to download scenery every time, while allowing updates to
+propagate, terrasync checks for a .dirindex file each time it downloads a
+directory from the server.  This lists files, directories and tarballs that
+should be present in the local directory, along with their size and a sha1sum
+of their contents.  This sha1sum is checked against the local files to
+determine which files are to be downloaded.
+
+The format of the .dirindex is as follows:
+
+version:<version>
+path:<scenery_path>
+<type>:<filename>:<sha1sum>:<size>
+<type>:<filename>:<sha1sum>:<size>
+<type>:<filename>:<sha1sum>:<size>
+.
+.
+.
+
+Where:
+
+<version> is the .dirindex version number
+<scenery_path>  is the path of the current file, e.g. Objects/w010n50/w009n57
+<type>  is the file type - "f" for file, "d" for directory, "t" for tarball
+<filename> is the file name  (e.g. 2811121.stg)
+<sha1sum>  is the sha1sum of the file named (e.g. 9da6ebc1695ed1c3b151cd34263e9c931ee309ea)
+<size>     is the size of the file
+
+Tarballs (labelled with a "t" in the .dirindex) must be <name>.tgz files which
+unpack into a <name>/ sub-directory.  This enables terrasync to clean up
+out of date files by simply deleting the <name>/ subdirectory before unpacking
+the updated file.
+
+See also https://sourceforge.net/p/flightgear/flightgear/ci/next/tree/scripts/python/TerraSync/tests/data/dirindex/
+
+3 stg files -------------------------------------------------------------------
+
+stg files ("static terragear") define the static elements of a scenery
+"tile", including the terrain elevation data, airport geometry, and all
+static objects placed on this tile. (See section 5 for how to find out which
+geo coordinates belong to which tile.) Four of the available key words
+are followed by a string and four numbers. The meaning of these numbers
+is always the same and described in section 3.3.
+
+3.1  OBJECT_BASE
+----------------
+
+specifies the terrain elevation data file. These files are generated with
+the TerraGear tools (http://wiki.flightgear.org/TerraGear) and have file
+extension ".btg" ("binary terragear"; there used to be an "*.atg" file, too,
+where the 'a' stood for ASCII).
+
+Example:
+
+  OBJECT_BASE 942050.btg
+
+The entry may be anywhere in the 942050.stg file, on a separate line.
+
+3.2  OBJECT
+-----------
+
+specifies an airport geometry 'drop-in' file. The scenery elevation file
+has cut out holes for airports, that are filled with such objects. They
+are usually called after the airport ICAO id:
+
+Example:
+
+  OBJECT KSFO.btg
+
+These files are, again, created by TerraGear tools and are usually gzipped,
+so you'll find that file stored as KSFO.btg.gz.
+
+
+
+
+3.3  OBJECT_SHARED / OBJECT_SHARED_AGL
+--------------------------------------
+
+add static object to the tile.
+
+Example:
+
+  OBJECT_SHARED Models/Airport/tower.xml -122.501090 37.514830 15.5 0.00 0.00 0.00 0.00
+
+Syntax:
+
+  OBJECT_SHARED <object-path> <lon> <lat> <elev-m> <hdg-deg> <pitch-deg> <roll-deg> <radius>
+
+The <object-path> is relative to the data directory (FG_ROOT).
+<elev-m> is in meter and relative to mean sea-level (in the fgfs world).
+<hdg-deg> is in degree, counter-clockwise with North being 0.0. Note
+that this differs from about every other place in FlightGear, most notably
+the /orientation/heading-deg entry in the property system, which is clockwise.
+<pitch-deg> and <roll-deg> are in degree and optional.
+<radius> is the (optional) radius of the model.  This is added to the LOD range
+to help ensure that very large meshes (typical from osm2city) are drawn at the
+correct distance from the model edge.  I can safely be ignored for any model 
+<1km in size.
+
+OBJECT_SHARED models are cached and reused. They are only once in memory
+and never freed. (See also the next section.)
+
+OBJECT_SHARED_AGL places the object relative to the ground elevation.  Note that
+this is an expensive operation and is strongly discouraged.
+
+3.4  OBJECT_STATIC / OBJECT_STATIC_AGL
+--------------------------------------
+
+add static objects to the tile, just like OBJECT_SHARED. There are three
+differences to OBJECT_SHARED (apart from the name):
+
+(A) the path is relative to the tile directory where the *.stg file with
+    this entry is located. For example, relative to 130n30/w123n37/. This
+    usually means that all 3D object files, textures, and XML animation
+    files are in this tile directory, too.
+
+(B) these objects are *not* cached and kept loaded, but rather freed with
+    the tile (that is, when you leave that area).
+
+(C) the animation XML files may contain Nasal blocks <nasal><load> and
+    <nasal><unload> which are executed on loading/unloading.
+
+Example:
+
+  OBJECT_STATIC ggb-fb.xml -122.4760494 37.81876042 0 105 0.00 0.00
+
+
+OBJECT_STATIC_AGL places the object relative to the ground elevation.  Note that
+this is an expensive operation and is strongly discouraged.
+
+
+3.5 OBJECT_SIGN / OBJECT_SIGN_AGL
+---------------------------------
+
+defines taxiway or runway sign. The syntax is much like that of OBJECT_SHARED
+entries, except that the <object-path> is replaced with a sign contents specification
+and that <radius> is replaced with a size value at the end of the line.
+
+Example:
+
+  OBJECT_SIGN {@R}10L-28R{@L}C -122.35797457 37.61276290 -0.5398 74.0 2
+
+The sign specification defines the sign contents. We try to resemble the
+apt.dat 850 specifications in our implementation.
+In the simplest form it contains just 'normal' text, for example:
+
+  EXIT
+
+This will create a black panel of 1m height with "EXIT" written on it
+in white versal letters. Actually, each of those characters are
+single-letter glyph names that are looked up in the <glyph> map of a
+texture font <material> entry in $FG_ROOT/materials.xml. It just
+happens that the <glyph> entry for <name> 'E' maps to a drawn 'E' in
+the font texture. This isn't true for all ASCII characters. Many aren't
+mapped at all (and thus not available), others are mapped to non-standard
+drawings. The '_', for example, is mapped to an empty black area and can
+therefore be used as a space. (The sign specification must not contain
+real spaces.) The '*' is mapped to a raised period.
+
+Some glyph names consist of more than one character, and can't, thus, be
+used directly. They have to be put in a pair of curly braces:
+
+  {^rd}
+
+This creates an arrow that points to the right and down. Braces can really
+contain a list of glyph names, separated by commas (no space!).
+Single-letter glyph names can be used that way, too, or in any mixture
+of both methods:
+
+  EXIT
+  {E,X,I,T}
+  {E}{X}{I}{T}
+  EX{I,T}
+  E{X,I}T{^lu,^rd}
+  {^u}EXIT{^u}
+
+
+Multi-letter glyph names are usually used for symbols. Arrow symbol names
+always start with a caret ("arrow head") and the left or right direction
+always comes first (like the x in a Cartesian coordinate system). Here's
+a list of some of the available names (see $FG_ROOT/materials.xml for
+more):
+
+
+  ^l       left arrow
+  ^r       right arrow
+  ^u       up arrow
+  ^d       down arrow
+  ^lu      left-up arrow
+  ^ld      left-down arrow
+  ^ru      right-up arrow
+  ^rd      right-down arrow
+  no-entry "no entry" symbol
+  critical runway critical area
+  safety   ils safety area
+  hazard   end of taxiway
+
+
+
+There are commands for pre-defined sign types according to the FAA
+specification (5345-44; see http://www.google.com/search?q=5345-44g).
+
+  @Y   "Direction, Destination, Boundary" sign (black on yellow)
+  @R   "Mandatory Instruction" sign (white on red with black outline)
+  @L   "Location" sign  (yellow text and frame on black)
+  @B   "Runway Distance Remaining" sign  (white on black)
+
+
+Examples:
+
+  {@R}10L-28R{@L}C
+  {@Y,^l}P|{^lu}N{@L}F{@Y}F{^ru}
+  {@Y,^ld}C   ...  same as any of {@Y}{@ld}C  {@Y,@ld,C}
+  {@B}17
+
+
+Syntax errors are reported in --log-level=debug, in the SG_TERRAIN
+group. You can use this command line to filter out such messages:
+
+  $ fgfs --log-level=debug 2>&1|grep OBJECT_SIGN
+
+OBJECT_SIGN_AGL places the sign relative to the ground elevation.  Note that
+this is an expensive operation and is strongly discouraged.
+
+3.6  BUILDING_ROUGH / BUILDING_DETAILED
+---------------------------------------
+
+defines building meshes, typically based on OSM data.
+
+Example:
+
+  BUILDING_ROUGH buildings.ac -122.501090 37.514830 15.5 0.00 0.00 0.00 4000.0
+
+Syntax:
+
+  BUILDING_ROUGH <object-path> <lon> <lat> <elev-m> <hdg-deg> <pitch-deg> <roll-deg> <radius-m>
+
+Note that only bare .ac files should be referenced. The material definition for
+"OSM_Building" will be used to determine the texture and Effects.
+
+BUILDING_ROUGH uses the "rough" LOD range, while BUILDING_DETAILED uses the
+"detailed" LOD range. Some randomness is applied so that building meshes
+gradually fade in
+
+3.7  ROAD_ROUGH / ROAD_DETAILED
+-------------------------------
+
+Identical to BUILDING_ROUGH / BUILDING_DETAILED above, except used for roads.
+the material definition "OSM_Road" is applied.
+
+3.8  RAILWAY_ROUGH / RAILWAY_DETAILED
+-------------------------------
+
+Identical to BUILDING_ROUGH / BIULDING_DETAILED above, except used for roads.
+the material definition "OSM_Railway" is applied.
+
+3.9  BUILDING_LIST
+------------------
+
+Defines a file containing building coordinates that should be rendered using
+the building shader (aka Random Buildings).
+
+Example:
+
+  BUILDING_LIST buildings.txt OSM_Building -2.72943543 56.00080606 36.1
+
+Syntax
+
+  BUILDING_LIST <filename> <material name> <lon> <lat> <elev>
+
+Where:
+- <filename> is the name of a file containing building positions.  May be a .gz file
+- <material name> is the name of the material that will be referenced to find
+  random building parameters.
+- <lat>, <lon>, <elev> defines the center of the set of buildings, and also
+  the point at which the material definition will be evaluated (for regional
+  materials).
+
+See README.materials for details on configuring the random building parameters.
+
+The referenced <filename> (in the example buildings.txt) contains lines of the form
+
+X Y Z R B W D H P S O F WT RT
+
+Where:
+- X,Y,Z are the cartesian coordinates of the center of the front face. +X is South, +Y is East
+- R is the building rotation in degrees centered on the middle of the front face.
+- B is the building type [0, 1, 2] for SMALL, MEDIUM, LARGE
+- W is the building width in meters
+- D is the building depth in meters
+- H is the building height in meters, excluding any pitched roof
+- P is the pitch height in meters. 0 for a flat roof
+- S is the roof shape (only 0, 2, 4, 6 are implemented, others are approximated to those) :
+    0=flat 1=skillion 2=gabled 3=half-hipped 4=hipped 5=pyramidal 6=gambrel
+    7=mansard 8=dome 9=onion 10=round 11=saltbox
+- O is the roof ridge orientation :
+    0 = parallel to the front face of the building
+    1 = orthogonal to the front face of the building
+- F is the number of floors (integer)
+- WT is the texture index to use for walls (integer). Buildings with the same WT value will have the same wall texture assigned.  There are 6 small, 6 medium and 4 large textures.
+- RT is the texture index to use for roofs (integer). Buildings with the same RT value will have the same roof texture assigned.  There are 6 small, 6 medium and 4 large textures.
+
+<x> <y> <z> <rot> <type>
+
+where :
+- (<x>,<y>,<z>) define the bottom left corner of the building in cartesian space (+X is South, +Y is East, +Z is up), with (0,0,0) being the position referenced above
+- <rot> is the clockwise rotation around the Z-axis in degrees, rotating around the bottom left (SW) corner of the building
+- <type> is {0,1,2} which map to small, medium and large buildings respectively, as per random buildings.
+
+For example, the following entries generates 3 small, 2 medium and 2 large buildings in an easterly line:
+
+0 0 0 0 0
+0 100 0 0 0
+0 200 0 0 0
+0 300 0 0 1
+0 400 0 0 1
+0 500 0 0 2
+
+3.10  TREE_LIST
+------------------
+
+Defines a file containing tree coordinates that should be rendered using
+the tree shader (aka Random vegetation).
+
+Example:
+
+  TREE_LIST trees.txt.gz DeciduousBroadCover -3.36074090 55.95297494 30.3822
+
+Syntax
+
+  TREE_LIST <filename> <material name> <lon> <lat> <elev>
+
+Where:
+- <filename> is the name of a file containing tree positions, may be a .gz file
+- <material name> is the name of the material that will be referenced to find
+  random vegetation parameters such as size, texture.
+- <lat>, <lon>, <elev> defines the center of the set of trees, and also
+  the point at which the material definition will be evaluated (for regional
+  materials).
+
+See README.materials for details on configuring the random vegetation parameters.
+
+The referenced <filename> (in the example trees.txt.gz) contains lines of the form
+
+X Y Z A B C
+
+Where:
+- X,Y,Z are the cartesian coordinates of the tree. +X is South, +Y is East
+- A,B,C is optional and represents the normal of the underlying terrain.  Used for shadows.  Defaults to (0,0,1)
+
+3.11  LINEAR_FEATURE_LIST
+-------------------------
+
+Defines a file containing a set of linear feature that should be rendered using a
+particular Material.  E.g. Road, Waterways
+
+Example:
+
+  LINEAR_FEATURE_LIST roads.txt.gz Road
+
+Syntax
+
+  LINEAR_FEATURE_LIST <filename> <material name>
+
+Where:
+- <filename> is the name of a file containing linear feature positions, may be a .gz file
+- <material name> is the name of the material that will be used to render.
+
+See README.materials for details on configuring the random vegetation parameters.
+
+The referenced <filename> (in the example road.txt.gz) contains lines of the form
+
+W ATTR A B C D lon0 lat0 lon1 lat1 lon2 lat2 lon3 lat4
+
+Where:
+
+- W is the feature width in meters.
+- ATTR is an integer value used to store packed attributes (e.g. bitwise.  Bit 1 is for lit)
+- A,B,C,D are float values used to store attributes (currently unused)
+- lonN, latN are lon/lat pairs on the center of the line feature.  There must be at least two pairs
+
+3.12  OBJECT_LIGHT
+------------------
+
+Add a light to the tile.
+
+Example:
+
+  OBJECT_LIGHT sample-light -129.00074514 -9.00490134 5 10.0 100.0 0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 360.0 360.0 -1 1.0 1.0 0.0
+
+Syntax:
+
+  OBJECT_LIGHT <light-name> <lon> <lat> <elev-m> <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a> <normal-x> <normal-y> <normal-z> <horizontal-angle> <vertical-angle> <animation-param-1> <animation-param-2> <animation-param-3> <animation-param-4>
+
+Where:
+- <light-name> is a name for the light. Multiple lights may have the same name.
+- <lon> and <lat> are positions in longitude and latitude of the light.
+- <elev-m> is in meter and relative to mean sea-level (in the fgfs world).
+- <size-cm> is the size in centimeters of the light.
+- <intensity-cd> is the intensity of the light in candelas.
+- <on-period> defines what part of the day the light is turned on at:
+   0 means the light will be on all the time
+   1 means the light will turn on at sunset (sun angle ~89 degrees)
+   2 means the light will turn on around sunset with some variability
+   3 means the light will turn on at sunset or when visibility is less than 5000 nautical miles
+- <color-r>, <color-g>, <color-b> and <color-a> define the color of the light. Values range from 0.0 to 1.0.
+- <normal-x>, <normal-y>, <normal-z>, <horizontal-angle> and <vertical-angle> define the directionality of the light:
+   If both <horizonal/vertical-angle> are 360, the light is considered omnidirectional and the normals have no effect.
+   If not, <normal-x> points to south, <normal-y> points to east and <normal-z> points up.
+- <animation-param-1>, <animation-param-2>, <animation-param-3> and <animation-param-4> define animations:
+   If <animation-param-1> is less than 0, light is not animated.
+   If <animation-param-1> is greater than 0, then its value is used as the total time interval of a single loop of the animation
+   <animation-param-2> defines the portion of the loop the light is working (its switched off completely for the remaining portion)
+   <animation-param-3> defines the strobe rate of the light w.r.t. to the full loop interval (i.e. <animation-param-1>).
+      A value less than equal to zero turns off strobing completely.
+   <animation-param-4> defines the offset (so two lights with the same animation can start at different real-world times)
+
+   Examples:
+   - On for half a second, off for half a second
+        1.0 0.5 0.0 0.0
+   - Alternatively,
+        1.0 1.0 1.0 0.0
+   - On for half a second, off for half a second, offset by 0.2 seconds
+        1.0 0.5 0.0 0.2
+   - Blink twice for half a second, and then remain off for half a second
+        1.0 0.5 4.0 0.0
+
+*Notes for Normal vector computation:*
+A good way to think about the normal vector comptuation is to use spherical coordinates: http://motionscript.com/mastering-expressions/img/spherical-coords.gif.
+
+In this case, the -X is north (i.e. 0 degrees on the compass rose), +Y is east (90 degrees), and Z is the vertical axis. And the compass rose sits flush on the XY plane. What you want to do is get the vector that is at the center of your light. In the case of the following light:
+
+- visible 30 degree below horizon up to 45 degrees over the horizon
+- visible from 70 degrees to 110 degrees on a compas
+
+the normal would be the line from the light to 7.5 degrees from the horizon vertically (center of 45 and -30) and 90 degrees on the compass rose (center of 70 and 110). Using the equations, we get:
+
+normal-x = 0.0
+normal-y = 0.99144
+normal-z = 0.13053
+horizontal-angle = 40 degrees (110-70)
+vertical-angle = 75 degrees (45 - (-30))
+
+To make things easier, here is a python snippet that does all that computation and prints out the 5 numbers relating to the normal and angles:
+
+###################################################################
+import math
+def get_definition(min_h, max_h, min_v, max_v):
+  h = min_h + (max_h - min_h)/2
+  v = -90 + min_v + (max_v - min_v)/2
+
+  r = 1 # Unit length vector
+
+  x = -1 * round(r * math.sin(math.radians(v)) * math.cos(math.radians(h)), 5)
+  y = -1 * round(r * math.sin(math.radians(v)) * math.sin(math.radians(h)), 5)
+  z = round(r * math.cos(math.radians(v)), 5)
+  print(x, y, z, max_h - min_h, max_v - min_v)
+###################################################################
+
+3.13  LIGHT_LIST
+----------------
+Defines a file containing multiple light coordinates and properties.
+
+Example:
+
+  LIGHT_LIST light_list.txt -129.00074514 -9.00490134 5
+
+Syntax
+
+  LIGHT_LIST <filename> <lon> <lat> <elev>
+
+Where:
+- <filename> is the name of a file containing light positions and properties
+- <lat>, <lon>, <elev> defines the center of the set of lights
+
+The referenced <filename> (in the example light_list.txt) contains lines defining lights of various types
+
+- "omnidirectional":
+  X Y Z <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a>
+- "omnidirectional-animated":
+  X Y Z <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a> <animation-param-1> <animation-param-2> <animation-param-3> <animation-param-4>
+- "directional":
+  X Y Z <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a> <normal-x> <normal-y> <normal-z> <horizontal-angle> <vertical-angle>
+- "directional-animated":
+  X Y Z <size-cm> <intensity-cd> <on-period> <color-r> <color-g> <color-b> <color-a> <normal-x> <normal-y> <normal-z> <horizontal-angle> <vertical-angle> <animation-param-1> <animation-param-2> <animation-param-3> <animation-param-4>
+
+The type of the light is automatically detected based on the number of parameters specified for each light.
+
+Where:
+- X,Y,Z are the cartesian coordinates of the light. +X is South and +Y is East.
+- The rest of the parameters are the same as OBJECT_LIGHT (Section 3.12)
+
+4 model manager ("/models/model") --------------------------------------------
+
+
+4.1  static objects
+-------------------
+
+Another way to add objects to the scenery is via the "model manager".
+It reads all /models/model entries at startup and places these objects
+in the scenery. Just load a definition like the following into the
+property tree, for example by putting it into $FG_ROOT/preferences.xml, or
+better: an XML file that you load with e.g. --config=$HOME/.fgfs/stuff.xml:
+
+  <models>
+      <model n="0">
+          <name>pony</name>
+          <path>Local/pony.ac</path>
+          <longitude-deg>-115.8352869</longitude-deg>
+          <latitude-deg>37.24302849</latitude-deg>
+          <elevation-ft>4534.691321</elevation-ft>
+          <heading-deg>0</heading-deg>
+          <pitch-deg>0</pitch-deg>
+          <roll-deg>0</roll-deg>
+      </model>
+  </models>
+
+The <path> is relative to $FG_ROOT, the <name> is optional. One can leave the
+heading/pitch/roll entries away, in which case they are set to zero. The values
+are fixed and unchangeable at runtime.
+
+
+
+
+4.2  dynamic objects
+--------------------
+
+Any of the model properties can be made changeable at runtime by appending
+"-prop" and using a property path name instead of the fixed value:
+
+  <local>
+      <pony>
+          <longitude-deg>-115.8352869/<longitude-deg>
+          <latitude-deg>37.24302849</latitude-deg>
+          <elevation-ft>4534.691321</elevation-ft>
+          <heading-deg>0</heading-deg>
+      </pony>
+  </local>
+
+  <models>
+      <model n="1">
+          <name>pony</name>
+          <path>Local/pony.ac</path>
+          <longitude-deg-prop>/local/pony/longitude-deg</longitude-deg-prop>
+          <latitude-deg-prop>/local/pony/latitude-deg</latitude-deg-prop>
+          <elevation-ft-prop>/local/pony/elevation-ft</elevation-ft-prop>
+          <heading-deg-prop>/local/pony/heading-deg</heading-deg-prop>
+          <pitch-deg>1.234</pitch-deg>  <!-- static, just for fun -->
+      </model>
+  </models>
+
+Then one can move the pony around by changing the values in /local/pony/ in
+the property system. One can, of course, use other animals, too.
+
+
+
+
+4.3 loading/unloading at runtime
+--------------------------------
+
+Both dynamic and static model-manager-models can be loaded and unloaded
+at runtime. For loading you first create a new <model> entry under <models>,
+initialize all properties there (<longitude-deg> or <longitude-deg-prop>,
+etc.), and finally you create a child <load> of any type in this group.
+This is the signal for the model manager to load the object. You can
+remove the <load> property after that. It has no further meaning.
+
+To remove a model-manager model at runtime, you simply delete the whole
+<model> group.
+
+
+
+
+
+5 tools for object placing ----------------------------------------------------
+
+
+5.1 calc-tile.pl
+----------------
+
+For finding out the tile number for a given geo coordinate pair there's
+a script "scripts/perl/scenery/calc-tile.pl" in the FlightGear sources.
+You feed longitude and latitude to it and it returns the path to the
+*.stg file where you have to add the object entry.
+
+  $ perl calc-tile.pl 16.1234 48.5678
+  Longitude: 16.1234
+  Latitude:  48.5678
+  Tile:      3220128
+  Path:      "e010n40/e016n48/3220128.stg"
+
+
+
+
+5.2 ufo scenery object editor
+-----------------------------
+
+The ufo has a scenery object editor built-in. It uses the model manager
+described in section 4. To place objects with it, start fgfs, optionally
+with specifying an initial model type ("cursor") and a list of subdirectories
+of $FG_ROOT where the ufo should search for available 3D models ("source"):
+
+  $ fgfs --aircraft=ufo --prop:cursor=Models/Airport/radar.xml  \
+                        --prop:source=Models,Scenery/Objects
+
+Then click anywhere on the terrain to add a model (left mouse button).
+You can open the adjustment dialog (Tab-key) to make adjustments to
+position and orientation. Click as often as you like, choose further
+models from the space-key dialog. You can select an already placed object
+by Ctrl-clicking at its base (not at the object itself, but the surface
+point where it's located!). By also holding the Shift key down, you
+can select several objects or add them to a selection. You can remove
+the selected object(s) with the Backspace-key. (See the ?-key dialog
+for futher available keys.) After clicking on the input field right
+over the status line (invisible if there's no text in it) you can enter
+a comment/legend for the selected object.
+
+And finally, you dump the object data to the terminal (d-key) or export
+them to a file $HOME/.fgfs/ufo-model-export.xml (Unix) or
+%APPDATA%\flightgear.org\ufo-model-export.xml (MS Windows).
+
+You can now put the generated object entries into the specified *.stg
+file to make them permanent. Or load the whole exported *.xml file
+via --config option:
+
+  $ fgfs --config=$HOME/.fgfs/ufo-model-export.xml
+
+If you choose the sign placeholder object from the m-key dialog (first
+entry; "Aircraft/ufo/Models/sign.ac"), then an OBJEC_SIGN *.stg line
+will be generated with the legend used as sign contents. If you didn't
+insert any legend, then the sign text will be: NO CONTENTS and a 4 digits
+random number for later identification in the *.stg file.
+
+Unfortunately, objects added with this method are kept in memory, no
+matter where you are actually flying, so the *.stg method is preferable.
+
+
+
+
+
+6 embedded Nasal in XML files (static objects and AI) -------------------------
+
+
+6.1 static models
+-----------------
+
+Objects loaded via OBJECT_STATIC in *.stg files as well as AI models loaded
+via scenarios may contain embedded Nasal code. This can be used to drive
+more advanced animations. An example is a lighthouse with specific light
+signals, or hangar doors that open when the "player"'s aircraft is nearby.
+The Nasal code is added to the object's XML wrapper/animation file, anywhere
+on the top level, for example:
+
+
+   <PropertyList>
+       <path>lighthouse.ac</path>
+
+       <nasal>
+           <load>
+               var loop_id = 0;
+               var light = aircraft.light.new("
+                       "/models/static/w120n30/w118n35/lighthouse/light",
+                       [2, 1, 2, 1, 2, 1, 2, 5]);
+
+               var loop = func(id) {
+                   id == loop_id or return;
+                   light.switch(getprop("/sim/time/sun-angle-rad") > 1.37);
+                   settimer(func { loop(id) }, 30);
+               }
+               loop(loop_id += 1);
+           </load>
+
+           <unload>loop_id += 1</unload>
+       </nasal>
+
+       <animation>
+           <type>select</type>
+           <object-name>light-halo</object-name>
+           <property>/models/static/w120n30/w118n35/lighthouse/light/state</property>
+       </animation>
+
+       ...
+   </PropertyList>
+
+
+The <load> part is executed when the scenery tile on which the model is placed
+is loaded into memory. It can start timers or listeners that modify properties,
+which are then queried by the <animation>. As a convention developers are requested
+to use "/models/static/" + <tile-path> + <file-basename>. So, in the above example
+file "$FG_ROOT/Scenery/Objects/w120n30/w118n35/lighthouse.xml" all properties
+are stored under "/models/static/w120n30/w118n35/lighthouse/". That way collisions
+with other models are quite unlikely.
+
+An optional <unload> part is executed when the tile and model is removed from
+memory. Note that this is only when the "player" is already far away! To
+cause minimal impact on the framerate it is recommended to do as few
+calculations as possible, to use as large timer intervals as possible, and to
+stop all timers and listeners in the <unload> part, as shown in the example.
+
+All Nasal variables/functions are in a separate namespace, which is named
+after the file name. It's recommended not to access this namespace from
+outside for other than development purposes.
+
+What the above code does: as soon as the model is loaded, an aircraft.light
+is created with a specific light sequence. Then, in half-minute intervals,
+the light is turned on or off depending on the sun angle. On <unload> the
+loop identifier is increased, which makes the loop terminate itself. For
+more info about this technique, see the Nasal wiki.
+
+
+
+
+6.2 AI models
+-------------
+
+Here the syntax is the same like for static models. The only two differences
+are:
+
+- these models are currently only removed at program end, so it's more
+  important to consider effects on performance.
+
+- AI models don't need to store their properties in /models/static/...,
+  but get a separate node under /ai/models/, for example /ai/models/carrier[1].
+  The embedded Nasal code can access this dynamically assigned property
+  via cmdarg() function, which returns a props.Node hash. Example:
+
+     <nasal>
+         <load>print("my data are under ", cmdarg().getPath())</load>
+         <unload>print("Currently I'm only called at fgfs exit!")</unload>
+     </nasal>

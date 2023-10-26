@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/water-shading</name>
+  <parameters>
+    <!-- exposure.glsl -->
+    <exposure-compensation>
+      <use>/sim/rendering/hdr/exposure-compensation</use>
+    </exposure-compensation>
+  </parameters>
+  <technique n="1">
+    <pass>
+      <stencil>
+        <function>equal</function>
+        <value>3</value>
+      </stencil>
+      <program>
+        <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/water_shading.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/normal_encoding.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/pos_from_depth.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/sun.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/atmos_spectral.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>gbuffer0_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>gbuffer1_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>prefiltered_envmap_tex</name>
+        <type>sampler-cube</type>
+        <value type="int">9</value>
+      </uniform>
+      <!-- pos_from_depth.glsl -->
+      <uniform>
+        <name>depth_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">3</value>
+      </uniform>
+      <!-- aerial_perspective.glsl -->
+      <uniform>
+        <name>aerial_perspective_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">11</value>
+      </uniform>
+      <!-- sun.glsl -->
+      <uniform>
+        <name>transmittance_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
+      </uniform>
+      <!-- exposure.glsl -->
+      <uniform>
+        <name>lum_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">14</value>
+      </uniform>
+      <uniform>
+        <name>exposure_compensation</name>
+        <type>float</type>
+        <value><use>exposure-compensation</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

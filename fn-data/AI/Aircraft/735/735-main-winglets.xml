@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <description>Boeing 737-500 W/ Winglets</description>
+ <author>Ian(Yves) Tolosa, June 2018</author> 
+ <path>Models/735.ac</path>
+<!-- Gear Showed only < 150 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+<!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/735/Effects/735-LightMap</inherits-from>
+    <object-name>735</object-name>
+	<object-name>Gear</object-name>
+	<object-name>Winglets</object-name>
+  </effect>
+ <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/735-NavLights.xml</path>
+  </model>
+</PropertyList>

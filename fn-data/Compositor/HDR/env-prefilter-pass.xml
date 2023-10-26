@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>quad</type>
+  <binding>
+    <unit>0</unit>
+    <buffer>envmap</buffer>
+  </binding>
+  <render-condition>
+    <property>/sim/rendering/hdr/envmap/should-prefilter</property>
+  </render-condition>
+</PropertyList>

@@ -1,0 +1,47 @@
+<style>
+.phi-widget {
+       border: 3px ridge silver;
+    
+}
+
+.phi-radiostack {
+    font-family: "Liberation Mono";
+    font-size: 11px;
+    color: silver;
+    background-color: #101010;
+    padding: 4px;
+}
+
+.phi-radiostack span {
+    width: 3.5em;
+    display: inline-block;
+    padding-left: 0.5em;
+}
+
+.phi-radiostack input {
+    font-family: "Liberation Mono";
+    font-size: 11px;
+    background-color: #404040;
+    color: red;
+    font-weight: bold;
+    border: 2px inset silver;
+    width: 8ex;
+    display: inline-block;
+}
+
+.phi-radiostack button {
+    background-color: white;
+    color: black;
+    border: 2px outset gray;
+    padding: 1px 2px 4px 2px;
+    font-size: 11px;
+}
+</style>
+<div class="phi-radiostack" data-bind="foreach: radios">
+	<div class="phi-radio">
+		<span data-bind="text: label"></span> 
+		<input data-bind="value: use, attr: { title: stn }, tooltip: {}, event: { blur: onUseBlur, keyup: onUseKey }"/>
+		<button data-bind="click: swap">&harr;</button>
+		<input data-bind="value: stby, event: { blur: onStbyBlur, keyup: onStbyKey }"/>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+<table class="ui-widget-content ui-corner-all">
+    <thead>
+        <tr>
+            <th>Coverage</th>
+            <th>Base (ft)</th>
+            <th>Tops (ft)</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: cloudLayers">
+        <tr>
+            <td><select
+                data-bind="value: coverageId, selectmenu: {}, options: coverage, optionsValue: 'id', optionsText: 'text'"
+                style="width: 11em;"></select></td>
+            <td><input data-bind="spinner: { value: base, disabled: coverageId() == 4 }" style="width: 4em;"></td>
+            <td><input data-bind="spinner: { value: tops, disabled: coverageId() == 4 }" style="width: 4em;"></td>
+        </tr>
+    </tbody>
+</table>

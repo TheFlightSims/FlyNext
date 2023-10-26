@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+
+<!--
+    Gerard Robin Copyright License:  GPL
+    Usable with FlightGear
+    
+-->
+
+
+<PropertyList>
+
+    <path>pont-v2.ac</path>
+    <texture-path>Textures</texture-path>
+
+    <effect>
+	<inherits-from>Models/Geometry/Nimitz/Effects/flightdeck</inherits-from>
+	<object-name>Pont1</object-name>
+	<object-name>Pont2</object-name>
+	<object-name>Pont3</object-name>
+	<object-name>Pont4</object-name>
+	<object-name>Pont5</object-name>
+    </effect>
+	
+
+
+
+
+
+</PropertyList>

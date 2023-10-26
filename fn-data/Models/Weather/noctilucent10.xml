@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <path>cirrocumulus10.ac</path>
+
+
+<animation>
+  <object-name>mesh</object-name>
+  <enable-hot type="bool">false</enable-hot>
+</animation>
+
+<effect>
+  <inherits-from>Effects/cloud-noctilucent</inherits-from>
+  <object-name>mesh</object-name>
+</effect>
+
+	<animation>
+		<type>noshadow</type>
+	</animation>
+</PropertyList>

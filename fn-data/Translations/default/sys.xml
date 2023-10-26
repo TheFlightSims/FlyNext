@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<!-- FlightGear system messages: English (=default) language resource -->
+
+<PropertyList>
+
+		<init>initializing</init>
+		<license-url>Licensed under the GNU GPL. See https://www.flightgear.org for more information.</license-url>
+		<loading-aircraft-list>loading aircraft list</loading-aircraft-list>
+		<loading-aircraft>loading aircraft</loading-aircraft>
+		<loading-nav-dat>loading navigation data</loading-nav-dat>
+        <navdata-reading-apt-dat-files>reading airport data</navdata-reading-apt-dat-files>
+        <navdata-loading-airports>loading airport data</navdata-loading-airports>
+        <navdata-navaids>loading navigation aid data</navdata-navaids>
+        <navdata-fixes>loading fixes</navdata-fixes>
+        <navdata-pois>loading points of interest</navdata-pois>
+		<init-scenery>initializing scenery</init-scenery>
+		<creating-subsystems>creating subsystems</creating-subsystems>
+		<init-subsystems>initializing subsystems</init-subsystems>
+		<binding-subsystems>binding subsystems</binding-subsystems>
+		<finishing-subsystems>finalizing subsystems</finishing-subsystems>
+		<init-graphics>initializing graphics engine</init-graphics>
+		<loading-scenery>loading scenery</loading-scenery>
+        <downloading-scenery>downloading scenery</downloading-scenery>
+        <finalize-position>finalizing position</finalize-position>
+
+		<unstable-warning>Unstable nightly build - some features may be under active development</unstable-warning>
+
+		<!-- the value is replaced into the [VALUE] section of this -->
+		<navdata-load-percent>[VALUE]% complete</navdata-load-percent>
+
+		<scenery-extract>extracting [VALUE]</scenery-extract>
+
+		<settings-migration-title>Settings migrated</settings-migration-title>
+		<settings-migration-text>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</settings-migration-text>
+
+
+<!--
+	Temporary feebdack text for initial error-reporting
+-->
+		<error-next-steps>This dialog is work-in-progress. The information included above may not be fully correct, so please check the detailed information below and give feedback if something seems wrong. Please include all the information below, as well as the message above.</error-next-steps>
+
+<!--
+		Use this version once the code is better tested
+		<error-next-steps>FlightGear is developed and tested by volunteers around the world. The information below contains details on the problem: you can use it to start investigating the problem yourself, or ask for help via our forum or bug tracker. Please include all the information below in any error report.</error-next-steps>
+-->
+
+		<!-- error groupings : top-level messages shown to the user-->
+		<error-category-aircraft>This aircraft (%VALUE%) contains errors. This may include visual issues, or the aircraft might not fly at all. Check for an updated version of the aircraft from its developers.</error-category-aircraft>
+		<error-category-aircraft-from-hangar>The selected aircraft (%VALUE%) contains errors. This may cause visual issues, or the aircraft might not fly at all. Please report the information below to the aircraft hangar's maintainers.</error-category-aircraft-from-hangar>
+		<error-category-custom-scenery>The custom scenery at '%VALUE%' contains errors. Parts may be missing, or the scenery may not load at all. Check for an updated version of the scenery.</error-category-custom-scenery>
+		<error-category-terrasync>Scenery downloaded via TerraSync is not loading correctly. The usually indicates a problem with your network connection or local disk.</error-category-terrasync>
+		<error-category-addon>The add-on '%VALUE%' contains errors. Please report this to the add-on developers.</error-category-addon>
+		<error-category-scenario>The scenario '%VALUE%' contains errors, and may not work correctly.</error-category-scenario>
+		<error-category-input-device>The joystick (input device) '%VALUE%' couldn't be loaded correctly. This usually means its configuration file is incorrect.</error-category-input-device>
+		<error-category-fgdata>Errors were found loading the core simulator files (FGData). This usually indicates a problem with the installation, or your local disk.</error-category-fgdata>
+		<error-category-unknown>Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team.</error-category-unknown>
+		<error-category-traffic>Problems occured loading simulated aircaft traffic: some traffic may not appear.</error-category-traffic>
+		<error-category-out-of-memory>Allocating memory failed. Some resources will not be loaded. Adjust your settings to reduce view distance or number of objects loaded.</error-category-out-of-memory>
+		<error-category-multiplayer>Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog)</error-category-multiplayer>
+		<error-category-shaders>Problems occurred loading visual effects (shaders). This can cause objects to be invisible or appear incorrect. It can sometimes be fixed by changing rendering settings inside FlightGear, or occasionally, by updating the drivers for your graphics card.</error-category-shaders>
+
+		<error-type-unknown>Unknown error</error-type-unknown>
+		<error-type-not-found>The file or resource was not found</error-type-not-found>
+		<error-type-out-of-memory>Unable to allocate sufficient memory</error-type-out-of-memory>
+		<error-type-bad-header>File or resource header is incorrect</error-type-bad-header>
+		<error-type-bad-data>File or resource is invalid or corrupted</error-type-bad-data>
+		<error-type-misconfigured>The resource contains a configuration problem</error-type-misconfigured>
+		<error-type-io>Unable to read/write files correctly (check permissions and disk space)</error-type-io>
+		<error-type-network>Network connection failure</error-type-network>
+
+		<error-missing-shader>Shader / Effect problems</error-missing-shader>
+		<error-loading-texture>Texture failed to load</error-loading-texture>
+		<error-xml-model-load>Errors loading model XML</error-xml-model-load>
+		<error-3D-model-load>Error loading 3D model</error-3D-model-load>
+		<error-btg-load>Errors loading terrain (BTG)</error-btg-load>
+		<error-scenery-load>Errors loading scenery</error-scenery-load>
+		<error-dialog-load>Errors loading user-interface</error-dialog-load>
+		<error-audio-fx-load>Audio FX description contains errors</error-audio-fx-load>
+		<error-xml-load-command>Scripted loading of XML failed</error-xml-load-command>
+		<error-aircraft-systems>Errors occured loading aircraft systems (fuel, electrical, hydrualics)</error-aircraft-systems>
+		<error-input-device-config>Errors loading input device configuration</error-input-device-config>
+		<error-terraysnc>Errors downloading scenery from TerraSync</error-terraysnc>
+
+		<units-kbytes>KB</units-kbytes>
+		<units-kbytes-per-sec>KB/s</units-kbytes-per-sec>
+		<units-mbytes>MB</units-mbytes>
+		<units-mbytes-per-sec>MB/s</units-mbytes-per-sec>
+
+</PropertyList>

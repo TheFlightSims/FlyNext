@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/histogram-luminance</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/quad_notexcoord.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/histogram_luminance.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/histogram.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>histogram_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>prev_lum_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

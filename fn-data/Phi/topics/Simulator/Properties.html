@@ -1,0 +1,96 @@
+<style>
+.pointer-icon {
+	cursor: pointer;
+}
+
+.property-list {
+	list-style-type: none;
+	list-style-image: none;
+	padding-left: 26px;
+}
+
+.property-name {
+	width: 12em;
+	display: inline-block;
+}
+
+.property-value {
+	padding: 0 0.2em;
+	min-width: 8em;
+	display: inline-block;
+	text-align: right;
+}
+</style>
+<div class="ui-widget ui-widget-content ui-corner-all" data-bind="visible: hasGraphItems" style="padding-bottom: 1ex; margin-bottom: 1ex;">
+    <div class="ui-widget-header">Property Graph</div>
+    <div style="height: 300px; width: 100%"
+        data-bind="flotchart: { data: flotData, options: flotOptions, hover: graphHover }"></div>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <div style="display: inline; float: left">
+        <div data-bind="button: { icons: { primary : 'ui-icon-gear' }, text: true, label: 'Settings' }, click: settings"></div>
+        <div data-bind="button: { icons: startIcons, text: true, label: startLabel }, click: startPause "></div>
+      </div>
+    </div>
+</div>
+<div class=" ui-widget
+        ui-widget-contentui-corner-all">
+        <div class="ui-widget-header">Property Tree</div>
+        <div data-bind="template: { name: 'propertytree-template', data: properties }"></div>
+    </div>
+    <script type="text/html" id="propertytree-template">
+  <ul class="property-list" data-bind="foreach: $data">
+    <li>
+        <span class="ui-icon pointer-icon" style="display: inline-block;"
+              data-bind="
+                css: { 
+                  'ui-icon-triangle-1-e': hasChildren, 
+                  'ui-icon-triangle-1-se': isExpanded, 
+                  'ui-icon-refresh': hasValue, 
+                  'ui-icon-blank': !(hasValue||hasChildren),
+                },
+                attr: {
+                  title: hasValue ? 'refresh' : 'expand/collapse',
+                },
+                click: toggle,
+        "></span>
+
+        <span class="property-name"
+              data-bind="
+                text: indexedName,
+                css: { 
+                  'pointer-icon': hasChildren, 
+                },
+                click: toggle,
+              "></span>
+
+        <span class="ui-icon ui-icon-blank" style="display: inline-block;"
+              data-bind="
+                css: { 
+                  'ui-icon-image': isPlottable, 
+                  'pointer-icon': hasValue,
+                },
+                attr: {
+                  title: hasValue ? 'toggle plot' : '',
+                },
+                click: togglePlot,
+        "></span>
+        <span class="property-value ui-state-hover pointer-icon ui-corner-all" 
+              data-bind="
+                text: value, 
+                visible: hasValue,
+                click: valueEdit,
+              "></span>
+
+        <div data-bind="
+               template: { 
+                 name: 'propertytree-template',
+                 data: children
+               },
+               visible: isExpanded
+             "></div>
+    </li>
+  </ul>
+</script>
+    <script type="text/html" id="inplace-editor-template">
+  <input style="width: 8em" >
+</script>

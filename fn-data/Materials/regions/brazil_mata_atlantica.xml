@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<!-- Regional definitions for the Brazilian Mata Atlantica, based on Tropical South America regions -->
+<PropertyList>
+  <name>Mata Atlantica</name>
+
+  <area>
+    <lat1>-29.11</lat1>
+    <lat2>-25.03</lat2>
+    <lon1>-41.09</lon1>
+    <lon2>-49.25</lon2>
+  </area>
+  
+  <area>
+    <lat1>-29.11</lat1>
+    <lat2>-23.58</lat2>
+    <lon1>-41.09</lon1>
+    <lon2>-48.33</lon2>
+  </area>
+  
+  <area>
+    <lat1>-29.11</lat1>
+    <lat2>-23.45</lat2>
+    <lon1>-41.09</lon1>
+    <lon2>-46.53</lon2>
+  </area>
+  
+  <area>
+    <lat1>-29.11</lat1>
+    <lat2>-23.34</lat2>
+    <lon1>-41.09</lon1>
+    <lon2>-46.25</lon2>
+  </area>
+  
+  <area>
+    <lat1>-29.11</lat1>
+    <lat2>-23.19</lat2>
+    <lon1>-41.09</lon1>
+    <lon2>-45.34</lon2>
+  </area>
+  
+  <area>
+    <lat1>-29.11</lat1>
+    <lat2>-22.60</lat2>
+    <lon1>-41.09</lon1>
+    <lon2>-45.07</lon2>
+  </area>
+  
+  <area>
+    <lat1>-29.11</lat1>
+    <lat2>-22.27</lat2>
+    <lon1>-41.09</lon1>
+    <lon2>-44.47</lon2>
+  </area>
+  
+  <area>
+    <lat1>-29.11</lat1>
+    <lat2>-22.06</lat2>
+    <lon1>-41.09</lon1>
+    <lon2>-42.08</lon2>
+  </area>
+  
+  <area>
+    <lon1>-33.30</lon1>
+    <lon2>-41.26</lon2>
+    <lat1>-20.06</lat1>
+    <lat2>-25.00</lat2>
+  </area>
+ 
+  <area>
+    <lon1>-33.30</lon1>
+    <lon2>-40.51</lon2>
+    <lat1>-19.46</lat1>
+    <lat2>-25.00</lat2>
+  </area>
+  
+  <area>
+    <lon1>-33.30</lon1>
+    <lon2>-39.89</lon2>
+    <lat1>-12.22</lat1>
+    <lat2>-25.00</lat2>
+  </area>
+  
+  <area>
+    <lon1>-33.30</lon1>
+    <lon2>-38.06</lon2>
+    <lat1>-10.14</lat1>
+    <lat2>-25.00</lat2>
+  </area>
+  
+  <area>
+    <lon1>-33.30</lon1>
+    <lon2>-36.39</lon2>
+    <lat1>-9.13</lat1>
+    <lat2>-25.00</lat2>
+  </area>
+  
+  <area>
+    <lon1>-31.00</lon1>
+    <lon2>-35.63</lon2>
+    <lat1>-3.00</lat1>
+    <lat2>-25.00</lat2>
+  </area>
+  
+  <area>
+    <lon1>-90.0</lon1>
+    <lon2>-30.0</lon2>
+    <lat1>-23.0</lat1>
+    <lat2>23.0</lat2>
+  </area>
+
+  <material>  
+    <name>MixedForestCover</name>
+    <name>MixedForest</name>
+    <name>RainForest</name>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>
+    <name>DeciduousBroadCover</name>
+    <name>DeciduousForest</name>
+    <name>DeciduousNeedleCover</name>    
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-patch.png</texture>
+      <texture n="12">Terrain/rainforest-patch.png</texture>
+      <texture n="13">Terrain/rock_brown.png</texture>
+    </texture-set>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>5000000.0</light-coverage>
+    <wood-coverage>7000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>18.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>0.95</bumpiness>
+  </material>
+
+  <material>  
+    <name>ShrubCover</name>
+    <name>ShrubGrassCover</name>
+    <name>ScrubCover</name>
+    <name>Scrub</name>
+    <name>Marsh</name>
+    <name>FloodLand</name>
+    <name>SaltMarsh</name>
+    <name>HerbWetlandCover</name>
+    <name>WoodedWetlandCover</name>
+    <name>Grassland</name>
+    <name>GrassCover</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="12">Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/grass_dry2a.png</texture>
+      <texture n="13">Terrain/rock_brown.png</texture>
+    </texture-set>
+		<parameters>
+			<hires_overlay_bias>-0.3</hires_overlay_bias>
+		</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>5000000.0</light-coverage>
+    <wood-coverage>10000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>18.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>0.95</bumpiness>
+  </material>
+
+	<material>  
+    <name>MixedCrop</name>
+    <name>MixedCropPastureCover</name>
+    <name>DryCropPastureCover</name>
+    <name>DryCrop</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-patch.png</texture>
+      <texture n="12">Terrain/dirtrock.png</texture>
+      <texture n="13">Terrain/rock_brown.png</texture>
+    </texture-set>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>5000000.0</light-coverage>
+    <wood-coverage>7000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture> <!-- modified by gsagostinho -->
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>30.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+  
+	<material>  
+    <name>BarrenCover</name>
+    <name>Dirt</name>
+    <name>OpenMining</name>
+    <name>Rock</name>
+    <name>Dump</name>
+    <texture-set>
+      <texture>Terrain/rock_brown2.png</texture>
+      <texture n="13">Terrain/rock_brown.png</texture>
+    </texture-set>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>5000000.0</light-coverage>
+    <wood-coverage>9999000.0</wood-coverage>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+
+</PropertyList>

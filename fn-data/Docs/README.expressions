@@ -1,0 +1,107 @@
+Expressions (or SGExpressions) are a feature of the SimGear library
+and provide a nice way of implementing complex math formulas using XML
+syntax. They are supported in many systems within the FlightGear code.
+
+Caution: Expressions do not check if your math creates floating point
+exceptions (like division by zero conditions, taking the square root
+of a negative number, etc.). This can cause undefined behavior and may
+result in NaNs or even Cascading NaNs.  Usage
+
+Expressions are supported in
+
+* Autopilot configuration files
+* Particle system configuration files
+* Animations (translate, rotate, scale, range, blend)
+* The shader technique
+
+Sample Expressions
+
+This is a sample expression for the euation c = sqrt(a*a + b^2). 
+
+Children/arguments are parsed in the order they appear in in the file
+(or the order in which they are set via property methods).
+
+<expression>
+  <sqrt>
+    <sum>
+      <product>
+        <property>/value/a</property>
+        <property>/value/a</property>
+      </product>
+      <pow>
+        <property>/value/b</property>
+        <value>2</value>
+      </pow>
+    </sum>
+  </sqrt>
+</expression>
+
+Supported elements
+
+NOTE: #c in the table below is the number of child nodes required.
+
++-------------------+----+--------------------------------------------------+
+| Function          | #c | Notes                                            |
++-------------------+----+--------------------------------------------------+
+| <abs> <fabs>      | 1  |                                                  |
+| <acos>            | 1  |                                                  |
+| <asin>            | 1  |                                                  |
+| <atan2>           | 2  |                                                  |
+| <atan>            | 1  |                                                  |
+| <ceil>            | 1  |                                                  |
+| <clip>            | 3  | clipMin, clipMax, expression                     |
+| <cos>             | 1  |                                                  |
+| <cosh>            | 1  |                                                  |
+| <deg2rad>         | 1  |                                                  |
+| <difference> <dif>| 1+ |                                                  |
+| <div>             | 2  |                                                  |
+| <exp>             | 1  |                                                  |
+| <floor>           | 1  |                                                  |
+| <log10>           | 1  |                                                  |
+| <log>             | 1  |                                                  |
+| <max>             | 1+ |                                                  |
+| <min>             | 1+ |                                                  |
+| <mod>             | 2  |                                                  |
+| <pow>             | 2  |                                                  |
+| <product> <prod>  | 1+ |                                                  |
+| <property>        | 0  | Property name e.g.<property>node/value</property>|
+| <rad2deg>         | 1  |                                                  |
+| <sin>             | 1  |                                                  |
+| <sinh>            | 1  |                                                  |
+| <sqr>             | 1  |                                                  |
+| <sqrt>            | 1  |                                                  |
+| <sum>             | 1+ |                                                  |
+| <table>           | 2+ | <entry><ind> 0.0 </ind><dep> 10 </dep></entry>   |
+| <tan>             | 1  |                                                  |
+| <tanh>            | 1  |                                                  |
+| <value>           | 0  | Constant Value e.g. <value>0</value>             |
++-------------------+----+--------------------------------------------------+
+
+Hints and tips
+--------------
+
+1. There is no function for rounding, hwoever "Round half up" can be
+   achieved as follows
+
+  <expression>
+    <floor>
+      <sum>
+        <property>your/property/here</property>
+        <value>0.5</value>
+      </sum>
+    </floor>
+  </expression>
+
+2. Interpolation tables can be useful when a formula cannot be found,
+   In the example below <ind> is the indepdendant variable and
+   <dep> is the dependant variable. What this table does is as follows
+   - values below 0.2 will be 10
+   - values above 0.2 and between 1.0 will be interpolated between 10
+     and 0
+   - values above 1.0 will be 0
+
+    <table>
+      <entry><ind> 0.0 </ind><dep> 10 </dep></entry>
+      <entry><ind> 0.2 </ind><dep> 10 </dep></entry>
+      <entry><ind> 1.0 </ind><dep>  0 </dep></entry>
+    </table>

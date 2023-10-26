@@ -1,0 +1,518 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>timeofday</name>
+	<layout>vbox</layout>
+	<padding>20</padding>
+	<modal>false</modal>
+
+	<group>
+		<layout>hbox</layout>
+		<empty><stretch>1</stretch></empty>
+
+		<text>
+			<label>Time Settings</label>
+		</text>
+
+		<empty><stretch>1</stretch></empty>
+
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<keynum>27</keynum>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+
+	<hrule/>
+
+    <group>
+        <layout>hbox</layout>
+
+        <group>
+            <layout>vbox</layout>
+
+            <empty>
+                <stretch>true</stretch>
+            </empty>
+            <group>
+                <layout>table</layout>
+                <name>date_group</name>
+                <!-- Date setting. Use the split out properties in the dialog load, this way these will remain constant when the dialog
+     is opened. Set these automatically when changed - however there appears to be a timezone/dst issue that subtracts an hour.
+-->
+                <text>
+                    <row>0</row>
+                    <col>0</col>
+                    <label>Year</label>
+                </text>
+                <input>
+                    <row>1</row>
+                    <col>0</col>
+                    <live>1</live>
+                    <name>demand-year</name>
+                    <property>/sim/time/demand-year</property>
+                        <binding>
+                            <command>dialog-apply</command>
+                            <object-name>demand-year</object-name>
+                        </binding>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                tod_setdate();
+                            </script>
+                        </binding>
+                    </input>
+                <!--<slider>
+                    <row>2</row>
+                    <col>0</col>
+                    <name>sl_year</name>
+                    <property>/sim/time/demand-year</property>
+                    <live>1</live>
+                    <min>1971</min>
+                    <max>2037</max>
+                    <step>1</step>
+                    <binding>
+                        <command>dialog-apply</command>
+                        <object-name>sl_year</object-name>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            tod_setdate();
+                        </script>
+                    </binding>
+                </slider>-->
+                <text>
+                    <row>0</row>
+                    <col>1</col>
+                    <label>Month</label>
+                    </text>
+                    <combo>
+                        <row>1</row>
+                        <col>1</col>
+                        <live>1</live>
+                        <name>month-combo</name>
+                        <property>/sim/time/demand-month</property>
+                        <editable>false</editable>
+                        <pref-width>130</pref-width>
+                        <halign>fill</halign>
+                        <binding>
+                            <command>dialog-apply</command>
+                            <object-name>month-combo</object-name>
+                        </binding>
+                        <binding>
+                            <command>nasal</command>
+                            <script>
+                                tod_setdate();
+                            </script>
+                        </binding>
+                    </combo>
+                <!--<slider>
+                    <row>2</row>
+                    <col>1</col>
+                    <name>sl_month</name>
+                    <property>/sim/time/demand-month-idx</property>
+                    <live>1</live>
+                    <min>0</min>
+                    <max>11</max>
+                    <step>1</step>
+                    <binding>
+                        <object-name>sl_month</object-name>
+                        <command>dialog-apply</command>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            setprop("/sim/time/demand-month",months[getprop("/sim/time/demand-month-idx")]);
+                            tod_setdate();
+                        </script>
+                    </binding>
+                </slider>-->
+
+                <text>
+                    <row>0</row>
+                    <col>2</col>
+                    <label>Day</label>
+                </text>
+                <input>
+                    <row>1</row>
+                    <col>2</col>
+                    <name>demand-day</name>
+                    <property>/sim/time/demand-day</property>
+                    <live>1</live>
+                    <binding>
+                        <command>dialog-apply</command>
+                        <object-name>demand-day</object-name>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            tod_setdate();
+                        </script>
+                    </binding>
+                </input>
+                <!--<slider>
+                    <row>2</row>
+                    <col>2</col>
+                    <name>sl_day</name>
+                    <property>/sim/time/demand-day</property>
+                    <live>1</live>
+                    <min>1</min>
+                    <max>31</max>
+                    <step>1</step>
+                    <binding>
+                        <command>dialog-apply</command>
+                        <object-name>sl_day</object-name>
+                    </binding>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            tod_setdate();
+                        </script>
+                    </binding>
+                </slider>-->
+            </group>
+            <!-- end of date setting -->
+            <empty>
+                <stretch>true</stretch>
+            </empty>
+            <layout>vbox</layout>
+            <group>
+                <layout>table</layout>
+                <halign>center</halign>
+
+                <text>
+                    <row>0</row>
+                    <col>0</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>UTC</label>
+                </text>
+                <text>
+                    <row>0</row>
+                    <col>1</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>00:00:00</label>
+                    <live>true</live>
+                    <property>/sim/time/gmt-string</property>
+                </text>
+                <text>
+                    <row>0</row>
+                    <col>2</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label></label>
+                </text>
+
+                <text>
+                    <row>1</row>
+                    <col>0</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>Local</label>
+                </text>
+                <text>
+                    <row>1</row>
+                    <col>1</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>00:00:00</label>
+                    <live>true</live>
+                    <property>/sim/time/local-time-string</property>
+                </text>
+                <text>
+                    <row>1</row>
+                    <col>2</col>
+                    <halign>left</halign>
+                    <default-padding>0</default-padding>
+                    <label>UTC</label>
+                    <live>true</live>
+                    <property>/sim/time/local-timezone</property>
+                </text>
+            </group>
+            <!--<slider>
+                <row>2</row>
+                <col>0</col>
+                <name>sl_minute</name>
+                <property>/sim/time/demand-minute-of-day</property>
+                <live>1</live>
+                <min>0</min>
+                <max>1440</max>
+                <step>1</step>
+                <pref-width>250</pref-width>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>sl_minute</object-name>
+                </binding>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                        tod_setminuteofday(getprop("/sim/time/demand-minute-of-day"));
+                    </script>
+                </binding>
+            </slider>-->
+            <hrule/>
+
+			<text>
+				<label>Simulation Rate</label>
+			</text>
+			<text>
+				<label></label>
+				<live>true</live>
+				<property>/sim/speed-up</property>
+			</text>
+
+			<group>
+				<layout>hbox</layout>
+				<default-padding>0</default-padding>
+				<button>
+					<legend>-</legend>
+					<binding>
+						<command>nasal</command>
+						<script>controls.speedup(-1);</script>
+					</binding>
+				</button>
+				<button>
+					<legend>Reset</legend>
+					<binding>
+						<command>property-assign</command>
+						<property>/sim/speed-up</property>
+						<property>/sim/time/warp-delta</property>
+						<value>1</value>
+					</binding>
+				</button>
+				<button>
+					<legend>+</legend>
+					<binding>
+						<command>nasal</command>
+						<script>controls.speedup(1);</script>
+					</binding>
+				</button>
+			</group>
+
+			<empty>
+				<pref-height>1</pref-height>
+			</empty>
+			<hrule/>
+
+			<text>
+				<label>Time Warp</label>
+			</text>
+			<text>
+				<live>true</live>
+				<property>/sim/time/warp-delta</property>
+			</text>
+
+			<group>
+			<layout>hbox</layout>
+			<default-padding>0</default-padding>
+				<button>
+					<legend>-</legend>
+					<binding>
+						<command>property-adjust</command>
+						<property>/sim/time/warp-delta</property>
+						<step type="int">-30</step>
+					</binding>
+				</button>
+				<button>
+					<legend>Reset</legend>
+					<binding>
+						<command>property-assign</command>
+						<property>/sim/time/warp-delta</property>
+						<value>0</value>
+					</binding>
+				</button>
+				<button>
+					<legend>+</legend>
+					<binding>
+						<command>property-adjust</command>
+						<property>/sim/time/warp-delta</property>
+						<step type="int">30</step>
+					</binding>
+				</button>
+			</group>
+
+			<empty>
+				<stretch>true</stretch>
+			</empty>
+
+		</group>
+
+		<empty>
+			<pref-width>2</pref-width>
+		</empty>
+
+        <vrule/>
+        <group>
+            <padding>5</padding>
+            <layout>vbox</layout>
+			<default-padding>0</default-padding>
+            <text>
+                <halign>center</halign>
+                <default-padding>0</default-padding>
+                <label>Time Presets</label>
+            </text>
+            <hrule/>
+            <button>
+				<legend>Clock Time</legend>
+				<equal>true</equal>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>real</timeofday>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Dawn</legend>
+				<equal>true</equal>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>dawn</timeofday>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Morning</legend>
+				<equal>true</equal>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>morning</timeofday>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Noon</legend>
+				<equal>true</equal>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>noon</timeofday>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Afternoon</legend>
+				<equal>true</equal>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>afternoon</timeofday>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Dusk</legend>
+				<equal>true</equal>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>dusk</timeofday>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Evening</legend>
+				<equal>true</equal>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>evening</timeofday>
+				</binding>
+			</button>
+
+			<button>
+				<legend>Night</legend>
+				<equal>true</equal>
+				<binding>
+					<command>timeofday</command>
+					<timeofday>midnight</timeofday>
+				</binding>
+			</button>
+            <!--<group>
+                <layout>hbox</layout>
+                <checkbox>
+                    <property>sim/time/warp-easing</property>
+                    <live>true</live>
+                    <binding>
+                        <command>property-toggle</command>
+                        <property>sim/time/warp-easing</property>
+                    </binding>
+                </checkbox>
+                <text>
+                    <label>Smooth transition</label>
+                </text>
+            </group>-->
+        </group>
+	</group>
+
+    <hrule/>
+
+    <button>
+        <legend>Close</legend>
+        <default>true</default>
+        <key>Esc</key>
+        <binding>
+            <command>dialog-close</command>
+        </binding>
+    </button>
+    <nasal>
+            <open>
+                <![CDATA[
+                # Extract the year month day into properties
+                var dlgRoot = cmdarg();
+                var cb_month = gui.findElementByName(dlgRoot, "month-combo");
+                var dtv = getprop("/sim/time/gmt");
+                var year = substr(dtv,0,4);
+                var month = substr(dtv,5,2);
+                var day = substr(dtv,8,2);
+                #var daymax = gui.findElementByName(dlgRoot, "sl_day").getChild("max");
+                var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                var monthmax = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+                #
+                # populate the combo box with the months
+                forindex(var idx; months)
+                    cb_month.getChild("value", idx, 1).setValue(months[idx]);
+
+                setprop("/sim/time/demand-year",year);
+                setprop("/sim/time/demand-month",months[month-1]);
+                setprop("/sim/time/demand-month-idx",month-1);
+                setprop("/sim/time/demand-day",day);
+
+                #
+                # method to set the time of day based on the dialog values
+                tod_setdate = func{
+                      forindex (var idx; months) {
+                          if (months[idx] == getprop("/sim/time/demand-month"))
+                              month=idx+1;
+                      }
+                      var year = getprop("/sim/time/demand-year");
+                      if ( (math.fmod(year,4) == 0 and math.fmod(year,100) != 0) or (math.fmod(year,400) == 0))
+                          monthmax[1]=29;
+                      else
+                          monthmax[1]=28;
+                      setprop("/sim/time/demand-month-idx",month-1);
+                      setprop("/sim/time/demand-month",months[month-1]);
+                      var hour = substr(dtv,11,2);
+                      var minute = substr(dtv,14,2);
+                      var second = substr(dtv,18,2);
+                      var new_dt=sprintf("%04d-%02d-%02dT%02d:%02d:%02d",getprop("/sim/time/demand-year"),month,getprop("/sim/time/demand-day"),hour,minute,second*1);
+                      setprop("/sim/time/gmt",new_dt);
+                      #daymax.setValue(monthmax[month-1]);
+                      if (getprop("/sim/time/demand-day") > monthmax[month-1])
+                          setprop("/sim/time/demand-day",sprintf("%02d",monthmax[month-1]));
+                }
+                tod_setminuteofday  = func(minute){
+                      var hour = minute/60;
+                      var minute = math.fmod(minute,60);
+                      var second = 0;
+                      var new_dt=sprintf("%04d-%02d-%02dT%02d:%02d:%02d",getprop("/sim/time/demand-year"),month,getprop("/sim/time/demand-day"),hour,minute,second*1);
+                      setprop("/sim/time/gmt",new_dt);
+                      printf(new_dt);
+                }
+                ]]>
+            </open>
+        </nasal>
+</PropertyList>

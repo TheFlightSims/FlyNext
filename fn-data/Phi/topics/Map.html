@@ -1,0 +1,23 @@
+<div  data-bind="component: {
+  name: 'Small Map',
+  params: {
+    map: {
+      attributionControl: true,
+      zoom: 11
+    },
+    on: {
+      'resize' : mapResize,
+      'zoomend': mapZoomend,
+      'moveend': mapMoveend,
+      'unload' : mapUnload,
+    },
+    css: {
+      width: '100%',
+      height: '100%'
+    },
+    overlays: overlays,
+    selectedOverlays: selectedOverlays,
+    hasFollowAircraft: true,
+    hasToggleOwnAircraftDrag: true,
+    scale: { metric: false }
+  }}"></div>

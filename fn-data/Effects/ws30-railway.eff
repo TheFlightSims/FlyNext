@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+	<name>Effects/ws30-railway</name>
+	<inherits-from>Effects/terrain-default</inherits-from>
+	<parameters>
+		<speed-factor>0.8</speed-factor>
+		<base-density>0.25</base-density>
+	</parameters>
+	<technique n="3">
+		<!-- Disable the ultra technique as it doesn't work in WS30-->
+		<predicate n="0">
+			<and>
+				<equal>
+					<value type="float">2.0</value>
+					<value type="float">1.0</value>
+				</equal>
+			</and>
+		</predicate>
+	</technique>
+</PropertyList>

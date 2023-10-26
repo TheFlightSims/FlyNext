@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <shaders archive="true">
+    <custom-settings type="bool">true</custom-settings>
+    <generic type="double">1</generic>
+    <landmass type="double">6</landmass>
+    <model type="double">3</model>
+    <contrails type="double">1</contrails>
+    <crop type="double">1</crop>
+    <skydome type="bool">true</skydome>
+    <transition type="double">5</transition>
+    <urban type="double">1</urban>
+    <water type="double">5</water>
+    <wind-effects type="double">2</wind-effects>
+    <forest type="double">1</forest>
+    <lights type="double">1</lights>
+    <quality-level-internal type="double">1</quality-level-internal>
+    <quality-level type="double">-1</quality-level>
+  </shaders>
+  <clouds3d-enable archive="true" type="bool">true</clouds3d-enable>
+  <shadows archive="true">
+    <enabled type="bool">true</enabled>
+  </shadows>
+</PropertyList>

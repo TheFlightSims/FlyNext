@@ -1,0 +1,151 @@
+AC3Db
+MATERIAL "Brick" rgb 0.215789 0.305263 0.305263  amb 0.152632 0.236842 0.368421  emis 0 0 0  spec 0.215789 0.189474 0.357895  shi 10.7789  trans 0
+MATERIAL "Brick.001" rgb 0.6 0.4 0.2  amb 0.189474 0.1 0.0210526  emis 0 0 0  spec 0.541176 0.360784 0.180392  shi 10.1053  trans 0
+OBJECT world
+kids 2
+OBJECT poly
+name "Cube"
+data 4
+Cube
+crease 30.000000
+numvert 12
+-30 8 -35
+-30 -5 -35
+-30 8 35
+-30 -5 35
+30 8 35
+30 -5 35
+30 -5 -35
+30 8 -35
+-29.7 8 -34.7
+-29.7 8 34.7
+29.7 8 34.7
+29.6 8 -34.7
+numsurf 8
+SURF 0x0
+mat 1
+refs 4
+0 0 0
+7 0 0
+6 0 0
+1 0 0
+SURF 0x0
+mat 1
+refs 4
+0 0 0
+1 0 0
+3 0 0
+2 0 0
+SURF 0x0
+mat 1
+refs 4
+2 0 0
+3 0 0
+5 0 0
+4 0 0
+SURF 0x0
+mat 1
+refs 4
+4 0 0
+5 0 0
+6 0 0
+7 0 0
+SURF 0x0
+mat 1
+refs 4
+7 0 0
+0 0 0
+8 0 0
+11 0 0
+SURF 0x0
+mat 1
+refs 4
+0 0 0
+2 0 0
+9 0 0
+8 0 0
+SURF 0x0
+mat 1
+refs 4
+2 0 0
+4 0 0
+10 0 0
+9 0 0
+SURF 0x0
+mat 1
+refs 4
+4 0 0
+7 0 0
+11 0 0
+10 0 0
+kids 0
+OBJECT poly
+name "Plane.001"
+data 9
+Plane.003
+crease 30.000000
+numvert 10
+30 7 35
+10 12 -25
+10 12 25
+-10 7 35
+30 7 -35
+-30 7 35
+-30 7 -35
+-9.99999 7 -35
+-20 10 25
+-20 10 -25
+numsurf 8
+SURF 0x0
+mat 0
+refs 3
+3 0 0
+0 0 0
+2 0 0
+SURF 0x0
+mat 0
+refs 3
+7 0 0
+1 0 0
+4 0 0
+SURF 0x0
+mat 0
+refs 4
+7 0 0
+3 0 0
+2 0 0
+1 0 0
+SURF 0x0
+mat 0
+refs 4
+0 0 0
+4 0 0
+1 0 0
+2 0 0
+SURF 0x0
+mat 0
+refs 4
+3 0 0
+7 0 0
+9 0 0
+8 0 0
+SURF 0x0
+mat 0
+refs 4
+6 0 0
+5 0 0
+8 0 0
+9 0 0
+SURF 0x0
+mat 0
+refs 3
+6 0 0
+9 0 0
+7 0 0
+SURF 0x0
+mat 0
+refs 3
+5 0 0
+3 0 0
+8 0 0
+kids 0

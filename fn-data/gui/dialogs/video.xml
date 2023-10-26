@@ -1,0 +1,282 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <name>video-control</name>
+    <layout>vbox</layout>
+    <resizable>false</resizable>
+
+    <!-- titlebar -->
+    <group>
+        <layout>hbox</layout>
+        <empty><stretch>1</stretch></empty>
+
+        <text>
+            <label>Video Control</label>
+        </text>
+
+        <empty><stretch>1</stretch></empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+
+    <hrule/>
+
+    <group>
+        <layout>vbox</layout>
+        <text>
+            <label>Container</label>
+        </text>
+        
+        <input>
+            <halign>left</halign>
+            <live>true</live>
+            <property>/sim/video/container</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>container_radios_set(nil);</script>
+            </binding>
+        </input>
+        
+        <radio>
+            <halign>left</halign>
+            <label>MP4</label>
+            <property>/sim/gui/dialogs/video-control/container-mp4</property>
+            <value>mp4</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>container_radios_set('mp4');</script>
+            </binding>
+        </radio>
+        
+        <radio>
+            <halign>left</halign>
+            <label>MPEG</label>
+            <property>/sim/gui/dialogs/video-control/container-mpeg</property>
+            <value>mpeg</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>container_radios_set('mpeg');</script>
+            </binding>
+        </radio>
+        
+        <radio>
+            <halign>left</halign>
+            <label>MKV</label>
+            <property>/sim/gui/dialogs/video-control/container-mkv</property>
+            <value>mkv</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>container_radios_set('mkv');</script>
+            </binding>
+        </radio>
+        
+        <radio>
+            <halign>left</halign>
+            <label>OGV</label>
+            <property>/sim/gui/dialogs/video-control/container-ogv</property>
+            <value>ogv</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>container_radios_set('ogv');</script>
+            </binding>
+        </radio>
+    </group>
+
+    <hrule/>
+        
+    <group>
+        <layout>vbox</layout>
+        <text>
+            <label>Codec</label>
+        </text>
+        <input>
+            <halign>left</halign>
+            <live>true</live>
+            <property>/sim/video/codec</property>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>codec_radios_set(nil);</script>
+            </binding>
+        </input>
+        
+        <radio>
+            <halign>left</halign>
+            <label>MPEG2</label>
+            <property>/sim/gui/dialogs/video-control/codec-mpeg2video</property>
+            <value>mpeg2video</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>codec_radios_set('mpeg2video');</script>
+            </binding>
+        </radio>
+        
+        <radio>
+            <halign>left</halign>
+            <label>H.264</label>
+            <property>/sim/gui/dialogs/video-control/codec-libx264</property>
+            <value>libx264</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>codec_radios_set('libx264');</script>
+            </binding>
+        </radio>
+        
+        <radio>
+            <halign>left</halign>
+            <label>H.265</label>
+            <property>/sim/gui/dialogs/video-control/codec-libx265</property>
+            <value>libx265</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>codec_radios_set('libx265');</script>
+            </binding>
+        </radio>
+        
+        <radio>
+            <halign>left</halign>
+            <label>VP8</label>
+            <property>/sim/gui/dialogs/video-control/codec-libvpx</property>
+            <value>libvpx</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>codec_radios_set('libvpx');</script>
+            </binding>
+        </radio>
+        
+        <radio>
+            <halign>left</halign>
+            <label>Theora</label>
+            <property>/sim/gui/dialogs/video-control/codec-libtheora</property>
+            <value>libtheora</value>
+            <live>true</live>
+            <binding>
+                <command>nasal</command>
+                <script>codec_radios_set('libtheora');</script>
+            </binding>
+        </radio>
+    </group>
+    
+    <hrule/>
+    
+    <group>
+        <layout>vbox</layout>
+        <text>
+            <label>Settings</label>
+        </text>
+        
+        <group>
+            <layout>table</layout>
+            <text>
+                <row>0</row>
+                <col>0</col>
+                <halign>left</halign>
+                <label>Quality (-1 or 0..1)</label>
+            </text>
+            <input>
+                <row>0</row>
+                <col>1</col>
+                <name>quality</name>
+                <property>/sim/video/quality</property>
+                <live>true</live>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>quality</object-name>
+                </binding>
+            </input>
+            <text>
+                <row>1</row>
+                <col>0</col>
+                <halign>left</halign>
+                <label>Speed (-1 or 0..1)</label>
+            </text>
+            <input>
+                <row>1</row>
+                <col>1</col>
+                <name>speed</name>
+                <property>/sim/video/speed</property>
+                <live>true</live>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>speed</object-name>
+                </binding>
+            </input>
+            <text>
+                <row>2</row>
+                <col>0</col>
+                <halign>left</halign>
+                <label>Bitrate (bits/sec)</label>
+            </text>
+            <input>
+                <row>2</row>
+                <col>1</col>
+                <name>bitrate</name>
+                <property>/sim/video/bitrate</property>
+                <live>true</live>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>bitrate</object-name>
+                </binding>
+            </input>
+        </group>
+    </group>
+    
+    <nasal>
+        <open><![CDATA[
+            # Code to implement radio buttons.
+            #
+            var container_radios = cmdarg().getChildren("group")[1].getChildren("radio");
+            var codec_radios = cmdarg().getChildren("group")[2].getChildren("radio");
+            
+            var radios_set = func(prefix, radios, value)
+            {
+                for (var i = 0; i < size(radios); i += 1)
+                {
+                    v = radios[i].getChild("value").getValue();
+                    var path = "/sim/gui/dialogs/video-control/" ~ prefix ~ "-" ~ v;
+                    setprop(path, v == value);
+                }
+            }
+            var codec_radios_set = func(value)
+            {
+                if (value == nil)   value = getprop("/sim/video/codec");
+                radios_set("codec", codec_radios, value);
+                if (value != nil) setprop("/sim/video/codec", value);
+            }
+            
+            var container_radios_set = func(value)
+            {
+                if (value == nil)   value = getprop("/sim/video/container");
+                radios_set("container", container_radios, value);
+                if (value != nil) setprop("/sim/video/container", value);
+            }
+            codec_radios_set(getprop("/sim/video/codec"));
+            container_radios_set(getprop("/sim/video/container"));
+            ]]>
+        </open>
+    </nasal>
+
+</PropertyList>

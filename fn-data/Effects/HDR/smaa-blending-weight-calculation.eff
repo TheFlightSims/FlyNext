@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/smaa-blending-weight-calculation</name>
+  <parameters>
+    <texture n="1">
+      <image>Textures/SMAA/area_tex.dds</image>
+      <type>2d</type>
+      <filter>linear-mipmap-linear</filter>
+      <mag-filter>linear</mag-filter>
+      <wrap-s>clamp</wrap-s>
+      <wrap-t>clamp</wrap-t>
+      <internal-format>normalized</internal-format>
+    </texture>
+    <texture n="2">
+      <image>Textures/SMAA/search_tex.dds</image>
+      <type>2d</type>
+      <filter>linear-mipmap-linear</filter>
+      <mag-filter>linear</mag-filter>
+      <wrap-s>clamp</wrap-s>
+      <wrap-t>clamp</wrap-t>
+      <internal-format>normalized</internal-format>
+    </texture>
+  </parameters>
+  <technique n="1">
+    <pass>
+      <stencil>
+        <function>equal</function>
+        <value>1</value>
+      </stencil>
+      <texture-unit>
+        <unit>1</unit>
+        <image><use>texture[1]/image</use></image>
+        <type><use>texture[1]/type</use></type>
+        <filter><use>texture[1]/filter</use></filter>
+        <mag-filter><use>texture[1]/mag-filter</use></mag-filter>
+        <wrap-s><use>texture[1]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[1]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[1]/internal-format</use></internal-format>
+      </texture-unit>
+      <texture-unit>
+        <unit>2</unit>
+        <image><use>texture[2]/image</use></image>
+        <type><use>texture[2]/type</use></type>
+        <filter><use>texture[2]/filter</use></filter>
+        <mag-filter><use>texture[2]/mag-filter</use></mag-filter>
+        <wrap-s><use>texture[2]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[2]/wrap-t</use></wrap-t>
+        <internal-format><use>texture[2]/internal-format</use></internal-format>
+      </texture-unit>
+      <program>
+        <vertex-shader>Shaders/HDR/smaa_blending_weight_calculation.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/smaa_blending_weight_calculation.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>edges_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>area_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">1</value>
+      </uniform>
+      <uniform>
+        <name>search_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">2</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

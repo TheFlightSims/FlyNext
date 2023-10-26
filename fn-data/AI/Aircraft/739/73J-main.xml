@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Boeing 737-900ER</description>
+  <author>Ian(Yves) Tolosa. July 2017</author>
+  <path>Models/73J.ac</path>
+  <offsets>
+    <pitch-deg>-0.7</pitch-deg>
+  </offsets>
+  <animation>
+    <type>select</type>
+    <object-name>Gear_Down</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/739-NavLights.xml</path>
+  </model>
+</PropertyList>

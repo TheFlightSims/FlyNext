@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>De Havilland Canada DHC6 Twin Otter</description>
+  <author>Ian (Yves) Tolosa from flyable model by Syd Adams</author>
+  <path>Models/DHT.ac</path>
+  <!-- Show Propeller Blur if Speed over 15 Knots -->
+  <animation>
+    <type>select</type>
+    <object-name>Prop_Blur_L</object-name>
+    <condition>
+      <greater-than-equals>
+        <property>velocities/true-airspeed-kt</property>
+        <value>25</value>
+      </greater-than-equals>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>Prop_Blur_R</object-name>
+    <condition>
+      <greater-than-equals>
+        <property>velocities/true-airspeed-kt</property>
+        <value>25</value>
+      </greater-than-equals>
+    </condition>
+  </animation>
+  <!-- Propellers rotate at (Factor) times Air Speed -->
+  <animation>
+    <type>spin</type>
+    <object-name>Prop_L</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>10</factor>
+    <center>
+      <x-m>-2.73651</x-m>
+      <y-m>-2.857</y-m>
+      <z-m>2.83788</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>spin</type>
+    <object-name>Prop_R</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>10</factor>
+    <center>
+      <x-m>-2.73651</x-m>
+      <y-m>2.857</y-m>
+      <z-m>2.83788</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+</PropertyList>

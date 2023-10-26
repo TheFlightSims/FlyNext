@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- Set of US farm buildings, for inclusion in a materials file -->
+<PropertyList>
+  <object>
+    <path>Models/Agriculture/us-horse-farm.ac</path>
+    <path>Models/Agriculture/cattle-farm.ac</path>
+    <path>Models/Agriculture/us-crop-farm.ac</path>
+    <path>Models/Agriculture/livestock-farm.ac</path>
+    <path>Models/Agriculture/brick-farm.ac</path>
+    <path>Models/Agriculture/foursquare-crop-farm.ac</path>
+    <path>Models/Agriculture/foursquare-horse-farm.ac</path>
+    <coverage-m2>10000</coverage-m2>
+    <heading-type>mask</heading-type>
+  </object>
+</PropertyList>

@@ -1,0 +1,510 @@
+<?xml version="1.0"?>
+
+<!--
+   generic.xml - FlightGear driver for the DragonRise Inc. Generic USB Joystick
+   Copyright (C) 2013  Florent Rougon
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+******************************************************************************
+*                          Axes and Buttons Layout                           *
+******************************************************************************
+
+In the following ASCII-art representation of the joypad:
+  - a single digit represents a button (and gives the button number);
+  - a digit followed by a + or - sign represents an axis direction (and gives
+    the axis number).
+
+The Top View below shows 4 real axes (0 and 1 on the left stick, 3 and 4 on
+the right stick) and 2 pseudo-axes (5 and 6). Pseudo-axes are simple buttons
+in the hardware. Contrary to a real axis, each pseudo-axis only allows 3
+values: -1, 0, 1.
+
+Don't forget to put the joypad in analog mode! This changes the center point of
+axes, for one.
+
+
+Top View
+~~~~~~~~~
+
+   6-                                0
+5-    5+  8 (SELECT)   (START) 9  3     1
+   6+              ANALOG            2
+
+         1-                     4-
+      0-    0+               3-    3+
+         1+                     4+
+
+(buttons and axes numbers obtained on Linux)
+
+
+Bottom View
+~~~~~~~~~~~
+
+   5                                 4
+
+     7                             6
+
+(buttons numbers obtained on Linux)
+
+
+******************************************************************************
+*                         Buttons and Axes Bindings                          *
+******************************************************************************
+
+Modifiers
+~~~~~~~~~
+
+The two pseudo-axes (5 and 6) are used to define three variables (mod1, mod2,
+mod3) that act as modifiers for other buttons and axes.
+
+  Initially, mod1 == mod2 == mod3 == 0.
+
+  Pressing button 6- toggles mod1 between the values 0 and 1.
+  Pressing button 6+ toggles mod2 between the values 0 and 1 (mod2 is
+  currently unused).
+
+  When neither 5- nor 5+ is pressed:           mod3 == 0
+  As long as 5- is pressed and 5+ is released: mod3 == -1
+  As long as 5+ is pressed and 5- is released: mod3 == 1
+
+  (the result of holding both 5- and 5+ at the same time is undefined)
+
+Bindings that don't depend on modifier states
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Axis 0     Aileron
+Axis 1     Elevator
+Axis 3     Rudder
+Button 4   View Cycle (backward)
+Button 5   View Cycle (forward)
+Button 6   View Decrease
+Button 7   View Increase
+
+When mod3 == 0
+~~~~~~~~~~~~~~
+
+[if mod1 == 0]
+Axis 4     Throttle
+Button 0   View Up
+Button 1   View Right
+Button 2   View Down
+Button 3   View Left
+Button 8   Apply Brakes
+Button 9   Select Initial View and Recenter
+
+[if mod1 == 1]
+Button 3   Trigger  (weapon)
+Button 1   Trigger1 (other weapon)
+
+When mod3 == -1
+~~~~~~~~~~~~~~~
+
+Axis 4     Elevator Trim
+Button 0   Flaps Up
+Button 2   Flaps Down
+Button 3   Brake Left
+Button 1   Brake Right
+Button 8   Aileron and Rudder Dance (for kids!)
+Button 9   Reset Zoom to Default
+
+When mod3 == 1
+~~~~~~~~~~~~~~
+
+Axis 4     Mixture Control
+Button 0   Select First Engine
+Button 1   Select Second Engine
+Button 2   Select Third Engine
+Button 3   Select Fourth Engine
+Button 9   Select All Engines
+
+-->
+
+<PropertyList>
+
+  <name>DragonRise Inc.   Generic   USB  Joystick  </name>
+
+  <nasal>
+    <script>
+      var (mod1, mod2, mod3) = (0, 0, 0);
+      # These variables are used to emulate non-repeatable buttons when
+      # mod3 != 0.
+      var (button0_with_mod3, button1_with_mod3, button2_with_mod3,
+           button3_with_mod3) = (0, 0, 0, 0);
+      var initial_goal_heading_offset_deg =
+        getprop("/sim/current-view/goal-heading-offset-deg") or 0.0;
+      var initial_goal_pitch_offset_deg =
+        getprop("/sim/current-view/goal-pitch-offset-deg") or 0.0;
+    </script>
+  </nasal>
+
+  <axis n="0">
+    <desc>Aileron</desc>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/aileron</property>
+      <!-- I need the following offset when the joypad is in analog mode. -->
+      <offset type="double">-0.01028</offset>
+      <factor type="double">0.5</factor>
+    </binding>
+  </axis>
+
+  <axis n="1">
+    <desc>Elevator</desc>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/elevator</property>
+      <!-- I need the following offset when the joypad is in analog mode. -->
+      <offset type="double">-0.01028</offset>
+      <factor type="double">-0.5</factor>
+    </binding>
+  </axis>
+
+  <axis n="3">
+    <desc>Rudder</desc>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/rudder</property>
+      <!-- I need the following offset when the joypad is in analog mode. -->
+      <offset type="double">-0.01028</offset>
+    </binding>
+  </axis>
+
+  <axis n="4">
+    <desc>Throttle [mod3=0] / Mixture Control [mod3=1] / Elevator Trim [mod3=-1]</desc>
+    <high>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>
+        if (mod3 == 0) {
+          controls.adjThrottle(-1.0);
+        } elsif (mod3 == 1) {
+          controls.adjMixture(-1);
+        } else {
+          setprop("/controls/flight/elevator-trim",
+            -0.001 + getprop("/controls/flight/elevator-trim"));
+        }
+        </script>
+      </binding>
+    </high>
+    <low>
+      <repeatable type="bool">true</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>
+        if (mod3 == 0) {
+          controls.adjThrottle(1.0);
+        } elsif (mod3 == 1) {
+          controls.adjMixture(1);
+        } else {
+          setprop("/controls/flight/elevator-trim",
+            0.001 + getprop("/controls/flight/elevator-trim"));
+        }
+        </script>
+      </binding>
+    </low>
+  </axis>
+
+  <axis n="5">
+    <name>mod3_switch</name>
+    <desc>Switch mod3 between the values -1, 0, 1</desc>
+    <binding>
+      <command>nasal</command>
+      <script>
+        mod3 = cmdarg().getNode("setting").getValue();
+        # gui.popupTip("DragonRise.mod3 = " ~ mod3, 2);
+      </script>
+    </binding>
+  </axis>
+
+  <axis n="6">
+    <name>mod1_mod2_toggle</name>
+    <desc>Toggle mod1 and mod2</desc>
+    <low>
+      <binding>
+        <command>nasal</command>
+        <script>
+          mod1 = !mod1;
+          gui.popupTip("DragonRise.mod1 = " ~ mod1, 2);
+        </script>
+      </binding>
+    </low>
+    <high>
+      <binding>
+        <command>nasal</command>
+        <script>
+          mod2 = !mod2;
+          gui.popupTip("DragonRise.mod2 = " ~ mod2, 2);
+        </script>
+      </binding>
+    </high>
+  </axis>
+
+  <button n="0">
+    <desc>View Up [mod3=0] / Select first engine [mod3=1] / Flaps Up [mod3=-1]</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (mod3 == 0) {
+          setprop("/sim/current-view/goal-pitch-offset-deg",
+            1.0 + getprop("/sim/current-view/goal-pitch-offset-deg"));
+          return;
+        }
+
+        # Emulate a non-repeatable button for mod3 != 0
+        if (button0_with_mod3)
+          return;
+
+        button0_with_mod3 = 1;
+
+        if (mod3 == -1) {
+          controls.flapsDown(-1);
+        } else {
+          controls.selectEngine(0);
+        }
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          button0_with_mod3 = 0;
+        </script>
+      </binding>
+    </mod-up>
+  </button>
+
+  <button n="1">
+    <desc>View Right / Brake Right [mod3=-1] / Select second engine [mod3=1] / Trigger1 [mod3=0 and mod1]</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (mod3 == 0) {
+          if (mod1) {
+            # This seems the most common for "trigger"
+            setprop("/controls/armament/trigger1", 1);
+            # Many planes use this instead [also true for "trigger1"?]
+            setprop("/ai/submodels/trigger1", 1);
+          } else {
+            setprop("/sim/current-view/goal-heading-offset-deg",
+              -1.0 + getprop("/sim/current-view/goal-heading-offset-deg"));
+          }
+
+          return;
+        }
+
+        # Emulate a non-repeatable button for mod3 != 0
+        if (button1_with_mod3)
+          return;
+
+        button1_with_mod3 = 1;
+
+        if (mod3 == -1) {
+          controls.applyBrakes(1, 1);
+        } else {
+          controls.selectEngine(1);
+        }
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          button1_with_mod3 = 0;
+
+          controls.applyBrakes(0, 1);
+          # This seems the most common for "trigger"
+          setprop("/controls/armament/trigger1", 0);
+          # Many planes use this instead [also true for "trigger1"?]
+          setprop("/ai/submodels/trigger1", 0);
+        </script>
+      </binding>
+    </mod-up>
+  </button>
+
+  <button n="2">
+    <desc>View Down [mod3=0] / Select third engine [mod3=1] / Flaps Down [mod3=-1]</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (mod3 == 0) {
+          setprop("/sim/current-view/goal-pitch-offset-deg",
+            -1.0 + getprop("/sim/current-view/goal-pitch-offset-deg"));
+
+          return;
+        }
+
+        # Emulate a non-repeatable button for mod3 != 0
+        if (button2_with_mod3)
+          return;
+
+        button2_with_mod3 = 1;
+
+        if (mod3 == -1) {
+          controls.flapsDown(1);
+        } else {
+          controls.selectEngine(2);
+        }
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          button2_with_mod3 = 0;
+        </script>
+      </binding>
+    </mod-up>
+  </button>
+
+  <button n="3">
+    <desc>View Left / Brake Left [mod3=-1] / Select fourth engine [mod3=1] / Trigger [mod3=0 and mod1]</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (mod3 == 0) {
+          if (mod1) {
+            # This seems the most common
+            setprop("/controls/armament/trigger", 1);
+            # Many planes use this instead
+            setprop("/ai/submodels/trigger", 1);
+          } else {
+            setprop("/sim/current-view/goal-heading-offset-deg",
+              1.0 + getprop("/sim/current-view/goal-heading-offset-deg"));
+          }
+
+          return;
+        }
+
+        # Emulate a non-repeatable button for mod3 != 0
+        if (button3_with_mod3)
+          return;
+
+        button3_with_mod3 = 1;
+
+        if (mod3 == -1) {
+          controls.applyBrakes(1, -1);
+        } else {
+          controls.selectEngine(3);
+        }
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>
+          button3_with_mod3 = 0;
+          controls.applyBrakes(0, -1);
+
+          # This seems the most common
+          setprop("/controls/armament/trigger", 0);
+          # Many planes use this instead
+          setprop("/ai/submodels/trigger", 0);
+        </script>
+      </binding>
+    </mod-up>
+  </button>
+
+  <button n="4">
+    <desc>View Cycle (backward)</desc>
+    <repeatable type="bool">false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.stepView(-1)</script>
+    </binding>
+  </button>
+
+  <button n="5">
+    <desc>View Cycle (forward)</desc>
+    <repeatable type="bool">false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.stepView(1)</script>
+    </binding>
+  </button>
+
+  <button n="6">
+    <desc>View Decrease</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.decrease(0.75)</script>
+    </binding>
+  </button>
+
+  <button n="7">
+    <desc>View Increase</desc>
+    <repeatable type="bool">true</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>view.increase(0.75)</script>
+    </binding>
+  </button>
+
+  <button n="8">
+    <desc>Brakes [mod3=0] / Aileron and Rudder Dance [mod3=-1]</desc>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (mod3 == -1) {
+          interpolate("/controls/flight/aileron",
+            -0.5, 1, 0.5, 1, -0.5, 1, 0.5, 1, -0.5, 1, 0.5, 1,
+            -0.5, 1, 0.5, 1);
+          interpolate("/controls/flight/rudder",
+            -0.5, 1, 0.5, 1, -0.5, 1, 0.5, 1, -0.5, 1, 0.5, 1,
+            -0.5, 1, 0.5, 1);
+        }
+        elsif (mod3 == 0) {
+          controls.applyBrakes(1);
+        }
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>controls.applyBrakes(0)</script>
+      </binding>
+    </mod-up>
+  </button>
+
+  <button n="9">
+    <desc>Select Initial View and Recenter [mod3=0] / Reset Zoom to Default [mod3=-1] / Select all engines [mod3=1]</desc>
+    <binding>
+      <command>nasal</command>
+      <script>
+        if (mod3 == -1) {
+          setprop("/sim/current-view/field-of-view",
+            getprop("/sim/view/config/default-field-of-view-deg"));
+        } elsif (mod3 == 1) {
+            controls.selectAllEngines();
+        } else {
+          setprop("/sim/current-view/view-number", 0);
+          setprop("/sim/current-view/goal-heading-offset-deg",
+            initial_goal_heading_offset_deg);
+          setprop("/sim/current-view/goal-pitch-offset-deg",
+            initial_goal_pitch_offset_deg);
+        }
+      </script>
+    </binding>
+  </button>
+
+</PropertyList>
+
+<!-- end of generic.xml -->

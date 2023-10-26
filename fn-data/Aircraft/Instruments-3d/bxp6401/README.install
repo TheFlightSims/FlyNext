@@ -1,0 +1,38 @@
+# Copyright 2020 Benedikt Wolf
+# 	with parts by Gilberto Agonstinho, WooT, Joshau Davidson
+# This file is part of FlightGear.
+#
+# FlightGear is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# FlightGear is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
+
+To install this instrument into your aircraft, you need to do the following:
+
+1.	Enable the <transponder> module through the aircraft's instrumentation.xml (in case a custom one is used)
+2.	Add bxp6401.nas to your aircraft's list of included nasal files:
+	<nasal>
+		...
+		<bxp6401>
+			<file>Aircraft/Instruments-3d/bxp6401/bxp6401.nas</file>
+		</bxp6401>
+		...
+	</nasal>
+	** Note that it is important to put the file into <bxp6401></bxp6401> tags, as the animation xml references the instrument by that name
+3.	Add the model to your aircraft:
+	<model>
+		<path>Aircraft/Instruments-3d/bxp6401/bxp6401.xml</path>
+		...
+	</model>
+4.	If you are using a custom electric system, make sure the transponder is supplied at /systems/electrical/outputs/transponder[0] when appropriate
+
+
+## Please report any bugs, issues and improvements either to the mailing list of FlightGear forum so they can be fixed/included in the shared version of this instrument

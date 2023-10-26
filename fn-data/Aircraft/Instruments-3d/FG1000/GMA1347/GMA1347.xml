@@ -1,0 +1,643 @@
+<?xml version="1.0" ?>
+
+<PropertyList>
+
+  <path>GMA1347.ac</path>
+
+  <animation>
+    <object-name>body.mixer</object-name>
+    <object-name>softkey.COM1MIC</object-name>
+    <object-name>softkey.COM2MIC</object-name>
+    <object-name>softkey.COM3MIC</object-name>
+    <object-name>softkey.COM12</object-name>
+    <object-name>softkey.PA</object-name>
+    <object-name>softkey.MKRMUTE</object-name>
+    <object-name>softkey.DME</object-name>
+    <object-name>softkey.ADF</object-name>
+    <object-name>softkey.AUX</object-name>
+    <object-name>softkey.MANSQ</object-name>
+    <object-name>softkey.PILOT</object-name>
+    <object-name>softkey.COM1</object-name>
+    <object-name>softkey.COM2</object-name>
+    <object-name>softkey.COM3</object-name>
+    <object-name>softkey.TEL</object-name>
+    <object-name>softkey.SPKR</object-name>
+    <object-name>softkey.HISENS</object-name>
+    <object-name>softkey.NAV1</object-name>
+    <object-name>softkey.NAV2</object-name>
+    <object-name>softkey.PLAY</object-name>
+    <object-name>softkey.COPLT</object-name>
+
+    <object-name>led.COM1MIC</object-name>
+    <object-name>led.COM2MIC</object-name>
+    <object-name>led.COM3MIC</object-name>
+    <object-name>led.COM12</object-name>
+    <object-name>led.PA</object-name>
+    <object-name>led.MKRMUTE</object-name>
+    <object-name>led.DME</object-name>
+    <object-name>led.ADF</object-name>
+    <object-name>led.AUX</object-name>
+    <object-name>led.MANSQ</object-name>
+    <object-name>led.PILOT</object-name>
+    <object-name>led.COM1</object-name>
+    <object-name>led.COM2</object-name>
+    <object-name>led.COM3</object-name>
+    <object-name>led.TEL</object-name>
+    <object-name>led.SPKR</object-name>
+    <object-name>led.HISENS</object-name>
+    <object-name>led.NAV1</object-name>
+    <object-name>led.NAV2</object-name>
+    <object-name>led.PLAY</object-name>
+    <object-name>led.COPLT</object-name>
+
+    <object-name>knob.Vol.large</object-name>
+    <object-name>knob.Vol.small</object-name>
+    <object-name>knob.RED</object-name>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>body.mixer</object-name>
+    <object-name>knob.Vol.large</object-name>
+    <object-name>knob.Vol.small</object-name>
+    <object-name>softkey.PILOT</object-name>
+    <object-name>softkey.COPLT</object-name>
+    <object-name>softkey.MANSQ</object-name>
+    <object-name>softkey.PLAY</object-name>
+    <object-name>softkey.AUX</object-name>
+    <object-name>softkey.ADF</object-name>
+    <object-name>softkey.DME</object-name>
+    <object-name>softkey.NAV1</object-name>
+    <object-name>softkey.NAV2</object-name>
+    <object-name>softkey.MKRMUTE</object-name>
+    <object-name>softkey.HISENS</object-name>
+    <object-name>softkey.PA</object-name>
+    <object-name>softkey.SPKR</object-name>
+    <object-name>softkey.COM12</object-name>
+    <object-name>softkey.TEL</object-name>
+    <object-name>softkey.COM1MIC</object-name>
+    <object-name>softkey.COM1</object-name>
+    <object-name>softkey.COM2MIC</object-name>
+    <object-name>softkey.COM2</object-name>
+    <object-name>softkey.COM3MIC</object-name>
+    <object-name>softkey.COM3</object-name>
+    <condition>
+      <property>controls/lighting/instrument-lights</property>
+      <property>controls/electric/battery-switch</property>
+    </condition>
+    <emission>
+      <factor-prop>controls/lighting/floods-lights</factor-prop>
+      <blue>  0.2 </blue>
+      <red>   0.2 </red>
+      <green> 0.2 </green>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.COM1MIC</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>COM1MIC</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.COM1MIC</object-name>
+    <emission>
+      <factor-prop>instrumentation/audio-panel/com-mic[0]</factor-prop>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+    </emission>
+  </animation>
+
+  <!---->
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.COM1</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+    </action>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>COM1</notification>
+        <offset>0</offset>
+      </binding>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.COM1</object-name>
+    <emission>
+      <factor-prop>instrumentation/audio-panel/com[0]</factor-prop>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.COM2MIC</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>COM2MIC</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.COM2MIC</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/com-mic[1]</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.COM2</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>COM2</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.COM2</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/com[1]</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.COM3MIC</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>COM3MIC</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.COM3MIC</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/com-mic[2]</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.COM3</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>COM3</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.COM3</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/com[2]</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.COM12</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>COM12</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.COM12</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/com12</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.TEL</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>TEL</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.TEL</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/tel</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.PA</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>PA</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.PA</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/crew</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.SPKR</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>SPKR</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.SPKR</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/spkr</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.MKRMUTE</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>MKRMUTE</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.MKRMUTE</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/mkrmute</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.HISENS</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>HISENS</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.HISENS</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/hi</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.DME</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>DME</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.DME</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>/instrumentation/dme[0]/ident</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.NAV1</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>NAV1</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.NAV1</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>/instrumentation/nav[0]/ident</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.ADF</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>ADF</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.ADF</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/adf[0]/ident-audible</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.NAV2</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>NAV2</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.NAV2</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/nav[1]/ident</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.AUX</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>AUX</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.AUX</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/aux</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.MANSQ</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>MANSQ</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.MANSQ</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/mansq</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.PLAY</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>PLAY</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.PLAY</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/play</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.PILOT</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>PILOT</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.PILOT</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/pilot</factor-prop>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>softkey.COPLT</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>FG1000HardKeyPushed</command>
+        <device>10</device>
+        <notification>COPLT</notification>
+        <offset>0</offset>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>led.COPLT</object-name>
+    <emission>
+      <red>   1 </red>
+      <green> 1 </green>
+      <blue>  1 </blue>
+      <factor-prop>instrumentation/audio-panel/copilot</factor-prop>
+    </emission>
+  </animation>
+
+</PropertyList>

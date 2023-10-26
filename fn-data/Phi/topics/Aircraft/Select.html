@@ -1,0 +1,48 @@
+<div data-bind="if: catalogs().length == 0">
+<h3>No Catalogs found</h3>
+Sorry, but no package catalogs were found by your FlightGear.
+</div>
+<div data-bind="foreach: catalogs">
+    <h3>Package <span data-bind="text: id"></span></h3>
+    <!-- 
+    <div>
+        Source <span data-bind="text: url"></span>
+    </div>
+    <div>
+        Installed at <span data-bind="text: installRoot"></span>
+    </div>
+     -->
+    <table class="phi-aircraft-package-table ui-widget-content ui-corner-all">
+        <caption class="ui-widget-header ui-corner-all" data-bind="text: description"></caption>
+        <thead>
+            <tr>
+                <th>Aircraft</th>
+                <th>Description</th>
+                <th>FDM</th>
+                <th>Systems</th>
+                <th>Cockpit</th>
+                <th>Model</th>
+                <th>kB</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: packages">
+            <tr>
+                <td colspan="5"><span data-bind="text: name"></span></td>
+            </tr>
+            <tr>
+                <td><img data-bind="attr: { src: thumbnails[0], alt: name, title: name }" width="171"></img></td>
+                <td><span data-bind="text: description"></span></td>
+                <td><span data-bind="text: ratingFdm"></span></td>
+                <td><span data-bind="text: ratingSystems"></span></td>
+                <td><span data-bind="text: ratingCockpit"></span></td>
+                <td><span data-bind="text: ratingModel"></span></td>
+                <td><span data-bind="text: (fileSize/1024).toFixed(0)"></span></td>
+                <td data-bind="if: installed">installed</td>
+                <td data-bind="ifnot: installed">
+                  <button data-bind=" click: $parents[1].install">Install</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

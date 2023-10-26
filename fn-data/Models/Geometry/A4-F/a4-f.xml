@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <path>a4-f-tanker.ac</path>
+  <offsets>
+    <x-m>-5.61</x-m>
+    <z-m>-0.25</z-m>
+  </offsets>
+
+<!-- Transparent Surfaces for Rembrandt rendering -->
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>FixedCanopyGlass</object-name>
+    <object-name>Canopy_1</object-name>
+  </effect>
+
+  <!-- hide tanker elements -->
+  <animation>
+    <type>select</type>
+    <object-name>Hose</object-name>
+    <object-name>Drogue</object-name>
+    <object-name>DropTank.000</object-name>
+    <object-name>DropTank.001</object-name>
+    <object-name>DropTank.002</object-name>
+  </animation>
+
+</PropertyList>
+
+
+
+

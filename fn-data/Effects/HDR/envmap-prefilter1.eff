@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/envmap-prefilter1</name>
+  <inherits-from>Effects/HDR/envmap-prefilter</inherits-from>
+  <parameters>
+    <roughness type="float">0.25</roughness>
+    <num-samples type="int">8</num-samples>
+  </parameters>
+</PropertyList>

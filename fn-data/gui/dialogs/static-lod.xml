@@ -1,0 +1,1466 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    <nasal>
+        <open>
+        <![CDATA[
+
+            var reload_props = [
+                "/sim/rendering/static-lod/vegetation-lod-level",
+                "/sim/rendering/static-lod/line-features-lod-level",
+                "/sim/rendering/static-lod/lod-level[0]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[1]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[2]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[3]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[4]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[5]/line-features-min-width",
+                "/sim/rendering/static-lod/lod-level[6]/line-features-min-width",
+                "/sim/rendering/static-lod/rough-delta",
+                "/sim/rendering/static-lod/bare-delta"];
+
+            var reload_vals = {};
+            foreach (var p; reload_props) {
+                reload_vals[p] = getprop(p);
+            }
+            check_for_reload = func{
+                    var reinit = 0;
+                    foreach (var p; reload_props) {
+                      if (reload_vals[p] != getprop(p)) {
+                        reinit = 1;
+                      }
+                    }
+
+                    if (reinit) {
+                      fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
+                    }
+            };
+
+            var lodDIALOG = cmdarg();
+            var dlgLOD = props.Node.new({"dialog-name": "static-lod"});
+
+            var ai_mp_bare = gui.findElementByName(lodDIALOG, "aimp-bare");
+            var ai_mp_bare_label = gui.findElementByName(lodDIALOG, "aimp-bare-label");
+            var ai_mp_detailed = gui.findElementByName(lodDIALOG, "aimp-detailed");
+            var ai_mp_detailed_label = gui.findElementByName(lodDIALOG, "aimp-detailed-label");
+            var current_detailed = nil;
+            var current_bare = nil;
+            var current_ai_mp_mode = "";
+
+            if (getprop("/sim/rendering/static-lod/aimp-detailed") < 0)
+                setprop("/sim/gui/dialogs/static-lod/aimp-mp-mode", "High Detail only");
+            else if (getprop("/sim/rendering/static-lod/aimp-detailed") == getprop("/sim/rendering/static-lod/aimp-bare"))
+                setprop("/sim/gui/dialogs/static-lod/aimp-mp-mode", "Low Detail only");
+            else
+                setprop("/sim/gui/dialogs/static-lod/aimp-mp-mode", "Specify Ranges");
+
+            update_enabling = func{
+                var mode = getprop("/sim/gui/dialogs/static-lod/aimp-mp-mode");
+                if (mode == "Low Detail only") {
+                    setprop("/sim/gui/dialogs/static-lod/aimp-mp-bare-enabled", 1);
+                    setprop("/sim/gui/dialogs/static-lod/aimp-mp-detailed-enabled", 0);
+                } else if (mode == "High Detail only") {
+                    setprop("/sim/gui/dialogs/static-lod/aimp-mp-bare-enabled", 0);
+                    setprop("/sim/gui/dialogs/static-lod/aimp-mp-detailed-enabled", 0);
+                } else {
+                    setprop("/sim/gui/dialogs/static-lod/aimp-mp-bare-enabled", 1);
+                    setprop("/sim/gui/dialogs/static-lod/aimp-mp-detailed-enabled", 1);
+                }
+
+#                if (!getprop("/sim/rendering/static-lod/aimp-bare") and !getprop("/sim/rendering/static-lod/aimp-detailed")) {
+#                    setprop("/sim/rendering/static-lod/aimp-bare", 0);
+#                    setprop("/sim/rendering/static-lod/aimp-detailed",100);
+#                }
+                return mode;
+            };
+
+            reload_sliders = func(reload) {
+                if (!reload)
+                    return ;
+                var current_dialog = getprop("/sim/gui/dialogs/current-dialog");
+                fgcommand("dialog-close", dlgLOD);
+                fgcommand("dialog-show", dlgLOD);
+                if (current_dialog != "") {
+                    var show_node = props.Node.new({"dialog-name": current_dialog});
+                    fgcommand("dialog-show", show_node);
+                }
+            }
+            ;
+
+            update_scenery_text = func{
+                var detailed = getprop("/sim/rendering/static-lod/detailed");
+                var bare = getprop("/sim/rendering/static-lod/bare-delta");
+                var rough = getprop("/sim/rendering/static-lod/rough-delta");
+                setprop("/sim/rendering/static-lod/detailed-description", sprintf("from %5.0fm to %5.0fm",0, detailed));
+                setprop("/sim/rendering/static-lod/rough-delta-description", sprintf("from %5.0fm to %5.0fm",detailed, rough+detailed));
+                setprop("/sim/rendering/static-lod/bare-delta-description", sprintf("from %5.0fm to %5.0fm",rough+detailed,rough+bare+detailed));
+            };
+
+            update_description = func(mode){
+
+                var descD = "";
+                var descB = "";
+                var descW = "";
+
+                if (getprop("sim/rendering/static-lod/aimp-range-mode-distance")) {
+                    if (mode == "Low Detail only") {
+                        if (getprop("/sim/rendering/static-lod/aimp-bare")>0) {
+                            descD = sprintf("visible when viewpoint within\n%.0f meters", getprop("/sim/rendering/static-lod/aimp-detailed"));
+                        } else {
+                            descB = "always visible";
+                        }
+                    } else if (mode == "High Detail only") {
+                        descW = "Always visible regardless of distance";
+                    } else {
+                        descW = "";
+                        descD = sprintf("0 to %.0fm from viewpoint", getprop("/sim/rendering/static-lod/aimp-detailed"));
+                        descB = sprintf("%.0fm to %.0fm", getprop("/sim/rendering/static-lod/aimp-detailed"), getprop("/sim/rendering/static-lod/aimp-detailed")+getprop("/sim/rendering/static-lod/aimp-bare"));
+                        var lowDetailRange = getprop("/sim/rendering/static-lod/aimp-detailed") + getprop("/sim/rendering/static-lod/aimp-bare") ;
+                        if (lowDetailRange < 1000)
+                            descW = sprintf("WARNING: Low Detail too close, nothing drawn over %.0fm", lowDetailRange);
+
+                    }
+                } else {
+                    if (mode == "Low Detail only") {
+                        if (getprop("/sim/rendering/static-lod/aimp-bare")>0) {
+                            descD = sprintf("visible when larger than\n%.0f pixels in size on screen", getprop("/sim/rendering/static-lod/aimp-detailed"));
+                            descB = "";
+                            descW = sprintf("WARNING: When smaller than %.0f pixels nothing will be drawn", getprop("/sim/rendering/static-lod/aimp-bare"));
+                        } else {
+                            descW = "";
+                            descD = "";
+                            descB = "always visible";
+                        }
+                    } else if (mode == "High Detail only") {
+                        descW = "Always visible regardless of distance";
+                    } else {
+                        descW = "";
+                        if (getprop("/sim/rendering/static-lod/aimp-bare")>0)
+                            descW = sprintf("WARNING: Below %.0f pixels in size nothing will be drawn", getprop("/sim/rendering/static-lod/aimp-bare"));
+                        descD = sprintf("above %.0f pixels in size", getprop("/sim/rendering/static-lod/aimp-detailed"));
+                        descB = sprintf("above %.0f pixels in size", getprop("/sim/rendering/static-lod/aimp-bare"));
+                    }
+                }
+                setprop("/sim/gui/dialogs/static-lod/aimp-detailed-description",  descD);
+                setprop("/sim/gui/dialogs/static-lod/aimp-bare-description", descB);
+                setprop("/sim/gui/dialogs/static-lod/aimp-bare-description1", descW);
+
+            };
+            # returns non zero if the value was adjusted and it can be adjusted (can_reload)
+            adjustValue = func(id, nodeId, value, can_reload){
+                var node = nodeId.getNode(id);
+                if (node != nil) {
+                    var cv = node.getValue();
+                    if (cv != value) {
+                        node.setValue(value);
+                        if (can_reload)
+                            reload_sliders(1);
+                    }
+                }
+                return 0;                   # no need to reload.
+            }
+
+            update_ai_mp = func(can_reload) {
+                var mode = update_enabling ();
+                var distance_mode = getprop("sim/rendering/static-lod/aimp-range-mode-distance");
+                update_description(mode);
+                if (mode == "Low Detail only") {
+                    setprop("/sim/rendering/static-lod/aimp-detailed",getprop("/sim/rendering/static-lod/aimp-bare"));
+                    can_reload = adjustValue("max", ai_mp_bare, 2000, can_reload);
+                    reload_sliders(can_reload);
+                } else if (mode == "High Detail only") {
+#                    setprop("/sim/rendering/static-lod/aimp-bare", 0);
+#                    setprop("/sim/rendering/static-lod/aimp-detailed",-1);
+                } else {
+                    if (!distance_mode) {
+                        if (getprop("/sim/rendering/static-lod/aimp-bare") > getprop("/sim/rendering/static-lod/aimp-detailed")){
+                            setprop("/sim/rendering/static-lod/aimp-bare", getprop("/sim/rendering/static-lod/aimp-detailed")-1 ) ;
+                        }
+                        can_reload = adjustValue("max", ai_mp_detailed, 2000, can_reload);
+                        can_reload = adjustValue("max", ai_mp_bare, getprop("/sim/rendering/static-lod/aimp-detailed"), can_reload);
+                    } else {
+                        can_reload = adjustValue("max", ai_mp_detailed, 3000, can_reload);
+                        can_reload = adjustValue("max", ai_mp_bare, 3000, can_reload);
+                    }
+                }
+            }
+            update_aimp_mode = func{
+                var new_mode = getprop("/sim/gui/dialogs/static-lod/aimp-mp-mode");
+                if (new_mode != current_ai_mp_mode) {
+
+                    if (current_ai_mp_mode == "Specify Ranges") {
+                        current_detailed = getprop("/sim/rendering/static-lod/aimp-detailed");
+                        current_bare =getprop("/sim/rendering/static-lod/aimp-bare");
+                    }
+                    if (current_ai_mp_mode == "Low Detail only" or current_ai_mp_mode == "High Detail only") {
+                        if (current_detailed != nil)
+                            setprop("/sim/rendering/static-lod/aimp-detailed", current_detailed );
+                        if (current_bare != nil)
+                            setprop("/sim/rendering/static-lod/aimp-bare",current_bare);
+                    }
+                    if (new_mode == "High Detail only") {
+                        setprop("/sim/rendering/static-lod/aimp-detailed", -1);
+                        setprop("/sim/rendering/static-lod/aimp-bare",0);
+                    } else if (new_mode == "Low Detail only"){
+                        setprop("/sim/rendering/static-lod/aimp-detailed", 0);
+                        setprop("/sim/rendering/static-lod/aimp-bare",0);
+                    }
+                    current_ai_mp_mode = new_mode;
+                }
+                update_description(update_enabling());
+             }
+#            setlistener("/sim/gui/dialogs/static-lod/aimp-mp-mode", func(v){
+#            },0 ,0);
+
+            update_scenery_text ();
+            update_ai_mp (0);
+
+
+        ]]>
+        </open>
+    </nasal>
+
+    <name>static-lod</name>
+    <layout>vbox</layout>
+
+    <group>
+        <layout>hbox</layout>
+        <empty>
+            <stretch>1</stretch>
+        </empty>
+
+        <text>
+            <label>Adjust Level Of Detail Ranges</label>
+        </text>
+
+        <empty>
+            <stretch>1</stretch>
+        </empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+
+    <hrule/>
+
+    <group>
+        <layout>table</layout>
+        <halign>center</halign>
+
+
+        <text>
+            <row>0</row>
+            <col>1</col>
+            <halign>center</halign>
+            <label>Scenery (Tiles, Buildings, Roads, Railways)</label>
+        </text>
+
+        <text>
+            <row>1</row>
+            <col>0</col>
+            <label>Detailed</label>
+        </text>
+        <slider>
+            <row>1</row>
+            <col>1</col>
+            <pref-width>300</pref-width>
+            <pref-height>14</pref-height>
+            <name>scenery-detailed</name>
+            <property>/sim/rendering/static-lod/detailed</property>
+            <live>1</live>
+            <min>0</min>
+            <max>100000</max>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>scenery-detailed</object-name>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    update_scenery_text();
+                ]]>
+                </script>
+            </binding>
+        </slider>
+
+        <text>
+            <row>1</row>
+            <col>2</col>
+            <halign>left</halign>
+            <label>xxxxxxxxxxxxxxxxxxx</label>
+            <live>true</live>
+            <property>/sim/rendering/static-lod/detailed-description</property>
+        </text>
+
+        <!--ROUGH -->
+        <text>
+            <row>2</row>
+            <col>0</col>
+            <label>Rough</label>
+        </text>
+        <slider>
+            <row>2</row>
+            <col>1</col>
+            <pref-width>300</pref-width>
+            <pref-height>14</pref-height>
+            <name>scenery-rough</name>
+            <property>/sim/rendering/static-lod/rough-delta</property>
+            <live>1</live>
+            <min>0</min>
+            <max>200000</max>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>scenery-rough</object-name>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    update_scenery_text();
+                ]]>
+                </script>
+            </binding>
+        </slider>
+
+        <text>
+            <row>2</row>
+            <col>2</col>
+            <halign>left</halign>
+            <label>xxxxxxxxxxxxxx</label>
+            <live>true</live>
+            <property>/sim/rendering/static-lod/rough-delta-description</property>
+        </text>
+
+        <!--BARE -->
+        <text>
+            <row>3</row>
+            <col>0</col>
+            <label>Bare</label>
+        </text>
+        <slider>
+            <row>3</row>
+            <col>1</col>
+            <pref-width>300</pref-width>
+            <pref-height>14</pref-height>
+            <name>scenery-bare</name>
+            <property>/sim/rendering/static-lod/bare-delta</property>
+            <live>1</live>
+            <min>0</min>
+            <max>200000</max>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>scenery-bare</object-name>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    update_scenery_text();
+                ]]>
+                </script>
+            </binding>
+        </slider>
+
+        <text>
+            <row>3</row>
+            <col>2</col>
+            <halign>left</halign>
+            <label>xxxxxxxxxxxxxx</label>
+            <live>true</live>
+            <property>/sim/rendering/static-lod/bare-delta-description</property>
+        </text>
+        <!-- end bare -->
+
+        <!--This is the AI/MP part-->
+        <hrule>
+            <row>4</row>
+            <col>0</col>
+            <colspan>7</colspan>
+        </hrule>
+
+        <text>
+            <row>5</row>
+            <col>1</col>
+            <halign>center</halign>
+            <label>AI/MP Aircraft</label>
+        </text>
+            <combo>
+                <row>6</row>
+                <col>1</col>
+                <pref-width>200</pref-width>
+                <name>aimp-mode</name>
+                <property>/sim/gui/dialogs/static-lod/aimp-mp-mode</property>
+                <value>Specify Ranges</value>
+                <value>Low Detail only</value>
+                <value>High Detail only</value>
+                <editable>false</editable>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>aimp-mode</object-name>
+                </binding>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                        <![CDATA[
+                update_aimp_mode();
+                    ]]>
+                    </script>
+                </binding>
+            </combo>
+        <checkbox>
+            <row>6</row>
+            <col>2</col>
+
+            <halign>left</halign>
+            <name>distance</name>
+            <property>sim/rendering/static-lod/aimp-range-mode-distance</property>
+            <live>true</live>
+            <label>AI/MP in meters</label>
+            <binding>
+                <command>property-toggle</command>
+                <property>sim/rendering/static-lod/aimp-range-mode-distance</property>
+                <value>0</value>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    update_ai_mp(0);
+                ]]>
+                </script>
+            </binding>
+
+        </checkbox>
+
+        <!--ai - detail-->
+        <text>
+            <row>7</row>
+            <col>0</col>
+            <name>aimp-detailed-label</name>
+            <enable><property>/sim/gui/dialogs/static-lod/aimp-mp-detailed-enabled</property></enable>
+            <label>High Detail</label>
+        </text>
+        <slider>
+            <row>7</row>
+            <col>1</col>
+            <pref-width>300</pref-width>
+            <pref-height>14</pref-height>
+            <name>aimp-detailed</name>
+            <enable><property>/sim/gui/dialogs/static-lod/aimp-mp-detailed-enabled</property></enable>
+            <property>/sim/rendering/static-lod/aimp-detailed</property>
+            <live>1</live>
+            <min>0</min>
+            <max>1500</max>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>aimp-detailed</object-name>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    update_ai_mp(1);
+                ]]>
+                </script>
+            </binding>
+            <binding>
+                <command>dialog-update</command>
+            </binding>
+
+        </slider>
+
+        <text>
+            <row>7</row>
+            <col>2</col>
+            <halign>left</halign>
+            <label>xxxxxxxxxxxxxxxxxxxxxxxxxx</label>
+            <live>true</live>
+            <property>/sim/gui/dialogs/static-lod/aimp-detailed-description</property>
+        </text>
+        <!-- end ai detail -->
+
+        <!--ai - bare-->
+        <text>
+            <name>aimp-bare-label</name>
+            <enable><property>/sim/gui/dialogs/static-lod/aimp-mp-bare-enabled</property></enable>
+            <row>8</row>
+            <col>0</col>
+            <label>Low Detail</label>
+        </text>
+        <slider>
+            <row>8</row>
+            <col>1</col>
+            <enable><property>/sim/gui/dialogs/static-lod/aimp-mp-bare-enabled</property></enable>
+            <pref-width>300</pref-width>
+            <pref-height>14</pref-height>
+            <name>aimp-bare</name>
+            <property>/sim/rendering/static-lod/aimp-bare</property>
+            <live>1</live>
+            <min>0</min>
+            <max>1500</max>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>aimp-bare</object-name>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    update_ai_mp(1);
+                ]]>
+                </script>
+            </binding>
+            <binding>
+                <command>dialog-update</command>
+            </binding>
+        </slider>
+
+        <text>
+            <row>8</row>
+            <col>2</col>
+            <halign>left</halign>
+            <valign>top</valign>
+            <label>xxxxxxxxxxxxxxxxxxxxxxxxxx</label>
+            <live>true</live>
+            <property>/sim/gui/dialogs/static-lod/aimp-bare-description</property>
+        </text>
+        <text>
+            <row>9</row>
+            <col>1</col>
+            <halign>left</halign>
+            <valign>top</valign>
+            <label>xxxxxxxxxxxxxxxxxxxxxxxxxx</label>
+            <live>true</live>
+            <property>/sim/gui/dialogs/static-lod/aimp-bare-description1</property>
+        </text>
+
+        <text>
+            <row>11</row>
+            <col>0</col>
+            <halign>right</halign>
+            <label>AI/MP Interior</label>
+        </text>
+
+        <slider>
+            <row>11</row>
+            <col>1</col>
+            <pref-width>300</pref-width>
+            <pref-height>14</pref-height>
+            <name>aimp-interior</name>
+            <property>/sim/rendering/static-lod/aimp-interior</property>
+            <live>1</live>
+            <min>0</min>
+            <max>1500</max>
+            <binding>
+                <command>dialog-apply</command>
+                <object-name>aimp-interior</object-name>
+            </binding>
+            <!--<binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    update_ai_mp(1);
+                ]]>
+                </script>
+            </binding>
+            <binding>
+                <command>dialog-update</command>
+            </binding>-->
+        </slider>
+        <text>
+            <row>11</row>
+            <col>2</col>
+            <halign>left</halign>
+            <valign>top</valign>
+            <label>xxxxxxxxxxxxxxxxxxxxxxxxxx</label>
+            <format>%.0f </format>
+            <live>true</live>
+            <property>/sim/rendering/static-lod/aimp-interior</property>
+        </text>
+    </group>
+
+    <hrule/>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>left</halign>
+        <text>
+            <label>World Scenery 3.0 (Experimental)</label>
+        </text>
+        <hrule>
+            <stretch>true</stretch>
+        </hrule>
+    </group>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>left</halign>
+        <text>
+            <label>WS3.0 uses 7 levels of detail, from 0 (least detailed) to 6 (most detailed).</label>
+        </text>
+    </group>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>left</halign>
+        <text>
+            <label>You can control at which level features are rendered and at what range level 6 is used.</label>
+        </text>
+    </group>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>center</halign>
+
+        <group>
+            <layout>table</layout>
+            <default-padding>4</default-padding>
+            <valign>center</valign>
+            <text>
+                <row>0</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Detail range</label>
+            </text>
+
+            <text>
+                <row>1</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Line Feature minimum LOD</label>
+            </text>
+            <slider>
+                <row>1</row>
+                <col>1</col>
+                <name>line-lod</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>0.0</min>
+                <max>6.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/line-features-lod-level</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-lod</object-name>
+                </binding>
+            </slider>
+            <text>
+                <row>1</row>
+                <col>2</col>
+                <label>1</label>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/line-features-lod-level</property>
+            </text>
+
+            <text>
+                <row>2</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Vegetation minimum LOD</label>
+            </text>
+            <slider>
+                <row>2</row>
+                <col>1</col>
+                <name>veg-lod</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>0.0</min>
+                <max>6.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/vegetation-lod-level</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>veg-lod</object-name>
+                </binding>
+            </slider>
+            <text>
+                <row>2</row>
+                <col>2</col>
+                <label>1</label>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/vegetation-lod-level</property>
+            </text>
+        
+            <text>
+                <row>3</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Area features minimum LOD</label>
+            </text>
+            <slider>
+                <row>3</row>
+                <col>1</col>
+                <name>area-lod</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>0.0</min>
+                <max>6.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/area-features-lod-level</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod</object-name>
+                </binding>
+            </slider>
+            <text>
+                <row>3</row>
+                <col>2</col>
+                <label>1</label>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/area-features-lod-level</property>
+            </text>        
+
+            <text>
+                <row>4</row>
+                <col>0</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <label>Detailed coastline minimum LOD</label>
+            </text>
+            <slider>
+                <row>4</row>
+                <col>1</col>
+                <name>coast-lod</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>0.0</min>
+                <max>6.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/coastline-lod-level</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>coast-lod</object-name>
+                </binding>
+            </slider>
+            <text>
+                <row>4</row>
+                <col>2</col>
+                <label>1</label>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/coastline-lod-level</property>
+            </text>            
+        </group>
+    </group>
+
+    <hrule/>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>center</halign>
+
+        <group>
+            <layout>table</layout>
+            <default-padding>4</default-padding>
+            <valign>center</valign>
+            <text>
+                <row>0</row>
+                <col>0</col>
+                <label>LOD Level</label>
+            </text>
+            <text>
+                <row>0</row>
+                <col>1</col>
+                <colspan>2</colspan>
+                <label>Minimum Line Feature Width (m)</label>
+            </text>
+            <text>
+                <row>0</row>
+                <col>3</col>
+                <colspan>2</colspan>
+                <label>Minimum Area Feature Area (m^2)</label>
+            </text>
+            <text>
+                <row>1</row>
+                <col>0</col>
+                <label>0</label>
+            </text>
+            <slider>
+                <row>1</row>
+                <col>1</col>
+                <name>line-width-lod0</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[0]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod0</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>1</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[0]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>1</row>
+                <col>3</col>
+                <name>area-lod0</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[0]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod0</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>1</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[0]/area-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>2</row>
+                <col>0</col>
+                <label>1</label>
+            </text>
+            <slider>
+                <row>2</row>
+                <col>1</col>
+                <name>line-width-lod1</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[1]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod1</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>2</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[1]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>2</row>
+                <col>3</col>
+                <name>area-lod1</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[1]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod1</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>2</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[1]/area-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>3</row>
+                <col>0</col>
+                <label>2</label>
+            </text>
+            <slider>
+                <row>3</row>
+                <col>1</col>
+                <name>line-width-lod2</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[2]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod2</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>3</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[2]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>3</row>
+                <col>3</col>
+                <name>area-lod2</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[2]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod2</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>3</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[2]/area-features-min-width</property>
+            </text>        
+
+
+            <text>
+                <row>4</row>
+                <col>0</col>
+                <label>3</label>
+            </text>
+            <slider>
+                <row>4</row>
+                <col>1</col>
+                <name>line-width-lod3</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[3]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod3</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>4</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[3]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>4</row>
+                <col>3</col>
+                <name>area-lod3</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[3]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod2</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>4</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[3]/area-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>5</row>
+                <col>0</col>
+                <label>4</label>
+            </text>
+            <slider>
+                <row>5</row>
+                <col>1</col>
+                <name>line-width-lod4</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[4]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod4</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>5</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[4]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>5</row>
+                <col>3</col>
+                <name>area-lod4</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[4]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod4</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>5</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[4]/area-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>6</row>
+                <col>0</col>
+                <label>5</label>
+            </text>
+            <slider>
+                <row>6</row>
+                <col>1</col>
+                <name>line-width-lod5</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[5]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod5</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>6</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[5]/line-features-min-width</property>
+            </text>                
+            <slider>
+                <row>6</row>
+                <col>3</col>
+                <name>area-lod5</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[5]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod5</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>6</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[5]/area-features-min-width</property>
+            </text>        
+
+            <text>
+                <row>7</row>
+                <col>0</col>
+                <label>6</label>
+            </text>
+            <slider>
+                <row>7</row>
+                <col>1</col>
+                <name>line-width-lod6</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>50.0</max>
+                <step>1.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[6]/line-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>line-width-lod6</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>7</row>
+                <col>2</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[6]/line-features-min-width</property>
+            </text>        
+            <slider>
+                <row>7</row>
+                <col>3</col>
+                <name>area-lod6</name>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <min>1.0</min>
+                <max>10000.0</max>
+                <step>100.0</step>
+                <fraction>0.17</fraction>
+                <property>/sim/rendering/static-lod/lod-level[6]/area-features-min-width</property>
+                <binding>
+                    <command>dialog-apply</command>
+                    <object-name>area-lod6</object-name>
+                </binding>
+            </slider>
+            <text>
+                <label>12</label>
+                <row>7</row>
+                <col>4</col>
+                <enable>
+                    <equals>
+                        <property>/scenery/use-vpb</property>
+                        <value>true</value>
+                    </equals>
+                </enable>
+                <format>%d</format>
+                <live>true</live>
+                <property>/sim/rendering/static-lod/lod-level[6]/area-features-min-width</property>
+            </text>        
+        </group>
+
+    </group>
+    
+    <hrule/>
+
+    <group>
+        <layout>hbox</layout>
+        <default-padding>10</default-padding>
+        <empty>
+            <stretch>true</stretch>
+        </empty>
+        <button>
+            <legend>OK</legend>
+            <default>true</default>
+            <equal>true</equal>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    check_for_reload();
+                  ]]>
+                </script>
+            </binding>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+        <empty>
+            <stretch>true</stretch>
+        </empty>
+        <button>
+            <legend>Apply</legend>
+            <equal>true</equal>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    check_for_reload();
+                  ]]>
+                </script>
+            </binding>        </button>
+        <empty>
+            <stretch>true</stretch>
+        </empty>
+
+        <button>
+            <legend>Defaults</legend>
+            <equal>true</equal>
+
+            <!--end reset for pixel mode-->
+            <binding>
+                <command>nasal</command>
+                <script>
+                    <![CDATA[
+                    setprop("/sim/gui/dialogs/static-lod/aimp-mp-mode", "Specify Ranges");
+                    setprop("/sim/rendering/static-lod/detailed",1500);
+                    setprop("/sim/rendering/static-lod/rough-delta",7500);
+                    setprop("/sim/rendering/static-lod/bare-delta",21000);
+                    if (getprop("sim/rendering/static-lod/aimp-range-mode-distance")){
+                        # Reset for meters
+                        setprop("/sim/rendering/static-lod/aimp-detailed",500);
+                        setprop("/sim/rendering/static-lod/aimp-bare",2000);
+                        setprop("/sim/rendering/static-lod/aimp-interior",50);
+                    } else {
+                        # Reset for pixel mode
+                        setprop("/sim/rendering/static-lod/aimp-detailed",400);
+                        setprop("/sim/rendering/static-lod/aimp-bare",0);
+                        setprop("/sim/rendering/static-lod/aimp-interior",200);
+                    }
+                    update_description(update_enabling());
+                    reload_sliders(1);
+                ]]>
+                </script>
+            </binding>
+        </button>
+        <empty>
+            <stretch>true</stretch>
+        </empty>
+        <button>
+            <legend>Close</legend>
+            <key>Esc</key>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+
+
+
+</PropertyList>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+
+<!-- Stromboli central crater activity -->
+
+
+<PropertyList>
+
+
+	
+	<model>
+	  <path>stromboli_smoke_main.xml</path>
+      <offsets>
+        <x-m>-50.0</x-m>
+        <y-m>50.0</y-m>
+        <z-m>20.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/stromboli/central-activity</property>
+			<value>0</value>
+		</greater-than>
+       </condition>
+    </model>
+	
+	<model>
+	  <path>stromboli_smoke_minor.xml</path>
+      <offsets>
+        <x-m>50.0</x-m>
+        <y-m>100.0</y-m>
+        <z-m>20.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/stromboli/central-activity</property>
+			<value>0</value>
+		</greater-than>
+       </condition>
+    </model>
+	
+	<model>
+	  <path>central_crater_lava_fountain.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>170</heading-deg>
+	  <pitch-deg>10</pitch-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/stromboli/central-activity</property>
+			<value>1</value>
+		</greater-than>
+       </condition>
+    </model>
+	
+		<model>
+	  <path>central_crater_lava_fountain_inner.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>170</heading-deg>
+	  <pitch-deg>10</pitch-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/stromboli/central-activity</property>
+			<value>1</value>
+		</greater-than>
+       </condition>
+    </model>
+	
+
+ 
+
+
+</PropertyList>

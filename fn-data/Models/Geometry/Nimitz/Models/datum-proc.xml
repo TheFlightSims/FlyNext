@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- Green DatumLight, ALS version -->
+<PropertyList>
+	<path>procedural_light.ac</path>
+
+	<effect>
+		<inherits-from>Models/Geometry/Nimitz/Effects/datum_light</inherits-from>
+		<object-name>procedural_light</object-name>
+	</effect>
+
+    	<animation>
+		<object-name>procedural_light</object-name>
+	  	<type>scale</type>
+		<property>controls/flols/distance-m</property>
+	  	<x-offset>2.0</x-offset>
+	  	<y-offset>2.0</y-offset>
+	  	<z-offset>2.0</z-offset>
+		<x-factor>0.005</x-factor>
+		<y-factor>0.005</y-factor>
+		<z-factor>0.005</z-factor>
+    	</animation>
+
+
+</PropertyList>

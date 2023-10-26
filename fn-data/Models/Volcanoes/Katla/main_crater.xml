@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<!-- Beerenberg main crater activity -->
+
+
+<PropertyList>
+
+
+	
+	
+	<model>
+	  <path>katla_plinian_eruption.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+	     <equals>
+			<property>/environment/volcanoes/katla/main-activity</property>
+			<value>1</value>
+		 </equals>
+	  </condition>
+    </model>
+	
+	
+
+	
+
+ 
+
+
+</PropertyList>

@@ -1,0 +1,124 @@
+# Copyright 2020-2023 Benedikt Wolf
+# 	with parts by Gilberto Agonstinho, WooT, Joshau Davidsonm, Colin Geniet
+# This file is part of FlightGear.
+#
+# FlightGear is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# FlightGear is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with FlightGear.  If not, see <http://www.gnu.org/licenses/>.
+
+
+To install this instrument into your aircraft, you need to do the following:
+
+1.	Enable a second altimeter (<altimeter n="1">) module through the aircraft's instrumentation.xml (in case a custom one is used). 
+	Make sure instrumentation/altimeter[1]/serviceable is set to true via your -set.xml file.
+2.	Add S3.nas to your aircraft's list of included nasal files:
+	<nasal>
+		...
+		<s3>
+			<file>Aircraft/Instruments-3d/glider/vario/S3/S3.nas</file>
+		</s3>
+		...
+	</nasal>
+	** Note that it is important to put the file into <s3></s3> tags, as the animation xml may in the future reference the instrument by that name
+3.	Add the model to your aircraft:
+	<model>
+		<path>Aircraft/Instruments-3d/glider/vario/S3/S3.xml</path>
+		...
+	</model>
+4.	If you are using a custom electric system, make sure the vario is supplied at /systems/electrical/outputs/S3 when appropriate
+5.	Add sound effects for this vario, e.g. by using the block below and adjusting it to fit:
+
+<variometer-up>
+	<name>variometer-up</name>
+	<mode>looped</mode>
+	<path>Aircraft/Instruments-3d/glider/vario/ilec-sc7/vario.wav</path>
+	<condition>
+		<and>
+			<greater-than>
+				<property>instrumentation/s3/te-reading-mps</property>
+				<value>0.01</value>
+			</greater-than>
+			<greater-than-equals>
+				<property>systems/electrical/outputs/S3</property>
+				<value>9</value>
+			</greater-than-equals>
+			<equals>
+				<property>instrumentation/s3/start</property>
+				<value>1.0</value>
+			</equals>
+		</and>
+	</condition>
+	<pitch>
+		<property>instrumentation/s3/sound-pitch</property>
+		<offset>0</offset>
+	</pitch>
+	<volume>
+		<property>instrumentation/s3/volume</property>
+		<factor>1</factor>
+		<max>1</max>
+	</volume>
+	<!-- Put the position of your variometer loudspeaker here -->
+	<position>
+		<x>-3.35</x>
+		<y>0</y>
+		<z>0.7</z>
+	</position>
+	<reference-dist>0.5</reference-dist>
+	<max-dist>2.0</max-dist>
+</variometer-up>
+
+<variometer-down>
+	<name>variometer-down</name>
+	<mode>looped</mode>
+	<path>Aircraft/Instruments-3d/glider/vario/ilec-sc7/vario2.wav</path>
+	<condition>
+		<and>
+			<greater-than>
+				<property>instrumentation/s3/te-reading-mps</property>
+				<value>-10.00</value>
+			</greater-than>
+			<less-than>
+				<property>instrumentation/s3/te-reading-mps</property>
+				<value>-0.01</value>
+			</less-than>
+			<greater-than-equals>
+				<property>systems/electrical/outputs/S3</property>
+				<value>9</value>
+			</greater-than-equals>
+			<equals>
+				<property>instrumentation/s3/start</property>
+				<value>1.0</value>
+			</equals>
+		</and>
+	</condition>
+	<pitch>
+		<property>instrumentation/s3/sound-pitch</property>
+		<offset>0</offset>
+	</pitch>
+	<volume>
+		<property>instrumentation/s3/volume</property>
+		<factor>1</factor>
+		<max>1</max>
+	</volume>
+	<!-- Put the position of your variometer loudspeaker here -->
+	<position>
+		<x>-3.35</x>
+		<y>0</y>
+		<z>0.7</z>
+	</position>
+	<reference-dist>0.5</reference-dist>
+	<max-dist>2.0</max-dist>
+</variometer-down>
+
+
+
+## Please report any bugs, issues and improvements either to the mailing list of FlightGear forum so they can be fixed/included in the shared version of this instrument

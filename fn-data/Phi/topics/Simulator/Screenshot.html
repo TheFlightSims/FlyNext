@@ -1,0 +1,9 @@
+<div class="ui-widget ui-corner-all">
+    <div>
+    <span>Refresh image every</span>
+        <input data-bind="spinner: { value: updateInterval, min: 1, spin: spinUpdateInterval }" , style="width: 2em;">
+    <span>seconds</span>
+    </div>
+
+    <img data-bind="attr: { src: imageUrl }" style="width: 100%;">
+</div>

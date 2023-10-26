@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/tree-grass</name>
+  <inherits-from>Effects/tree</inherits-from>
+	<parameters>
+		<use_tree_shadows>false</use_tree_shadows>
+		<use_forest_effect>false</use_forest_effect>
+	</parameters>
+</PropertyList>

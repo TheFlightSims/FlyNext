@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Airbus A350-900</description>
+  <author>Ian(Yves) Tolosa. August 2017</author>
+  <path>Models/359.ac</path>
+  <!-- Pitch Aircraft towards front so all wheels on ground -->
+  <offsets>
+    <pitch-deg>-0.45</pitch-deg>
+  </offsets>
+  <!-- Show Gear only when speed under 150 knots for parking and taxi and take off phases -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/A350/Effects/359-LightMap</inherits-from>
+    <object-name>359</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/359-NavLights.xml</path>
+  </model>
+</PropertyList>

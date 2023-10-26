@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <description>de Havilland DH.82 Tiger Moth</description>
+ <author>Brett Harrison</author>  
+ <path>Models/DH82.ac</path>
+ 
+  <offsets>
+   <pitch-deg>12.428</pitch-deg>
+
+ </offsets>   
+ 
+    <animation>
+    <name>propall</name>
+    <object-name>prop</object-name>
+    <object-name>propdisc</object-name>
+   </animation>
+    
+    <animation>
+    <type>select</type>
+    <object-name>propdisc</object-name>
+    <condition>
+      <greater-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>25</value>
+      </greater-than>
+    </condition>
+  </animation>
+    
+      <animation>
+    <type>select</type>
+    <object-name>prop</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>30</value>
+      </less-than>
+    </condition>zzaa
+  </animation>
+    
+      <animation>
+    <type>spin</type>
+    <object-name>propall</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>27</factor>
+    <center>
+      <x-m> -1.5800</x-m>
+      <y-m> 0.00000 </y-m>
+      <z-m> 1.6271 </z-m>
+    </center>
+    <axis>
+      <x> -1.000 </x>
+      <y>  0.000 </y>
+      <z>  0.000 </z>
+    </axis>
+   </animation>
+   
+   <animation>
+  <type>rotate</type>
+  <property>velocities/true-airspeed-kt</property>
+  <interpolation>
+<entry>
+    <ind>0.0</ind>
+    <dep>0.0</dep>
+   </entry>
+   
+   <entry>
+    <ind>25</ind>
+    <dep>0.0</dep>
+   </entry>
+   
+      <entry>
+    <ind>45</ind>
+    <dep>-12.428</dep>
+   </entry>
+   
+  </interpolation>
+  <center>
+   <x-m>0.0</x-m>
+   <y-m>0.0</y-m>
+   <z-m>0.0</z-m>
+  </center>
+  <axis>
+   <x>0.0</x>
+   <y>1.0</y>
+   <z>0.0</z>
+  </axis>
+ </animation>
+
+ 
+</PropertyList>

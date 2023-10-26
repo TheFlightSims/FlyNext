@@ -1,0 +1,17 @@
+src/Instrumentation/ - gauge and avionics support code
+
+This directory contains code to support gauges, avionics, and other
+instruments in FlightGear.  The file instrument_mgr.[ch]xx contains a
+subsystem group that holds all of the individual instruments.  Every
+instrument should extend FGSubsystem (directly or via AbstractInstrument),
+and then should be added to the group in the FGInstrumentMgr constructor.
+
+Code is gradually moving into here from other areas, especially the
+src/Cockpit/ directory.
+
+Aircraft can select which instrumentation modules should be available
+using an XML configuration file loaded as
+<sim><instrumentation><path>.
+An example of such a configuration file can be found in FGData at
+Aircraft/Generic/generic-instrumentation.xml
+

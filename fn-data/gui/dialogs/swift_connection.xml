@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>
+    <name>swift_connection</name>
+    <layout>vbox</layout>
+    <resizable>false</resizable>
+
+
+    <!-- titlebar -->
+    <group>
+        <layout>hbox</layout>
+        <empty>
+            <stretch>1</stretch>
+        </empty>
+
+        <text>
+            <label>Swift Connection Settings</label>
+        </text>
+
+        <empty>
+            <stretch>1</stretch>
+        </empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+    <hrule/>
+
+    <!-- main dialog area -->
+    <group>
+        <layout>hbox</layout>
+        <halign>center</halign>
+        <default-padding>10</default-padding>
+
+        <button>
+            <legend>Start server</legend>
+            <equal>true</equal>
+            <enable>
+                <not>
+                    <property>/sim/swift/serverRunning</property>
+                </not>
+            </enable>
+            <binding>
+                <command>nasal</command>
+                <script>
+                fgcommand("swiftStart",  props.Node.new({
+                "message": getprop("/controls/lighting/landing-lights")}));
+                </script>
+            </binding>
+        </button>
+
+        <button>
+            <legend>Stop server</legend>
+            <equal>true</equal>
+            <enable>
+                <property>/sim/swift/serverRunning</property>
+            </enable>
+            <binding>
+                <command>nasal</command>
+                <script>
+                fgcommand("swiftStop",  props.Node.new({
+                "message": getprop("/controls/lighting/landing-lights")}));
+                </script>
+            </binding>
+        </button>
+    </group>
+
+
+    <group>
+        <layout>hbox</layout>
+        <row>4</row>
+        <col>1</col>
+        <text>
+            <width>2</width>
+            <halign>right</halign>
+            <label>Address</label>
+        </text>
+        <input>
+            <pref-width>150</pref-width>
+            <halign>left</halign>
+            <property>/sim/swift/address</property>
+            <enable>
+                <not>
+                    <property>/sim/swift/serverRunning</property>
+                </not>
+            </enable>
+        </input>
+        <text>
+            <width>2</width>
+            <halign>right</halign>
+            <label>Port</label>
+        </text>
+        <input>
+            <pref-width>55</pref-width>
+            <halign>left</halign>
+            <property>/sim/swift/port</property>
+            <enable>
+                <not>
+                    <property>/sim/swift/serverRunning</property>
+                </not>
+            </enable>
+        </input>
+
+    </group>
+
+    <group>
+        <layout>hbox</layout>
+        <halign>center</halign>
+        <default-padding>10</default-padding>
+
+        <button>
+            <legend>Apply setting changes</legend>
+            <equal>true</equal>
+            <enable>
+                <not>
+                    <property>/sim/swift/serverRunning</property>
+                </not>
+            </enable>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </button>
+    </group>
+</PropertyList>

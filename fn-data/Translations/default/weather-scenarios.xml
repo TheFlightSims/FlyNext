@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- !!! Don't modify this file manually. !!!
+This file was automatically generated from $FG_ROOT/Environment/environment.xml
+using the fg-copy-weather-scenarios-to-default-locale script from FGMeta.
+Modifications should be done either in $FG_ROOT/Environment/environment.xml or
+in that script. -->
+<PropertyList>
+  <live-data-name>Live data</live-data-name>
+  <live-data-desc>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</live-data-desc>
+  <manual-input-name>Manual input</manual-input-name>
+  <manual-input-desc>Enter your favorite METAR weather. A valid METAR syntax is required.</manual-input-desc>
+  <isa-name>International Standard Atmosphere</isa-name>
+  <isa-desc>A standard atmosphere model for testing and calibrating aircraft performance and design.</isa-desc>
+  <core-high-pressure-region-name>Core high pressure region</core-high-pressure-region-name>
+  <core-high-pressure-region-desc>The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</core-high-pressure-region-desc>
+  <high-pressure-region-name>High pressure region</high-pressure-region-name>
+  <high-pressure-region-desc>A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</high-pressure-region-desc>
+  <border-high-pressure-region-name>Border of a high pressure region</border-high-pressure-region-name>
+  <border-high-pressure-region-desc>The border of a high pressure region, in which the airmass becomes unstable and various convective and stratiform clouds may appear.</border-high-pressure-region-desc>
+  <border-low-pressure-region-name>Border of a low pressure region</border-low-pressure-region-name>
+  <border-low-pressure-region-desc>The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</border-low-pressure-region-desc>
+  <low-pressure-region-name>Low pressure region</low-pressure-region-name>
+  <low-pressure-region-desc>A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</low-pressure-region-desc>
+  <core-low-pressure-region-name>Core low pressure region</core-low-pressure-region-name>
+  <core-low-pressure-region-desc>The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</core-low-pressure-region-desc>
+  <warm-sector-name>Warm sector</warm-sector-name>
+  <warm-sector-desc>A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</warm-sector-desc>
+  <fair-weather-name>Fair weather</fair-weather-name>
+  <fair-weather-desc>A lovely day for trip to your favorite 100$ hamburger airfield</fair-weather-desc>
+  <thunderstorm-name>Thunderstorm</thunderstorm-name>
+  <thunderstorm-desc>A hot and damp summer day with thunderstorms developing in the afternoon. Be prepared for reduction of visibility in showers and strong gusts near thunderstorms</thunderstorm-desc>
+  <stormy-monday-name>Stormy Monday</stormy-monday-name>
+  <stormy-monday-desc>You're out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</stormy-monday-desc>
+  <marginal-vfr-name>Marginal VFR</marginal-vfr-name>
+  <marginal-vfr-desc>After the storm - limited visibility and some showers. Go or No-Go?</marginal-vfr-desc>
+  <cat-one-minimum-name>CAT I minimum</cat-one-minimum-name>
+  <cat-one-minimum-desc>If you just got your IFR rating, this is what you are allowed to do. But can you?</cat-one-minimum-desc>
+  <cat-two-minimum-name>CAT II minimum</cat-two-minimum-name>
+  <cat-two-minimum-desc>With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</cat-two-minimum-desc>
+  <cat-three-b-minimum-name>CAT IIIb minimum</cat-three-b-minimum-name>
+  <cat-three-b-minimum-desc>This is expert level. You will barely see the taxiway from the cockpit, even if you are on ground. Fog and light drizzle, freezing level at 1000ft.</cat-three-b-minimum-desc>
+  <early-morning-fog-name>Early morning fog</early-morning-fog-name>
+  <early-morning-fog-desc>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</early-morning-fog-desc>
+</PropertyList>

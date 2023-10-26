@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+
+<!--
+
+  Copyright (c) 2021 FlightGear Flight Simulator
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+********************************************************************
+
+Written for the Cessna 172 and only tested on Raspberry Pi OS running
+FlightGear 2020.3.6
+
+********************************************************************
+-->
+
+
+<!--
+********************************************************************
+*
+* Bindings for Honeycomb Aeronautical Alpha Flight Controls - Yoke
+*
+*
+* Axis 0: ailerons
+* Axis 1: elevator
+* Axes 2 and 3 (hat): view direction
+* 
+* Button  0: YOKE white-Trigger left-handle  >>>>>>>>  View, Cycle Forwards
+* Button  1: YOKE white-top-Button left-handle  >>>>>  View, Reset
+* Button  2: YOKE white-top-Button right-handle
+* Button  3: YOKE red-top-Button right-handle
+* Button  4: YOKE outer-Rocker down left-handle  >>>>  Elevator Trim, Up
+* Button  5: YOKE outer-Rocker up left-handle  >>>>>>  Elevator Trim, Down
+* Button  6: YOKE inner-Rocker down left-handle  >>>>  Flaps, Down
+* Button  7: YOKE inner-Rocker up left-handle  >>>>>>  Flaps, Up
+* Button  8: YOKE top-Rocker inward right-handle  >>>  Rudder Trim, Left
+* Button  9: YOKE top-Rocker outward right-handle  >>  Rudder Trim, Right
+* Button 10: YOKE bottom-Rocker inward right-handle
+* Button 11: YOKE bottom-Rocker outward right-handle
+* Button 12: BASE Master Alternator up  >>>>>>>>>>>>>  Master Alternator, ON OFF
+* Button 13: BASE Master Alternator down
+* Button 14: BASE Master Battery up  >>>>>>>>>>>>>>>>  Battery, ON OFF
+* Button 15: BASE Master Battery down
+* Button 16: BASE Avionics Bus1 up  >>>>>>>>>>>>>>>>>  Master Avionics, ON OFF
+* Button 17: BASE Avionics Bus1 down
+* Button 18: BASE Avionics Bus2 up
+* Button 19: BASE Avionics Bus2 down
+* Button 20: BASE Beacon up  >>>>>>>>>>>>>>>>>>>>>>>>  Beacon, ON OFF
+* Button 21: BASE Beacon down
+* Button 22: BASE Land up  >>>>>>>>>>>>>>>>>>>>>>>>>>  Landing Lights, ON OFF
+* Button 23: BASE Land down
+* Button 24: BASE Taxi up  >>>>>>>>>>>>>>>>>>>>>>>>>>  Taxi Lights, ON OFF
+* Button 25: BASE Taxi down
+* Button 26: BASE Nav up  >>>>>>>>>>>>>>>>>>>>>>>>>>>  Navigation Lights, ON OFF
+* Button 27: BASE Nav down
+* Button 28: BASE Strobe up  >>>>>>>>>>>>>>>>>>>>>>>>  Strobe Light, ON OFF
+* Button 29: BASE Strobe down
+* Button 30: BASE Off  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>  Magneto, OFF
+* Button 31: BASE Right Mag  >>>>>>>>>>>>>>>>>>>>>>>>  Magneto, Right
+* Button 32: BASE Left Mag  >>>>>>>>>>>>>>>>>>>>>>>>>  See note below
+* Button 33: BASE Both Mag  >>>>>>>>>>>>>>>>>>>>>>>>>  See note below
+* Button 34: BASE Start  >>>>>>>>>>>>>>>>>>>>>>>>>>>>  See note below
+
+********************************************************************
+-->
+
+<PropertyList>
+  <name type="string">Honeycomb Aeronautical Alpha Flight Controls</name>
+
+  <axis>
+      <desc>Aileron</desc>
+      <binding>
+          <command>property-scale</command>
+          <property>/controls/flight/aileron</property>
+          <factor type="double">1</factor>
+          <offset type="double">0</offset>
+      </binding>
+  </axis>
+
+  <axis n="1">
+      <desc>Elevator</desc>
+      <binding>
+          <command>property-scale</command>
+          <property>/controls/flight/elevator</property>
+          <factor type="double">-1</factor>
+          <offset type="double">0</offset>
+      </binding>
+  </axis>
+
+  <axis n="2">
+      <desc>View, Direction</desc>
+      <direction>left</direction>
+      <low>
+          <repeatable>true</repeatable>
+          <binding>
+              <command>nasal</command>
+              <script>view.panViewDir(1)</script>
+              <module>__js1</module>
+              <offset type="double">1</offset>
+          </binding>
+      </low>
+      <high>
+          <repeatable>true</repeatable>
+          <binding>
+              <command>nasal</command>
+              <script>view.panViewDir(-1)</script>
+              <module>__js1</module>
+              <offset type="double">1</offset>
+          </binding>
+      </high>
+  </axis>
+
+  <axis n="3">
+      <desc>View, Elevation</desc>
+      <direction>upward</direction>
+      <low>
+          <repeatable>true</repeatable>
+          <binding>
+              <command>nasal</command>
+              <script>view.panViewPitch(1)</script>
+              <module>__js1</module>
+              <offset type="double">1</offset>
+          </binding>
+     </low>
+     <high>
+          <repeatable>true</repeatable>
+          <binding>
+              <command>nasal</command>
+              <script>view.panViewPitch(-1)</script>
+              <module>__js1</module>
+              <offset type="double">1</offset>
+          </binding>
+      </high>
+  </axis>
+  
+  <button n="0">
+      <desc>View, Cycle Forwards</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>view.stepView(1)</script>
+      </binding>
+  </button>
+
+  <button n="1">
+      <desc>View, Reset</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>
+              setprop("/sim/current-view/view-number", 0);
+              view.resetView()
+          </script>
+      </binding>
+  </button>
+
+  <button n="4">
+      <desc>Elevator Trim, Up</desc>
+      <repeatable>true</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>controls.elevatorTrim(-1)</script>
+      </binding>
+  </button>
+
+  <button n="5">
+      <desc>Elevator Trim, Down</desc>
+      <repeatable>true</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>controls.elevatorTrim(1)</script>
+      </binding>
+  </button>
+
+  <button n="6">
+      <desc>Flaps, Down</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>controls.flapsDown(1)</script>
+      </binding>
+  </button>
+
+  <button n="7">
+      <desc>Flaps, Up</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>controls.flapsDown(-1)</script>
+      </binding>
+  </button>
+
+  <button n="8">
+      <desc>Rudder Trim, Left</desc>
+      <repeatable>true</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>controls.rudderTrim(-1)</script>
+      </binding>
+  </button>
+
+  <button n="9">
+      <desc>Rudder Trim, Right</desc>
+      <repeatable>true</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>controls.rudderTrim(1)</script>
+      </binding>
+  </button>
+
+  <button n="12">
+      <desc>Master Alternator, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/switches/master-alt", 1);</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/switches/master-alt", 0)</script>
+          </binding>
+      </mod-up>
+  </button>
+
+  <button n="14">
+      <desc>Battery, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/switches/master-bat", 1)</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/switches/master-bat", 0)</script>
+          </binding>
+      </mod-up>
+      </button>
+
+  <button n="16">
+      <desc>Master Avionics, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/switches/master-avionics", 1)</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/switches/master-avionics", 0)</script>
+          </binding>
+      </mod-up>
+  </button>
+
+  <button n="20">
+      <desc>Beacon, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/lighting/beacon", 1)</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/lighting/beacon", 0)</script>
+          </binding>
+      </mod-up>
+  </button>
+
+  <button n="22">
+      <desc>Landing Lights, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/lighting/landing-lights", 1)</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/lighting/landing-lights", 0)</script>
+          </binding>
+      </mod-up>
+  </button>
+
+  <button n="24">
+      <desc>Taxi Lights, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/lighting/taxi-light", 1)</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/lighting/taxi-light", 0)</script>
+          </binding>
+      </mod-up>
+  </button>
+
+  <button n="26">
+      <desc>Navigation Lights, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/lighting/nav-lights", 1)</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/lighting/nav-lights", 0)</script>
+          </binding>
+      </mod-up>
+  </button>
+
+  <button n="28">
+      <desc>Strobe Light, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/lighting/strobe", 1)</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/lighting/strobe", 0)</script>
+          </binding>
+      </mod-up>
+  </button>
+
+  <button n="30">
+      <desc>Magneto, OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/switches/magnetos", 0)</script>
+      </binding>
+  </button>
+
+  <button n="31">
+      <desc>Magneto, Right</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/switches/magnetos", 1)</script>
+      </binding>
+  </button>
+
+<!-- Linux and FlightGear does not handle more than 32 USB buttons.
+     See FlightGear Ticket 2212.
+
+  <button n="32">
+      <desc>Magneto, Left</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/switches/magnetos", 2)</script>
+      </binding>
+  </button>
+
+  <button n="33">
+      <desc>Magneto, Both</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/switches/magnetos", 3)</script>
+      </binding>
+  </button>
+
+  <button n="34">
+      <desc>Starter, ON OFF</desc>
+      <repeatable>false</repeatable>
+      <binding>
+          <command>nasal</command>
+          <script>setprop("/controls/lighting/strobe", 1)</script>
+      </binding>
+      <mod-up>
+          <binding>
+              <command>nasal</command>
+              <script>setprop("/controls/lighting/strobe", 0)</script>
+          </binding>
+      </mod-up>
+  </button>
+-->
+
+</PropertyList>

@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/cloud-noctilucent</name>
+  <parameters>
+    <texture n ="0">
+    </texture>
+    <terminator><use>/environment/terminator-relative-position-m</use></terminator>
+    <altitude><use>/sim/rendering/eye-altitude-m</use></altitude>
+    <cloud_self_shading><use>/environment/cloud-self-shading</use></cloud_self_shading>
+    <moonlight><use>/environment/moonlight</use></moonlight>
+    <!-- exposure.glsl -->
+    <exposure-compensation>
+      <use>/sim/rendering/hdr/exposure-compensation</use>
+    </exposure-compensation>
+    <!-- atmos.glsl -->
+    <aerosol-absorption-cross-section type="vec4d">
+      <use>/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[0]</use>
+      <use>/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[1]</use>
+      <use>/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[2]</use>
+      <use>/sim/rendering/hdr/atmos/aerosol-absorption-cross-section[3]</use>
+    </aerosol-absorption-cross-section>
+    <aerosol-scattering-cross-section type="vec4d">
+      <use>/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[0]</use>
+      <use>/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[1]</use>
+      <use>/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[2]</use>
+      <use>/sim/rendering/hdr/atmos/aerosol-scattering-cross-section[3]</use>
+    </aerosol-scattering-cross-section>
+    <aerosol-base-density>
+      <use>/sim/rendering/hdr/atmos/aerosol-base-density</use>
+    </aerosol-base-density>
+    <aerosol-relative-background-density>
+      <use>/sim/rendering/hdr/atmos/aerosol-relative-background-density</use>
+    </aerosol-relative-background-density>
+    <aerosol-scale-height>
+      <use>/sim/rendering/hdr/atmos/aerosol-scale-height</use>
+    </aerosol-scale-height>
+    <fog-density>
+      <use>/sim/rendering/hdr/atmos/fog-density</use>
+    </fog-density>
+    <fog-scale-height>
+      <use>/sim/rendering/hdr/atmos/fog-scale-height</use>
+    </fog-scale-height>
+    <ozone-mean-dobson>
+      <use>/sim/rendering/hdr/atmos/ozone-mean-dobson</use>
+    </ozone-mean-dobson>
+    <ground-albedo type="vec4d">
+      <use>/sim/rendering/hdr/atmos/ground-albedo[0]</use>
+      <use>/sim/rendering/hdr/atmos/ground-albedo[1]</use>
+      <use>/sim/rendering/hdr/atmos/ground-albedo[2]</use>
+      <use>/sim/rendering/hdr/atmos/ground-albedo[3]</use>
+    </ground-albedo>
+  </parameters>
+
+<technique n="9">
+    <predicate>
+      <and>
+        <property>/sim/rendering/shaders/skydome</property>
+        <property>/sim/rendering/clouds3d-enable</property>
+        <less-equal>
+          <value type="float">1.0</value>
+          <shader-language/>
+        </less-equal>
+      </and>
+    </predicate>
+    <pass n="0">
+      <!-- This is apparently not used, so maybe we'll blow it way soon. -->
+      <lighting>true</lighting>
+      <material>
+        <ambient type="vec4d">0.5 0.5 0.5 1.0</ambient>
+        <diffuse type="vec4d">0.5 0.5 0.5 1.0</diffuse>
+        <color-mode>off</color-mode>
+      </material>
+      <alpha-test>
+        <comparison>greater</comparison>
+        <reference type="float">0.01</reference>
+      </alpha-test>
+      <shade-model>smooth</shade-model>
+      <blend>
+        <source>src-alpha</source>
+        <destination>one-minus-src-alpha</destination>
+      </blend>
+      <depth>
+        <write-mask>false</write-mask>
+      </depth>
+      <render-bin>
+        <bin-number>9</bin-number>
+        <bin-name>DepthSortedBin</bin-name>
+      </render-bin>
+      <texture-unit>
+        <unit>0</unit>
+	<type><use>texture[0]/type</use></type>
+        <image><use>texture[0]/image</use></image>
+        <filter><use>texture[0]/filter</use></filter>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+        <!--<wrap-s>clamp</wrap-s>
+        <wrap-t>clamp</wrap-t>-->
+      </texture-unit>
+      <program>
+        <vertex-shader>Shaders/cloud-noctilucent-ALS.vert</vertex-shader>
+        <vertex-shader>Shaders/filters-ALS.vert</vertex-shader>
+        <fragment-shader>Shaders/cloud-static-ALS.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>baseTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>terminator</name>
+        <type>float</type>
+        <value><use>terminator</use></value>
+      </uniform>
+      <uniform>
+        <name>altitude</name>
+        <type>float</type>
+        <value><use>altitude</use></value>
+      </uniform>
+      <uniform>
+        <name>cloud_self_shading</name>
+        <type>float</type>
+        <value><use>cloud_self_shading</use></value>
+      </uniform>
+      <uniform>
+        <name>moonlight</name>
+        <type>float</type>
+        <value><use>moonlight</use></value>
+      </uniform>
+      <vertex-program-two-side>true</vertex-program-two-side>
+    </pass>
+  </technique>
+  <technique n="10">
+    <predicate>
+      <and>
+        <property>/sim/rendering/clouds3d-enable</property>
+        <less-equal>
+          <value type="float">1.0</value>
+          <shader-language/>
+        </less-equal>
+      </and>
+    </predicate>
+    <pass n="0">
+      <!-- This is apparently not used, so maybe we'll blow it way soon. -->
+      <lighting>true</lighting>
+      <material>
+        <ambient type="vec4d">0.5 0.5 0.5 1.0</ambient>
+        <diffuse type="vec4d">0.5 0.5 0.5 1.0</diffuse>
+        <color-mode>off</color-mode>
+      </material>
+      <alpha-test>
+        <comparison>greater</comparison>
+        <reference type="float">0.01</reference>
+      </alpha-test>
+      <shade-model>smooth</shade-model>
+      <blend>
+        <source>src-alpha</source>
+        <destination>one-minus-src-alpha</destination>
+      </blend>
+      <depth>
+        <write-mask>false</write-mask>
+      </depth>
+      <render-bin>
+        <bin-number>9</bin-number>
+        <bin-name>DepthSortedBin</bin-name>
+      </render-bin>
+      <texture-unit>
+        <unit>0</unit>
+	<type><use>texture[0]/type</use></type>
+        <image><use>texture[0]/image</use></image>
+        <filter><use>texture[0]/filter</use></filter>
+        <wrap-s><use>texture[0]/wrap-s</use></wrap-s>
+        <wrap-t><use>texture[0]/wrap-t</use></wrap-t>
+        <!--<wrap-s>clamp</wrap-s>
+        <wrap-t>clamp</wrap-t>-->
+      </texture-unit>
+      <program>
+        <vertex-shader>Shaders/cloud-static.vert</vertex-shader>
+        <fragment-shader>Shaders/cloud-static.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>baseTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>terminator</name>
+        <type>float</type>
+        <value><use>terminator</use></value>
+      </uniform>
+      <uniform>
+        <name>altitude</name>
+        <type>float</type>
+        <value><use>altitude</use></value>
+      </uniform>
+      <vertex-program-two-side>true</vertex-program-two-side>
+    </pass>
+  </technique>
+
+  <technique n="109">
+    <scheme>hdr-geometry</scheme>
+  </technique>
+  <technique n="129">
+    <scheme>hdr-forward</scheme>
+    <pass>
+      <!-- Reverse floating point depth buffer -->
+      <depth>
+        <function>gequal</function>
+        <near>1.0</near>
+        <far>0.0</far>
+        <write-mask>false</write-mask>
+      </depth>
+      <texture-unit>
+        <unit>0</unit>
+        <type>2d</type>
+        <image><use>texture[0]/image</use></image>
+        <wrap-s>clamp-to-border</wrap-s>
+        <wrap-t>clamp-to-border</wrap-t>
+      </texture-unit>
+      <blend>1</blend>
+      <rendering-hint>transparent</rendering-hint>
+      <program>
+        <vertex-shader>Shaders/HDR/cloud_static.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/cloud_static_common.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/sun.glsl</vertex-shader>
+        <vertex-shader>Shaders/HDR/aerial_perspective.glsl</vertex-shader>
+        <vertex-shader>Shaders/HDR/atmos_spectral.glsl</vertex-shader>
+        <fragment-shader>Shaders/HDR/3dcloud.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/3dcloud_common.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/aerial_perspective.glsl</fragment-shader>
+        <fragment-shader>Shaders/HDR/exposure.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>base_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <!-- aerial_perspective.glsl -->
+      <uniform>
+        <name>aerial_perspective_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">11</value>
+      </uniform>
+      <!-- sun.glsl -->
+      <uniform>
+        <name>transmittance_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
+      </uniform>
+      <!-- exposure.glsl -->
+      <uniform>
+        <name>lum_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">14</value>
+      </uniform>
+      <uniform>
+        <name>exposure_compensation</name>
+        <type>float</type>
+        <value><use>exposure-compensation</use></value>
+      </uniform>
+    </pass>
+  </technique>
+
+  <technique n="139">
+    <scheme>hdr-envmap</scheme>
+    <pass>
+      <depth>
+        <write-mask>false</write-mask>
+      </depth>
+      <texture-unit>
+        <unit>0</unit>
+        <type>2d</type>
+        <image><use>texture[0]/image</use></image>
+        <wrap-s>clamp-to-border</wrap-s>
+        <wrap-t>clamp-to-border</wrap-t>
+      </texture-unit>
+      <blend>1</blend>
+      <rendering-hint>transparent</rendering-hint>
+      <program>
+        <vertex-shader>Shaders/HDR/cloud_static_envmap.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/cloud_static_common.vert</vertex-shader>
+        <vertex-shader>Shaders/HDR/math.glsl</vertex-shader>
+        <vertex-shader>Shaders/HDR/sun.glsl</vertex-shader>
+        <vertex-shader>Shaders/HDR/aerial_perspective_envmap.glsl</vertex-shader>
+        <vertex-shader>Shaders/HDR/atmos.glsl</vertex-shader>
+        <vertex-shader>Shaders/HDR/atmos_spectral.glsl</vertex-shader>
+        <fragment-shader>Shaders/HDR/3dcloud_envmap.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/3dcloud_common.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/aerial_perspective_envmap.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>base_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <!-- sun.glsl -->
+      <!-- aerial_perspective_envmap.glsl -->
+      <uniform>
+        <name>transmittance_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">12</value>
+      </uniform>
+      <!-- atmos.glsl -->
+      <uniform>
+        <name>aerosol_absorption_cross_section</name>
+        <type>float-vec4</type>
+        <value><use>aerosol-absorption-cross-section</use></value>
+      </uniform>
+      <uniform>
+        <name>aerosol_scattering_cross_section</name>
+        <type>float-vec4</type>
+        <value><use>aerosol-scattering-cross-section</use></value>
+      </uniform>
+      <uniform>
+        <name>aerosol_base_density</name>
+        <type>float</type>
+        <value><use>aerosol-base-density</use></value>
+      </uniform>
+      <uniform>
+        <name>aerosol_relative_background_density</name>
+        <type>float</type>
+        <value><use>aerosol-relative-background-density</use></value>
+      </uniform>
+      <uniform>
+        <name>aerosol_scale_height</name>
+        <type>float</type>
+        <value><use>aerosol-scale-height</use></value>
+      </uniform>
+      <uniform>
+        <name>fog_density</name>
+        <type>float</type>
+        <value><use>fog-density</use></value>
+      </uniform>
+      <uniform>
+        <name>fog_scale_height</name>
+        <type>float</type>
+        <value><use>fog-scale-height</use></value>
+      </uniform>
+      <uniform>
+        <name>ozone_mean_dobson</name>
+        <type>float</type>
+        <value><use>ozone-mean-dobson</use></value>
+      </uniform>
+      <uniform>
+        <name>ground_albedo</name>
+        <type>float-vec4</type>
+        <value><use>ground-albedo</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

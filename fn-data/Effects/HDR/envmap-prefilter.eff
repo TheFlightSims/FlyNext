@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/envmap-prefilter</name>
+  <parameters>
+    <roughness type="float">0.0</roughness>
+    <num-samples type="int">1</num-samples>
+    <mip-count type="int">4</mip-count>
+  </parameters>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/envmap.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/envmap_prefilter.frag</fragment-shader>
+        <fragment-shader>Shaders/HDR/math.glsl</fragment-shader>
+      </program>
+      <uniform>
+        <name>envmap_tex</name>
+        <type>sampler-cube</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>roughness</name>
+        <type>float</type>
+        <value><use>roughness</use></value>
+      </uniform>
+      <uniform>
+        <name>num_samples</name>
+        <type>int</type>
+        <value><use>num-samples</use></value>
+      </uniform>
+      <uniform>
+        <name>mip_count</name>
+        <type>int</type>
+        <value><use>mip-count</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

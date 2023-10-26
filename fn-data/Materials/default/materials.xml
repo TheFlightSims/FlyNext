@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- FlightGear Materials File. See Docs/README.materials for details. -->
+
+<PropertyList>
+
+<!-- Landclass Mapping for WS3.0 -->
+<landclass-mapping include="Materials/base/landclass-mapping.xml" />
+
+<!-- Base materials -->
+<region include="Materials/default/global.xml"/>
+<region include="Materials/default/global-summer.xml"/>
+
+</PropertyList>

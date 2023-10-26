@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+ Core Nasal module load priority list.
+ The files listed below will be loaded in order before any other files in the
+ Nasal directory.  This is to avoid dependency problems that would otherwise
+ occur if aaaa.nas relied on props.nas
+ 
+ <file> tag must include ONLY a filename.nas nothing else. 
+ Comments must be placed outside the <file></file>
+================================================================================
+Short overview over the files and prominent functions they provide:
+
+props.nas
+    props.Node class for easy access to the property tree
+    
+globals.nas
+    cmdarg, fgcommand, isa, setlistener, 
+    several constants
+    deferred loading of user nas files from $FGHOME/Nasal 
+
+io.nas (uses string.nas)
+    include, load_nasal, read_properties, write_properties, 
+    readxml, writexml 
+    
+debug.nas (uses io.nas)
+    benchmark, backtrace, dump,
+    classes Breakpoint, Probe, Tracer
+
+Dependencies:
+
+modules.nas <- addons.nas
+string.nas <- io.nas
+string.nas <- gui.nas 
+    io.nas  <- gui.nas 
+    gui.nas <- multiplayer.nas 
+        multiplayer.nas <- view.nas 
+    io.nas <- std.nas
+
+geo.nas <- view.nas
+        view.nas <- dynamic_view.nas
+-->
+
+<PropertyList>
+<!-- stage 0 -->
+    <file>props.nas</file>
+    <file>globals.nas</file>
+    <file>math.nas</file>
+    <file>string.nas</file>
+    <file>io.nas</file>
+    <file>std.nas</file>
+    <file>debug.nas</file>
+<!-- stage 1 -->
+    <file>modules.nas</file>
+    <file>mp_broadcast.nas</file>
+    <file>gui.nas</file>
+    <file>multiplayer.nas</file>
+    <file>geo.nas</file>
+    <file>view.nas</file>
+    <file>markerpins.nas</file>
+</PropertyList>

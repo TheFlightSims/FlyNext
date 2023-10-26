@@ -1,0 +1,451 @@
+<?xml version="1.0"?>
+ 
+<!-- UFO Autopilot -->
+<!-- Copyright (c) 2022 Josh Davidson (Octal450) -->
+
+<PropertyList>
+	
+	<!-- Logic -->
+	<logic> <!-- Roll channel active -->
+		<input>
+			<or>
+				<equals>
+					<property>/autopilot/locks/heading</property>
+					<value>wing-leveler</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/heading</property>
+					<value>dg-heading-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/heading</property>
+					<value>true-heading-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/heading</property>
+					<value>nav1-hold</value>
+				</equals>
+			</or>
+		</input>
+		<output>/autopilot/internal/roll-active</output>
+	</logic>
+	
+	<logic> <!-- Basic pitch hold active -->
+		<input>
+			<equals>
+				<property>/autopilot/locks/altitude</property>
+				<value>pitch-hold</value>
+			</equals>
+		</input>
+		<output>/autopilot/internal/pitch-hold-active</output>
+	</logic>
+	
+	<logic> <!-- Pitch channel active -->
+		<input>
+			<or>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>vertical-speed-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>pitch-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>altitude-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>agl-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>gs1-hold</value>
+				</equals>
+			</or>
+		</input>
+		<output>/autopilot/internal/pitch-active</output>
+	</logic>
+	
+	<logic> <!-- Fpm channel active -->
+		<input>
+			<or>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>vertical-speed-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>altitude-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>agl-hold</value>
+				</equals>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>gs1-hold</value>
+				</equals>
+			</or>
+		</input>
+		<output>/autopilot/internal/vs-active</output>
+	</logic>
+	
+	<logic> <!-- Throttle channel active -->
+		<input>
+			<equals>
+				<property>/autopilot/locks/speed</property>
+				<value>speed-with-throttle</value>
+			</equals>
+		</input>
+		<output>/autopilot/internal/throttle-active</output>
+	</logic>
+	
+	<filter> <!-- Heading error computer -->
+		<name>Heading/Nav Error Deg</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<input>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/heading</property>
+					<value>nav1-hold</value>
+				</equals>
+			</condition>
+			<property>/instrumentation/nav[0]/radials/target-auto-hdg-deg</property>
+			<offset>
+				<property>/orientation/heading-deg</property>
+				<scale>-1.0</scale>
+			</offset>
+		</input>
+		<input>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/heading</property>
+					<value>true-heading-hold</value>
+				</equals>
+			</condition>
+			<property>/autopilot/settings/true-heading-deg</property>
+			<offset>
+				<property>/orientation/heading-deg</property>
+				<scale>-1.0</scale>
+			</offset>
+		</input>
+		<input>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/heading</property>
+					<value>dg-heading-hold</value>
+				</equals>
+			</condition>
+			<property>/autopilot/settings/heading-bug-deg</property>
+			<offset>
+				<property>/orientation/heading-magnetic-deg</property>
+				<scale>-1.0</scale>
+			</offset>
+		</input>
+		<input>0</input>
+		<output>/autopilot/internal/heading-error-deg</output>
+		<period>
+			<min>-180</min>
+			<max>180</max>
+		</period>
+	</filter>
+	
+	<filter> <!-- Clamp glideslope target fpm -->
+		<name>G/S FPM Calc</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<input>/instrumentation/nav[0]/gs-rate-of-climb-fpm</input>
+		<output>/autopilot/internal/nav1-rate-of-climb-fpm</output>
+		<min>-10000</min>
+		<max>0</max>
+	</filter>
+	
+	<!-- Roll Axis -->
+	<filter> <!-- Copy target roll angle, 0 by default for wingn leveller -->
+		<name>IT-CONTROLLER: Roll Deg/Wings Level</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/heading</property>
+					<value>wing-leveler</value>
+				</equals>
+			</condition>
+		</enable>
+		<input>/autopilot/settings/target-roll-deg</input>
+		<output>/autopilot/internal/target-roll-deg</output>
+	</filter>
+	
+	<filter> <!-- Compute target roll angle from heading error -->
+		<name>IT-CONTROLLER: Heading</name>
+		<type>gain</type>
+		<gain>0.5</gain>
+		<enable>
+			<condition>
+				<or>
+					<equals>
+						<property>/autopilot/locks/heading</property>
+						<value>dg-heading-hold</value>
+					</equals>
+					<equals>
+						<property>/autopilot/locks/heading</property>
+						<value>true-heading-hold</value>
+					</equals>
+					<equals>
+						<property>/autopilot/locks/heading</property>
+						<value>nav1-hold</value>
+					</equals>
+				</or>
+			</condition>
+		</enable>
+		<input>/autopilot/internal/heading-error-deg</input>
+		<reference>0</reference>
+		<output>/autopilot/internal/target-roll-deg</output>
+		<min>-90</min>
+		<max>90</max>
+	</filter>
+	
+	<filter> <!-- Smooth engagement by syncing when disabled -->
+		<name>System Command: Roll Target Inactive Sync</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<not><property>/autopilot/internal/roll-active</property></not>
+			</condition>
+		</enable>
+		<input>/orientation/roll-deg</input>
+		<output>/autopilot/internal/target-roll-deg</output>
+		<min>-90</min>
+		<max>90</max>
+	</filter>
+	
+	<filter> <!-- Aileron elevator controller -->
+		<name>System Command: Aileron</name>
+		<type>noise-spike</type>
+		<feedback-if-disabled>true</feedback-if-disabled>
+		<initialize-to>output</initialize-to>
+		<enable>
+			<condition>
+				<property>/autopilot/internal/roll-active</property>
+			</condition>
+		</enable>
+		<input>
+			<expression>
+				<div>
+					<property>/autopilot/internal/target-roll-deg</property>
+					<value>90</value>
+				</div>
+			</expression>
+		</input>
+		<output>/controls/flight/aileron</output>
+		<max-rate-of-change>1.2</max-rate-of-change>
+	</filter>
+	
+	<!-- Pitch Axis -->
+	<filter> <!-- Compute target fpm from altitude error -->
+		<name>IT-CONTROLLER: Altitude Capture/Hold</name>
+		<type>gain</type>
+		<gain>-20</gain>
+		<input>/position/altitude-ft</input>
+		<reference>/autopilot/settings/target-altitude-ft</reference>
+		<output>/autopilot/internal/target-fpm-alt</output>
+	</filter>
+	
+	<filter> <!-- Compute target fpm from agl error -->
+		<name>IT-CONTROLLER: AGL Capture/Hold</name>
+		<type>gain</type>
+		<gain>-20</gain>
+		<input>/position/altitude-agl-ft</input>
+		<reference>/autopilot/settings/target-agl-ft</reference>
+		<output>/autopilot/internal/target-fpm-agl</output>
+	</filter>
+	
+	<filter> <!-- Copy target pitch angle -->
+		<name>IT-CONTROLLER: Pitch Deg</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<property>/autopilot/internal/pitch-hold-active</property>
+			</condition>
+		</enable>
+		<input>/autopilot/settings/target-pitch-deg</input>
+		<output>/autopilot/internal/target-pitch-deg</output>
+	</filter>
+	
+	<filter> <!-- Select target vertical speed -->
+		<name>IT-CONTROLLER: Pitch Deg</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<input>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>altitude-hold</value>
+				</equals>
+			</condition>
+			<property>/autopilot/internal/target-fpm-alt</property>
+		</input>
+		<input>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>agl-hold</value>
+				</equals>
+			</condition>
+			<property>/autopilot/internal/target-fpm-agl</property>
+		</input>
+		<input>
+			<condition>
+				<equals>
+					<property>/autopilot/locks/altitude</property>
+					<value>gs1-hold</value>
+				</equals>
+			</condition>
+			<property>/autopilot/internal/nav1-rate-of-climb-fpm</property>
+		</input>
+		<input>/autopilot/settings/vertical-speed-fpm</input>
+		<output>/autopilot/internal/target-fpm</output>
+	</filter>
+	
+	<filter> <!-- Main fpm controller -->
+		<name>IT-CONTROLLER: FPM Hold</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<property>/autopilot/internal/vs-active</property>
+			</condition>
+		</enable>
+		<input> <!-- Reversed from UFO.cxx -->
+			<expression>
+				<rad2deg>
+					<asin>
+						<div>
+							<div>
+								<div>
+									<property>/autopilot/internal/target-fpm</property>
+									<value>60</value> <!-- Fps to fpm -->
+								</div>
+								<value>3.28084</value> <!-- Meters to feet -->
+							</div>
+							<max>
+								<product>
+									<property>/velocities/airspeed-kt</property>
+									<value>0.514444</value> <!-- Knots to meters/sec -->
+								</product>
+								<value>0.0000001</value> <!-- Prevent divide by 0 -->
+							</max>
+						</div>
+					</asin>
+				</rad2deg>
+			</expression>
+		</input>
+		<output>/autopilot/internal/target-pitch-deg</output>
+	</filter>
+	
+	<filter> <!-- Copy target pitch angle -->
+		<name>IT-CONTROLLER: Pitch Deg</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<property>/autopilot/internal/pitch-hold-active</property>
+			</condition>
+		</enable>
+		<input>/autopilot/settings/target-pitch-deg</input>
+		<output>/autopilot/internal/target-pitch-deg</output>
+	</filter>
+	
+	<filter> <!-- Smooth engagement by syncing when disabled -->
+		<name>System Command: Pitch Target Inactive Sync</name>
+		<type>gain</type>
+		<gain>1.0</gain>
+		<enable>
+			<condition>
+				<not><property>/autopilot/internal/pitch-active</property></not>
+			</condition>
+		</enable>
+		<input>/orientation/pitch-deg</input>
+		<output>/autopilot/internal/target-pitch-deg</output>
+		<min>-90</min>
+		<max>90</max>
+	</filter>
+	
+	<filter> <!-- Main elevator controller -->
+		<name>System Command: Elevator</name>
+		<type>noise-spike</type>
+		<feedback-if-disabled>true</feedback-if-disabled>
+		<initialize-to>output</initialize-to>
+		<enable>
+			<condition>
+				<property>/autopilot/internal/pitch-active</property>
+			</condition>
+		</enable>
+		<input>
+			<expression>
+				<div>
+					<property>/autopilot/internal/target-pitch-deg</property>
+					<value>-90</value>
+				</div>
+			</expression>
+		</input>
+		<output>/controls/flight/elevator</output>
+		<max-rate-of-change>1.2</max-rate-of-change>
+	</filter>
+	
+	<!-- Throttle Axis -->
+	<filter> <!-- Main throttle controller -->
+		<name>System Command: Throttle</name>
+		<type>noise-spike</type>
+		<feedback-if-disabled>true</feedback-if-disabled>
+		<initialize-to>output</initialize-to>
+		<enable>
+			<condition>
+				<property>/autopilot/internal/throttle-active</property>
+			</condition>
+		</enable>
+		<input>
+			<expression>
+				<div>
+					<product>
+						<property>/autopilot/settings/target-speed-kt</property>
+						<value>0.514444</value> <!-- Knots to meters/sec -->
+					</product>
+					<max>
+						<property>/engines/engine[0]/speed-max-mps</property>
+						<value>0.0000001</value> <!-- Prevent divide by 0 -->
+					</max>
+				</div>
+			</expression>
+		</input>
+		<output>/controls/engines/engine[0]/throttle</output>
+		<max-rate-of-change>0.3</max-rate-of-change>
+	</filter>
+	
+	<!-- Trim Axis -->
+	<filter> <!-- Centers all the trims otherwise the system can't work -->
+		<name>System Command: Trim</name>
+		<type>gain</type>
+		<gain>0.0</gain>
+		<enable>
+			<condition>
+				<property>/autopilot/internal/pitch-active</property>
+			</condition>
+		</enable>
+		<input>0</input>
+		<output>
+			<property>/controls/flight/aileron-trim</property>
+			<property>/controls/flight/elevator-trim</property>
+			<property>/controls/flight/rudder-trim</property>
+		</output>
+		<min>-1.0</min>
+		<max>1.0</max>
+	</filter>
+
+</PropertyList>

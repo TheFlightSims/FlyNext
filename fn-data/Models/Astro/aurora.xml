@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <model>
+	<path>aurora_inner.xml</path>
+ </model>
+ <model>
+	<path>aurora_outer.xml</path>
+ </model>
+ 
+ </PropertyList>

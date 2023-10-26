@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+************************************************************************
+* Bindings for Logitech G25 Racing Wheel.
+* Axis 1:                        rudder
+* Axis 2:                        rudder
+************************************************************************
+* Postby Ouacaze » Tue Aug 05, 2014 3:55 pm
+*
+* Hi,
+*
+* I've just copied the "Microsoft SideWinder Precision Racing Wheel" xml file and adapted it  * to use with the Logitech G25 Racing Wheel.
+* It only maps the clutch and throttle pedal as the rudder, but it works well.
+*
+* NB: I left the tags for Win and OSX as they were for the microsoft, but I only tested this *on Linux. So if someone could try this under Windows and OSX, and maybe try it with a G27, it *would be great !
+************************************************************************
+$Id$
+-->
+
+<PropertyList>
+  <name>G25 Racing Wheel</name>
+
+  <axis n="1">
+    <desc>Rudder Right</desc>
+    <number>
+      <unix>1</unix>
+      <mac>1</mac>
+      <windows>2</windows>
+    </number>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/rudder</property>
+      <factor type="double">-0.5</factor>
+      <offset type="double">-1.0</offset>
+      <squared type="bool">true</squared>
+    </binding>
+  </axis>
+
+  <axis n="2">
+    <desc>Rudder Left</desc>
+    <number>
+      <unix>2</unix>
+      <mac>2</mac>
+      <windows>3</windows>
+    </number>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/rudder</property>
+      <factor type="double">0.5</factor>
+      <offset type="double">-1.0</offset>
+      <squared type="bool">true</squared>
+    </binding>
+  </axis>
+</PropertyList>

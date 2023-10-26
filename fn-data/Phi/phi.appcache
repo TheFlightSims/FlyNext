@@ -1,0 +1,9 @@
+CACHE MANIFEST
+
+CACHE:
+# Don't cache anything
+FALLBACK:
+# Nothing
+NETWORK:
+# Request everything from server
+*

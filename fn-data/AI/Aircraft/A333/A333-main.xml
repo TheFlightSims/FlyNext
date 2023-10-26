@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <description>A330-300</description>
+ <author>3D Model Innis Cunningham, UV map liveries Brett Harrison</author> 
+ <path>Models/A333.ac</path>
+     <animation>
+		<type>select</type>
+		<object-name>gear</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.25</value>
+			</greater-than>
+		</condition>
+	</animation>
+<!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/A333/Effects/333-LightMap</inherits-from>
+    <object-name>fuselage</object-name>
+	<object-name>gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/333-NavLights.xml</path>
+  </model>
+</PropertyList>

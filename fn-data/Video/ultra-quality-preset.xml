@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <id>ultra-quality</id>
+  <name>Ultra</name>
+  <description>Maximum settings for very powerful systems.</description>
+  <order-num>4</order-num>
+
+  <settings>
+    <sim>
+      <rendering>
+        <shaders>
+          <skydome type="bool">true</skydome>
+          <use-shaders type="bool">true</use-shaders>
+          <landmass type="float">6</landmass>
+          <transition type="float">6</transition>
+          <model type="float">3</model>
+          <water type="float">5</water>
+          <clouds type="float">1</clouds>
+          <wind-effects type="float">2</wind-effects>
+          <vegetation-effects type="float">1</vegetation-effects>
+        </shaders>
+        <multi-sample-buffers type="bool">true</multi-sample-buffers>
+        <multi-samples type="int">8</multi-samples>
+        <shadows>
+          <enabled type="bool">true</enabled>
+          <sun-atlas-size type="int">8192</sun-atlas-size>
+        </shadows>
+        <dynamic-lighting>
+          <enabled type="bool">true</enabled>
+          <limit-lights type="bool">false</limit-lights>
+          <max-lights type="int">0</max-lights>
+        </dynamic-lighting>
+        <scenery-path-suffix n="0"><enabled type="bool">true</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="1"><enabled type="bool">true</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="2"><enabled type="bool">true</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="3"><enabled type="bool">true</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="4"><enabled type="bool">true</enabled></scenery-path-suffix>
+        <scenery-path-suffix n="5"><enabled type="bool">true</enabled></scenery-path-suffix>
+        <osm-buildings type="bool">true</osm-buildings>
+        <random-objects type="bool">true</random-objects>
+        <random-buildings type="bool">false</random-buildings>
+        <random-vegetation type="bool">true</random-vegetation>
+        <random-vegetation-shadows type="bool">true</random-vegetation-shadows>
+        <vegetation-density type="float">4.0</vegetation-density>
+        <particles type="bool">true</particles>
+        <precipitation-gui-enable type="bool">true</precipitation-gui-enable>
+        <clouds3d-enable type="bool">true</clouds3d-enable>
+      </rendering>
+    </sim>
+  </settings>
+</PropertyList>

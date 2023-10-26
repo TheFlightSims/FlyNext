@@ -1,0 +1,3 @@
+The shaders in this directory are taken from the source code of ShaderVG,
+located in simgear/canvas/ShaderVG/src/shaders.c, to make it easier to
+updated them.

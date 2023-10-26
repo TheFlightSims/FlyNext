@@ -1,0 +1,1195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+###################################################################################
+##                                                                               ##
+## Improved redout/blackout system for Flightgear                                ##
+##                                                                               ##
+## Author: Nikolai V. Chr. (property rules), Thorsten Renk (shaders),            ##
+##         Benedikt Hallinger (groundshake effect)                               ##
+##                                                                               ##
+##                                                                               ##
+##                                                                               ##
+##                                                                               ##
+## Version 2.10            License: GPL 2.0                                      ##
+##                                                                               ##
+###################################################################################
+-->
+<PropertyList>
+
+    <params>
+        <onset-b>sim/rendering/redout/parameters/blackout-onset-g</onset-b>
+        <fast-b>sim/rendering/redout/parameters/blackout-complete-g</fast-b>
+        <onset-r>sim/rendering/redout/parameters/redout-onset-g</onset-r>
+        <fast-r>sim/rendering/redout/parameters/redout-complete-g</fast-r>
+        <onset-t-b>sim/rendering/redout/parameters/onset-blackout-sec</onset-t-b>
+        <fast-t-b>sim/rendering/redout/parameters/fast-blackout-sec</fast-t-b>
+        <onset-t-r>sim/rendering/redout/parameters/onset-redout-sec</onset-t-r>
+        <fast-t-r>sim/rendering/redout/parameters/fast-redout-sec</fast-t-r>
+        <rec-f>sim/rendering/redout/parameters/recover-fast-sec</rec-f>
+        <rec-s>sim/rendering/redout/parameters/recover-slow-sec</rec-s>
+        <log>
+            <g-force>sim/rendering/redout/internal/log/g-force</g-force>
+            <onset-b>sim/rendering/redout/internal/log/onset-b</onset-b>
+            <fast-b>sim/rendering/redout/internal/log/fast-b</fast-b>
+            <g-force-r>sim/rendering/redout/internal/log/g-force-r</g-force-r>
+            <onset-r>sim/rendering/redout/internal/log/onset-r</onset-r>
+            <fast-r>sim/rendering/redout/internal/log/fast-r</fast-r>
+        </log>
+        <g-damp>accelerations/pilot-gdamped</g-damp>
+        <g-force-inv>sim/rendering/redout/internal/g-force-inv</g-force-inv>
+        <blackout>sim/rendering/redout/internal/blackout</blackout>
+        <redout>sim/rendering/redout/internal/redout</redout>
+        <jsb>sim/rendering/redout/internal/jsb</jsb>
+        <alpha>sim/rendering/redout/alpha</alpha>
+        <red>sim/rendering/redout/red</red>
+        <inside>sim/current-view/internal</inside>
+        <sum>sim/rendering/redout/internal/sum</sum>
+        <enable>sim/rendering/redout/enabled</enable>
+        <g-force>accelerations/pilot-g[0]</g-force>
+        <greyout>sim/rendering/als-filters/grey-factor</greyout>
+        <tunnel>sim/rendering/als-filters/black-factor</tunnel>
+        <als>sim/rendering/shaders/skydome</als>
+        <filters>sim/rendering/als-filters/use-filtering</filters>
+        <groundshake>
+            <!-- inputs -->
+            <effect-factor>sim/rendering/headshake/groundshake/effect-factor</effect-factor>
+            <aircraft-scale-prop>sim/rendering/headshake/groundshake/custom-aircraft-scaler</aircraft-scale-prop>
+            <default-aircraft-scaler-minkts>sim/rendering/headshake/groundshake/default-aircraft-scaler-min-knots</default-aircraft-scaler-minkts>
+            <default-aircraft-scaler-maxkts>sim/rendering/headshake/groundshake/default-aircraft-scaler-max-knots</default-aircraft-scaler-maxkts>
+            <default-aircraft-scaler-factor>sim/rendering/headshake/groundshake/default-aircraft-scaler-factor</default-aircraft-scaler-factor>
+            
+            <!-- internal -->
+            <rng-source>sim/rendering/headshake/groundshake/internal/groundbump</rng-source>
+            <terrain-bumpiness>/fdm/jsbsim/ground/bumpiness</terrain-bumpiness>
+            <has-ground-contact>sim/rendering/headshake/groundshake/internal/ground-contact</has-ground-contact>
+            <is-moving>sim/rendering/headshake/groundshake/internal/is-moving</is-moving>
+            <default-aircraft-scaler>sim/rendering/headshake/groundshake/internal/default-aircraft-scaler</default-aircraft-scaler>
+            
+            <!-- outputs -->
+            <result>sim/rendering/headshake/groundshake/result-g</result>
+        </groundshake>
+    </params>
+
+    <filter><!-- check for NaN -->
+        <type>gain</type>
+        <gain>0</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <not>
+                    <less-than>
+                        <property alias="/params/blackout"/>
+                        <value>1000.0</value>
+                    </less-than>
+                    <greater-than>
+                        <property alias="/params/blackout"/>
+                        <value>-1000.0</value>
+                    </greater-than>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/blackout"/>
+    </filter>
+
+    <filter><!-- check for NaN -->
+        <type>gain</type>
+        <gain>0</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <not>
+                    <less-than>
+                        <property alias="/params/redout"/>
+                        <value>1000.0</value>
+                    </less-than>
+                    <greater-than>
+                        <property alias="/params/redout"/>
+                        <value>-1000.0</value>
+                    </greater-than>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/redout"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <!-- check if blackout onset has sane value. -->
+            <condition>
+                <or>
+                    <less-than>
+                        <property alias="/params/onset-b"/>
+                        <value>1.25</value>
+                    </less-than>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <max>
+                    <property alias="/params/fast-b"/>
+                    <value>1.25</value>
+                </max>
+            </expression>
+        </input>
+        <output alias="/params/onset-b"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <!-- check if blackout complete has sane value. -->
+            <condition>
+                <or>
+                    <greater-than>
+                        <property alias="/params/onset-b"/>
+                        <property alias="/params/fast-b"/>                    
+                    </greater-than>
+                    <less-than>
+                        <property alias="/params/fast-b"/>
+                        <value>1.5</value>
+                    </less-than>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <max>
+                    <sum>
+                        <property alias="/params/onset-b"/>
+                        <value>0.50</value>
+                    </sum>
+                    <value>1.5</value>
+                </max>
+            </expression>
+        </input>
+        <output alias="/params/fast-b"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <!-- check if redout onset has sane value. -->
+            <condition>
+                <or>
+                    <greater-than>
+                        <property alias="/params/onset-r"/>
+                        <value>-1.00</value>
+                    </greater-than>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <property alias="/params/fast-r"/>
+                    <value>-1.00</value>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/onset-r"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <!-- check if redout complete has sane value. -->
+            <condition>
+                <or>
+                    <greater-than>
+                        <property alias="/params/fast-r"/>
+                        <property alias="/params/onset-r"/>                                        
+                    </greater-than>
+                    <greater-than>
+                        <property alias="/params/fast-r"/>
+                        <value>-1.25</value>
+                    </greater-than>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <sum>
+                        <property alias="/params/onset-r"/>
+                        <value>-0.50</value>
+                    </sum>
+                    <value>-1.25</value>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/fast-r"/>
+    </filter>    
+
+    <filter>
+        <type>gain</type>
+        <gain>-1</gain>
+        <enable>
+            <!-- check if JSBSim is the FDM. -->
+            <condition>
+                <equals>
+                    <property alias="/params/jsb"/>
+                    <value>1</value>
+                </equals>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <div>
+                        <property>accelerations/pilot/z-accel-fps_sec</property>
+                        <value>32.174</value>
+                    </div>
+                    <property alias="/params/groundshake/result" />
+                </sum>
+            </expression>
+        </input>
+        <output alias="/params/g-force"/>
+    </filter>
+
+    <filter>
+        <!-- for backwards compatibility for planes that use gdamped property -->
+        <type>exponential</type>
+        <filter-time>0.2</filter-time>
+        <input alias="/params/g-force"/>
+        <output alias="/params/g-damp"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <log10>
+                    <property alias="/params/fast-b"/>
+                </log10>
+            </expression>
+        </input>
+        <output alias="/params/log/fast-b"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <log10>
+                    <property alias="/params/onset-b"/>
+                </log10>
+            </expression>
+        </input>
+        <output alias="/params/log/onset-b"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <less-than-equals>
+                    <property alias="/params/g-force"/>
+                    <value>1</value>
+                </less-than-equals>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/log/g-force"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <greater-than>
+                    <property alias="/params/g-force"/>
+                    <value>1</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <log10>
+                    <property alias="/params/g-force"/>
+                </log10>
+            </expression>
+        </input>
+        <output alias="/params/log/g-force"/>
+    </filter>
+
+    <filter><!-- reduce blackout -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <less-than>
+                    <property alias="/params/g-force"/>
+                    <property alias="/params/onset-b"/>
+                </less-than>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <value>1</value>
+                    <max>
+                        <value>0</value>
+                        <dif>
+                            <property alias="/params/blackout"/>
+                            <product>
+                                <property>sim/time/delta-sec</property>
+                                <div>
+                                    <value>1</value>
+                                    <max>
+                                        <value>0</value>
+                                        <sum>
+                                            <property alias="/params/rec-f"/>
+                                            <product>
+                                                <div>
+                                                    <dif>
+                                                        <property alias="/params/log/g-force"/>
+                                                        <log10>
+                                                            <value>1</value>
+                                                        </log10>
+                                                    </dif>
+                                                    <dif>
+                                                        <property alias="/params/log/onset-b"/>
+                                                        <log10>
+                                                            <value>1</value>
+                                                        </log10>
+                                                    </dif>
+                                                </div>
+                                                <dif>
+                                                    <property alias="/params/rec-s"/>
+                                                    <property alias="/params/rec-f"/>
+                                                </dif>
+                                            </product>
+                                        </sum>
+                                    </max>
+                                </div>
+                            </product>
+                        </dif>
+                    </max>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/blackout"/>
+    </filter>    
+
+    <filter><!-- increase blackout -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <greater-than-equals>
+                    <property alias="/params/g-force"/>
+                    <property alias="/params/onset-b"/>
+                </greater-than-equals>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <value>1</value>
+                    <max>
+                        <value>0</value>
+                        <sum>
+                            <property alias="/params/blackout"/>
+                            <product>
+                                <property>sim/time/delta-sec</property>
+                                <div>
+                                    <value>1</value>
+                                    <max>
+                                        <value>0</value>
+                                        <pow>
+                                            <value>10</value>
+                                            <sum>
+                                                <log10>
+                                                    <property alias="/params/onset-t-b"/>
+                                                </log10>
+                                                <product>
+                                                    <div>
+                                                        <dif>
+                                                            <property alias="/params/log/g-force"/>
+                                                            <property alias="/params/log/onset-b"/>
+                                                        </dif>
+                                                        <dif>
+                                                            <property alias="/params/log/fast-b"/>
+                                                            <property alias="/params/log/onset-b"/>
+                                                        </dif>
+                                                    </div>
+                                                    <dif>
+                                                        <log10>
+                                                            <property alias="/params/fast-t-b"/>
+                                                        </log10>
+                                                        <log10>
+                                                            <property alias="/params/onset-t-b"/>
+                                                        </log10>
+                                                    </dif>
+                                                </product>
+                                            </sum>
+                                        </pow>
+                                    </max>
+                                </div>
+                            </product>
+                        </sum>
+                    </max>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/blackout"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <log10>
+                    <product>
+                        <value>-1</value>
+                        <dif>
+                            <property alias="/params/fast-r"/>
+                            <value>2</value>
+                        </dif>
+                    </product>
+                </log10>
+            </expression>
+        </input>
+        <output alias="/params/log/fast-r"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <log10>
+                    <product>
+                        <value>-1</value>
+                        <dif>
+                            <property alias="/params/onset-r"/>
+                            <value>2</value>
+                        </dif>
+                    </product>
+                </log10>
+            </expression>
+        </input>
+        <output alias="/params/log/onset-r"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>-1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <dif>
+                    <property alias="/params/g-force"/>
+                    <value>2</value>
+                </dif>
+            </expression>
+        </input>
+        <output alias="/params/g-force-inv"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <less-than-equals>
+                    <property alias="/params/g-force-inv"/>
+                    <value>1</value>
+                </less-than-equals>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/log/g-force-r"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <greater-than>
+                    <property alias="/params/g-force-inv"/>
+                    <value>1</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <log10>
+                    <property alias="/params/g-force-inv"/>
+                </log10>
+            </expression>
+        </input>
+        <output alias="/params/log/g-force-r"/>
+    </filter>
+
+    <filter><!-- reduce redout -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <greater-than>
+                    <property alias="/params/g-force"/>
+                    <property alias="/params/onset-r"/>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <value>1</value>
+                    <max>
+                        <value>0</value>
+                        <dif>
+                            <property alias="/params/redout"/>
+                            <product>
+                                <property>sim/time/delta-sec</property>
+                                <div>
+                                    <value>1</value>
+                                    <max>
+                                        <value>0</value>
+                                        <sum>
+                                            <property alias="/params/rec-f"/>
+                                            <product>
+                                                <div>
+                                                    <dif>
+                                                        <property alias="/params/log/g-force-r"/>
+                                                        <log10>
+                                                            <value>1</value>
+                                                        </log10>
+                                                    </dif>
+                                                    <dif>
+                                                        <property alias="/params/log/onset-r"/>
+                                                        <log10>
+                                                            <value>1</value>
+                                                        </log10>
+                                                    </dif>
+                                                </div>
+                                                <dif>
+                                                    <property alias="/params/rec-s"/>
+                                                    <property alias="/params/rec-f"/>
+                                                </dif>
+                                            </product>
+                                        </sum>
+                                    </max>
+                                </div>
+                            </product>
+                        </dif>
+                    </max>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/redout"/>
+    </filter>    
+
+    <filter><!-- increase redout -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <less-than-equals>
+                    <property alias="/params/g-force"/>
+                    <property alias="/params/onset-r"/>
+                </less-than-equals>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <value>1</value>
+                    <max>
+                        <value>0</value>
+                        <sum>
+                            <property alias="/params/redout"/>
+                            <product>
+                                <property>sim/time/delta-sec</property>
+                                <div>
+                                    <value>1</value>
+                                    <max>
+                                        <value>0</value>
+                                        <pow>
+                                            <value>10</value>
+                                            <sum>
+                                                <log10>
+                                                    <property alias="/params/onset-t-r"/>
+                                                </log10>
+                                                <product>
+                                                    <div>
+                                                        <dif>
+                                                            <property alias="/params/log/g-force-r"/>
+                                                            <property alias="/params/log/onset-r"/>
+                                                        </dif>
+                                                        <dif>
+                                                            <property alias="/params/log/fast-r"/>
+                                                            <property alias="/params/log/onset-r"/>
+                                                        </dif>
+                                                    </div>
+                                                    <dif>
+                                                        <log10>
+                                                            <property alias="/params/fast-t-r"/>
+                                                        </log10>
+                                                        <log10>
+                                                            <property alias="/params/onset-t-r"/>
+                                                        </log10>
+                                                    </dif>
+                                                </product>
+                                            </sum>
+                                        </pow>
+                                    </max>
+                                </div>
+                            </product>
+                        </sum>
+                    </max>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/redout"/>
+    </filter>
+
+    <filter>
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <dif>
+                    <property alias="/params/blackout"/>
+                    <property alias="/params/redout"/>
+                </dif>
+            </expression>
+        </input>
+        <output alias="/params/sum"/>
+    </filter>
+
+    <filter>
+        <!-- When system is on, in pilot view and negative G effect, set fading color to red -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <equals>
+                    <property alias="/params/inside"/>
+                    <value>1</value>
+                </equals>
+                <less-than>
+                    <property alias="/params/sum"/>
+                    <value>0</value>
+                </less-than>
+            </condition>
+        </enable>
+        <input>
+            <value>1</value>
+        </input>
+        <output alias="/params/red"/>
+    </filter>
+
+    <filter>
+        <!-- When system is on, in pilot view and negative G effect, set fading amount -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <equals>
+                    <property alias="/params/inside"/>
+                    <value>1</value>
+                </equals>
+                <less-than>
+                    <property alias="/params/sum"/>
+                    <value>0</value>
+                </less-than>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <product>
+                    <property alias="/params/sum"/>
+                    <value>-1</value>
+                </product>
+            </expression>
+        </input>
+        <output alias="/params/alpha"/>
+    </filter>
+
+    <filter>
+        <!-- When system is on, in pilot view and positive G effect, set fading color to black -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <equals>
+                    <property alias="/params/inside"/>
+                    <value>1</value>
+                </equals>
+                <greater-than-equals>
+                    <property alias="/params/sum"/>
+                    <value>0</value>
+                </greater-than-equals>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/red"/>
+    </filter>
+
+    <filter>
+        <!-- When system is on, in pilot view and effect should be black, set fading amount -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <equals>
+                    <property alias="/params/inside"/>
+                    <value>1</value>
+                </equals>
+                <greater-than-equals>
+                    <property alias="/params/sum"/>
+                    <value>0</value>
+                </greater-than-equals>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <value>1</value>
+                    <max>
+                        <value>0</value>
+                        <sum>
+                            <product>
+                                <property alias="/params/als"/>
+                                <property alias="/params/filters"/>
+                                <!-- this will be used when ALS filters are in effect -->
+                                <div>
+                                    <dif>
+                                        <property alias="/params/sum"/>
+                                        <value>0.66</value><!-- onset of blackout -->
+                                    </dif>
+                                    <value>0.34</value><!-- (full-onset) of blackout -->
+                                </div>
+                            </product>
+                            <product>
+                                <dif>
+                                    <value>1</value>
+                                    <product>
+                                        <property alias="/params/als"/>
+                                        <property alias="/params/filters"/>
+                                    </product>
+                                </dif>                                
+                                <!-- this will be used when ALS filters are off -->
+                                <property alias="/params/sum"/>
+                            </product>
+                        </sum>
+                    </max>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/alpha"/>
+    </filter>
+
+    <filter>
+        <!-- When system is off or not in pilot view, set fading to off -->
+        <type>gain</type>
+        <gain>0</gain>
+        <enable>
+            <condition>
+                <or>
+                    <not>
+                        <property alias="/params/enable"/>
+                    </not>
+                    <equals>
+                        <property alias="/params/inside"/>
+                        <value>0</value>
+                    </equals>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/alpha"/>
+    </filter>
+
+    <filter>
+        <!-- When system disabled, set blackout amount to 0 -->
+        <type>gain</type>
+        <gain>0</gain>
+        <enable>
+            <condition>
+                <not>
+                    <property alias="/params/enable"/>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/blackout"/>
+    </filter>
+
+    <filter>
+        <!-- When system is disabled, set redout amount to 0 -->
+        <type>gain</type>
+        <gain>0</gain>
+        <enable>
+            <condition>
+                <not>
+                    <property alias="/params/enable"/>
+                </not>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/redout"/>
+    </filter>
+
+    <filter>
+        <!-- When system is off or not in pilot view or negative G effect, set greyout to off -->
+        <type>gain</type>
+        <gain>0</gain>
+        <enable>
+            <condition>
+                <or>
+                    <not>
+                        <property alias="/params/enable"/>
+                    </not>
+                    <equals>
+                        <property alias="/params/inside"/>
+                        <value>0</value>
+                    </equals>
+                    <less-than>
+                        <property alias="/params/sum"/>
+                        <value>0</value>
+                    </less-than>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/greyout"/>
+    </filter>
+
+    <filter>
+        <!-- When system is off or not in pilot view or negative G effect, set tunnel-vision to off -->
+        <type>gain</type>
+        <gain>0</gain>
+        <enable>
+            <condition>
+                <or>
+                    <not>
+                        <property alias="/params/enable"/>
+                    </not>
+                    <equals>
+                        <property alias="/params/inside"/>
+                        <value>0</value>
+                    </equals>
+                    <less-than>
+                        <property alias="/params/sum"/>
+                        <value>0</value>
+                    </less-than>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <value>0</value>
+        </input>
+        <output alias="/params/tunnel"/>
+    </filter>
+
+    <filter>
+        <!-- When system is on, in pilot view and positive G effect, set tunnel-vision amount -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <equals>
+                    <property alias="/params/inside"/>
+                    <value>1</value>
+                </equals>
+                <greater-than-equals>
+                    <property alias="/params/sum"/>
+                    <value>0</value>
+                </greater-than-equals>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <value>1</value>
+                    <max>
+                        <value>0</value>
+                        <div>
+                            <dif>
+                                <property alias="/params/sum"/>
+                                <value>0.35</value><!-- onset of tunnel -->
+                            </dif>
+                            <value>0.65</value><!-- (full-onset) of tunnel -->
+                        </div>
+                    </max>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/tunnel"/>
+    </filter>
+
+    <filter>
+        <!-- When system is on, in pilot view and positive G effect, set greyout amount -->
+        <type>gain</type>
+        <gain>1</gain>
+        <enable>
+            <condition>
+                <property alias="/params/enable"/>
+                <equals>
+                    <property alias="/params/inside"/>
+                    <value>1</value>
+                </equals>
+                <greater-than-equals>
+                    <property alias="/params/sum"/>
+                    <value>0</value>
+                </greater-than-equals>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <min>
+                    <value>1</value>
+                    <max>
+                        <value>0</value>
+                        <div>
+                            <dif>
+                                <property alias="/params/sum"/>
+                                <value>0.15</value><!-- onset of greyout -->
+                            </dif>
+                            <value>0.65</value><!-- (full-onset) of greyout -->
+                        </div>
+                    </max>
+                </min>
+            </expression>
+        </input>
+        <output alias="/params/greyout"/>
+    </filter>
+
+
+    <!-- Ground shake effect
+         The ground shake effect simulates the roughness of the terrain and the
+         resulting forces onto the pilot when moving over it.
+         This is achieved by generating random g-forces depending on the current terrain bumpyness.
+         The force is then applied to the pilot depending on movement speed of the aircraft.
+
+         Adjustments reside in sim/rendering/headshake/groundshake and can be done with this properties:
+          - effect-factor:    Overall effect scaling/enabling, so users can disable/adjust in cockpit-gui
+          - default-aircraft-scaler-factor: allows to adjust the default aircraft effect output.
+                              To be overwritten from aircraft for which the default table is OK but the effect to small/big.
+                              Set to zero in case a separate scaler is provided
+          - default-aircraft-scaler-min-knots: at this speed the effect starts
+          - default-aircraft-scaler-max-knots: at this speed the effect reaches its maximum
+          - custom-aircraft-scaler: aircraft devs calculate their own scaling algorythm result here.
+                              Most probably this is based on speed etc.
+                              Set default-aircraft-scaler-factor to zero, because otherwise the
+                              default still applies (default+custom effects are added)!
+    -->
+    <filter>
+        <name>groundshake-terrain-g</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <gain><property alias="/params/groundshake/effect-factor"/></gain>
+        <input>
+            <condition>
+                <!-- only act when having ground contact -->
+                <property alias="/params/groundshake/has-ground-contact"/>
+                <property alias="/params/groundshake/is-moving"/>
+            </condition>
+            <expression>
+                <product>
+                    <!-- defines bumps of surface -->
+                    <property alias="/params/groundshake/rng-source"/>
+
+                    <!-- apply bumpiness of terrain -->
+                    <product>
+                        <value>1</value>
+                        <sum>
+                            <value>0.1</value> <!-- so we have a effect even on taxiway/runway -->
+                            <property alias="/params/groundshake/terrain-bumpiness"/>
+                        </sum>
+                    </product>
+                    
+                    <sum>
+                        <!-- apply the default aircraft scaling -->
+                        <!-- note: in case the aircraft dev wants his own model, he should deactivate the internal one -->
+                        <!-- this can be done by setting the deafualt-aircraft-factor to zero -->
+                        <property alias="/params/groundshake/default-aircraft-scaler" />
+                        
+                        <!-- apply aircraft specific scaling -->
+                        <!-- (this is intended to model gear damping based on speed etc) -->
+                        <property alias="/params/groundshake/aircraft-scale-prop"/>
+                    </sum>
+
+                </product>
+            </expression>
+        </input>
+        <input><value>0.0</value></input> <!-- in-air: no ground forces -->
+        <output alias="/params/groundshake/result" />
+    </filter>
+        
+    <filter>
+        <name>Ground bumps</name>
+        <!-- calculate the ground bump number: The rate and ammount of change simulates bumps in the surface -->
+        <type>coherent-noise</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property alias="/params/groundshake/has-ground-contact"/>
+                <property alias="/params/groundshake/is-moving"/>
+            </condition>
+        </enable>
+        <input>
+            <!-- depending on position: the faster we go, the faster the prop changes, the faster the bumps come in -->
+            <expression>
+                <product>
+                    <sum>
+                        <property>/position/latitude-deg</property>
+                        <property>/position/longitude-deg</property>
+                    </sum>
+                    <value>50</value>
+                </product>
+            </expression>
+        </input>
+        <output><property alias="/params/groundshake/rng-source"/></output>
+        <amplitude>0.5</amplitude>
+        <absolute type="bool">false</absolute>
+        <discrete-resolution>1024</discrete-resolution> <!-- frequency of the changes/bumps: the smaller, the more wide the bumps are -->
+    </filter>
+    
+    <logic>
+        <name>Aircraft has ground contact</name>
+        <input>
+            <or>
+                <property>/gear/gear[0]/wow</property>
+                <property>/gear/gear[1]/wow</property>
+                <property>/gear/gear[2]/wow</property>
+                <property>/gear/gear[3]/wow</property>
+            </or>
+        </input>
+        <output>
+            <property alias="/params/groundshake/has-ground-contact"/>
+        </output>
+    </logic>
+    
+    <logic>
+        <name>Aircraft is moving</name>
+        <input>
+            <greater-than>
+                <property>/velocities/groundspeed-kt</property>
+                <value>1</value>
+            </greater-than>
+        </input>
+        <output>
+            <property alias="/params/groundshake/is-moving"/>
+        </output>
+    </logic>
+    
+    <filter>
+        <name>Default aircraft scaling by speed</name>
+        <!-- This filter defines a table for applying the scaled effect by airspeed to
+             simulate basic damping of the gear. It allows for defining dynamic min/max knots
+             ranges and scales linearly bin between -->
+        <debug>false</debug>
+        <type>gain</type>
+        <gain> <property alias="/params/groundshake/default-aircraft-scaler-factor"/> </gain>
+        <input>
+            <!-- Formula: (1/(max-min))*speed-(min/(max-min)) lets us scale linearly with given min/max values -->
+            <expression>
+                <difference>
+                    <prod>
+                        <div>
+                            <value>1</value>
+                            <difference>
+                                <property alias="/params/groundshake/default-aircraft-scaler-maxkts"/>
+                                <property alias="/params/groundshake/default-aircraft-scaler-minkts"/>
+                            </difference>
+                        </div>
+                        <property>/velocities/groundspeed-kt</property>
+                    </prod>
+                    
+                    <div>
+                        <property alias="/params/groundshake/default-aircraft-scaler-minkts"/>
+                        <difference>
+                            <property alias="/params/groundshake/default-aircraft-scaler-maxkts"/>
+                            <property alias="/params/groundshake/default-aircraft-scaler-minkts"/>
+                        </difference>
+                    </div>
+                </difference>
+            </expression>
+            
+            <min>0.0</min>
+            <max>1.0</max>
+        </input>
+        <output>
+            <property alias="/params/groundshake/default-aircraft-scaler" />
+        </output>
+    </filter>
+    
+</PropertyList>

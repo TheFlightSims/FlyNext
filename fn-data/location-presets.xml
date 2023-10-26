@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+  presets for the ever changing default airport
+-->
+<PropertyList>
+  <sim>
+    <presets>
+      <airport-id>BIKF</airport-id>
+      <runway>29</runway>
+    </presets>
+  </sim>
+  <instrumentation>
+    <!-- Radio settings -->
+    <comm n="0">
+      <frequencies>
+        <!-- TWR -->
+        <selected-mhz type="double">118.300</selected-mhz>
+        <!-- DEP -->
+        <standby-mhz type="double">119.300</standby-mhz>
+      </frequencies>
+    </comm>
+    <comm n="1">
+      <frequencies>
+        <!-- ATIS -->
+        <selected-mhz type="double">128.300</selected-mhz>
+        <!-- GND -->
+        <standby-mhz type="double">121.900</standby-mhz>
+      </frequencies>
+    </comm>
+    <nav n="0">
+      <frequencies>
+        <!-- KEFLAVIK (KEF) -->
+        <selected-mhz type="double">112.00</selected-mhz>
+        <!-- BIKF ILS-29 (IKW) -->
+        <standby-mhz type="double">108.50</standby-mhz>
+      </frequencies>
+      <radials>
+        <selected-deg type="double">284</selected-deg>
+      </radials>
+    </nav>
+    <nav n="1">
+      <frequencies>
+        <!-- INGO (ING) -->
+        <selected-mhz type="double">112.40</selected-mhz>
+        <!-- AKURERYI -->
+        <standby-mhz type="double">113.600</standby-mhz>
+      </frequencies>
+      <radials>
+        <selected-deg type="double">326</selected-deg>
+      </radials>
+    </nav>
+    <dme n="0">
+      <serviceable type="bool" archive="y">true</serviceable>
+      <switch-position type="int" archive="y">2</switch-position>
+      <frequencies>
+        <selected-mhz type="double">118.300</selected-mhz>
+        <source>/instrumentation/nav[0]/frequencies/selected-mhz</source>
+      </frequencies>
+    </dme>
+    <adf n="0">
+      <frequencies>
+        <!-- KEFLAVIK (KF) -->
+        <selected-khz type="int">392</selected-khz>
+        <!-- ELLIDAVATAN (EL)-->
+        <standby-khz type="int">335</standby-khz>
+      </frequencies>
+      <serviceable type="bool" archive="y">true</serviceable>
+      <indicated-bearing-deg type="double">270</indicated-bearing-deg>
+      <error-deg type="double">2</error-deg>
+      <mode>adf</mode>
+      <rotation-deg type="double">0</rotation-deg>
+      <volume-norm type="double">0.5</volume-norm>
+    </adf>
+    <adf n="1"> <!-- unset -->
+      <frequencies>
+        <!-- SELFOSS (SE)-->
+        <selected-khz type="int">397</selected-khz>
+        <!-- REYKJAVIK (RK) -->
+        <standby-khz type="int">355</standby-khz>
+      </frequencies>
+      <serviceable type="bool" archive="y">true</serviceable>
+      <indicated-bearing-deg type="double">90</indicated-bearing-deg>
+      <error-deg type="double">2</error-deg>
+      <mode>adf</mode>
+      <rotation-deg type="double">0</rotation-deg>
+      <volume-norm type="double">0.5</volume-norm>
+    </adf>
+  </instrumentation>
+</PropertyList>

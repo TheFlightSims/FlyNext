@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/Fallback/classic-shadow</name>
+  <technique n="-10">
+    <scheme>classic-shadow</scheme>
+    <pass>
+      <lighting>false</lighting>
+      <color-mask type="vec4d">0 0 0 0</color-mask>
+      <cull-face>back</cull-face>
+      <blend>
+        <active>false</active>
+      </blend>
+      <alpha-test>
+        <comparison>greater</comparison>
+        <reference type="float">0.5</reference>
+      </alpha-test>
+    </pass>
+  </technique>
+</PropertyList>

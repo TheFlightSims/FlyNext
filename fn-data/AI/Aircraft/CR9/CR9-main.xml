@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Bombardier Canadair Regional Jet CRJ900 (CL-600-2D24)</description>
+  <author>Ian (Yves) Tolosa, March 2019</author>
+  <path>Models/CR9.ac</path>
+  <!-- Pitch Forward so nosewheel on ground -->
+  <offsets>
+    <pitch-deg>-1.9</pitch-deg>
+  </offsets>
+  <!-- Gear Showed only < 150 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/CR9/Effects/CR9-LightMap</inherits-from>
+    <object-name>CR9</object-name>
+	<object-name>Gear</object-name>
+  </effect>
+    <!-- ALS Navigation Lights Objects -->
+    <model>
+    <path>Lights/CR9-NavLights.xml</path>
+  </model>
+</PropertyList>

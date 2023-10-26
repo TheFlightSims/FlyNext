@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <fx>
+
+<!--
+  <thunder>
+   <name>Thunder</name>
+   <mode>once</mode>
+   <path>Sounds/thunder.wav</path>
+   <property>environment/lightning/flash</property>
+   <position>
+    <x><property>environment/lightning/lightning-pos-x</property></x>
+    <y><property>environment/lightning/lightning-pos-y</property></y>
+    <z>1000.0</z>
+   </position>
+   <volume>1.0</volume>
+   <pitch>1.0</pitch>
+  </thunder>
+-->
+
+ </fx>
+
+</PropertyList>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- Create a Light Object by Associating a Geometry and a Custom Effect -->
+<PropertyList>
+  <path>procedural_light.ac</path>
+  <nopreview />
+  <effect>
+    <inherits-from>procedural-light-nav-left</inherits-from>
+    <object-name>procedural_light</object-name>
+  </effect>
+  <animation>
+    <!-- Scale the generic AC Object to allow view from larger distance -->
+    <type>scale</type>
+    <x-offset>10</x-offset>
+    <y-offset>10</y-offset>
+    <z-offset>10</z-offset>
+  </animation>
+  <!-- Re scale Light Object based on distance from viewer to compensate perspective -->
+  <animation>
+    <type>dist-scale</type>
+    <object-name>procedural_light</object-name>
+    <factor>0.005</factor>
+    <offset>0.0</offset>
+    <min>0.12</min>
+  </animation>
+</PropertyList>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>2d</type>
+  <width>screen</width>
+  <height>screen</height>
+  <format>r8</format>
+  <min-filter>linear</min-filter>
+  <mag-filter>linear</mag-filter>
+  <condition>
+    <property>/sim/rendering/hdr/ambient-occlusion/enabled</property>
+  </condition>
+</PropertyList>

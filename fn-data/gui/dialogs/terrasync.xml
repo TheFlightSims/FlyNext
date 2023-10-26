@@ -1,0 +1,462 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <name>terrasync</name>
+
+  <nasal>
+    <open>
+      <![CDATA[
+        var computeStatusText = func {
+            # first, check if the system is actually enabled
+            if (!getprop('/sim/terrasync/enabled'))
+                return "Downloading disabled";
+
+            # only happens if terrasync failed to activate, so
+            # indicates a problem
+            if (!getprop('/sim/terrasync/active'))
+                return "Automatic download inactive";
+
+            # we need to suggest some remedial action here!
+            if (getprop('/sim/terrasync/stalled'))
+                return "Downloading has stalled. Check your network connection and settings";
+
+            if (getprop('/sim/terrasync/busy')) {
+                var kbytesSec = getprop('/sim/terrasync/transfer-rate-bytes-sec') / 1024;
+                return sprintf('Downloading: %dKB/sec', int(kbytesSec));
+            }
+
+            # we are enabled but not busy, so idle
+            return "Ready";
+        }
+
+        # timer function, update summary status string
+        var updateStatusText = func {
+            var s = computeStatusText();
+            setprop("/sim/gui/dialogs/terrasync/status", s);
+
+            var msg = "";
+            if (getprop("/sim/terrasync/available")) {
+                if (getprop("/sim/terrasync/enabled"))
+                    msg = "Automatic download active; monitor your bandwidth on metered connection.";
+            } else {
+                if (getprop("/sim/terrasync/intialized"))
+                    msg = "Automatic download not active.";
+                else
+                    msg = "Automatic download not supported.";
+            }
+            setprop("/sim/terrasync/ui-message-node", msg);
+        }
+
+        # the TerraSync properties of interest are tied, so we can't use a
+        # listener. Let's poll while the dialog is open; not ideal but not
+        # a major problem.
+        var statusTimer = maketimer(0.4, updateStatusText);
+        statusTimer.start();
+        updateStatusText();
+
+        setprop("/sim/gui/dialogs/terrasync/display-mode", "0");
+      ]]>
+    </open>
+      
+    <close>
+      statusTimer.stop();
+      statusTimer = nil;
+    </close>
+
+  </nasal>
+
+  <layout>vbox</layout>
+  <default-padding>3</default-padding>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>1</default-padding>
+
+    <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Automatic Download of Scenery and Data (TerraSync)</label>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
+    <button>
+      <pref-width>16</pref-width>
+      <pref-height>16</pref-height>
+      <legend></legend>
+      <keynum>27</keynum>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>vbox</layout>
+    <padding>5</padding>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>left</halign>
+
+      <text>
+        <name>message</name>
+        <color>
+          <red>1.0</red>
+          <green>0.4</green>
+          <blue>0.4</blue>
+        </color>
+        <property>/sim/terrasync/ui-message-node</property>
+        <live>true</live>
+      </text>
+    </group>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>left</halign>
+
+      <checkbox>
+        <name>terrasync-enabled</name>
+        <halign>left</halign>
+        <property>/sim/terrasync/enabled</property>
+        <label>Enable automatic scenery download</label>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>terrasync-enabled</object-name>
+        </binding>
+        <enable>
+          <not-equals>
+            <property>/sim/terrasync/scenery-dir</property>
+            <value></value>
+          </not-equals>
+        </enable>
+      </checkbox>
+    </group>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>left</halign>
+
+      <!-- only for a gap -->
+      <text>
+        <label>    </label>
+      </text>
+
+      <checkbox>
+        <name>ai-data-enabled</name>
+        <halign>left</halign>
+        <property>/sim/terrasync/ai-data-enabled</property>
+        <label>Update AI Traffic during FG start</label>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>ai-data-enabled</object-name>
+        </binding>
+        <enable>
+          <property>/sim/terrasync/enabled</property>
+          <property>/sim/traffic-manager/enabled</property>
+        </enable>
+      </checkbox>
+
+      <button>
+        <legend>Update Now</legend>
+        <equal>true</equal>
+        <enable>
+          <property>/sim/terrasync/enabled</property>
+          <property>/sim/traffic-manager/enabled</property>
+          <property>/sim/terrasync/ai-data-enabled</property>
+        </enable>
+        <binding>
+          <command>property-assign</command>
+          <property>/sim/terrasync/ai-data-enabled</property>
+          <value>1</value>
+        </binding>
+        <binding>
+          <command>property-assign</command>
+          <property>/sim/terrasync/ai-data-update-now</property>
+          <value>1</value>
+        </binding>
+      </button>
+
+      <!-- <checkbox>
+        <name>other-data-enabled</name>
+        <halign>left</halign>
+        <property>/sim/terrasync/other-data-enabled</property>
+        <label>Download other data files</label>
+        <live>true</live>
+        <binding>
+          <command>dialog-apply</command>
+          <object-name>other-data-enabled</object-name>
+        </binding>
+        <enable>
+          <property>/sim/terrasync/enabled</property>
+        </enable>
+      </checkbox> -->
+    </group>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>center</halign>
+
+      <text>
+        <name>warning_text</name>
+        <color>
+          <red>1.0</red>
+          <green>0.4</green>
+          <blue>0.4</blue>
+          <alpha>1</alpha>
+        </color>
+        <label/>
+      </text>
+    </group>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>vbox</layout>
+    <halign>left</halign>
+    <default-padding>5</default-padding>
+
+    <group>
+      <layout>hbox</layout>
+      <halign>left</halign>
+
+      <button>
+        <legend>Information</legend>
+        <equal>true</equal>
+        <binding>
+          <command>property-assign</command>
+          <property>/sim/gui/dialogs/terrasync/display-mode</property>
+          <value>0</value>
+        </binding>
+      </button>
+
+      <button>
+        <legend>Log</legend>
+        <equal>true</equal>
+        <binding>
+          <command>property-assign</command>
+          <property>/sim/gui/dialogs/terrasync/display-mode</property>
+          <value>1</value>
+        </binding>
+      </button>
+    </group>
+
+    <!-- 'tabbed' group controlled by display-mode property -->
+    <group>
+      <layout>hbox</layout>
+      <halign>left</halign>
+
+      <group>
+        <layout>table</layout>
+        <halign>fill</halign>
+        <valign>fill</valign>
+        <default-padding>0</default-padding>
+
+        <group>
+          <layout>table</layout>
+          <halign>left</halign>
+          <valign>top</valign>
+          <equal>false</equal>
+
+          <row>0</row>
+          <col>0</col>
+          <visible>
+            <equals>
+              <property>/sim/gui/dialogs/terrasync/display-mode</property>
+              <value>0</value>
+            </equals>
+          </visible>
+
+          <text>
+            <row>0</row>
+            <col>0</col>
+
+            <halign>left</halign>
+            <label>Status:</label>
+            <live>true</live>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+
+          <text>
+            <row>0</row>
+            <col>1</col>
+            <colspan>2</colspan>
+
+            <halign>left</halign>
+            <!-- status text is generated by Nasal dynamically -->
+            <property>/sim/gui/dialogs/terrasync/status</property>
+            <live>true</live>
+            <halign>right</halign>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+
+          <text>
+            <halign>left</halign>
+            <row>1</row>
+            <col>0</col>
+            <label>KBytes downloaded:</label>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+          <text>
+            <row>1</row>
+            <col>1</col>
+            <format>%d</format>
+            <property>/sim/terrasync/downloaded-kbytes</property>
+            <live>true</live>
+            <halign>right</halign>
+            <stretch>true</stretch>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+
+          <text>
+            <halign>left</halign>
+            <row>2</row>
+            <col>0</col>
+            <label>Processed elements:</label>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+          <text>
+            <row>2</row>
+            <col>1</col>
+            <format>%s</format>
+            <property>/sim/terrasync/update-count</property>
+            <live>true</live>
+            <stretch>true</stretch>
+            <halign>right</halign>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+
+          <text>
+            <halign>left</halign>
+            <row>3</row>
+            <col>0</col>
+            <label>Processed scenery tiles:</label>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+          <text>
+            <row>3</row>
+            <col>1</col>
+            <format>%s</format>
+            <property>/sim/terrasync/tile-count</property>
+            <live>true</live>
+            <stretch>true</stretch>
+            <halign>right</halign>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+
+          <text>
+            <halign>left</halign>
+            <row>4</row>
+            <col>0</col>
+            <label>Number of errors:</label>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+          <text>
+            <row>4</row>
+            <col>1</col>
+            <format>%s</format>
+            <property>/sim/terrasync/error-count</property>
+            <live>true</live>
+            <stretch>true</stretch>
+            <halign>right</halign>
+            <color>
+              <red>0.7</red>
+              <green>0.7</green>
+              <blue>0.7</blue>
+              <alpha>1</alpha>
+            </color>
+          </text>
+        </group>
+
+        <loglist>
+          <row>0</row>
+          <col>0</col>
+
+          <visible>
+            <equals>
+              <property>/sim/gui/dialogs/terrasync/display-mode</property>
+              <value>1</value>
+            </equals>
+          </visible>
+
+          <halign>fill</halign>
+          <valign>fill</valign>
+          <stretch>true</stretch>
+          <pref-width>600</pref-width>
+          <pref-height>300</pref-height>
+          <logclass>terrasync</logclass>
+        </loglist>
+      </group>
+    </group> <!-- end of tabbed group -->
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <default-padding>3</default-padding>
+    <empty><stretch>true</stretch></empty>
+
+    <button>
+      <legend>Close</legend>
+      <equal>true</equal>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+    <empty><stretch>true</stretch></empty>
+  </group>
+
+</PropertyList>

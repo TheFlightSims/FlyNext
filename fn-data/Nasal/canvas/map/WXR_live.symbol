@@ -1,0 +1,103 @@
+# See: http://wiki.flightgear.org/MapStructure
+# Class things:
+var name = 'WXR_live';
+var parents = [DotSym];
+var __self__ = caller(0)[0];
+DotSym.makeinstance( name, __self__ );
+
+var element_type = "group";
+
+var getWXRImageFilePath = func(){
+	var home = getprop('sim/fg-home');
+	var aircraft = getprop('sim/aircraft');
+	var idx = me.layer.getCanvas()._node.getIndex();
+	return home ~ '/Export/' ~ aircraft ~ '-wxr-'~idx~'.png';
+};
+
+var processRequest = func(r) {
+	var splitVector = split(",", r.response);
+	var timeStamp = split("]",splitVector[size(splitVector) - 1]);
+	return timeStamp[0];
+};
+
+var getWXRAPIUrl = func(lat, lon){
+	if (me.timeStamp == nil) { return nil; }
+	return "https://tilecache.rainviewer.com/v2/radar/" ~ sprintf("%s",me.timeStamp) ~ "/512/5/" ~ lat ~ "/" ~ lon ~ "/7/0_0.png";
+};
+
+var fetchWXRMap = func(size){
+	if(me.fetching) return;
+	var pos = geo.aircraft_position();
+	var lat = pos.lat();
+	var lon = pos.lon();
+	var url = me.getWXRAPIUrl(lat, lon);
+	var filePath = me.getWXRImageFilePath();
+	if(url == nil) {
+		logprint(LOG_INFO,me.name,": No URL!");
+		return;
+	}
+	me.fetching = 1;
+	http.save(url, filePath)
+		.fail(func(){
+			logprint(LOG_INFO,me.name,":Download failed!");}
+		)
+		.done(func(){
+			var sz = size * 2;
+			var transl = -size;
+			me.wxlayer.hide();
+			me.wxlayer.setFile(filePath)
+					  .setSize(sz, sz)
+					  .setTranslation(transl, transl);
+			me.wxlayer.show();
+			me.last_request = getprop("/sim/time/elapsed-sec");
+		})
+		.always(func(){
+			setprop("/instrumentation/wxr/center/latitude-deg", lat);
+			setprop("/instrumentation/wxr/center/longitude-deg", lon);
+			me.fetching = 0;
+			logprint(LOG_DEBUG,me.name,": Layer Request: ",url);
+		});
+};
+
+var init = func {
+	#print('WXR init');
+	me.fetching = 0;
+	me.timeStamp = nil;
+	me.fetchRad = me.model.fetchRad; # Radius of radar layer to fetch
+	me.range = me.model.rangeNm; # Range of Navigation Display
+	me.viewport_radius = me.getOption('viewport_radius', 670);
+	
+	me.wxlayer = me.element.createChild("image").set("z-index", -100).hide();
+	
+	me.last_request = -600;
+	me.update_interval = 600;
+	
+	var r_scaled = (me.fetchRad*me.viewport_radius)/me.range;
+	me.fetchWXRMap(r_scaled);
+	
+	me.timeStamp = nil;
+	http.load("https://api.rainviewer.com/public/maps.json").done(func(r) me.timeStamp = processRequest(r));
+};
+
+var draw = func {
+	var range = me.layer.map.getRange(); # Range of Navigation Display
+	var update_size = (range != me.range);
+	me.range = range;
+	me.fetchRad = me.model.fetchRad; # Radius of radar layer to fetch
+	var r_scaled = (me.fetchRad*me.viewport_radius)/me.range;
+	var hdg = me.layer.map.getHdg();
+	var rot = 0 - hdg;
+	if(rot < 0) rot = 360 + rot + -getprop("/environment/magnetic-variation-deg"); 
+	me.element.setRotation(rot*D2R);
+	if(update_size){
+		me.wxlayer.hide();
+		me.wxlayer.setSize(2*r_scaled, 2*r_scaled)
+				  .setTranslation(-r_scaled, -r_scaled);
+		me.wxlayer.show();
+	}
+
+	if(getprop("/sim/time/elapsed-sec") - me.last_request > me.update_interval) {
+		me.fetchWXRMap(r_scaled);
+	}
+};
+

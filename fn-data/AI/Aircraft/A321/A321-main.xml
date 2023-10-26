@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>A321</description>
+  <author>Brett Harrison</author>
+  <path>Models/A321.ac</path>
+  <animation>
+    <type>select</type>
+    <object-name>gear</object-name>
+    <condition>
+      <greater-than>
+        <property>gear/gear[0]/position-norm</property>
+        <value>0.25</value>
+      </greater-than>
+    </condition>
+  </animation>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/A321-NavLights.xml</path>
+  </model>
+</PropertyList>

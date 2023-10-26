@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Altitude-dependent scattered light -->
+<PropertyList>
+  <name>Effects/space-combined</name>
+  <inherits-from>Effects/model-combined</inherits-from>
+
+<parameters>
+	<geo_light_r type="float">0.0</geo_light_r>
+	<geo_light_g type="float">0.0</geo_light_g>
+	<geo_light_b type="float">0.0</geo_light_b>
+	<geo_light_x type="float">0.0</geo_light_x>
+	<geo_light_y type="float">0.0</geo_light_y>
+	<geo_light_z type="float">0.0</geo_light_z>
+	<geo_light_radius type="float">0.0</geo_light_radius>
+	<geo_ambience type="float">0.0</geo_ambience>
+	<use_geo_light type="int">0</use_geo_light>
+</parameters> 
+
+<technique n="4">
+ <pass>
+ <program>
+        <vertex-shader n="0">Shaders/space-ALS-ultra.vert</vertex-shader>
+        <fragment-shader n="0">Shaders/space-ALS-ultra.frag</fragment-shader>
+	<fragment-shader n="6">Shaders/color_temperature.frag</fragment-shader>
+  </program>
+
+			   <uniform>
+				   <name>BaseTex</name>
+				   <type>sampler-2d</type>
+				   <value type="int">0</value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>ReflNoiseTex</name>
+				   <type>sampler-3d</type>
+				   <value type="int">1</value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>NormalTex</name>
+				   <type>sampler-2d</type>
+				   <value type="int">2</value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>LightMapTex</name>
+				   <type>sampler-2d</type>
+				   <value type="int">3</value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>ReflMapTex</name>
+				   <type>sampler-2d</type>
+				   <value type="int">4</value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>Environment</name>
+				   <type>sampler-cube</type>
+				   <value type="int">5</value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>ReflGradientsTex</name>
+				   <type>sampler-2d</type>
+				   <value type="int">6</value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>GrainTex</name>
+				   <type>sampler-2d</type>
+				   <value type="int">7</value>
+		 	   </uniform>
+			   
+			   <!-- 			NORMAL MAP -->
+			   <!-- normalmap is used-->
+			   <uniform>
+				   <name>nmap_enabled</name>
+				   <type>int</type>
+				   <value>
+					   <use>normalmap-enabled</use>
+				   </value>
+			   </uniform>
+			   
+			   <!-- normalmap is .dds-->
+			   <uniform>
+				   <name>nmap_dds</name>
+				   <type>int</type>
+				   <value>
+					   <use>normalmap-dds</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>nmap_tile</name>
+				   <type>float</type>
+				   <value>
+					   <use>normalmap-tiling</use>
+				   </value>
+			   </uniform>
+			   
+			   <!-- 			LIGHTMAP -->
+			   <!-- lightmap is used -->
+			   <uniform>
+				   <name>lightmap_enabled</name>
+				   <type>int</type>
+				   <value>
+					   <use>lightmap-enabled</use>
+				   </value>
+			   </uniform>
+			   <!-- lightmap is multichannel -->
+			   <uniform>
+				   <name>lightmap_multi</name>
+				   <type>int</type>
+				   <value>
+					   <use>lightmap-multi</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>lightmap_r_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>lightmap-factor[0]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>lightmap_r_color</name>
+				   <type>float-vec3</type>
+				   <value>
+					   <use>lightmap-color[0]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>lightmap_g_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>lightmap-factor[1]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>lightmap_g_color</name>
+				   <type>float-vec3</type>
+				   <value>
+					   <use>lightmap-color[1]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>lightmap_b_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>lightmap-factor[2]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>lightmap_b_color</name>
+				   <type>float-vec3</type>
+				   <value>
+					   <use>lightmap-color[2]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>lightmap_a_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>lightmap-factor[3]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>lightmap_a_color</name>
+				   <type>float-vec3</type>
+				   <value>
+					   <use>lightmap-color[3]</use>
+				   </value>
+			   </uniform>
+
+		  	<uniform>
+				<name>darkmap_factor</name>
+				<type>float</type>
+				<value>
+			 	 <use>darkmap-factor</use>
+				</value>
+		  	</uniform>
+			   
+			   <!-- reflection is used -->
+			   <uniform>
+				   <name>refl_enabled</name>
+				   <type>int</type>
+				   <value>
+					   <use>reflection-enabled</use>
+				   </value>
+			   </uniform>
+			   <!-- reflection correction -->
+			   <uniform>
+				   <name>refl_correction</name>
+				   <type>float</type>
+				   <value>
+					   <use>reflection-correction</use>
+				   </value>
+			   </uniform>
+			   
+			   <!-- use a reflection map-->
+			   <uniform>
+				   <name>refl_map</name>
+				   <type>int</type>
+				   <value>
+					   <use>reflect-map-enabled</use>
+				   </value>
+			   </uniform>
+
+			   <!-- how are colors merged in a reflection-->
+			   <uniform>
+				   <name>refl_type</name>
+				   <type>int</type>
+				   <value>
+					   <use>reflection-type</use>
+				   </value>
+			   </uniform>
+
+			   <!-- reflection is dynamic -->
+			   <uniform>
+				   <name>refl_dynamic</name>
+				   <type>int</type>
+				   <value>
+					   <use>reflection-dynamic</use>
+				   </value>
+			   </uniform>
+			   
+			   <!-- set the amount of fringing colour 0.0 - 1.0 -->
+			   <uniform>
+				   <name>refl_rainbow</name>
+				   <type>float</type>
+				   <value>
+					   <use>reflection-rainbow</use>
+				   </value>
+			   </uniform>
+			   
+			   <!-- set the amount of fresnel effect colour 0.0 - 1.0 -->
+			   <uniform>
+				   <name>refl_fresnel</name>
+				   <type>float</type>
+				   <value>
+					   <use>reflection-fresnel</use>
+				   </value>
+			   </uniform>
+			   
+			   <!-- set the amount of noisiness 0.0 - 1.0 -->
+			   <uniform>
+				   <name>refl_noise</name>
+				   <type>float</type>
+				   <value>
+					   <use>reflection-noise</use>
+				   </value>
+			   </uniform>
+			   
+			   <!-- dirt -->
+			   <uniform>
+				   <name>dirt_enabled</name>
+				   <type>int</type>
+				   <value>
+					   <use>dirt-enabled</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>dirt_multi</name>
+				   <type>int</type>
+				   <value>
+					   <use>dirt-multi</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>dirt_r_color</name>
+				   <type>float-vec3</type>
+				   <value>
+					   <use>dirt-color[0]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>dirt_r_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>dirt-factor[0]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>dirt_g_color</name>
+				   <type>float-vec3</type>
+				   <value>
+					   <use>dirt-color[1]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>dirt_g_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>dirt-factor[1]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>dirt_b_color</name>
+				   <type>float-vec3</type>
+				   <value>
+					   <use>dirt-color[2]</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>dirt_b_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>dirt-factor[2]</use>
+				   </value>
+			   </uniform>
+
+			   <uniform>
+				   <name>dirt_modulates_reflection</name>
+				   <type>int</type>
+				   <value>
+					   <use>dirt-modulates-reflection</use>
+				   </value>
+			   </uniform>
+
+			   <uniform>
+				   <name>dirt_reflection_factor</name>
+				   <type>float</type>
+				   <value>
+					   <use>dirt-reflection-factor</use>
+				   </value>
+			   </uniform>
+			   
+
+			   <!-- use a grain texture map-->
+		  	   <uniform>
+				   <name>grain_texture_enabled</name>
+				   <type>int</type>
+				   <value>
+			  	   	<use>grain-texture-enabled</use>
+				   </value>
+		  	   </uniform>
+		  
+		  	   <uniform>
+				   <name>grain_magnification</name>
+				   <type>float</type>
+				   <value>
+			  		<use>grain-magnification</use>
+				   </value>
+		  	   </uniform>
+
+			   <!-- simulate wetness and rain-->
+		  	   <uniform>
+				   <name>rain_enabled</name>
+				   <type>int</type>
+				   <value>
+			  	   	<use>rain-enabled</use>
+				   </value>
+		  	   </uniform>
+
+			   <!-- set the amount of ambient light correction 0.0 - 1.0  -->
+			   <uniform>
+				   <name>amb_correction</name>
+				   <type>float</type>
+				   <value>
+					   <use>ambient-correction</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>hdg</name>
+				   <type>float</type>
+				   <value>
+					   <use>model-hdg</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>pitch</name>
+				   <type>float</type>
+				   <value>
+					   <use>model-pitch</use>
+				   </value>
+			   </uniform>
+			   
+			   <uniform>
+				   <name>roll</name>
+				   <type>float</type>
+				   <value>
+					   <use>model-roll</use>
+				   </value>
+			   </uniform>
+			   
+			   <!-- 	    BEGIN fog include -->
+			   <uniform>
+				   <name>visibility</name>
+				   <type>float</type>
+				   <value>
+					   <use>visibility</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>avisibility</name>
+				   <type>float</type>
+				   <value>
+					   <use>avisibility</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>hazeLayerAltitude</name>
+				   <type>float</type>
+				   <value>
+					   <use>lthickness</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>scattering</name>
+				   <type>float</type>
+				   <value>
+					   <use>scattering</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>terminator</name>
+				   <type>float</type>
+				   <value>
+					   <use>terminator</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>ground_scattering</name>
+				   <type>float</type>
+				   <value>
+					   <use>ground_scattering</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>terminator</name>
+				   <type>float</type>
+				   <value>
+					   <use>terminator</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>terrain_alt</name>
+				   <type>float</type>
+				   <value>
+					   <use>terrain_alt</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>overcast</name>
+				   <type>float</type>
+				   <value>
+					   <use>overcast</use>
+				   </value>
+			   </uniform>
+			   <uniform>
+				   <name>eye_alt</name>
+				   <type>float</type>
+				   <value>
+					   <use>eye_alt</use>
+				   </value>
+			   </uniform>
+      			   <uniform>
+        		 	   <name>cloud_self_shading</name>
+        		           <type>float</type>
+        			   <value><use>cloud_self_shading</use></value>
+      			   </uniform>
+      			   <uniform>
+        			   <name>moonlight</name>
+        			   <type>float</type>
+        			   <value><use>moonlight</use></value>
+      			   </uniform>
+   			   <uniform>
+        			   <name>air_pollution</name>
+       				   <type>float</type>
+       				   <value><use>air_pollution</use></value>
+     			   </uniform>
+   			   <uniform>
+        			   <name>rain_norm</name>
+       				   <type>float</type>
+       				   <value><use>rnorm</use></value>
+     			   </uniform>
+   			   <uniform>
+        			   <name>wetness</name>
+       				   <type>float</type>
+       				   <value><use>wetness</use></value>
+     			   </uniform>
+			   <uniform>
+         			   <name>view_pitch_offset</name>
+    				   <type>float</type>
+      				   <value><use>view_pitch_offset</use></value>
+     			   </uniform>
+    			   <uniform>
+    				   <name>view_heading_offset</name>
+     				   <type>float</type>
+     				   <value><use>view_heading_offset</use></value>
+    			   </uniform>
+    			   <uniform>
+     				   <name>field_of_view</name>
+    				   <type>float</type>
+     				   <value><use>view_fov</use></value>
+     			   </uniform>
+   			   <uniform>
+    				   <name>landing_light1_offset</name>
+    				   <type>float</type>
+      				   <value><use>landing_light1_offset</use></value>
+     			   </uniform>
+   			   <uniform>
+     				   <name>landing_light2_offset</name>
+    				   <type>float</type>
+     				   <value><use>landing_light2_offset</use></value>
+     			   </uniform>
+                   	   <uniform>
+                       		   <name>landing_light3_offset</name>
+                       	           <type>float</type>
+                       		   <value><use>landing_light3_offset</use></value>
+                   	   </uniform>
+ 			<uniform>
+        			<name>gamma</name>
+        			<type>float</type>
+       			 <value><use>gamma</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>brightness</name>
+        			<type>float</type>
+       			 <value><use>brightness</use></value>
+      			</uniform>
+      			<uniform>
+        			<name>use_filtering</name>
+        			<type>bool</type>
+        			<value><use>use_filtering</use></value>
+      			</uniform>
+      			<uniform>
+       				 <name>use_night_vision</name>
+        			  <type>bool</type>
+       			 	   <value><use>use_night_vision</use></value>
+      			  </uniform>
+      			  <uniform>
+       			 	<name>use_IR_vision</name>
+        			<type>bool</type>
+       			 	<value><use>use_IR_vision</use></value>
+      			   </uniform>
+     			   <uniform>
+        			<name>delta_T</name>
+        			<type>float</type>
+        			<value><use>delta_T</use></value>
+      			   </uniform>
+			   <uniform>
+				<name>fact_grey</name>
+				<type>float</type>
+				<value><use>fact_grey</use></value>
+			   </uniform>
+			   <uniform>
+				<name>fact_black</name>
+				<type>float</type>
+				<value><use>fact_black</use></value>
+			   </uniform>
+ 			   <uniform>
+       				  <name>cloudpos1_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos1_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos1_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos1_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos2_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos2_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos2_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos2_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos3_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos3_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos3_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos3_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos4_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos4_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos4_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos4_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos5_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos5_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos5_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos5_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos6_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos6_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos6_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos6_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos7_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos7_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos7_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos7_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos8_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos8_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos8_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos8_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos9_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos9_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos9_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos9_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos10_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos10_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos10_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos10_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos11_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos11_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos11_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos11_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos12_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos12_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos12_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos12_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos13_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos13_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos13_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos13_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos14_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos14_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos14_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos14_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos15_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos15_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos15_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos15_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos16_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos16_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos16_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos16_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos17_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos17_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos17_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos17_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos18_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos18_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos18_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos18_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos19_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos19_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos19_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos19_y</use></value>
+      			   </uniform>
+			   <uniform>
+       				  <name>cloudpos20_x</name>
+        			  <type>float</type>
+        		   <value><use>cloudpos20_x</use></value>
+      			   </uniform>
+	  		   <uniform>
+       				  <name>cloudpos20_y</name>
+        			  <type>float</type>
+        			  <value><use>cloudpos20_y</use></value>
+      			   </uniform>
+	  		   <uniform>
+        			  <name>cloud_shadow_flag</name>
+        			  <type>int</type>
+        			  <value><use>cloud_shadow_flag</use></value>
+      			   </uniform>
+			   <uniform>
+				  <name>use_searchlight</name>
+	 			  <type>int</type>
+				  <value><use>use_searchlight</use></value>
+     			   </uniform>
+    			   <uniform>
+				  <name>use_landing_light</name>
+				  <type>int</type>
+	   			  <value><use>use_landing_light</use></value>
+      			   </uniform>
+     			   <uniform>
+				  <name>use_alt_landing_light</name>
+				  <type>int</type>
+				  <value><use>use_alt_landing_light</use></value>
+     			   </uniform>
+     			   <uniform>
+       				  <name>display_xsize</name>
+      				  <type>int</type>
+      				  <value><use>display_xsize</use></value>
+    			   </uniform>
+     			   <uniform>
+       				  <name>display_ysize</name>
+      				  <type>int</type>
+      				  <value><use>display_ysize</use></value>
+    			   </uniform>  
+			   <uniform>
+				  <name>darkmap_enabled</name>
+	 			  <type>int</type>
+				  <value><use>darkmap-enabled</use></value>
+     			   </uniform>
+
+  <uniform>
+	<name>geo_light_r</name>
+	<type>float</type>
+	<value><use>geo_light_r</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_g</name>
+	<type>float</type>
+	<value><use>geo_light_g</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_b</name>
+	<type>float</type>
+	<value><use>geo_light_b</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_x</name>
+	<type>float</type>
+	<value><use>geo_light_x</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_y</name>
+	<type>float</type>
+	<value><use>geo_light_y</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_z</name>
+	<type>float</type>
+	<value><use>geo_light_z</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_light_radius</name>
+	<type>float</type>
+	<value><use>geo_light_radius</use></value>
+  </uniform>
+  <uniform>
+	<name>geo_ambience</name>
+	<type>float</type>
+	<value><use>geo_ambience</use></value>
+  </uniform>
+  <uniform>
+	<name>use_geo_light</name>
+	<type>int</type>
+	<value><use>use_geo_light</use></value>
+  </uniform>
+  </pass>
+ </technique>
+
+ <technique n="5">
+ <pass>
+ <program>
+        <vertex-shader n="0">Shaders/space-ALS-base.vert</vertex-shader>
+        <fragment-shader n="0">Shaders/space-ALS-base.frag</fragment-shader>
+  </program>
+  </pass>
+ </technique>
+
+</PropertyList> 
+
+

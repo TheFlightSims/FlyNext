@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<!--
+    Copyright License:  GPL
+    Usable with FlightGear
+    Property of Gerard Robin
+    but  the Fresnel Lens Optical Landing System which is copied from the Nimitz Model
+    by Vivian Meazza
+-->
+
+  <PropertyList>
+	  <scenario>
+	  	<name>Carrier: R98 - Clemenceau (LFMN)</name>
+	  	<description>This scenario spawns the Clemenceau aircraft carrier in the Mediterranean off Marseille.</description>
+		<entry>
+			<type>carrier</type>
+			<name>Clemenceau</name>
+			<pennant-number>R98</pennant-number>
+			<TACAN-channel-ID>026Y</TACAN-channel-ID>
+      <description>French aircraft carrier Clemenceau (R98) in the Mediterranean off Marseille (43.2N, 5.1E).</description>
+			<model>Models/Geometry/Clemenceau/Clemenceau.xml</model>
+			<latitude>43.2</latitude>
+			<longitude>5.11</longitude>
+            <deck-altitude>65</deck-altitude>
+			<speed>10</speed>
+			<heading>150</heading>
+			<rudder>0</rudder>
+			<turn-radius-ft>5000</turn-radius-ft>
+
+      <flols-pos>
+				<x-offset-m>25.9</x-offset-m>
+				<y-offset-m>-29.5</y-offset-m>
+				<z-offset-m>14.7</z-offset-m>
+        <heading-offset-deg>-8.5</heading-offset-deg>
+			</flols-pos>
+
+			<parking-pos>
+				<name>cat-1</name>
+				<heading-offset-deg>0</heading-offset-deg>
+				<x-offset-m>-72</x-offset-m>
+				<y-offset-m>-7.08761</y-offset-m>
+				<z-offset-m>14.27</z-offset-m>
+			</parking-pos>
+			<parking-pos>
+				<name>cat-2</name>
+				<heading-offset-deg>-4.55</heading-offset-deg>
+                                <x-offset-m>27</x-offset-m>
+				<y-offset-m>-18.4</y-offset-m>
+				<z-offset-m>14.27</z-offset-m>
+			</parking-pos>
+			<parking-pos>
+				<name>park-1</name>
+				<heading-offset-deg>30</heading-offset-deg>
+				<x-offset-m>112.841</x-offset-m>
+				<y-offset-m>-8</y-offset-m>
+				<z-offset-m>14.27</z-offset-m>
+			</parking-pos>
+			<parking-pos>
+				<name>park-2</name>
+				<heading-offset-deg>300</heading-offset-deg>
+				<x-offset-m>38</x-offset-m>
+				<y-offset-m>13.5</y-offset-m>
+				<z-offset-m>14.27</z-offset-m>
+			</parking-pos>
+                        <parking-pos>
+				<name>park-3</name>
+				<heading-offset-deg>-8</heading-offset-deg>
+				<x-offset-m>71.165</x-offset-m>
+				<y-offset-m>-2.0565</y-offset-m>
+				<z-offset-m>14.27</z-offset-m>
+			</parking-pos>
+                        <parking-pos>
+                            <name>wires</name>
+                            <heading-offset-deg>-8</heading-offset-deg>
+                            <x-offset-m>59.9102</x-offset-m>
+                            <y-offset-m>-3.12509</y-offset-m>
+                            <z-offset-m>14.27</z-offset-m>
+			</parking-pos>
+
+		</entry>
+
+    </scenario>
+
+  </PropertyList>

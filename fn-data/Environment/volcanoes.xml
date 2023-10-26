@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+
+<PropertyList>
+
+
+<enable-volcanoes type="int" userarchive="y">0</enable-volcanoes>
+<turbulence type="double" userarchive="n">0.0</turbulence>
+
+<kilauea>
+	<halemaumau-activity type="int" userarchive="y">0</halemaumau-activity>
+	<puu-oo-activity type="int" userarchive="y">0</puu-oo-activity>
+</kilauea>
+
+<stromboli>
+	<central-activity type="int" userarchive="y">0</central-activity>
+	<side-activity type="int" userarchive="y">0</side-activity>
+</stromboli>
+
+<etna>
+	<southeast-activity type="int" userarchive="y">0</southeast-activity>
+	<northeast-activity type="int" userarchive="y">0</northeast-activity>
+	<flank-activity type="int" userarchive="y">0</flank-activity>
+</etna>
+<beerenberg>
+  	<main-activity type="int" userarchive="y">0</main-activity>
+	<flank-activity type="int" userarchive="y">0</flank-activity>
+</beerenberg> 
+<eyjafjallajokull>
+  	<main-activity type="int" userarchive="y">0</main-activity>
+</eyjafjallajokull>
+
+<katla>
+  	<main-activity type="int" userarchive="y">0</main-activity>
+</katla>
+
+<surtsey>
+  	<main-activity type="int" userarchive="y">0</main-activity>
+	<side-activity type="int" userarchive="y">0</side-activity>
+</surtsey>
+
+
+</PropertyList>

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+  Settings for the internal web server
+-->
+<PropertyList>
+	<uri-handler>
+		<screenshot>/screenshot</screenshot>
+		<property>/props/</property>
+		<json>/json/</json>
+		<pkg>/pkg/</pkg>
+		<flighthistory>/flighthistory/</flighthistory>
+		<run>/run.cgi</run>
+		<navdb>/navdb</navdb>
+	</uri-handler>
+	<options>
+		<!-- for a complete description of options, see
+	     http://cesanta.com/docs.shtml?Options.md -->
+
+		<!-- gets overwritten by - -httpd=nnnn -->
+		<!-- listening-port>8080</listening-port -->
+
+		<!-- set your access log file here, defaults to SG_LOG(SG_NETWORK,SG_INFO) -->
+		<!-- (not yet implemented) -->
+		<!-- access-log-file>/tmp/access.log</access-log-file -->
+
+		<!-- set your error log file here, defaults to SG_LOG(SG_NETWORK,SG_WARN) -->
+		<!-- (not yet implemented) -->
+		<!-- error-log-file>/tmp/error.log</error-log-file -->
+
+		<!-- (not yet implemented) -->
+		<!-- auth-domain>flightgear.org</auth-domain -->
+
+		<!-- (not yet implemented) -->
+		<!-- cgi-interpreter>/path/to/cgi/interpreter/executable</cgi-interpreter -->
+
+		<!-- set the doucment root directory here, defaults to fg-root, paths relative to fg-root -->
+		<document-root>Phi</document-root>
+
+		<enable-directory-listing>yes</enable-directory-listing>
+
+		<!-- (not yet implemented) -->
+		<extra-mime-types>.appcache=text/cache-manifest</extra-mime-types>
+
+
+		<!-- (not yet implemented) -->
+		<!--global-auth-file>/path/to/global/auth/file</global-auth-file-->
+
+		<!-- (not yet implemented) -->
+		<!--hide-file-patterns>secret.txt|even_more_secret.txt</hide-file-patterns-->
+
+		<idle-timeout-ms>30000</idle-timeout-ms>
+
+		<index-files>index.html</index-files>
+
+		<!-- (not yet implemented) -->
+		<!-- ssl-certificate>/path/to/certificate.pem</ssl-certificate-->
+
+		<!-- run-as-user>THIS IS NOT SUPPORTED IN FLIGHTGEAR <run-as-user -->
+
+		<!-- all paths are relative to fg-root -->
+		<url-rewrites>/fonts/=Fonts/</url-rewrites>
+	</options>
+</PropertyList>

@@ -1,0 +1,26 @@
+[This file is mirrored in both the FlightGear and SimGear packages.]
+
+You *must* have OpenSceneGraph (OSG) installed to build this version of
+FlightGear.
+
+Notice that this version of SimGear/FlightGear requires at least OSG 3.0.0.
+
+You can get the latest version of OSG from:
+
+http://www.openscenegraph.org/
+
+Build notes:
+
+Unzip the file OpenSceneGraph-x.x.zip and install using the following
+commands:
+
+unzip OpenSceneGraph-x.x
+cd OpenSceneGraph
+ccmake .
+
+[ While running ccmake: press 'c' to configure, press 'c' once more, and
+  then press 'g' to generate and exit ]
+
+make
+sudo make install
+

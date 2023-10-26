@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/transition-base-grass-rock</name>
+  <inherits-from>Effects/transition</inherits-from>
+</PropertyList>

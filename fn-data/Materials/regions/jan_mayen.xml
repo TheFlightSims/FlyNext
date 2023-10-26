@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<!--  Settings for Jan Mayen airport materials -->
+<PropertyList>
+  <name>Jan Mayen</name>
+  <area>
+    <lon1>-12.0</lon1>
+    <lon2>-6.0</lon2>
+    <lat1>69.0</lat1>
+    <lat2>73.0</lat2>
+  </area>
+
+  <condition>
+    <equals>
+      <property>sim/startup/season</property>
+      <value>summer</value>
+    </equals>
+  </condition>
+  
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <effect>Effects/grass</effect>
+    <texture-set>
+      <texture>Terrain/grass_green_hires-autumn.png</texture>
+      <texture n="13">Terrain/grass_green_hires-autumn.png</texture>
+      <texture n="14">Terrain/gravel_gray.png</texture>
+      <texture n="15">Terrain/airport_grass_structure_overlay1.png</texture>
+      <texture n="20">Terrain/grass_green_hires-autumn.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.1</overlay_bias>
+      <overlay_alpha>1.0</overlay_alpha>
+      <use_grain>1</use_grain>
+      <use_color_overlay>0</use_color_overlay>
+      <base_layer_magnification>0.6</base_layer_magnification>
+      <overlay_layer_magnification>8.0</overlay_layer_magnification>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
+      <max_grass_height>0.35</max_grass_height>
+      <grass_density>0.5</grass_density>
+      <grass_groups>2</grass_groups>
+      <grass_modulate_by_overlay>1</grass_modulate_by_overlay>
+      <grass_modulate_height_min>0.0</grass_modulate_height_min>
+    </parameters>
+    <xsize>250</xsize>
+    <ysize>250</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>dirt_rwy</name>
+    <effect>Effects/dirt-runway</effect>
+    <texture-set>
+      <texture>Runway/dirt_rwy.png</texture>
+      <texture n="16">Runway/dirt_rwy.png</texture>
+      <texture n="17">Terrain/grass_green_hires-autumn.png</texture>
+    </texture-set>
+    <parameters>
+      <strength_05m>0.0</strength_05m>
+      <strength_1m>0.2</strength_1m>
+      <strength_2m>0.2</strength_2m>
+      <strength_5m>0.3</strength_5m>
+      <strength_10m>0.2</strength_10m>
+      <filter_threshold>0.2</filter_threshold>
+      <filter_transition>0.4</filter_transition>
+      <bias_center>1</bias_center>
+      <bias_center_strength>0.8</bias_center_strength>
+      <relief_strength>0.40</relief_strength>
+      <size_base>25.0</size_base>
+      <size_overlay>25.0</size_overlay>
+      <size_grain>20.0</size_grain>
+      <grain_strength>0.25</grain_strength>
+    </parameters>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.04</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+  </material>  
+  
+  <material>
+    <name>default</name>
+    <effect>Effects/dirt-runway</effect>
+    <texture-set>
+      <texture>Runway/dirt_rwy.png</texture>
+      <texture n="16">Runway/dirt_rwy.png</texture>
+      <texture n="17">Terrain/grass_green_hires-autumn.png</texture>
+    </texture-set>
+    <parameters>
+      <strength_05m>0.0</strength_05m>
+      <strength_1m>0.2</strength_1m>
+      <strength_2m>0.2</strength_2m>
+      <strength_5m>0.3</strength_5m>
+      <strength_10m>0.2</strength_10m>
+      <filter_threshold>0.2</filter_threshold>
+      <filter_transition>0.4</filter_transition>
+      <bias_center>1</bias_center>
+      <bias_center_strength>0.8</bias_center_strength>
+      <relief_strength>0.40</relief_strength>
+      <size_base>25.0</size_base>
+      <size_overlay>25.0</size_overlay>
+      <size_grain>20.0</size_grain>
+      <grain_strength>0.25</grain_strength>
+    </parameters>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.04</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+  </material> 
+  
+  <material>
+    <name>Landmass</name>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>
+    <name>MixedForestCover</name>
+    <name>MixedForest</name>
+    <name>SomeSort</name>
+    <name>Island</name>
+    <name>Default</name>
+    <name>ShrubCover</name>
+    <name>ShrubGrassCover</name>
+    <name>ScrubCover</name>
+    <name>Scrub</name>
+    <name>Sclerophyllous</name>
+    <effect>Effects/terrain-overlay</effect>
+    <texture-set>
+     <texture>Terrain/shrub1-autumn.png</texture>
+     <texture n="11">Terrain/grass_green_hires-autumn.png</texture>
+     <texture n="12">Terrain/rock_dark.png</texture>
+     <texture n="13">Terrain/rock_dark.png</texture>
+     <texture n="14">Terrain/grain_texture.png</texture>
+     <texture n="15">Terrain/rock_dark.png</texture>
+     <texture n="20">Terrain/rock_dark.png</texture>
+    </texture-set>
+    <parameters>
+     <dot_density>0.1</dot_density>
+     <transition_model>0.7</transition_model>
+     <hires_overlay_bias>-0.05</hires_overlay_bias>
+     <max_overlay_height>0.5</max_overlay_height>
+     <overlay_hardness>1.0</overlay_hardness>
+     <overlay_density>0.01</overlay_density>
+     <overlay_scale>1.0</overlay_scale>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <diffuse>
+     <r>0.86</r>
+     <g>0.86</g>
+     <b>0.86</b>
+     <a>1.0</a>
+    </diffuse>
+    <specular>
+     <r>0.1</r>
+     <g>0.1</g>
+     <b>0.1</b>
+     <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <light-coverage>20000000.0</light-coverage>
+    <wood-coverage>12000.0</wood-coverage>
+    <tree-texture>Trees/mixed-shrub.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>2.0</tree-height-m>
+    <tree-width-m>2.0</tree-width-m>
+    <rolling-friction>0.6</rolling-friction>
+    <bumpiness>0.4</bumpiness>
+  </material>
+  
+  <material>
+    <name>Road</name>       
+    <texture>Terrain/dark_gravel.png</texture>
+    <xsize>20</xsize>
+    <ysize>20</ysize>
+  </material>
+  
+ </PropertyList> 

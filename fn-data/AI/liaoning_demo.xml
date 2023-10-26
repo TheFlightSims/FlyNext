@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<scenario>
+		<name>Carrier: Liaoning</name>
+		<description>This scenario spawns the Liaoning aircraft carrier in the East China Sea off Wenzhou.</description>
+		<author>Daniel Overbeck, Richard Harrison, Uxman (3d)</author>
+		<!-- 3d model from: https://sketchfab.com/3d-models/kuznetsov-aircraft-carrier-460d73a91efb49298c86ee347fae397c -->
+		<entry>
+			<type>carrier</type>
+			<name>Liaoning</name>
+			<pennant-number>16</pennant-number>
+			<TACAN-channel-ID>026Y</TACAN-channel-ID>
+			<description>Chinese aircraft carrier Liaoning in the East China Sea off Wenzhou.</description>
+			<model>Models/Geometry/Kuznetsov/Liaoning.xml</model>
+			<latitude>27</latitude>
+			<longitude>123</longitude>
+			<deck-altitude>50</deck-altitude>
+			<speed>10</speed>
+			<heading>0</heading>
+			<rudder>0</rudder>
+			<turn-radius-ft>5000</turn-radius-ft>
+			<flols-pos>
+				<x-offset-m>65</x-offset-m>
+				<y-offset-m>-37</y-offset-m>
+				<z-offset-m>17</z-offset-m>
+				<heading-offset-deg>20</heading-offset-deg>
+			</flols-pos>
+			<parking-pos>
+				<name>cat-1</name>
+				<heading-offset-deg>5</heading-offset-deg>
+				<x-offset-m>96</x-offset-m>
+				<y-offset-m>-19</y-offset-m>
+				<z-offset-m>15</z-offset-m>
+			</parking-pos>
+			<parking-pos>
+				<name>cat-2</name>
+				<heading-offset-deg>5</heading-offset-deg>
+				<x-offset-m>0</x-offset-m>
+				<y-offset-m>-9.5</y-offset-m>
+				<z-offset-m>15</z-offset-m>
+			</parking-pos>
+			<parking-pos>
+				<name>cat-3</name>
+				<heading-offset-deg>-5</heading-offset-deg>
+				<x-offset-m>0</x-offset-m>
+				<y-offset-m>11</y-offset-m>
+				<z-offset-m>15</z-offset-m>
+			</parking-pos>
+		</entry>
+	</scenario>
+</PropertyList>

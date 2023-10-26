@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>F-15-lowpoly.ac</path>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>Elevator</object-name>
+        <property>surface-positions/elevator-pos-norm</property>
+        <factor>20.0</factor>
+        <center>
+            <x-m>7.81175</x-m>
+            <y-m>-0.02125</y-m>
+            <z-m>1.84875</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>aileron-left</object-name>
+        <property>surface-positions/left-aileron-pos-norm</property>
+        <factor>20.0</factor>
+        <axis>
+            <object-name>aileron-left-axis</object-name>
+        </axis>
+    </animation>
+    <animation>
+        <type>rotate</type>
+        <object-name>aileron-right</object-name>
+        <property>surface-positions/right-aileron-pos-norm</property>
+        <factor>20.0</factor>
+        <axis>
+            <object-name>aileron-right-axis</object-name>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>gear</object-name>
+        <condition>
+            <greater-than>
+                <property>gear/gear[0]/position-norm</property>
+                <value>0.6</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+</PropertyList>

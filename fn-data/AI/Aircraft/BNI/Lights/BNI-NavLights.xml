@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!-- Author Ian (Yves Tolosa) - AUG 2018 -->
+<PropertyList>
+	<!-- Position ALS Navigation Lights -->
+	<model>
+		<name>nav-right</name>
+		<path>AI/Lights/procedural_light_nav_right.xml</path>
+		<offsets>
+			<x-m>-0.89056</x-m>
+			<y-m>7.24734</y-m>
+			<z-m>2.15608</z-m>
+		</offsets>
+	</model>
+	<model>
+		<name>nav-left</name>
+		<path>AI/Lights/procedural_light_nav_left.xml</path>
+		<offsets>
+			<x-m>-0.89056</x-m>
+			<y-m>-7.24734</y-m>
+			<z-m>2.15608</z-m>
+		</offsets>
+	</model>
+	<model>
+		<name>nav-tail</name>
+		<path>AI/Lights/procedural_light_nav_tail.xml</path>
+		<offsets>
+			<x-m>6.26388</x-m>
+			<y-m>0</y-m>
+			<z-m>1.83859</z-m>
+		</offsets>
+	</model>
+	<!-- Position ALS Strobes -->
+	<model>
+		<name>strobe-tail</name>
+		<path>AI/Lights/procedural_light_strobe_tail.xml</path>
+		<offsets>
+			<x-m>5.08984</x-m>
+			<y-m>0</y-m>
+			<z-m>4.34283</z-m>
+		</offsets>
+	</model>
+	<!-- Position Beacons -->
+	<model>
+		<name>beacon-top</name>
+		<path>AI/Lights/procedural_light_beacon_top.xml</path>
+		<offsets>
+			<x-m>-0.1267</x-m>
+			<y-m>0</y-m>
+			<z-m>2.09174</z-m>
+		</offsets>
+	</model>
+	<model>
+		<name>beacon-bottom</name>
+		<path>AI/Lights/procedural_light_beacon_bottom.xml</path>
+		<offsets>
+			<x-m>0.883</x-m>
+			<y-m>0</y-m>
+			<z-m>0.59026</z-m>
+		</offsets>
+	</model>
+	<!-- Group Lights for Shared Animations -->
+	<animation>
+		<name>StaticGrouped</name>
+		<object-name>nav-right</object-name>
+		<object-name>nav-left</object-name>
+		<object-name>nav-tail</object-name>
+	</animation>
+	<animation>
+		<name>StrobeGrouped</name>
+		<object-name>strobe-tail</object-name>
+	</animation>
+	<animation>
+		<name>BeaconGrouped</name>
+		<object-name>beacon-top</object-name>
+		<object-name>beacon-bottom</object-name>
+	</animation>
+	<!-- Show Static Lights & Beacons when aircraft is moving -->
+	<animation>
+		<type>select</type>
+		<object-name>StaticGrouped</object-name>
+		<object-name>BeaconGrouped</object-name>
+		<nopreview/>
+		<condition>
+			<greater-than>
+				<property>transponder-id</property>
+				<value type="string">0</value>
+			</greater-than>
+		</condition>
+	</animation>
+	<!-- Show Strobes when Aircraft on runway or airborne -->
+	<animation>
+		<type>select</type>
+		<object-name>StrobeGrouped</object-name>
+		<nopreview/>
+		<condition>
+			<greater-than>
+				<property>velocities/true-airspeed-kt</property>
+				<value>40</value>
+			</greater-than>
+		</condition>
+	</animation>
+</PropertyList>

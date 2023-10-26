@@ -1,0 +1,137 @@
+<PropertyList>
+
+  <!-- yes, the name is crazy. -->
+  <name>Microchip Technology Inc. Multi Media Keyboard Demo</name>
+  <debug-events type="bool">false</debug-events>
+
+  <!-- presents as a mouse and keyboard as well :/ -->
+  <device-number typ="int">0</device-number>
+<nasal>
+  <open>
+    <![CDATA[
+
+      for (var i=0; i < 8; i+=1) {
+        var n = props.globals.getNode('/input/goflight/rp48/led[' ~ i ~ ']', 1); 
+        n.setBoolValue(0);
+      }
+      ]]>
+  </open>
+</nasal>
+
+
+
+  <event>
+    <name>rel-dial-0</name>
+    <binding>
+      <command>property-adjust</command>
+      <property>/input/goflight/rp48/value[0]</property>
+    </binding>
+    <interpolater>
+      <entry><ind>0</ind><dep>0</dep></entry>
+      <entry><ind>1</ind><dep>1</dep></entry>
+      <entry><ind>2</ind><dep>2</dep></entry>
+      <entry><ind>3</ind><dep>4</dep></entry>
+      <entry><ind>4</ind><dep>8</dep></entry>
+    </interpolater>
+  </event>
+
+<event>
+  <name>rel-dial-1</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/input/goflight/rp48/value[1]</property>
+  </binding>
+  <interpolater>
+    <entry><ind>0</ind><dep>0</dep></entry>
+    <entry><ind>1</ind><dep>1</dep></entry>
+    <entry><ind>2</ind><dep>2</dep></entry>
+    <entry><ind>3</ind><dep>4</dep></entry>
+    <entry><ind>4</ind><dep>8</dep></entry>
+  </interpolater>
+</event>
+
+<event>
+  <name>rel-dial-2</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/input/goflight/rp48/value[2]</property>
+  </binding>
+  <interpolater>
+    <entry><ind>0</ind><dep>0</dep></entry>
+    <entry><ind>1</ind><dep>1</dep></entry>
+    <entry><ind>2</ind><dep>2</dep></entry>
+    <entry><ind>3</ind><dep>4</dep></entry>
+    <entry><ind>4</ind><dep>8</dep></entry>
+  </interpolater>
+</event>
+ 
+
+  <event>
+    <desc>Button</desc>
+    <name>button-1</name>
+    <binding>
+      <command>nasal</command>
+      <script>print('RP48 button');</script>
+    </binding>
+  </event>
+
+<event>
+    <desc>Button</desc>
+    <name>button-2</name>
+    <binding>
+      <command>nasal</command>
+      <script>print('RP48 button 2');</script>
+    </binding>
+  </event>
+
+  <event>
+    <desc>Button</desc>
+    <name>button-3</name>
+    <binding>
+      <command>nasal</command>
+      <script>print('RP48 button 3');</script>
+    </binding>
+  </event>
+
+    <event>
+      <name>led-misc-0</name>
+      <setting>
+        <property>/input/goflight/rp48/led[0]</property>
+      </setting>
+  </event>
+
+    <event>
+      <name>led-misc-1</name>
+      <setting>
+        <property>/input/goflight/rp48/led[1]</property>
+      </setting>
+  </event>
+
+   <event>
+      <name>led-misc-2</name>
+      <setting>
+        <property>/input/goflight/rp48/led[2]</property>
+      </setting>
+  </event>
+
+  <event>
+        <name>led-misc-3</name>
+      <setting>
+        <property>/input/goflight/rp48/led[3]</property>
+      </setting>
+  </event>
+
+   <event>
+        <name>led-misc-4</name>
+      <setting>
+        <property>/input/goflight/rp48/led[4]</property>
+      </setting>
+  </event>
+
+   <event>
+        <name>led-misc-5</name>
+      <setting>
+        <property>/input/goflight/rp48/led[5]</property>
+      </setting>
+  </event>
+</PropertyList>

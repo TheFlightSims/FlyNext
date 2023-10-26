@@ -1,0 +1,268 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    <id>org.flightgear.test.catalog1</id>
+    <description>First test catalog</description>
+    <url>http://localhost:2000/catalogTest1/catalog.xml</url>
+    <catalog-version>4</catalog-version>
+
+    <version>8.1.*</version>
+    <version>8.0.0</version>
+    <version>8.2.0</version>
+
+    <package>
+        <id>alpha</id>
+        <name>Alpha package</name>
+        <revision type="int">8</revision>
+        <file-size-bytes type="int">593</file-size-bytes>
+
+        <md5>a469c4b837f0521db48616cfe65ac1ea</md5>
+        <url>http://localhost:2000/catalogTest1/alpha.zip</url>
+
+        <dir>alpha</dir>
+
+    </package>
+
+    <package>
+        <id>c172p</id>
+        <name>Cessna 172-P</name>
+        <dir>c172p</dir>
+        <description>A plane made by Cessna on Jupiter</description>
+        <revision type="int">42</revision>
+        <file-size-bytes type="int">860</file-size-bytes>
+        <author>Standard author</author>
+
+        <localized>
+          <de>
+            <description>German description of C172</description>
+          </de>
+          <fr>
+            <description>French description of C172</description>
+          </fr>
+        </localized>
+
+        <tag>cessna</tag>
+        <tag>ga</tag>
+        <tag>piston</tag>
+        <tag>ifr</tag>
+
+        <rating>
+          <FDM type="int">3</FDM>
+          <systems type="int">4</systems>
+          <model type="int">5</model>
+          <cockpit type="int">4</cockpit>
+        </rating>
+
+        <!-- local dependency -->
+        <depends>
+            <id>org.flightgear.test.catalog1.common-sounds</id>
+            <revision>10</revision>
+        </depends>
+
+        <preview>
+          <type>exterior</type>
+          <path>thumb-exterior.png</path>
+          <url>http://foo.bar.com/thumb-exterior.png</url>
+        </preview>
+
+        <preview>
+          <type>panel</type>
+          <path>thumb-panel.png</path>
+          <url>http://foo.bar.com/thumb-panel.png</url>
+        </preview>
+
+        <preview>
+          <path>thumb-something.png</path>
+          <url>http://foo.bar.com/thumb-something.png</url>
+        </preview>
+
+        <variant>
+            <id>c172p-2d-panel</id>
+            <name>C172 with 2d panel only</name>
+        </variant>
+
+        <variant>
+            <id>c172p-floats</id>
+            <name>C172 with floats</name>
+            <description>A plane with floats</description>
+            <author>Floats variant author</author>
+
+            <preview>
+              <type>exterior</type>
+              <path>thumb-exterior-floats.png</path>
+              <url>http://foo.bar.com/thumb-exterior-floats.png</url>
+            </preview>
+
+            <preview>
+              <type>panel</type>
+              <path>thumb-panel.png</path>
+              <url>http://foo.bar.com/thumb-panel.png</url>
+            </preview>
+
+            <thumbnail>http://foo.bar.com/thumb-floats.png</thumbnail>
+            <thumbnail-path>thumb-floats.png</thumbnail-path>
+        </variant>
+
+        <variant>
+            <id>c172p-skis</id>
+            <name>C172 with skis</name>
+            <description>A plane with skis</description>
+
+            <localized>
+            <de>
+              <description>German description of C172 with skis</description>
+            </de>
+            <fr>
+              <description>French description of C172 with skis</description>
+            </fr>
+          </localized>
+
+            <variant-of>c172p</variant-of>
+
+            <preview>
+              <type>exterior</type>
+              <path>thumb-exterior-skis.png</path>
+              <url>http://foo.bar.com/thumb-exterior-skis.png</url>
+            </preview>
+
+            <preview>
+              <type>panel</type>
+              <path>thumb-panel.png</path>
+              <url>http://foo.bar.com/thumb-panel.png</url>
+            </preview>
+        </variant>
+
+        <variant>
+            <id>c172r</id>
+            <name>C172R</name>
+            <description>Equally good version of the C172</description>
+            <variant-of>_package_</variant-of>
+            <preview>
+              <type>panel</type>
+              <path>thumb-panel.png</path>
+              <url>http://foo.bar.com/thumb-panel.png</url>
+            </preview>
+        </variant>
+
+        <variant>
+            <id>c172r-floats</id>
+            <name>C172R-floats</name>
+            <description>Equally good version of the C172 with floats</description>
+            <variant-of>c172r</variant-of>
+            <preview>
+              <type>panel</type>
+              <path>thumb-panel.png</path>
+              <url>http://foo.bar.com/thumb-panel.png</url>
+            </preview>
+        </variant>
+
+        <md5>ec0e2ffdf98d6a5c05c77445e5447ff5</md5>
+        <url>http://localhost:2000/catalogTest1/c172p.zip</url>
+
+        <thumbnail>http://foo.bar.com/thumb-exterior.png</thumbnail>
+        <thumbnail-path>exterior.png</thumbnail-path>
+    </package>
+
+    <package>
+        <id>b737-NG</id>
+        <name>Boeing 737 NG</name>
+        <dir>b737NG</dir>
+        <description>A popular twin-engined narrow body jet</description>
+        <revision type="int">111</revision>
+        <file-size-bytes type="int">860</file-size-bytes>
+
+        <tag>boeing</tag>
+        <tag>jet</tag>
+        <tag>ifr</tag>
+
+      <!-- not within a localized element -->
+          <de>
+            <description>German description of B737NG XYZ</description>
+          </de>
+          <fr>
+            <description>French description of B737NG</description>
+          </fr>
+
+        <rating>
+          <FDM type="int">5</FDM>
+          <systems type="int">5</systems>
+          <model type="int">4</model>
+          <cockpit type="int">4</cockpit>
+        </rating>
+
+        <md5>a94ca5704f305b90767f40617d194ed6</md5>
+        <url>http://localhost:2000/mirrorA/b737.tar.gz</url>
+        <url>http://localhost:2000/mirrorB/b737.tar.gz</url>
+        <url>http://localhost:2000/mirrorC/b737.tar.gz</url>
+      </package>
+
+    <package>
+        <id>b747-400</id>
+        <name>Boeing 747-400</name>
+        <dir>b744</dir>
+        <description>A popular four-engined wide-body jet</description>
+        <revision type="int">111</revision>
+        <file-size-bytes type="int">860</file-size-bytes>
+
+        <tag>boeing</tag>
+        <tag>jet</tag>
+        <tag>ifr</tag>
+
+  
+
+        <rating>
+          <FDM type="int">5</FDM>
+          <systems type="int">5</systems>
+          <model type="int">4</model>
+          <cockpit type="int">4</cockpit>
+        </rating>
+
+        <md5>4d3f7417d74f811aa20ccc4f35673d20</md5>
+        <!-- this URL will sometimes fail, on purpose -->
+        <url>http://localhost:2000/catalogTest1/b747.tar.gz</url>
+      </package>
+
+    <package>
+        <id>common-sounds</id>
+        <name>Common sound files for test catalog aircraft</name>
+        <revision>10</revision>
+        <dir>sounds</dir>
+        <url>http://localhost:2000/catalogTest1/common-sounds.zip</url>
+        <file-size-bytes>360</file-size-bytes>
+        <md5>acf9eb89cf396eb42f8823d9cdf17584</md5>
+        <type>library</type>
+        <provides>engine1.wav</provides>
+        <provides>engine3.wav</provides>
+    </package>
+
+
+    <package>
+        <id>movies</id>
+        <name>movies files for test catalog aircraft</name>
+        <revision>10</revision>
+        <dir>movies</dir>
+        <!-- url has no file extension, instead we set arcive-type -->
+        <url>http://localhost:2000/catalogTest1/movies?wierd=foo;bar=thing</url>
+        <archive-type>zip</archive-type>
+        <archive-path>movies_6789</archive-path>
+        <file-size-bytes>232</file-size-bytes>
+        <md5>e5f89c3f1ed1bdda16174c868f3c7b30</md5>
+        <type>library</type>
+        <provides>Foo/intro.mov</provides>
+    </package>
+
+    <package>
+        <id>b737-ng-ai</id>
+        <name>Boeing 737 NG AI Model</name>
+        <dir>b737NG</dir>
+        <description>AI Model for the 737-NG</description>
+        <revision type="int">111</revision>
+        <file-size-bytes type="int">860</file-size-bytes>
+        <type>ai-model</type>
+        <provides>737NG/Models/BritishAirways-738.xml</provides>
+        <md5>a94ca5704f305b90767f40617d194ed6</md5>
+        <url>http://localhost:2000/mirrorA/b737.tar.gz</url>
+        <url>http://localhost:2000/mirrorB/b737.tar.gz</url>
+        <url>http://localhost:2000/mirrorC/b737.tar.gz</url>
+      </package>
+</PropertyList>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>scene</type>
+  <implicit-attachment-mask>depth</implicit-attachment-mask>
+  <effect-scheme>hdr-envmap</effect-scheme>
+  <clear-mask>depth</clear-mask>
+  <!--
+      Only render:
+      - Terrain (both WS 2.0 and 3.0)
+      - Clouds
+      - Skydome
+  -->
+  <cull-mask>0x1801</cull-mask>
+  <binding>
+    <unit>12</unit>
+    <buffer>transmittance</buffer>
+  </binding>
+  <binding>
+    <unit>13</unit>
+    <buffer>sky-view</buffer>
+  </binding>
+  <binding>
+    <unit>14</unit>
+    <buffer>prev-luminance</buffer>
+  </binding>
+</PropertyList>

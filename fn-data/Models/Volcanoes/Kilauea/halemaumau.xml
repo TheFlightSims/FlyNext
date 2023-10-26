@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>
+
+ <nasal>
+    <load><![CDATA[
+		print ("Halemaumau model loaded");
+	    ]]></load>
+ </nasal>
+
+
+  <path>kilauea.ac</path>
+   <offsets>
+      <x-m>0.00</x-m>
+      <y-m>0.00</y-m>
+      <z-m>5.00</z-m>
+   </offsets>
+
+   <animation>
+    <type>select</type>
+	<object-name>Lava</object-name>
+   <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/halemaumau-activity</property>
+			<value>0</value>
+		</greater-than>
+   </condition>
+   </animation>
+   
+   <effect>
+   	<object-name>Lava</object-name>
+	<inherits-from>Effects/model-combined-deferred</inherits-from>
+   </effect>
+
+   <animation>
+  	<type>scale</type>
+	<object-name>Lava</object-name>
+  	<x-offset>330.0</x-offset>
+  	<y-offset>330.0</y-offset>
+  	<z-offset>1.0</z-offset>
+   </animation>
+   
+    <animation>
+     <type>material</type>
+	 <object-name>Lava</object-name>
+      <emission>
+            <red>   0.4 </red>
+            <green> 0.32 </green>
+            <blue>  0.32 </blue>
+        </emission>
+    </animation>
+	
+	<model>
+	  <path>halemaumau_smoke.xml</path>
+      <offsets>
+        <x-m>-20.0</x-m>
+        <y-m>20.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/halemaumau-activity</property>
+			<value>1</value>
+		</greater-than>
+       </condition>
+    </model>
+	
+	<model>
+	  <path>kilauea_lava_fountain.xml</path>
+      <offsets>
+        <x-m>-20.0</x-m>
+        <y-m>20.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/halemaumau-activity</property>
+			<value>1</value>
+		</greater-than>
+       </condition>
+    </model>
+  
+  	<model>
+	  <path>kilauea_smoke.xml</path>
+      <offsets>
+        <x-m>160.0</x-m>
+        <y-m>-130.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/halemaumau-activity</property>
+			<value>0</value>
+		</greater-than>
+       </condition>
+    </model>
+
+   <model>
+	  <path>kilauea_smoke.xml</path>
+      <offsets>
+        <x-m>180.0</x-m>
+        <y-m>180.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		<greater-than>
+			<property>/environment/volcanoes/kilauea/halemaumau-activity</property>
+			<value>0</value>
+		</greater-than>
+       </condition>
+    </model>
+
+ 
+
+
+</PropertyList>

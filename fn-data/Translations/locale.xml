@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<locale n="0">
+		<lang type="string">en</lang>
+		<lang type="string">en_AU</lang>
+		<lang type="string">en_CA</lang>
+		<lang type="string">en_GB</lang>
+		<lang type="string">en_US</lang>
+		<lang type="string">POSIX</lang>
+		<lang type="string">C</lang>
+		<lang type="string">default</lang>
+
+		<strings>
+			<options>Translations/default/options.xml</options>
+			<menu>Translations/default/menu.xml</menu>
+			<sys>Translations/default/sys.xml</sys>
+			<tips>Translations/default/tips.xml</tips>
+			<atc>Translations/default/atc.xml</atc>
+			<weather-scenarios>Translations/default/weather-scenarios.xml</weather-scenarios>
+		</strings>
+	</locale>
+
+	<locale>
+		<lang type="string">es</lang>
+		<lang type="string">es_AR</lang>
+		<lang type="string">es_MX</lang>
+		<lang type="string">es_ES</lang>
+		<xliff type="string">Translations/es/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+	<locale>
+		<lang type="string">de</lang>
+		<lang type="string">de_AT</lang>
+		<lang type="string">de_CH</lang>
+		<lang type="string">de_DE</lang>
+		<xliff type="string">Translations/de/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+	<locale>
+		<lang type="string">fr</lang>
+		<lang type="string">fr_BE</lang>
+		<lang type="string">fr_CA</lang>
+		<lang type="string">fr_CH</lang>
+		<lang type="string">fr_FR</lang>
+		<xliff type="string">Translations/fr/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+	<locale>
+		<lang type="string">it</lang>
+		<lang type="string">italian</lang>
+		<lang type="string">it_CH</lang>
+		<lang type="string">it_IT</lang>
+		<xliff type="string">Translations/it/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+	<locale>
+		<lang type="string">nl</lang>
+		<lang type="string">nl_BE</lang>
+		<lang type="string">nl_NL</lang>
+		<xliff type="string">Translations/nl/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+	<locale>
+		<lang type="string">pl</lang>
+		<lang type="string">pl_PL</lang>
+		<xliff type="string">Translations/pl/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+	<locale>
+		<lang type="string">ru</lang>
+		<lang type="string">ru_RU</lang>
+		<xliff type="string">Translations/ru/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+        <locale>
+		<lang type="string">zh</lang>
+		<lang type="string">zh_CN</lang>
+
+		<xliff type="string">Translations/zh_CN/FlightGear-nonQt.xlf</xliff>
+		<strings>
+			<options>Translations/zh_CN/options.xml</options>
+			<!-- Chinese startup tips disabled for now because the
+			     font used to display them in FlightGear's splash
+			     screen doesn't have the required glyphs
+			     (2017-06-25). cf.
+			     https://sourceforge.net/p/flightgear/fgdata/merge-requests/92/
+			-->
+			<!-- <tips>Translations/zh_CN/tips.xml</tips> -->
+		</strings>
+        </locale>
+
+	<locale>
+		<!--  test character encoding using - -language=TEST -->
+		<lang type="string">TEST</lang>
+
+		<strings>
+			<options>Translations/test/options.xml</options>
+			<menu>Translations/test/menu.xml</menu>
+		</strings>
+	</locale>
+
+	<locale>
+		<lang type="string">pt</lang>
+		<lang type="string">pt_BR</lang>
+		<lang type="string">pt_PT</lang>
+		<xliff type="string">Translations/pt/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+	<locale>
+		<lang type="string">tr</lang>
+		<lang type="string">tr_TR</lang>
+		<xliff type="string">Translations/tr/FlightGear-nonQt.xlf</xliff>
+	</locale>
+
+</PropertyList>

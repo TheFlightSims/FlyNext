@@ -1,0 +1,2037 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2.xsd">
+  <file original="" source-language="en-US" target-language="de" datatype="plaintext" xml:space="preserve">
+    <body>
+      <group restype="x-trolltech-linguist-context" resname="menu">
+        <trans-unit id="menu/adjust-hud:0" translate="yes" approved="yes">
+          <source>Adjust HUD Properties</source>
+          <target>HUD einstellen</target>
+        </trans-unit>
+        <trans-unit id="menu/adjust-lod:0" translate="yes" approved="yes">
+          <source>Adjust LOD Ranges</source>
+          <target>Detaillevel einstellen</target>
+        </trans-unit>
+        <trans-unit id="menu/ai:0" translate="yes" approved="yes">
+          <source>AI</source>
+          <target>KI</target>
+        </trans-unit>
+        <trans-unit id="menu/ai-objects:0" translate="yes" approved="no">
+          <source>AI Objects</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/aircraft-center:0" translate="yes" approved="yes">
+          <source>Aircraft Center (Experimental)</source>
+          <target>Flugzeug-Hangar (experimentell)</target>
+        </trans-unit>
+        <trans-unit id="menu/aircraft-checklists:0" translate="yes" approved="yes">
+          <source>Aircraft Checklists</source>
+          <target>Flugzeug Checklisten</target>
+        </trans-unit>
+        <trans-unit id="menu/aircraft-keys:0" translate="yes" approved="yes">
+          <source>Aircraft Help</source>
+          <target>Flugzeug Hilfe</target>
+        </trans-unit>
+        <trans-unit id="menu/als-filter-effects:0" translate="yes" approved="no">
+          <source>ALS Filter Effects</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/atc-in-range:0" translate="yes" approved="yes">
+          <source>ATC Services in Range</source>
+          <target>ATC Stationen in Reichweite</target>
+        </trans-unit>
+        <trans-unit id="menu/autopilot:0" translate="yes" approved="yes">
+          <source>Autopilot</source>
+          <target>Autopilot</target>
+        </trans-unit>
+        <trans-unit id="menu/autopilot-settings:0" translate="yes" approved="yes">
+          <source>Autopilot Settings</source>
+          <target>Autopilot-Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/autostart:0" translate="yes" approved="yes">
+          <source>Autostart</source>
+          <target>Autostart</target>
+        </trans-unit>
+        <trans-unit id="menu/basic-keys:0" translate="yes" approved="yes">
+          <source>Basic Simulator Keys</source>
+          <target>Tastenbelegung (allg.)</target>
+        </trans-unit>
+        <trans-unit id="menu/carrier:0" translate="yes" approved="no">
+          <source>Carrier Controls</source>
+          <target>Flugzeugträger</target>
+        </trans-unit>
+        <trans-unit id="menu/cockpit-view-options:0" translate="yes" approved="yes">
+          <source>Cockpit View Options</source>
+          <target>Einstellungen für Cockpit-Ansicht</target>
+        </trans-unit>
+        <trans-unit id="menu/common-keys:0" translate="yes" approved="yes">
+          <source>Common Aircraft Keys</source>
+          <target>Tastenbelegung (Flugzeug allg.)</target>
+        </trans-unit>
+        <trans-unit id="menu/configure-dev-extension:0" translate="yes" approved="yes">
+          <source>Configure Development Extensions</source>
+          <target>Erweiterungen für Entwickler</target>
+        </trans-unit>
+        <trans-unit id="menu/cycle-gui:0" translate="yes" approved="yes">
+          <source>Cycle GUI Style</source>
+          <target>Nächster GUI Stil</target>
+        </trans-unit>
+        <trans-unit id="menu/debug:0" translate="yes" approved="yes">
+          <source>Debug</source>
+          <target>Fehlersuche</target>
+        </trans-unit>
+        <trans-unit id="menu/development-keys:0" translate="yes" approved="yes">
+          <source>Development Keys</source>
+          <target>Entwickler Hotkeys</target>
+        </trans-unit>
+        <trans-unit id="menu/display-marker:0" translate="yes" approved="yes">
+          <source>Display Tutorial Marker</source>
+          <target>Tutorial-Markierung anzeigen</target>
+        </trans-unit>
+        <trans-unit id="menu/doc-browser:0" translate="yes" approved="yes">
+          <source>Documentation Browser</source>
+          <target>Erweiterte Dokumentation</target>
+        </trans-unit>
+        <trans-unit id="menu/dump-scene-graph:0" translate="yes" approved="yes">
+          <source>Dump Scene Graph</source>
+          <target>Scene Graph ausgeben</target>
+        </trans-unit>
+        <trans-unit id="menu/earthview:0" translate="yes" approved="no">
+          <source>Earthview orbital rendering</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/environment:0" translate="yes" approved="yes">
+          <source>Environment</source>
+          <target>Umwelt</target>
+        </trans-unit>
+        <trans-unit id="menu/environment-settings:0" translate="yes" approved="yes">
+          <source>Environment Settings</source>
+          <target>Umwelteinstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/equipment:0" translate="yes" approved="yes">
+          <source>Equipment</source>
+          <target>Ausrüstung</target>
+        </trans-unit>
+        <trans-unit id="menu/error-reports:0" translate="yes" approved="no">
+          <source>View Errors</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/exit:0" translate="yes" approved="yes">
+          <source>Quit</source>
+          <target>Beenden</target>
+        </trans-unit>
+        <trans-unit id="menu/failure-submenu:0" translate="yes" approved="yes">
+          <source>--- Failures ---</source>
+          <target>--- Fehler ---</target>
+        </trans-unit>
+        <trans-unit id="menu/fg1000-mfd:0" translate="yes" approved="yes">
+          <source>FG1000 MFD</source>
+          <target>FG1000 MFD</target>
+        </trans-unit>
+        <trans-unit id="menu/fg1000-pfd:0" translate="yes" approved="yes">
+          <source>FG1000 PFD</source>
+          <target>FG1000 PFD</target>
+        </trans-unit>
+        <trans-unit id="menu/fgcom-settings:0" translate="yes" approved="yes">
+          <source>FGCom Settings</source>
+          <target>FGCom-Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/file:0" translate="yes" approved="yes">
+          <source>File</source>
+          <target>Datei</target>
+        </trans-unit>
+        <trans-unit id="menu/flight-recorder-control:0" translate="yes" approved="no">
+          <source>Flight Recorder Control</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/fuel-and-payload:0" translate="yes" approved="yes">
+          <source>Fuel and Payload</source>
+          <target>Treibstoff und Ladung</target>
+        </trans-unit>
+        <trans-unit id="menu/global-weather:0" translate="yes" approved="yes">
+          <source>Weather</source>
+          <target>Wetter</target>
+        </trans-unit>
+        <trans-unit id="menu/goto-airport:0" translate="yes" approved="yes">
+          <source>Select Airport</source>
+          <target>Flughafenauswahl</target>
+        </trans-unit>
+        <trans-unit id="menu/gps:0" translate="yes" approved="yes">
+          <source>GPS Settings</source>
+          <target>GPS-Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/help:0" translate="yes" approved="yes">
+          <source>Help</source>
+          <target>Hilfe</target>
+        </trans-unit>
+        <trans-unit id="menu/help-browser:0" translate="yes" approved="yes">
+          <source>Help (opens in browser)</source>
+          <target>Hilfe (im Browser)</target>
+        </trans-unit>
+        <trans-unit id="menu/highlighting:0" translate="yes" approved="no">
+          <source>Highlighting</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/immatriculation:0" translate="yes" approved="yes">
+          <source>Immatriculation</source>
+          <target>Luftfahrzeugkennzeichen</target>
+        </trans-unit>
+        <trans-unit id="menu/input-config:0" translate="yes" approved="yes">
+          <source>Mouse Configuration</source>
+          <target>Maus-Konfiguration</target>
+        </trans-unit>
+        <trans-unit id="menu/instrument-failures:0" translate="yes" approved="yes">
+          <source>Instrument Failures</source>
+          <target>Instrumentenfehler</target>
+        </trans-unit>
+        <trans-unit id="menu/instrument-settings:0" translate="yes" approved="yes">
+          <source>Instrument Settings</source>
+          <target>Instrumenteneinstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/jetway:0" translate="yes" approved="yes">
+          <source>Jetway Settings</source>
+          <target>Jetway-Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/joystick-config:0" translate="yes" approved="yes">
+          <source>Joystick Configuration</source>
+          <target>Joystick-Konfiguration</target>
+        </trans-unit>
+        <trans-unit id="menu/joystick-info:0" translate="yes" approved="yes">
+          <source>Joystick Information</source>
+          <target>Joystick Informationen</target>
+        </trans-unit>
+        <trans-unit id="menu/lag-adjust:0" translate="yes" approved="yes">
+          <source>Lag Settings</source>
+          <target>Latenz-Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/light-switches:0" translate="yes" approved="no">
+          <source>Light switches</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/load-tape:0" translate="yes" approved="yes">
+          <source>Load Flight Recorder Tape</source>
+          <target>Flugaufzeichnung laden</target>
+        </trans-unit>
+        <trans-unit id="menu/local_weather:0" translate="yes" approved="no">
+          <source>Local Weather (Test)</source>
+          <target>Lokales Wetter (Test)</target>
+        </trans-unit>
+        <trans-unit id="menu/location:0" translate="yes" approved="yes">
+          <source>Location</source>
+          <target>Ort</target>
+        </trans-unit>
+        <trans-unit id="menu/logging:0" translate="yes" approved="yes">
+          <source>Logging</source>
+          <target>Protokollierung</target>
+        </trans-unit>
+        <trans-unit id="menu/map:0" translate="yes" approved="yes">
+          <source>Map</source>
+          <target>Karte</target>
+        </trans-unit>
+        <trans-unit id="menu/map-browser:0" translate="yes" approved="yes">
+          <source>Map (opens in browser)</source>
+          <target>Karte (im Browser)</target>
+        </trans-unit>
+        <trans-unit id="menu/map-canvas:0" translate="yes" approved="yes">
+          <source>Map (Canvas)</source>
+          <target>Karte (Canvas)</target>
+        </trans-unit>
+        <trans-unit id="menu/menu-about:0" translate="yes" approved="yes">
+          <source>About</source>
+          <target>Über FlightGear</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-carrier:0" translate="yes" approved="yes">
+          <source>MPCarrier Selection</source>
+          <target>Auswahl MP Flugzeugträger</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-chat:0" translate="yes" approved="yes">
+          <source>Chat Dialog</source>
+          <target>MP Chat</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-chat-menu:0" translate="yes" approved="yes">
+          <source>Chat Menu</source>
+          <target>MP Chat Menü</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-list:0" translate="yes" approved="yes">
+          <source>Pilot List</source>
+          <target>Pilotenliste</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-settings:0" translate="yes" approved="yes">
+          <source>Multiplayer Settings</source>
+          <target>Multiplayer-Einstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/multiplayer:0" translate="yes" approved="yes">
+          <source>Multiplayer</source>
+          <target>Mehrspieler</target>
+        </trans-unit>
+        <trans-unit id="menu/nasal-console:0" translate="yes" approved="yes">
+          <source>Nasal Console</source>
+          <target>Nasal Konsole</target>
+        </trans-unit>
+        <trans-unit id="menu/nasal-repl-interpreter:0" translate="yes" approved="yes">
+          <source>Nasal REPL Interpreter</source>
+          <target>Nasal REPL Interpreter</target>
+        </trans-unit>
+        <trans-unit id="menu/next-waypoint:0" translate="yes" approved="yes">
+          <source>Next Waypoint</source>
+          <target>Nächster Wegpunkt</target>
+        </trans-unit>
+        <trans-unit id="menu/performance-monitor:0" translate="yes" approved="yes">
+          <source>Monitor System Performance</source>
+          <target>Zeige Systemleistung</target>
+        </trans-unit>
+        <trans-unit id="menu/pilot-offset:0" translate="yes" approved="yes">
+          <source>Adjust View Position</source>
+          <target>Blickpunkt einstellen</target>
+        </trans-unit>
+        <trans-unit id="menu/position-in-air:0" translate="yes" approved="yes">
+          <source>Position Aircraft In Air</source>
+          <target>Flugzeug in der Luft positionieren</target>
+        </trans-unit>
+        <trans-unit id="menu/previous-waypoint:0" translate="yes" approved="yes">
+          <source>Previous Waypoint</source>
+          <target>Vorheriger Wegpunkt</target>
+        </trans-unit>
+        <trans-unit id="menu/print-rendering-statistics:0" translate="yes" approved="no">
+          <source>Print Rendering Statistics</source>
+          <target>Zeige Rendering-Statistik</target>
+        </trans-unit>
+        <trans-unit id="menu/print-scene-info:0" translate="yes" approved="no">
+          <source>Print Visible Scene Info</source>
+          <target>Zeige Infos zur sichtbaren Szene</target>
+        </trans-unit>
+        <trans-unit id="menu/property-browser:0" translate="yes" approved="yes">
+          <source>Browse Internal Properties</source>
+          <target>Property-Browser</target>
+        </trans-unit>
+        <trans-unit id="menu/pushback:0" translate="yes" approved="yes">
+          <source>Pushback</source>
+          <target>Flugzeugschlepper</target>
+        </trans-unit>
+        <trans-unit id="menu/radio:0" translate="yes" approved="yes">
+          <source>Radio Settings</source>
+          <target>Funkgerät einstellen</target>
+        </trans-unit>
+        <trans-unit id="menu/random-attitude:0" translate="yes" approved="yes">
+          <source>Random Attitude</source>
+          <target>Zufällige Fluglage</target>
+        </trans-unit>
+        <trans-unit id="menu/random-failures:0" translate="yes" approved="yes">
+          <source>Random Failures</source>
+          <target>Zufällige Fehler</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-autopilot:0" translate="yes" approved="yes">
+          <source>Reload Autopilot</source>
+          <target>Autopilot neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-gui:0" translate="yes" approved="yes">
+          <source>Reload GUI</source>
+          <target>Benutzeroberfläche neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-hud:0" translate="yes" approved="yes">
+          <source>Reload HUD</source>
+          <target>HUD neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-input:0" translate="yes" approved="yes">
+          <source>Reload Input</source>
+          <target>Eingabesystem neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-materials:0" translate="yes" approved="yes">
+          <source>Reload Materials</source>
+          <target>Materialien neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-model:0" translate="yes" approved="yes">
+          <source>Reload Aircraft Model</source>
+          <target>3D-Modell neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-network:0" translate="yes" approved="yes">
+          <source>Reload Network</source>
+          <target>Netzwerk neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-panel:0" translate="yes" approved="yes">
+          <source>Reload Panel</source>
+          <target>Panel neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-scenery:0" translate="yes" approved="yes">
+          <source>Reload Scenery</source>
+          <target>Szenerie neu laden</target>
+        </trans-unit>
+        <trans-unit id="menu/rembrandt-buffers-choice:0" translate="yes" approved="yes">
+          <source>Select Rendering Buffers</source>
+          <target>Wähle Rendering-Puffer</target>
+        </trans-unit>
+        <trans-unit id="menu/rendering-buffers:0" translate="yes" approved="yes">
+          <source>Hide/Show Rendering Buffers</source>
+          <target>Verstecke/Zeige Rendering-Puffer</target>
+        </trans-unit>
+        <trans-unit id="menu/rendering-options:0" translate="yes" approved="yes">
+          <source>Rendering Options</source>
+          <target>Grafikoptionen</target>
+        </trans-unit>
+        <trans-unit id="menu/replay:0" translate="yes" approved="yes">
+          <source>Instant Replay</source>
+          <target>Sofortwiederholung</target>
+        </trans-unit>
+        <trans-unit id="menu/reset:0" translate="yes" approved="yes">
+          <source>Reset</source>
+          <target>Flug zurücksetzen</target>
+        </trans-unit>
+        <trans-unit id="menu/route-manager:0" translate="yes" approved="yes">
+          <source>Route Manager</source>
+          <target>Routenplaner</target>
+        </trans-unit>
+        <trans-unit id="menu/save-tape:0" translate="yes" approved="yes">
+          <source>Save Flight Recorder Tape</source>
+          <target>Flugaufzeichnung speichern</target>
+        </trans-unit>
+        <trans-unit id="menu/scenario:0" translate="yes" approved="yes">
+          <source>Traffic and Scenario Settings</source>
+          <target>Flugverkehr und Szenarien</target>
+        </trans-unit>
+        <trans-unit id="menu/select-livery:0" translate="yes" approved="yes">
+          <source>Select Livery</source>
+          <target>Lackierung auswählen</target>
+        </trans-unit>
+        <trans-unit id="menu/show-hide-yokes:0" translate="yes" approved="yes">
+          <source>Show/hide yokes</source>
+          <target>Steuerhorn ein-/ausblenden</target>
+        </trans-unit>
+        <trans-unit id="menu/snap-shot:0" translate="yes" approved="yes">
+          <source>Screenshot</source>
+          <target>Bildschirmfoto</target>
+        </trans-unit>
+        <trans-unit id="menu/snap-shot-dir:0" translate="yes" approved="yes">
+          <source>Screenshot Directory</source>
+          <target>Fotoverzeichnis festlegen</target>
+        </trans-unit>
+        <trans-unit id="menu/sound-config:0" translate="yes" approved="yes">
+          <source>Sound Configuration</source>
+          <target>Sound-Konfiguration</target>
+        </trans-unit>
+        <trans-unit id="menu/statistics-display:0" translate="yes" approved="yes">
+          <source>Cycle On-Screen Statistics</source>
+          <target>On-Screen Statistik umschalten</target>
+        </trans-unit>
+        <trans-unit id="menu/stereoscopic-options:0" translate="yes" approved="yes">
+          <source>Stereoscopic View Options</source>
+          <target>Stereoskopie-Optionen</target>
+        </trans-unit>
+        <trans-unit id="menu/stopwatch:0" translate="yes" approved="yes">
+          <source>Stopwatch</source>
+          <target>Stoppuhr</target>
+        </trans-unit>
+        <trans-unit id="menu/swift_connection:0" translate="yes" approved="yes">
+          <source>swift Connection</source>
+          <target>Swift-Verbindung</target>
+        </trans-unit>
+        <trans-unit id="menu/system-failures:0" translate="yes" approved="yes">
+          <source>System Failures</source>
+          <target>Systemfehler</target>
+        </trans-unit>
+        <trans-unit id="menu/tanker:0" translate="yes" approved="yes">
+          <source>Tanker Controls</source>
+          <target>Tankersteuerung</target>
+        </trans-unit>
+        <trans-unit id="menu/terrasync:0" translate="yes" approved="yes">
+          <source>Scenery Download</source>
+          <target>Szenerie herunterladen</target>
+        </trans-unit>
+        <trans-unit id="menu/tiller-steering:0" translate="yes" approved="yes">
+          <source>Tiller Steering</source>
+          <target>Bugradsteuerung</target>
+        </trans-unit>
+        <trans-unit id="menu/time-mode:0" translate="yes" approved="no">
+          <source>Time Mode</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/time-settings:0" translate="yes" approved="yes">
+          <source>Time Settings</source>
+          <target>Zeiteinstellungen</target>
+        </trans-unit>
+        <trans-unit id="menu/toggle-fullscreen:0" translate="yes" approved="yes">
+          <source>Toggle Fullscreen</source>
+          <target>Vollbild umschalten</target>
+        </trans-unit>
+        <trans-unit id="menu/toggle-glide-slope:0" translate="yes" approved="yes">
+          <source>Toggle Glide Slope Tunnel</source>
+          <target>Gleitpfadanzeige umschalten</target>
+        </trans-unit>
+        <trans-unit id="menu/tower-position:0" translate="yes" approved="yes">
+          <source>Tower Position</source>
+          <target>Towerposition festlegen</target>
+        </trans-unit>
+        <trans-unit id="menu/tutorial-start:0" translate="yes" approved="yes">
+          <source>Tutorials</source>
+          <target>Tutorials</target>
+        </trans-unit>
+        <trans-unit id="menu/video-control:0" translate="yes" approved="no">
+          <source>Video Control</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/video-start:0" translate="yes" approved="no">
+          <source>Video Start</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/video-stop:0" translate="yes" approved="no">
+          <source>Video Stop</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/view:0" translate="yes" approved="yes">
+          <source>View</source>
+          <target>Ansicht</target>
+        </trans-unit>
+        <trans-unit id="menu/view-clone:0" translate="yes" approved="no">
+          <source>Add Clone View</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/view-last-pair:0" translate="yes" approved="no">
+          <source>Add Pair View</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/view-last-pair-double:0" translate="yes" approved="no">
+          <source>Add Pair Foreground View</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/view-options:0" translate="yes" approved="yes">
+          <source>View Options</source>
+          <target>Ansichtsoptionen</target>
+        </trans-unit>
+        <trans-unit id="menu/view-push:0" translate="yes" approved="no">
+          <source>Push Pair View</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/volcanoes:0" translate="yes" approved="no">
+          <source>Volcanoes</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/vr-options:0" translate="yes" approved="no">
+          <source>VR Options</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker:0" translate="yes" approved="no">
+          <source>Walker</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker-animation-dialog:0" translate="yes" approved="no">
+          <source>Walker animation dialog</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker-equipment:0" translate="yes" approved="no">
+          <source>Select Equipment</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker-theme:0" translate="yes" approved="no">
+          <source>Select Theme</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/walker-toggle-outside:0" translate="yes" approved="no">
+          <source>Toggle Walker outside</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="menu/wildfire-settings:0" translate="yes" approved="yes">
+          <source>Wildfire Settings</source>
+          <target>Flächenbrand</target>
+        </trans-unit>
+        <trans-unit id="menu/wingman:0" translate="yes" approved="yes">
+          <source>Wingman Controls</source>
+          <target>Wingman</target>
+        </trans-unit>
+        <trans-unit id="menu/write-video-config:0" translate="yes" approved="yes">
+          <source>Save Video Configuration</source>
+          <target>Speichere Videokonfiguration</target>
+        </trans-unit>
+      </group>
+      <group restype="x-trolltech-linguist-context" resname="options">
+        <trans-unit id="options/AV400-desc:0" translate="yes" approved="yes">
+          <source>Emit the Garmin AV400 protocol required to drive a Garmin 196/296 series GPS</source>
+          <target>Garmin AV400 Protokoll aktivieren, um ein Garmin 196/296 anzusteuern</target>
+        </trans-unit>
+        <trans-unit id="options/AV400Sim-desc:0" translate="yes" approved="yes">
+          <source>Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear</source>
+          <target>Daten des AV400 Protokolls verwenden, um ein Garmin 400-Series GPS durch FlightGear zu steuern</target>
+        </trans-unit>
+        <trans-unit id="options/AV400WSimA-desc:0" translate="yes" approved="no">
+          <source>Open connection for "A" channel using Garmin WAAS GPS protocol</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/AV400WSimB-desc:0" translate="yes" approved="no">
+          <source>Open connection for "B" channel using Garmin WAAS GPS protocol</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/addon-desc:0" translate="yes" approved="no">
+          <source>Specify a path to addon;</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/adf1-desc:0" translate="yes" approved="yes">
+          <source>Set the ADF1 radio frequency, optionally preceded by a card rotation.</source>
+          <target>Frequenz des ADF1 angeben, optional mit vorangestellter Kompassabweichung</target>
+        </trans-unit>
+        <trans-unit id="options/adf2-desc:0" translate="yes" approved="yes">
+          <source>Set the ADF2 radio frequency, optionally preceded by a card rotation.</source>
+          <target>Frequenz des ADF2 angeben, optional mit vorangestellter Kompassabweichung</target>
+        </trans-unit>
+        <trans-unit id="options/aero-desc:0" translate="yes" approved="no">
+          <source>Select aircraft aerodynamics model to load</source>
+          <target>Wähle das zu ladende Aerodynamik-Modell des Flugzeugs</target>
+        </trans-unit>
+        <trans-unit id="options/ai-scenario:0" translate="yes" approved="yes">
+          <source>Add and enable a new scenario. Multiple options are allowed.</source>
+          <target>Ein KI-Szenario hinzufügen und aktivieren (kann mehrfach angegeben werden)</target>
+        </trans-unit>
+        <trans-unit id="options/aircraft-desc:0" translate="yes" approved="yes">
+          <source>Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</source>
+          <target>Auswahl eines Flugzeugprofils (wählt ein &lt;name&gt;-set.xml Profil aus)</target>
+        </trans-unit>
+        <trans-unit id="options/aircraft-dir-desc:0" translate="yes" approved="yes">
+          <source>Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</source>
+          <target>Flugzeug-Verzeichnis relativ zum aktuellen Pfad (meist Verzeichnis, in dem fgfs.exe liegt). Umgeht &lt;path-cache&gt; aus autosave_X_Y.xml, und --fg-aircraft und die FG_AIRCRAFT Umgebungsvariable.</target>
+        </trans-unit>
+        <trans-unit id="options/aircraft-options:0" translate="yes" approved="yes">
+          <source>Aircraft</source>
+          <target>Flugzeug-Optionen</target>
+        </trans-unit>
+        <trans-unit id="options/airport-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position relative to an airport</source>
+          <target>Startposition relativ zu einem Flughafen angeben</target>
+        </trans-unit>
+        <trans-unit id="options/allow-nasal-from-sockets-desc:0" translate="yes" approved="no">
+          <source>Remove security flag, which means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/allow-nasal-read-desc:0" translate="yes" approved="no">
+          <source>Allow Nasal scripts to read files from directories listed as path (separate multiple paths with a semicolon (Windows) or a colon (UNIX)). By default, for security reasons, Nasal scripts can only read data from certain directories, such as $FG_ROOT, $FG_HOME, etc.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/altitude-desc:0" translate="yes" approved="yes">
+          <source>Starting altitude</source>
+          <target>Flughöhe (MSL) beim Start</target>
+        </trans-unit>
+        <trans-unit id="options/arm-desc:0" translate="yes" approved="yes">
+          <source>Specify a multiplier for the aspect ratio.</source>
+          <target>Einen Multiplikator für das Seitenverhältnis angeben</target>
+        </trans-unit>
+        <trans-unit id="options/atcsim-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the ATC sim protocol (atc610x)</source>
+          <target>Eine Verbindung per ATC Sim-Protokoll (atc610x) öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/atlas-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the Atlas protocol</source>
+          <target>Eine Verbindung per Atlas-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/audio-options:0" translate="yes" approved="yes">
+          <source>Audio Options</source>
+          <target>Audio-Optionen</target>
+        </trans-unit>
+        <trans-unit id="options/avionics-options:0" translate="yes" approved="yes">
+          <source>Avionics Options</source>
+          <target>Avionik-Optionen</target>
+        </trans-unit>
+        <trans-unit id="options/bpp-desc:0" translate="yes" approved="yes">
+          <source>Specify the bits per pixel</source>
+          <target>Bits pro Pixel angeben</target>
+        </trans-unit>
+        <trans-unit id="options/browser-app-desc:0" translate="yes" approved="yes">
+          <source>Specify path to your web browser</source>
+          <target>Pfad zum Internet-Browser angeben</target>
+        </trans-unit>
+        <trans-unit id="options/callsign-desc:0" translate="yes" approved="no">
+          <source>Assign a unique name to a player</source>
+          <target>Dem Spieler einen eindeutigen Namen zuweisen</target>
+        </trans-unit>
+        <trans-unit id="options/carrier-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position on an AI carrier</source>
+          <target>Auswahl der Startposition auf einem Flugzeugträger</target>
+        </trans-unit>
+        <trans-unit id="options/carrier-position-desc:0" translate="yes" approved="no">
+          <source>Specify a starting position relative to the carrier where you can use the predefined abeam (start on downwind abeam) or FLOLS (start on final approach) values, or specify the name of the carrier's parking position. Must also specify a carrier.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/ceiling-desc:0" translate="yes" approved="yes">
+          <source>Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft).</source>
+          <target>Erstelle geschlossene Wolkendecke, optional mit einer bestimmten Dicke (Standard: 2000ft)</target>
+        </trans-unit>
+        <trans-unit id="options/com1-desc:0" translate="yes" approved="yes">
+          <source>Set the COM1 radio frequency</source>
+          <target>Frequenz des COM1-Funkgeräts angeben</target>
+        </trans-unit>
+        <trans-unit id="options/com2-desc:0" translate="yes" approved="yes">
+          <source>Set the COM2 radio frequency</source>
+          <target>Frequenz des COM2-Funkgeräts angeben</target>
+        </trans-unit>
+        <trans-unit id="options/composite-viewer-desc:0" translate="yes" approved="no">
+          <source>Enable CompositeViewer (extra view windows)</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/compositor-desc:0" translate="yes" approved="no">
+          <source>Specify the path to XML file for multi-pass rendering. The path is relative to $FG_ROOT (defaults to Compositor/default.xml).</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/config-desc:0" translate="yes" approved="yes">
+          <source>Load additional properties from path</source>
+          <target>Lade weitere Einstellungen aus Pfad</target>
+        </trans-unit>
+        <trans-unit id="options/console-desc:0" translate="yes" approved="yes">
+          <source>Display console (Windows specific)</source>
+          <target>Konsole anzeigen (nur für Windows)</target>
+        </trans-unit>
+        <trans-unit id="options/data-desc:0" translate="yes" approved="no">
+          <source>Specify an additional base data directory (FGData), before the $FG_ROOT directory</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/debugging-options:0" translate="yes" approved="yes">
+          <source>Debugging Options</source>
+          <target>Optionen zur Fehlersuche</target>
+        </trans-unit>
+        <trans-unit id="options/developer-desc:0" translate="yes" approved="no">
+          <source>Enable developer mode</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/disable-ai-models-desc:0" translate="yes" approved="yes">
+          <source>Deprecated option (disable internal AI subsystem)</source>
+          <target>Veraltete Option (internes KI-Subsystem deaktivieren)</target>
+        </trans-unit>
+        <trans-unit id="options/disable-ai-traffic-desc:0" translate="yes" approved="yes">
+          <source>Disable artificial traffic.</source>
+          <target>KI-Verkehr deaktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/disable-anti-alias-hud-desc:0" translate="yes" approved="yes">
+          <source>Disable anti-aliased HUD</source>
+          <target>HUD mit Kantenglättung deaktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/disable-auto-coordination-desc:0" translate="yes" approved="yes">
+          <source>Disable auto coordination</source>
+          <target>Auto-Koordination von Quer- und Seitenruder deaktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/disable-clock-freeze-desc:0" translate="yes" approved="yes">
+          <source>Clock advances normally</source>
+          <target>Zeit vergeht normal</target>
+        </trans-unit>
+        <trans-unit id="options/disable-clouds-desc:0" translate="yes" approved="yes">
+          <source>Disable 2D (flat) cloud layers</source>
+          <target>Flache 2D-Wolken deaktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/disable-clouds3d-desc:0" translate="yes" approved="yes">
+          <source>Disable 3D (volumetric) cloud layers</source>
+          <target>Volumetrische 3D-Wolken deaktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/disable-distance-attenuation:0" translate="yes" approved="yes">
+          <source>Disable runway light distance attenuation</source>
+          <target>Deaktiviere Dämpfung der Startbahnbeleuchtung bei größerer Entfernung</target>
+        </trans-unit>
+        <trans-unit id="options/disable-enhanced-lighting:0" translate="yes" approved="yes">
+          <source>Disable enhanced runway lighting</source>
+          <target>Verbesserte Startbahnbeleuchtung deaktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/disable-fgcom-desc:0" translate="yes" approved="yes">
+          <source>Disable FGCom built-in</source>
+          <target>Deaktiviere integriertes FGCom</target>
+        </trans-unit>
+        <trans-unit id="options/disable-freeze-desc:0" translate="yes" approved="yes">
+          <source>Start in a running state</source>
+          <target>Nicht pausiert starten</target>
+        </trans-unit>
+        <trans-unit id="options/disable-fuel-freeze-desc:0" translate="yes" approved="yes">
+          <source>Fuel is consumed normally</source>
+          <target>Treibstoff wird normal verbraucht</target>
+        </trans-unit>
+        <trans-unit id="options/disable-fullscreen-desc:0" translate="yes" approved="yes">
+          <source>Disable fullscreen mode</source>
+          <target>Deaktiviere Vollbild</target>
+        </trans-unit>
+        <trans-unit id="options/disable-gui-desc:0" translate="yes" approved="no">
+          <source>Enable headless mode</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/disable-hold-short-desc:0" translate="yes" approved="no">
+          <source>Disable the move to hold short position for multiplayer</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/disable-horizon-effect:0" translate="yes" approved="yes">
+          <source>Disable celestial body growth illusion near the horizon</source>
+          <target>Scheinbare Vergrößerung von Himmelskörpern nahe dem Horizont deaktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/disable-hud-3d-desc:0" translate="yes" approved="yes">
+          <source>Disable 3D HUD</source>
+          <target>Deaktiviere 3D-HUD </target>
+        </trans-unit>
+        <trans-unit id="options/disable-hud-desc:0" translate="yes" approved="yes">
+          <source>Disable Heads Up Display (HUD)</source>
+          <target>Deaktiviere Head-Up-Display (HUD)</target>
+        </trans-unit>
+        <trans-unit id="options/disable-mouse-pointer-desc:0" translate="yes" approved="yes">
+          <source>Disable extra mouse pointer</source>
+          <target>Deaktiviere zusätzlichen Mauszeiger</target>
+        </trans-unit>
+        <trans-unit id="options/disable-panel-desc:0" translate="yes" approved="yes">
+          <source>Disable instrument panel</source>
+          <target>Deaktiviere Instrumentenbrett</target>
+        </trans-unit>
+        <trans-unit id="options/disable-random-buildings-desc:0" translate="yes" approved="yes">
+          <source>Exclude random buildings objects</source>
+          <target>Zufällige Gebäude ausblenden</target>
+        </trans-unit>
+        <trans-unit id="options/disable-random-objects-desc:0" translate="yes" approved="yes">
+          <source>Exclude random scenery objects</source>
+          <target>Zufällige Objekte ausblenden</target>
+        </trans-unit>
+        <trans-unit id="options/disable-random-vegetation-desc:0" translate="yes" approved="yes">
+          <source>Exclude random vegetation objects</source>
+          <target>Zufällige Vegetation ausblenden</target>
+        </trans-unit>
+        <trans-unit id="options/disable-real-weather-fetch-desc:0" translate="yes" approved="yes">
+          <source>Disable METAR based real weather fetching</source>
+          <target>Deaktiviere METAR Download (reales Wetter)</target>
+        </trans-unit>
+        <trans-unit id="options/disable-save-on-exit:0" translate="yes" approved="yes">
+          <source>Don't save preferences upon program exit</source>
+          <target>Einstellungen beim Beenden nicht speichern</target>
+        </trans-unit>
+        <trans-unit id="options/disable-sentry-desc:0" translate="yes" approved="no">
+          <source>Disable crash and error reports from being sent to the development team for analysis</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/disable-sound-desc:0" translate="yes" approved="yes">
+          <source>Disable sound effects</source>
+          <target>Deaktiviere Sound </target>
+        </trans-unit>
+        <trans-unit id="options/disable-specular-highlight:0" translate="yes" approved="yes">
+          <source>Disable specular reflections on textured objects</source>
+          <target>Deaktiviere spiegelnde Reflektionen an texturierten Objekten</target>
+        </trans-unit>
+        <trans-unit id="options/disable-splash-screen-desc:0" translate="yes" approved="yes">
+          <source>Disable splash screen</source>
+          <target>Deaktiviere Startbildschirm</target>
+        </trans-unit>
+        <trans-unit id="options/disable-terrasync-desc:0" translate="yes" approved="yes">
+          <source>Disable automatic scenery downloads/updates</source>
+          <target>Deaktiviere automatischen Download/Update von Szenerie</target>
+        </trans-unit>
+        <trans-unit id="options/disable-texture-cache-desc:0" translate="yes" approved="no">
+          <source>Disable texture cache (DDS)</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/disable-textures-desc:0" translate="yes" approved="yes">
+          <source>Disable textures</source>
+          <target>Deaktiviere Texturen</target>
+        </trans-unit>
+        <trans-unit id="options/disable-vr-desc:0" translate="yes" approved="no">
+          <source>Disable VR</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/disable-wireframe-desc:0" translate="yes" approved="yes">
+          <source>Disable wireframe drawing mode</source>
+          <target>Deaktiviere Drahtgitterdarstellung</target>
+        </trans-unit>
+        <trans-unit id="options/dme-desc:0" translate="yes" approved="yes">
+          <source>Slave the DME to one of the NAV radios, or set its internal frequency.</source>
+          <target>DME an eines der NAV-Funkgeräte koppeln oder seine interne Frequenz einstellen</target>
+        </trans-unit>
+        <trans-unit id="options/download-dir-desc:0" translate="yes" approved="yes">
+          <source>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>
+          <target>Verzeichnis für heruntergeladene Flugzeuge und Szenerie (das TerraSync Szenerieverzeichnis kann extra mit --terrasync-dir angegeben werden)</target>
+        </trans-unit>
+        <trans-unit id="options/enable-ai-models-desc:0" translate="yes" approved="yes">
+          <source>Enable AI subsystem (required for multi-player, AI traffic and many other animations)</source>
+          <target>KI-Subsystem aktivieren (erforderlich für Multiplayer, KI-Verkehr und viele andere Animationen)</target>
+        </trans-unit>
+        <trans-unit id="options/enable-ai-traffic-desc:0" translate="yes" approved="yes">
+          <source>Enable artificial traffic.</source>
+          <target>KI-Verkehr aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-anti-alias-hud-desc:0" translate="yes" approved="yes">
+          <source>Enable anti-aliased HUD</source>
+          <target>HUD mit Kantenglättung aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-auto-coordination-desc:0" translate="yes" approved="yes">
+          <source>Enable auto coordination</source>
+          <target>Auto-Koordination von Quer- und Seitenruder aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-clock-freeze-desc:0" translate="yes" approved="yes">
+          <source>Do not advance clock</source>
+          <target>Uhr einfrieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-clouds-desc:0" translate="yes" approved="yes">
+          <source>Enable 2D (flat) cloud layers</source>
+          <target>Flache 2D-Wolken aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-clouds3d-desc:0" translate="yes" approved="yes">
+          <source>Enable 3D (volumetric) cloud layers</source>
+          <target>Volumetrische 3D-Wolken aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-distance-attenuation:0" translate="yes" approved="yes">
+          <source>Enable runway light distance attenuation</source>
+          <target>Dämpfung der Startbahnbeleuchtung bei größerer Entfernung aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-enhanced-lighting:0" translate="yes" approved="yes">
+          <source>Enable enhanced runway lighting</source>
+          <target>Detaillierte Startbahnbeleuchtung aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-fgcom-desc:0" translate="yes" approved="yes">
+          <source>Enable FGCom built-in</source>
+          <target>Integriertes FGCom aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-freeze-desc:0" translate="yes" approved="yes">
+          <source>Start in a frozen state</source>
+          <target>Pausiert starten</target>
+        </trans-unit>
+        <trans-unit id="options/enable-fuel-freeze-desc:0" translate="yes" approved="no">
+          <source>Fuel tank quantity forced to remain constant</source>
+          <target>Treibstoffverbrauch einfrieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-fullscreen-desc:0" translate="yes" approved="yes">
+          <source>Enable fullscreen mode</source>
+          <target>Vollbild aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-horizon-effect:0" translate="yes" approved="yes">
+          <source>Enable celestial body growth illusion near the horizon</source>
+          <target>Scheinbare Vergrößerung von Himmelskörpern nahe dem Horizont aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-hud-3d-desc:0" translate="yes" approved="yes">
+          <source>Enable 3D HUD</source>
+          <target>3D-HUD aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-hud-desc:0" translate="yes" approved="yes">
+          <source>Enable Heads Up Display (HUD)</source>
+          <target>Head-Up-Display (HUD) aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-mouse-pointer-desc:0" translate="yes" approved="yes">
+          <source>Enable extra mouse pointer</source>
+          <target>Zusätzlichen Mauszeiger aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-mouse-pointer-desc:1" translate="yes" approved="yes">
+          <source>(i.e. for full screen Voodoo based cards)</source>
+          <target>z.B. für Vollbild-Voodoo-Karten</target>
+        </trans-unit>
+        <trans-unit id="options/enable-panel-desc:0" translate="yes" approved="yes">
+          <source>Enable instrument panel</source>
+          <target>Instrumentenbrett aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-random-buildings-desc:0" translate="yes" approved="yes">
+          <source>Include random buildings objects</source>
+          <target>Zufällige Gebäude anzeigen</target>
+        </trans-unit>
+        <trans-unit id="options/enable-random-objects-desc:0" translate="yes" approved="yes">
+          <source>Include random scenery objects</source>
+          <target>Zufällige Objekte darstellen</target>
+        </trans-unit>
+        <trans-unit id="options/enable-random-vegetation-desc:0" translate="yes" approved="yes">
+          <source>Include random vegetation objects</source>
+          <target>Zufällige Vegetation anzeigen</target>
+        </trans-unit>
+        <trans-unit id="options/enable-real-weather-fetch-desc:0" translate="yes" approved="yes">
+          <source>Enable METAR based real weather fetching (this requires an open internet connection)</source>
+          <target>Echtes Wetter auf METAR-Basis aktivieren (benötigt Internetzugang)</target>
+        </trans-unit>
+        <trans-unit id="options/enable-save-on-exit:0" translate="yes" approved="yes">
+          <source>Allow saving preferences at program exit</source>
+          <target>Einstellungen beim Beenden speichern</target>
+        </trans-unit>
+        <trans-unit id="options/enable-sentry-desc:0" translate="yes" approved="no">
+          <source>Enable crash and error reports to be sent to the development team for analysis</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/enable-sound-desc:0" translate="yes" approved="yes">
+          <source>Enable sound effects</source>
+          <target>Sound aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-specular-highlight:0" translate="yes" approved="yes">
+          <source>Enable specular reflections on textured objects</source>
+          <target>Spiegelnde Reflektionen an texturierten Objekten aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-splash-screen-desc:0" translate="yes" approved="yes">
+          <source>Enable splash screen</source>
+          <target>Startbildschirm aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-terrasync-desc:0" translate="yes" approved="yes">
+          <source>Enable automatic scenery downloads/updates</source>
+          <target>Automatischen Download/Update von Szenerie aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-texture-cache-desc:0" translate="yes" approved="no">
+          <source>Enable texture cache (DDS)</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/enable-textures-desc:0" translate="yes" approved="yes">
+          <source>Enable textures</source>
+          <target>Texturen aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/enable-vr-desc:0" translate="yes" approved="no">
+          <source>Enable VR</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/enable-wireframe-desc:0" translate="yes" approved="yes">
+          <source>Enable wireframe drawing mode</source>
+          <target>Drahtgitterdarstellung aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/environment-options:0" translate="yes" approved="yes">
+          <source>Environment Options</source>
+          <target>Umwelteinstellungen</target>
+        </trans-unit>
+        <trans-unit id="options/failure-desc:0" translate="yes" approved="yes">
+          <source>Fail the pitot, static, vacuum, or electrical system (repeat the option for multiple system failures).</source>
+          <target>Das Pitot-, Vakuum-, statische oder elektrische System ausfallen lassen (mehrfach für mehrere Systemausfälle möglich)</target>
+        </trans-unit>
+        <trans-unit id="options/fdm-desc:0" translate="yes" approved="yes">
+          <source>Select the core flight dynamics model</source>
+          <target>Wähle das grundlegende Flugdynamikmodell aus</target>
+        </trans-unit>
+        <trans-unit id="options/fdm-desc:1" translate="yes" approved="yes">
+          <source>Can be one of jsb, larcsim, yasim, magic, balloon, ada, external, or null</source>
+          <target>Entweder jsb, larcsim, yasim, magic, balloon, ada, external, oder null</target>
+        </trans-unit>
+        <trans-unit id="options/fdm-options:0" translate="yes" approved="yes">
+          <source>Flight Model</source>
+          <target>Optionen für die Flugphysik</target>
+        </trans-unit>
+        <trans-unit id="options/features-options:0" translate="yes" approved="yes">
+          <source>Features</source>
+          <target>Features</target>
+        </trans-unit>
+        <trans-unit id="options/fg-aircraft-desc:0" translate="yes" approved="yes">
+          <source>Specify additional aircraft directory path(s) (alternatively, you can use --aircraft-dir to target a specific aircraft in a given directory)</source>
+          <target>Konfiguriert Verzeichnisse mit zusätzlichen Flugzeugen</target>
+        </trans-unit>
+        <trans-unit id="options/fg-root-desc:0" translate="yes" approved="yes">
+          <source>Specify the root data path</source>
+          <target>Konfiguration des FlightGear Datenverzeichnisses</target>
+        </trans-unit>
+        <trans-unit id="options/fg-scenery-desc:0" translate="yes" approved="yes">
+          <source>Specify the scenery path(s);</source>
+          <target>Konfiguriert den Pfad zu den Szeneriedaten;</target>
+        </trans-unit>
+        <trans-unit id="options/fg-scenery-desc:1" translate="yes" approved="yes">
+          <source>Defaults to $FG_ROOT/Scenery</source>
+          <target>Voreinstellung ist $FG_ROOT/Scenery</target>
+        </trans-unit>
+        <trans-unit id="options/fgviewer-desc:0" translate="yes" approved="yes">
+          <source>Use a model viewer rather than load the entire simulator;</source>
+          <target>Den Modell-Betrachter verwenden, anstatt den gesamten Simulator zu laden</target>
+        </trans-unit>
+        <trans-unit id="options/fix-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position relative to a fix</source>
+          <target>Startposition relativ zu einem Fix angeben</target>
+        </trans-unit>
+        <trans-unit id="options/flarm-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</source>
+          <target>Ein Verbindung per Flarm-Protokoll herstellen, welches NMEA/GPS und Verkehrsinformationen überträgt</target>
+        </trans-unit>
+        <trans-unit id="options/flight-plan-desc:0" translate="yes" approved="yes">
+          <source>Read all waypoints from a file</source>
+          <target>Alle Wegpunkte von der angegebenen Datei einlesen</target>
+        </trans-unit>
+        <trans-unit id="options/fog-disable-desc:0" translate="yes" approved="yes">
+          <source>Disable fog/haze</source>
+          <target>Nebel/Dunst deaktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/fog-fastest-desc:0" translate="yes" approved="yes">
+          <source>Enable fastest fog/haze</source>
+          <target>Schnellere Darstellung von Nebel/Dunst</target>
+        </trans-unit>
+        <trans-unit id="options/fog-nicest-desc:0" translate="yes" approved="yes">
+          <source>Enable nicest fog/haze</source>
+          <target>Schönere Darstellung von Nebel/Dunst</target>
+        </trans-unit>
+        <trans-unit id="options/fov-desc:0" translate="yes" approved="yes">
+          <source>Specify field of view angle</source>
+          <target>Das Sichtfeld in Grad angeben</target>
+        </trans-unit>
+        <trans-unit id="options/fpe-desc:0" translate="yes" approved="yes">
+          <source>Abort on encountering a floating point exception;</source>
+          <target>Abbruch bei Auftreten eines Fließkommafehlers</target>
+        </trans-unit>
+        <trans-unit id="options/garmin-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the Garmin GPS protocol</source>
+          <target>Eine Verbindung per Garmin GPS-Protokoll herstellen</target>
+        </trans-unit>
+        <trans-unit id="options/general-options:0" translate="yes" approved="yes">
+          <source>General Options</source>
+          <target>Generelle Optionen</target>
+        </trans-unit>
+        <trans-unit id="options/generic-desc:0" translate="yes" approved="yes">
+          <source>Open connection using a predefined communication interface and a preselected communication protocol</source>
+          <target>Eine Verbindung öffnen unter Verwendung eines vorgegebenen Kommunikationsinterfaces und eines vorausgewählten Kommunikationsprotokolls</target>
+        </trans-unit>
+        <trans-unit id="options/geometry-desc:0" translate="yes" approved="yes">
+          <source>Specify window geometry (640x480, etc)</source>
+          <target>Fensterabmessungen angeben (z.B. 800x600, 1280x720, etc.)</target>
+        </trans-unit>
+        <trans-unit id="options/glideslope-desc:0" translate="yes" approved="yes">
+          <source>Specify flight path angle (can be positive)</source>
+          <target>Den Winkel des Flugpfads angeben</target>
+        </trans-unit>
+        <trans-unit id="options/gmt:0" translate="yes" approved="no">
+          <source>GMT</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/graphics-preset-desc:0" translate="yes" approved="no">
+          <source>Set graphic options from one of the presets</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/heading-desc:0" translate="yes" approved="yes">
+          <source>Specify heading (yaw) angle (Psi)</source>
+          <target>Den Steuerkurs angeben</target>
+        </trans-unit>
+        <trans-unit id="options/help-desc:0" translate="yes" approved="yes">
+          <source>Show the most relevant command line options</source>
+          <target>Die wichtigsten Kommandozeilenoptionen zeigen.</target>
+        </trans-unit>
+        <trans-unit id="options/httpd-desc:0" translate="yes" approved="no">
+          <source>Enable http server on the specified address. Specify the port or address:port to bind to.</source>
+          <target>Einen HTTP-Server auf Adresse:Port aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/hud-culled-desc:0" translate="yes" approved="no">
+          <source>Hud displays percentage of triangles culled</source>
+          <target>HUD zeigt Prozent der unterdrückten Grundobjekte</target>
+        </trans-unit>
+        <trans-unit id="options/hud-options:0" translate="yes" approved="yes">
+          <source>Hud Options</source>
+          <target>HUD-Optionen</target>
+        </trans-unit>
+        <trans-unit id="options/hud-tris-desc:0" translate="yes" approved="no">
+          <source>Hud displays number of triangles rendered</source>
+          <target>HUD zeigt Anzahl der gerenderten Grundobjekte</target>
+        </trans-unit>
+        <trans-unit id="options/igc-desc:0" translate="yes" approved="no">
+          <source>Open connection using the International Gliding Commission protocol</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/ignore-autosave-desc:0" translate="yes" approved="no">
+          <source>Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/in-air-desc:0" translate="yes" approved="yes">
+          <source>Start in air (implied when using --altitude)</source>
+          <target>In der Luft starten (impliziert bei Verwendung von --altitude)</target>
+        </trans-unit>
+        <trans-unit id="options/io-options:0" translate="yes" approved="yes">
+          <source>IO Options</source>
+          <target>I/O-Optionen</target>
+        </trans-unit>
+        <trans-unit id="options/joyclient-desc:0" translate="yes" approved="yes">
+          <source>Open connection to an Agwagon joystick</source>
+          <target>Eine Verbindung zu einem Agwagon-Joystick öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/jpg-httpd-desc:0" translate="yes" approved="yes">
+          <source>Enable screen shot http server on the specified port (replaced by --httpd)</source>
+          <target>Screenshot-HTTP-Server am angegeben Port aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/jsbsim-output-directive-file-desc:0" translate="yes" approved="no">
+          <source>Log JSBSim properties in a CSV file. An output directives file contains an &lt;output type="CSV"&gt;&lt;/output&gt; element, within which should be specified the parameters or parameter groups that should be logged.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/jsclient-desc:0" translate="yes" approved="yes">
+          <source>Open connection to a remote joystick</source>
+          <target>Eine Verbindung zu einem Remote-Joystick öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/json-report-desc:0" translate="yes" approved="yes">
+          <source>Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</source>
+          <target>Einen Report im JSON-Format ausgeben. Enthält Details über die FlightGear Version und Einstellungen.</target>
+        </trans-unit>
+        <trans-unit id="options/language-desc:0" translate="yes" approved="yes">
+          <source>Select the language for this session</source>
+          <target>Auswahl der Sprache</target>
+        </trans-unit>
+        <trans-unit id="options/lat-desc:0" translate="yes" approved="yes">
+          <source>Starting latitude (south = -)</source>
+          <target>Start bei Breitengrad (Süden = -)</target>
+        </trans-unit>
+        <trans-unit id="options/launcher-desc:0" translate="yes" approved="no">
+          <source>Use GUI launcher</source>
+          <target>Benutze das grafische Startprogramm</target>
+        </trans-unit>
+        <trans-unit id="options/livery-desc:0" translate="yes" approved="yes">
+          <source>Select aircraft livery</source>
+          <target>Lackierung des Flugzeugs auswählen</target>
+        </trans-unit>
+        <trans-unit id="options/load-tape-create-video:0" translate="yes" approved="no">
+          <source>Encode video while replaying tape specified by --load-tape</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/load-tape-desc:0" translate="yes" approved="no">
+          <source>Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
+          <target>Eine frühere FlighGear-Session laden</target>
+        </trans-unit>
+        <trans-unit id="options/load-tape-fixed-dt:0" translate="yes" approved="no">
+          <source>Set fixed-dt mode while replaying tape specified by --load-tape</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/local-aircraft-time:0" translate="yes" approved="no">
+          <source>local aircraft time</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/lod-levels-desc:0" translate="yes" approved="no">
+          <source>Specify the detail levels, where levels are a space-separated numeric list of levels. The default is "1 3 5 7 9".</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/lod-range-mult-desc:0" translate="yes" approved="no">
+          <source>Specify the range multiplier (point from low to fine detail). Defaults is 2.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/lod-res-desc:0" translate="yes" approved="no">
+          <source>Specify the resolution of the terrain grid. Defaults is 1.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/lod-texturing-desc:0" translate="yes" approved="no">
+          <source>Specify the method of texturing the terrain. The default is bluemarble.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/log-class-desc:0" translate="yes" approved="yes">
+          <source>Specify which logging class(es) to use</source>
+          <target>Die zu verwendende(n) Log-Klasse(n) angeben</target>
+        </trans-unit>
+        <trans-unit id="options/log-dir-desc:0" translate="yes" approved="yes">
+          <source>Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc.</source>
+          <target>Logverzeichnis. Kann mehrfach mit unterschiedlichen Werten angegeben werden.</target>
+        </trans-unit>
+        <trans-unit id="options/log-level-desc:0" translate="yes" approved="yes">
+          <source>Specify which logging level to use</source>
+          <target>Das zu verwendende Log-Level angeben</target>
+        </trans-unit>
+        <trans-unit id="options/lon-desc:0" translate="yes" approved="yes">
+          <source>Starting longitude (west = -)</source>
+          <target>Start bei Längengrad (Westen = -)</target>
+        </trans-unit>
+        <trans-unit id="options/mach-desc:0" translate="yes" approved="yes">
+          <source>Specify initial mach number</source>
+          <target>Anfängliche Mach-Zahl angeben</target>
+        </trans-unit>
+        <trans-unit id="options/materials-file-desc:0" translate="yes" approved="yes">
+          <source>Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)</source>
+          <target>Die Materials-Datei angeben, die zur Darstellung der Szenerie verwendet wird (Standard: materials.xml)</target>
+        </trans-unit>
+        <trans-unit id="options/max-fps-desc:0" translate="yes" approved="yes">
+          <source>Maximum frame rate in Hz.</source>
+          <target>Die maximale Bildrate in Hz</target>
+        </trans-unit>
+        <trans-unit id="options/metar-desc:0" translate="yes" approved="yes">
+          <source>Pass a METAR string to set up static weather (this implies --disable-real-weather-fetch)</source>
+          <target>Einen METAR eingeben, um statisches Wetter einzustellen</target>
+        </trans-unit>
+        <trans-unit id="options/min-aircraft-status:0" translate="yes" approved="yes">
+          <source>Allows you to define a minimum status level (=development status) for all listed aircraft</source>
+          <target>Schränkt die Anzeige auf Flugzeuge mit diesem minimalem Status ein</target>
+        </trans-unit>
+        <trans-unit id="options/model-hz-desc:0" translate="yes" approved="yes">
+          <source>Run the FDM this rate (iterations per second)</source>
+          <target>FDM mit dieser Frequenz betreiben (Wiederholungen pro Sekunde)</target>
+        </trans-unit>
+        <trans-unit id="options/multiplay-desc:0" translate="yes" approved="no">
+          <source>Specify multipilot communication settings;</source>
+          <target>Multiplayer-Einstellungen angeben</target>
+        </trans-unit>
+        <trans-unit id="options/multiplayer-options:0" translate="yes" approved="yes">
+          <source>MultiPlayer Options</source>
+          <target>Multiplayer-Optionen</target>
+        </trans-unit>
+        <trans-unit id="options/multiple-instance:0" translate="yes" approved="no">
+          <source>multiple instances can be used</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/native-ctrls-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the FG Native Controls protocol</source>
+          <target>Eine Verbindung per FG Native Controls-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/native-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the FG Native protocol</source>
+          <target>Eine Verbindung per FG Native-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/native-fdm-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the FG Native FDM protocol</source>
+          <target>Eine Verbindung per FG Native FDM-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/native-gui-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the FG Native GUI protocol</source>
+          <target>Eine Verbindung per FG Native GUI-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/nav1-desc:0" translate="yes" approved="yes">
+          <source>Set the NAV1 radio frequency, optionally preceded by a radial.</source>
+          <target>Frequenz des NAV1-Funkgeräts angeben, optional mit vorangestelltem Radial</target>
+        </trans-unit>
+        <trans-unit id="options/nav2-desc:0" translate="yes" approved="yes">
+          <source>Set the NAV2 radio frequency, optionally preceded by a radial.</source>
+          <target>Frequenz des NAV2-Funkgeräts angeben, optional mit vorangestelltem Radial</target>
+        </trans-unit>
+        <trans-unit id="options/ndb-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position relative to an NDB</source>
+          <target>Startposition relativ zu einem NDB angeben</target>
+        </trans-unit>
+        <trans-unit id="options/ndb-freq-desc:0" translate="yes" approved="yes">
+          <source>Specify the frequency of the NDB. Use with --ndb=ID</source>
+          <target>Frequenz des NDB angeben. Verwendung zusammen mit --ndb=ID</target>
+        </trans-unit>
+        <trans-unit id="options/network-options:0" translate="yes" approved="yes">
+          <source>Network Options</source>
+          <target>Netzwerk</target>
+        </trans-unit>
+        <trans-unit id="options/nmea-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the NMEA protocol</source>
+          <target>Eine Verbindung per NMEA-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/no-default-config-desc:0" translate="yes" approved="no">
+          <source>Do not load any default configuration files (like .fgfsrc) unless explicitly specified with --config.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/notrim-desc:0" translate="yes" approved="yes">
+          <source>Do NOT attempt to trim the model</source>
+          <target>Das Flugzeug NICHT trimmen</target>
+        </trans-unit>
+        <trans-unit id="options/notrim-desc:1" translate="yes" approved="yes">
+          <source>(only with fdm=jsbsim)</source>
+          <target>(nur mit --fdm=jsbsim)</target>
+        </trans-unit>
+        <trans-unit id="options/offset-azimuth-desc:0" translate="yes" approved="yes">
+          <source>Specify heading to reference point</source>
+          <target>Kurs relativ zum Referenzpunkt</target>
+        </trans-unit>
+        <trans-unit id="options/offset-distance-desc:0" translate="yes" approved="no">
+          <source>Specify distance to reference point (nautical miles)</source>
+          <target>Distanz zum Referenzpunkt angeben (Statute Miles)</target>
+        </trans-unit>
+        <trans-unit id="options/on-ground-desc:0" translate="yes" approved="yes">
+          <source>Start at ground level (default)</source>
+          <target>Auf dem Boden starten (Standard)</target>
+        </trans-unit>
+        <trans-unit id="options/opengc-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the OpenGC protocol</source>
+          <target>Eine Verbindung per OpenGC-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/parking-id-desc:0" translate="yes" approved="yes">
+          <source>Specify parking position at an airport (must also specify an airport)</source>
+          <target>Auswahl einer Parkposition am ausgewählten Flughafen</target>
+        </trans-unit>
+        <trans-unit id="options/parkpos-desc:0" translate="yes" approved="no">
+          <source>Same as the --parking-id option</source>
+          <target>Eine Parkposition auf dem angegebenen Flugzeugträger wählen</target>
+        </trans-unit>
+        <trans-unit id="options/pitch-desc:0" translate="yes" approved="yes">
+          <source>Specify pitch angle (Theta)</source>
+          <target>Die Längsneigung angeben (griech. Theta)</target>
+        </trans-unit>
+        <trans-unit id="options/position-options:0" translate="yes" approved="yes">
+          <source>Initial Position and Orientation</source>
+          <target>Position und Orientierung</target>
+        </trans-unit>
+        <trans-unit id="options/prop-desc:0" translate="yes" approved="yes">
+          <source>Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool.</source>
+          <target>Der Property &lt;name&gt; den Wert &lt;value&gt; zuweisen. &lt;type&gt; kann string, double, float, long, int, oder bool sein.</target>
+        </trans-unit>
+        <trans-unit id="options/props-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the interactive property manager</source>
+          <target>Eine Verbindung öffnen unter Verwendung des interaktiven Property-Managers</target>
+        </trans-unit>
+        <trans-unit id="options/proxy-desc:0" translate="yes" approved="yes">
+          <source>Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option.</source>
+          <target>Den zu verwendenden Proxy-Server (und Port) angeben. Nutzername und Passwort sind frei wählbar und sollten bereits MD5-codiert sein. Nur sinnvoll in Verbindung mit der Option "--real-weather-fetch"</target>
+        </trans-unit>
+        <trans-unit id="options/pve-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the PVE protocol</source>
+          <target>Eine Verbindung per PVE-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/random-objects-desc:0" translate="yes" approved="yes">
+          <source>(buildings, etc.)</source>
+          <target>(Gebäude, etc.)</target>
+        </trans-unit>
+        <trans-unit id="options/random-wind-desc:0" translate="yes" approved="yes">
+          <source>Set up random wind direction and speed</source>
+          <target>Zufällige Windrichtung und -geschwindigkeit</target>
+        </trans-unit>
+        <trans-unit id="options/ray-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the Ray Woodworth motion chair protocol</source>
+          <target>Eine Verbindung per Ray Woodworth Motion Chair-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/read-only-desc:0" translate="yes" approved="no">
+          <source>Make $FG_HOME read-only</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/rendering-options:0" translate="yes" approved="yes">
+          <source>Rendering Options</source>
+          <target>Grafik-Optionen</target>
+        </trans-unit>
+        <trans-unit id="options/restart-launcher-desc:0" translate="yes" approved="no">
+          <source>Open Launcher automatically when exiting FlightGear</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/restore-defaults-desc:0" translate="yes" approved="yes">
+          <source>Reset all user settings to their defaults (rendering options etc)</source>
+          <target>Alle Optionen auf Standard zurücksetzen (Grafik, etc.)</target>
+        </trans-unit>
+        <trans-unit id="options/roc-desc:0" translate="yes" approved="yes">
+          <source>Specify initial climb rate (can be negative)</source>
+          <target>Die anfängliche Steig-/Sinkrate angeben</target>
+        </trans-unit>
+        <trans-unit id="options/roll-desc:0" translate="yes" approved="yes">
+          <source>Specify roll angle (Phi)</source>
+          <target>Den Querneigung angeben (griech. Phi)</target>
+        </trans-unit>
+        <trans-unit id="options/route-options:0" translate="yes" approved="yes">
+          <source>Route/Way Point Options</source>
+          <target>Route/Wegpunkt</target>
+        </trans-unit>
+        <trans-unit id="options/rul-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the RUL protocol</source>
+          <target>Eine Verbindung per RUL-Protokoll öffnen</target>
+        </trans-unit>
+        <trans-unit id="options/runway-no-desc:0" translate="yes" approved="yes">
+          <source>Specify starting runway (must also specify an airport)</source>
+          <target>Auswahl einer Startbahn am ausgewählten Flughafen</target>
+        </trans-unit>
+        <trans-unit id="options/shading-flat-desc:0" translate="yes" approved="yes">
+          <source>Enable flat shading</source>
+          <target>Harte Schattierung</target>
+        </trans-unit>
+        <trans-unit id="options/shading-smooth-desc:0" translate="yes" approved="yes">
+          <source>Enable smooth shading</source>
+          <target>Weiche Schattierung</target>
+        </trans-unit>
+        <trans-unit id="options/show-aircraft-desc:0" translate="yes" approved="yes">
+          <source>Print a list of the currently available aircraft types</source>
+          <target>Zeigt eine Liste der verfügbaren Flugzeugtypen</target>
+        </trans-unit>
+        <trans-unit id="options/show-sound-devices-desc:0" translate="yes" approved="yes">
+          <source>Show a list of available audio device</source>
+          <target>Eine Liste der verfügbaren Audiogeräte anzeigen</target>
+        </trans-unit>
+        <trans-unit id="options/situation-options:0" translate="yes" approved="yes">
+          <source>Situation Options</source>
+          <target>Situationsoptionen</target>
+        </trans-unit>
+        <trans-unit id="options/sound-device-desc:0" translate="yes" approved="yes">
+          <source>Explicitly specify the audio device to use</source>
+          <target>Das zu verwendende Audiogerät explizit angeben</target>
+        </trans-unit>
+        <trans-unit id="options/speed-desc:0" translate="yes" approved="yes">
+          <source>Run the FDM 'n' times faster than real time</source>
+          <target>Das FDM mit dem n-fachen der realen Zeit betreiben</target>
+        </trans-unit>
+        <trans-unit id="options/start-date-desc:0" translate="yes" approved="yes">
+          <source>Specify a starting date/time with respect to</source>
+          <target>Eine Startzeit angeben relativ zu</target>
+        </trans-unit>
+        <trans-unit id="options/state-desc:0" translate="yes" approved="no">
+          <source>Specify the initial state of the aircraft to the given value</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/system-time:0" translate="yes" approved="no">
+          <source>system time</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/telnet-desc:0" translate="yes" approved="yes">
+          <source>Enable telnet server on the specified port</source>
+          <target>Telnet-Server am angegebenen Port aktivieren</target>
+        </trans-unit>
+        <trans-unit id="options/terrain-engine-desc:0" translate="yes" approved="no">
+          <source>Specify the terrain engine you want to use: tilecache or pagedLOD</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/terrasync-dir-desc:0" translate="yes" approved="yes">
+          <source>Set target directory for scenery downloads</source>
+          <target>Zielverzeichnis für Szenerie-Downloads</target>
+        </trans-unit>
+        <trans-unit id="options/texture-cache-dir-desc:0" translate="yes" approved="no">
+          <source>Specify the DDS texture cache directory to be different than the default location</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/texture-filtering-desc:0" translate="yes" approved="no">
+          <source>Anisotropic Texture Filtering: values should be 1 (default), 2, 4, 8 or 16</source>
+          <target>Anisotropische Texturfilterung: Wert sollte 1 (Standard), 2, 4, 8, oder 16 sein</target>
+        </trans-unit>
+        <trans-unit id="options/time-match-local-desc:0" translate="yes" approved="yes">
+          <source>Synchronize time with local real-world time</source>
+          <target>Mit Ortszeit synchronisieren</target>
+        </trans-unit>
+        <trans-unit id="options/time-match-real-desc:0" translate="yes" approved="yes">
+          <source>Synchronize time with real-world time</source>
+          <target>Mit Realzeit (UTC) synchronisieren</target>
+        </trans-unit>
+        <trans-unit id="options/time-offset-desc:0" translate="yes" approved="yes">
+          <source>Add this time offset</source>
+          <target>Zeitverschiebung angeben</target>
+        </trans-unit>
+        <trans-unit id="options/time-options:0" translate="yes" approved="yes">
+          <source>Time Options</source>
+          <target>Zeitoptionen</target>
+        </trans-unit>
+        <trans-unit id="options/timeofday-desc:0" translate="yes" approved="yes">
+          <source>Specify a time of day</source>
+          <target>Eine Tageszeit angeben</target>
+        </trans-unit>
+        <trans-unit id="options/trace-read-desc:0" translate="yes" approved="yes">
+          <source>Trace the reads for a property;</source>
+          <target>Lesezugriffe auf eine Property verfolgen</target>
+        </trans-unit>
+        <trans-unit id="options/trace-write-desc:0" translate="yes" approved="yes">
+          <source>Trace the writes for a property;</source>
+          <target>Schreibzugriffe auf eine Property verfolgen</target>
+        </trans-unit>
+        <trans-unit id="options/trim-desc:0" translate="yes" approved="yes">
+          <source>Trim the model</source>
+          <target>Das Flugzeug trimmen</target>
+        </trans-unit>
+        <trans-unit id="options/trim-desc:1" translate="yes" approved="yes">
+          <source>(only with fdm=jsbsim)</source>
+          <target>(nur mit --fdm=jsbsim)</target>
+        </trans-unit>
+        <trans-unit id="options/turbulence-desc:0" translate="yes" approved="yes">
+          <source>Specify turbulence from 0.0 (calm) to 1.0 (severe)</source>
+          <target>Angabe der Stärke der Turbulenz von 0.0 (gar keine) bis 1.0 (sehr stark)</target>
+        </trans-unit>
+        <trans-unit id="options/uBody-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along the body X axis</source>
+          <target>Geschwindigkeit entlang der X-Achse des Flugzeugs angeben</target>
+        </trans-unit>
+        <trans-unit id="options/uninstall-desc:0" translate="yes" approved="no">
+          <source>Remove $FG_HOME directory. For Windows, it additionally removes TerraSync, Aircraft and TextureCache directories from download directory.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/units-feet-desc:0" translate="yes" approved="yes">
+          <source>Use feet for distances</source>
+          <target>Fuß für Entfernungen verwenden</target>
+        </trans-unit>
+        <trans-unit id="options/units-meters-desc:0" translate="yes" approved="yes">
+          <source>Use meters for distances</source>
+          <target>Meter für Entfernungen verwenden</target>
+        </trans-unit>
+        <trans-unit id="options/usage:0" translate="yes" approved="yes">
+          <source>Usage: fgfs [ option ... ]</source>
+          <target>Aufruf: fgfs [ Optionen ... ]</target>
+        </trans-unit>
+        <trans-unit id="options/use-with-terrain-engine-pagedlod:0" translate="yes" approved="no">
+          <source>Use with --terrain-engine=pagedLOD</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="options/vBody-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along the body Y axis</source>
+          <target>Geschwindigkeit entlang der Y-Achse des Flugzeugs angeben</target>
+        </trans-unit>
+        <trans-unit id="options/vDown-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along a vertical axis</source>
+          <target>Geschwindigkeit entlang der Hochachse angeben</target>
+        </trans-unit>
+        <trans-unit id="options/vEast-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along a West-East axis</source>
+          <target>Geschwindigkeit in Ost-West-Richtung angeben</target>
+        </trans-unit>
+        <trans-unit id="options/vNorth-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along a South-North axis</source>
+          <target>Geschwindigkeit in Nord-Süd-Richtung angeben</target>
+        </trans-unit>
+        <trans-unit id="options/vc-desc:0" translate="yes" approved="yes">
+          <source>Specify initial airspeed</source>
+          <target>Anfangsgeschwindigkeit angeben</target>
+        </trans-unit>
+        <trans-unit id="options/vehicle-desc:0" translate="yes" approved="no">
+          <source>Same as the --aircraft option</source>
+          <target>Wähle ein Profil gemäß top level &lt;name&gt;-set.xml</target>
+        </trans-unit>
+        <trans-unit id="options/verbose-desc:0" translate="yes" approved="yes">
+          <source>Show all command line options when combined with --help or -h</source>
+          <target>Zeigt die vollständige Liste aller Kommandozeilenoptionen (mit --help oder -h kombinieren)</target>
+        </trans-unit>
+        <trans-unit id="options/verbose-help:0" translate="yes" approved="yes">
+          <source>For a complete list of options use --help --verbose</source>
+          <target>Anzeigen der vollständige Liste aller Optionen mit --help --verbose</target>
+        </trans-unit>
+        <trans-unit id="options/version-desc:0" translate="yes" approved="yes">
+          <source>Display the current FlightGear version</source>
+          <target>Zeigt die aktuelle FlightGear Version</target>
+        </trans-unit>
+        <trans-unit id="options/view-offset-desc:0" translate="yes" approved="yes">
+          <source>Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees</source>
+          <target>Die standardmäßige Nach-Vorne-Blickrichtung angeben als Abweichung von geradeaus. Erlaubte Werte sind LEFT, RIGHT, CENTER, oder eine Winkelangabe in Grad</target>
+        </trans-unit>
+        <trans-unit id="options/visibility-desc:0" translate="yes" approved="no">
+          <source>Specify initial visibility in meters</source>
+          <target>Die anfängliche Sichtweite in Metern angeben</target>
+        </trans-unit>
+        <trans-unit id="options/visibility-miles-desc:0" translate="yes" approved="no">
+          <source>Specify initial visibility in statute miles</source>
+          <target>Die anfängliche Sichtweite in Meilen angeben</target>
+        </trans-unit>
+        <trans-unit id="options/vor-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position relative to a VOR</source>
+          <target>Startposition relativ zu einem VOR angeben</target>
+        </trans-unit>
+        <trans-unit id="options/vor-freq-desc:0" translate="yes" approved="yes">
+          <source>Specify the frequency of the VOR. Use with --vor=ID</source>
+          <target>Die Frequenz des VOR angeben. Verwendung zusamen mit --vor=ID</target>
+        </trans-unit>
+        <trans-unit id="options/wBody-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along the body Z axis</source>
+          <target>Geschwindigkeit entlang der Z-Achse des Flugzeugs angeben</target>
+        </trans-unit>
+        <trans-unit id="options/wind-desc:0" translate="yes" approved="yes">
+          <source>Specify wind coming from DIR (degrees) at SPEED (knots)</source>
+          <target>Windrichtung und -geschwindigkeit in Grad und Knoten angeben</target>
+        </trans-unit>
+        <trans-unit id="options/wp-desc:0" translate="yes" approved="yes">
+          <source>Specify a waypoint for the GC autopilot;</source>
+          <target>Wegpunkt für den Autopiloten angeben</target>
+        </trans-unit>
+      </group>
+      <group restype="x-trolltech-linguist-context" resname="sys">
+        <trans-unit id="sys/binding-subsystems:0" translate="yes" approved="yes">
+          <source>binding subsystems</source>
+          <target>Binde Subsysteme</target>
+        </trans-unit>
+        <trans-unit id="sys/creating-subsystems:0" translate="yes" approved="yes">
+          <source>creating subsystems</source>
+          <target>Erzeuge Subsysteme</target>
+        </trans-unit>
+        <trans-unit id="sys/downloading-scenery:0" translate="yes" approved="yes">
+          <source>downloading scenery</source>
+          <target>Herunterladen der Szenerie</target>
+        </trans-unit>
+        <trans-unit id="sys/error-3D-model-load:0" translate="yes" approved="no">
+          <source>Error loading 3D model</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-aircraft-systems:0" translate="yes" approved="no">
+          <source>Errors occured loading aircraft systems (fuel, electrical, hydrualics)</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-audio-fx-load:0" translate="yes" approved="no">
+          <source>Audio FX description contains errors</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-btg-load:0" translate="yes" approved="no">
+          <source>Errors loading terrain (BTG)</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-addon:0" translate="yes" approved="no">
+          <source>The add-on '%VALUE%' contains errors. Please report this to the add-on developers.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-aircraft:0" translate="yes" approved="no">
+          <source>This aircraft (%VALUE%) contains errors. This may include visual issues, or the aircraft might not fly at all. Check for an updated version of the aircraft from its developers.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-aircraft-from-hangar:0" translate="yes" approved="no">
+          <source>The selected aircraft (%VALUE%) contains errors. This may cause visual issues, or the aircraft might not fly at all. Please report the information below to the aircraft hangar's maintainers.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-custom-scenery:0" translate="yes" approved="no">
+          <source>The custom scenery at '%VALUE%' contains errors. Parts may be missing, or the scenery may not load at all. Check for an updated version of the scenery.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-fgdata:0" translate="yes" approved="no">
+          <source>Errors were found loading the core simulator files (FGData). This usually indicates a problem with the installation, or your local disk.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-input-device:0" translate="yes" approved="no">
+          <source>The joystick (input device) '%VALUE%' couldn't be loaded correctly. This usually means its configuration file is incorrect.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-multiplayer:0" translate="yes" approved="no">
+          <source>Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog)</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-out-of-memory:0" translate="yes" approved="no">
+          <source>Allocating memory failed. Some resources will not be loaded. Adjust your settings to reduce view distance or number of objects loaded.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-scenario:0" translate="yes" approved="no">
+          <source>The scenario '%VALUE%' contains errors, and may not work correctly.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-shaders:0" translate="yes" approved="no">
+          <source>Problems occurred loading visual effects (shaders). This can cause objects to be invisible or appear incorrect. It can sometimes be fixed by changing rendering settings inside FlightGear, or occasionally, by updating the drivers for your graphics card.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-terrasync:0" translate="yes" approved="no">
+          <source>Scenery downloaded via TerraSync is not loading correctly. The usually indicates a problem with your network connection or local disk.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-traffic:0" translate="yes" approved="no">
+          <source>Problems occured loading simulated aircaft traffic: some traffic may not appear.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-category-unknown:0" translate="yes" approved="no">
+          <source>Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-dialog-load:0" translate="yes" approved="no">
+          <source>Errors loading user-interface</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-input-device-config:0" translate="yes" approved="no">
+          <source>Errors loading input device configuration</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-loading-texture:0" translate="yes" approved="no">
+          <source>Texture failed to load</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-missing-shader:0" translate="yes" approved="no">
+          <source>Shader / Effect problems</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-next-steps:0" translate="yes" approved="no">
+          <source>This dialog is work-in-progress. The information included above may not be fully correct, so please check the detailed information below and give feedback if something seems wrong. Please include all the information below, as well as the message above.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-scenery-load:0" translate="yes" approved="no">
+          <source>Errors loading scenery</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-terraysnc:0" translate="yes" approved="no">
+          <source>Errors downloading scenery from TerraSync</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-type-bad-data:0" translate="yes" approved="no">
+          <source>File or resource is invalid or corrupted</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-type-bad-header:0" translate="yes" approved="no">
+          <source>File or resource header is incorrect</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-type-io:0" translate="yes" approved="no">
+          <source>Unable to read/write files correctly (check permissions and disk space)</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-type-misconfigured:0" translate="yes" approved="no">
+          <source>The resource contains a configuration problem</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-type-network:0" translate="yes" approved="no">
+          <source>Network connection failure</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-type-not-found:0" translate="yes" approved="no">
+          <source>The file or resource was not found</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-type-out-of-memory:0" translate="yes" approved="no">
+          <source>Unable to allocate sufficient memory</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-type-unknown:0" translate="yes" approved="no">
+          <source>Unknown error</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-xml-load-command:0" translate="yes" approved="no">
+          <source>Scripted loading of XML failed</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/error-xml-model-load:0" translate="yes" approved="no">
+          <source>Errors loading model XML</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/finalize-position:0" translate="yes" approved="yes">
+          <source>finalizing position</source>
+          <target>Vorbereiten der Ausgansposition</target>
+        </trans-unit>
+        <trans-unit id="sys/finishing-subsystems:0" translate="yes" approved="yes">
+          <source>finalizing subsystems</source>
+          <target>Finalisiere Subsysteme</target>
+        </trans-unit>
+        <trans-unit id="sys/init:0" translate="yes" approved="yes">
+          <source>initializing</source>
+          <target>Initialisiere</target>
+        </trans-unit>
+        <trans-unit id="sys/init-graphics:0" translate="yes" approved="yes">
+          <source>initializing graphics engine</source>
+          <target>Initialisiere Grafik</target>
+        </trans-unit>
+        <trans-unit id="sys/init-scenery:0" translate="yes" approved="yes">
+          <source>initializing scenery</source>
+          <target>Initialisiere Szenerie</target>
+        </trans-unit>
+        <trans-unit id="sys/init-subsystems:0" translate="yes" approved="yes">
+          <source>initializing subsystems</source>
+          <target>Initialisiere Subsysteme</target>
+        </trans-unit>
+        <trans-unit id="sys/license-url:0" translate="yes" approved="no">
+          <source>Licensed under the GNU GPL. See https://www.flightgear.org for more information.</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/loading-aircraft:0" translate="yes" approved="yes">
+          <source>loading aircraft</source>
+          <target>Lade Flugzeug</target>
+        </trans-unit>
+        <trans-unit id="sys/loading-aircraft-list:0" translate="yes" approved="yes">
+          <source>loading aircraft list</source>
+          <target>Lade Flugzeugliste</target>
+        </trans-unit>
+        <trans-unit id="sys/loading-nav-dat:0" translate="yes" approved="yes">
+          <source>loading navigation data</source>
+          <target>Lade Navigationsdaten</target>
+        </trans-unit>
+        <trans-unit id="sys/loading-scenery:0" translate="yes" approved="yes">
+          <source>loading scenery</source>
+          <target>Lade Szenerie</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-fixes:0" translate="yes" approved="yes">
+          <source>loading fixes</source>
+          <target>Lade Fixes</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-load-percent:0" translate="yes" approved="no">
+          <source>[VALUE]% complete</source>
+          <target>[VALUE]% abgeschlossen</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-loading-airports:0" translate="yes" approved="yes">
+          <source>loading airport data</source>
+          <target>Lade Flughäfen</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-navaids:0" translate="yes" approved="yes">
+          <source>loading navigation aid data</source>
+          <target>Lade Navigationshilfen</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-pois:0" translate="yes" approved="yes">
+          <source>loading points of interest</source>
+          <target>Lade POIs</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-reading-apt-dat-files:0" translate="yes" approved="yes">
+          <source>reading airport data</source>
+          <target>Lese Flughäfen</target>
+        </trans-unit>
+        <trans-unit id="sys/scenery-extract:0" translate="yes" approved="no">
+          <source>extracting [VALUE]</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/settings-migration-text:0" translate="yes" approved="no">
+          <source>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</source>
+          <target>Es wurden gespeicherte Einstellungen von der vorherigen FlightGear-Version übernommen. Bei Problemen zunächst die Standard-Einstellungen wiederherstellen. Gespeicherte Einstellungen können Leistung und Funktion des Simulators negativ beeinflussen.</target>
+        </trans-unit>
+        <trans-unit id="sys/settings-migration-title:0" translate="yes" approved="no">
+          <source>Settings migrated</source>
+          <target>Einstellungen wurden übernommen</target>
+        </trans-unit>
+        <trans-unit id="sys/units-kbytes:0" translate="yes" approved="no">
+          <source>KB</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-kbytes-per-sec:0" translate="yes" approved="no">
+          <source>KB/s</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-mbytes:0" translate="yes" approved="no">
+          <source>MB</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/units-mbytes-per-sec:0" translate="yes" approved="no">
+          <source>MB/s</source>
+          <target />
+        </trans-unit>
+        <trans-unit id="sys/unstable-warning:0" translate="yes" approved="yes">
+          <source>Unstable nightly build - some features may be under active development</source>
+          <target>Entwicklerversion: Kann instabile/unfertige Features enthalten!</target>
+        </trans-unit>
+      </group>
+      <group restype="x-trolltech-linguist-context" resname="tips">
+        <trans-unit id="tips/tip:0" translate="yes" approved="yes">
+          <source>Drag while holding the right mouse button to look around</source>
+          <target>Zum Steuern der Blickrichtung die Maus bei gedrückter rechter Taste bewegen!</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:1" translate="yes" approved="no">
+          <source>Hold Ctrl while looking around to move the view up, down, left or right</source>
+          <target>Halte beim Ändern der Blickrichtung [Shift] gedrückt, um den Blick nach oben/unten/links/rechts zu bewegen.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:2" translate="yes" approved="yes">
+          <source>Press a/A to adjust the simulation speed</source>
+          <target>Tasten a/A drücken, um die Simulationsgeschwindigkeit anzupassen.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:3" translate="yes" approved="yes">
+          <source>Press x/X to zoom in and out</source>
+          <target>Drücke x/X um rein oder raus zu zoomen</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:4" translate="yes" approved="yes">
+          <source>Find frequencies of nearby ATC services from the Radios dialog</source>
+          <target>Die Frequenzen der umliegenden ATC Stationen können über den Radio-Dialog gefunden werden.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:5" translate="yes" approved="yes">
+          <source>Press v to change your viewpoint, Ctrl-V to return to the cockpit</source>
+          <target>Drücke v, um die Perspektive zu wechseln. Strg-V kehrt ins Cockpit zurück.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:6" translate="yes" approved="yes">
+          <source>Press F3 to take a screenshot</source>
+          <target>Drücke F3, um ein Bildschirmfoto zu erstellen.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:7" translate="yes" approved="yes">
+          <source>Join the FlightGear community at http://forum.flightgear.org</source>
+          <target>Trete der FlightGear Community bei: http://forum.flightgear.org</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:8" translate="yes" approved="yes">
+          <source>Press h to bring up a Heads Up Display</source>
+          <target>Drücke h, um das Head-Up-Display zu aktivieren.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:9" translate="yes" approved="yes">
+          <source>Show or hide the menu bar by pressing F10</source>
+          <target>Drücke F10, um die Menüzeile ein-/auszublenden.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:10" translate="yes" approved="yes">
+          <source>Frame-rate too low? - try disabling AI traffic</source>
+          <target>Ruckelt die Simulation? Versuche z.B. den KI Verkehr abzuschalten.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:11" translate="yes" approved="yes">
+          <source>Select Environment → Weather to fly in different weather</source>
+          <target>Wähle Umwelt → Wetter, um in verschiedenen Wetterlagen zu fliegen.</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:12" translate="yes" approved="yes">
+          <source>Press F12 to change the radio frequencies easily</source>
+          <target>Drücke F12, um die Funk-Frequenzen einzustellen!</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:13" translate="yes" approved="yes">
+          <source>Look around by holding down the right mouse button and moving the mouse</source>
+          <target>Zum Steuern der Blickrichtung die Maus bei gedrückter rechter Taste bewegen!</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:14" translate="yes" approved="yes">
+          <source>Select Multiplayer → Multiplayer Settings to join the shared flight environment</source>
+          <target>Wähle Multiplayer → Multiplayer Konfiguration um gemeinsam mit anderen Piloten zu fliegen!</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:15" translate="yes" approved="yes">
+          <source>Can't get the engine started? - see Help → Aircraft Checklists</source>
+          <target>Probleme den Motor zu starten? Siehe Hilfe → Flugzeug Checklisten</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:16" translate="yes" approved="yes">
+          <source>Drag while holding the middle and right mouse buttons to move the viewpoint</source>
+          <target>Zum Steuern des Blickpunkts die Maus bei gedrückter mittlerer und rechter Taste bewegen!</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:17" translate="yes" approved="yes">
+          <source>Press / to explore the internals of the simulator</source>
+          <target>Drücke "/", um Interna des Simulators zu erkunden!</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:18" translate="yes" approved="yes">
+          <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
+          <target>Drücke TAB, um den Blickpunkt mit der Maus zu bewegen und mit dem Scroll-Rad zu zoomen!</target>
+        </trans-unit>
+      </group>
+      <group restype="x-trolltech-linguist-context" resname="weather-scenarios">
+        <trans-unit id="weather-scenarios/border-high-pressure-region-desc:0" translate="yes" approved="no">
+          <source>The border of a high pressure region, in which the airmass becomes unstable and various convective and stratiform clouds may appear.</source>
+          <target>Grenze eines Hochdruckgebietes, in dem Luftmassen instabil werden und sich vielfältige konvektive und stratiforme Bewölkung bilden kann.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/border-high-pressure-region-name:0" translate="yes" approved="no">
+          <source>Border of a high pressure region</source>
+          <target>Grenze eines Hochdruckgebietes</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/border-low-pressure-region-desc:0" translate="yes" approved="no">
+          <source>The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</source>
+          <target>Grenze eines Tiefdruckgebietes, in dem Luftmassen instabil sind und sich konvektive Wolkenschichten bilden, die in stratiforme Bewölkung übergehen.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/border-low-pressure-region-name:0" translate="yes" approved="no">
+          <source>Border of a low pressure region</source>
+          <target>Grenze eines Tiefdruckgebietes</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-one-minimum-desc:0" translate="yes" approved="no">
+          <source>If you just got your IFR rating, this is what you are allowed to do. But can you?</source>
+          <target>Wenn Du gerade Dein IFR-Rating bekommen hast, ist dies das maximal Erlaubte.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-one-minimum-name:0" translate="yes" approved="no">
+          <source>CAT I minimum</source>
+          <target>CAT I Minimum</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-three-b-minimum-desc:0" translate="yes" approved="no">
+          <source>This is expert level. You will barely see the taxiway from the cockpit, even if you are on ground. Fog and light drizzle, freezing level at 1000ft.</source>
+          <target>Dies ist für Experten. Du wirst vom Cockpit aus gerade noch die Bahnmarkierungen sehen. Nebel und leichter Regen, einsetzende Vereisung ab 1000ft.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-three-b-minimum-name:0" translate="yes" approved="no">
+          <source>CAT IIIb minimum</source>
+          <target>CAT IIIb Minimum</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-two-minimum-desc:0" translate="yes" approved="no">
+          <source>With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
+          <target>Mit einer 1/4 Meile Sicht und Wolken bis 100ft wirst Du bis kurz vor dem Aufsetzen nicht viel sehen. Vertraue den Instrumenten, um zu überleben.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-two-minimum-name:0" translate="yes" approved="no">
+          <source>CAT II minimum</source>
+          <target>CAT II Minimum</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/core-high-pressure-region-desc:0" translate="yes" approved="no">
+          <source>The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</source>
+          <target>Zentrum eines Hochdruckgebietes, charakterisiert durch fallende Luftmassen und nur schwache Wolkenentwicklung mit sehr guter Sicht.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/core-high-pressure-region-name:0" translate="yes" approved="no">
+          <source>Core high pressure region</source>
+          <target>Zentrum eines Hochdruckgebietes</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/core-low-pressure-region-desc:0" translate="yes" approved="no">
+          <source>The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</source>
+          <target>Zentrum eines Tiefdruckgebietes, charakterisiert durch bedeckende Wolkenschichten, schlechte Sicht am Boden und erheblichen Regen.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/core-low-pressure-region-name:0" translate="yes" approved="no">
+          <source>Core low pressure region</source>
+          <target>Zentrum eines Tiefdruckgebietes</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/early-morning-fog-desc:0" translate="yes" approved="no">
+          <source>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</source>
+          <target>Ein nebeliger Herbstmorgen. Über dem Nebel ist gute Sicht zu erwarten, den Nebel zu durchfliegen ist eine Herausforderung. Bleib am Leben und Du siehst die Sonne!</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/early-morning-fog-name:0" translate="yes" approved="no">
+          <source>Early morning fog</source>
+          <target>Nebel am frühen Morgen</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/fair-weather-desc:0" translate="yes" approved="no">
+          <source>A lovely day for trip to your favorite 100$ hamburger airfield</source>
+          <target>Ein herrlicher Tag für einen Ausflug zu Deinem bevorzugten 100€ Hamburger Flugplatz</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/fair-weather-name:0" translate="yes" approved="no">
+          <source>Fair weather</source>
+          <target>Schönes Wetter</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/high-pressure-region-desc:0" translate="yes" approved="no">
+          <source>A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
+          <target>Ein Hochdruckgebiet, charakterisiert durch moderate bis starke Cumulus-Entwicklung am Nachmittag und recht gute Sichtbedingungen.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/high-pressure-region-name:0" translate="yes" approved="no">
+          <source>High pressure region</source>
+          <target>Ein Hochdruckgebiet</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/live-data-desc:0" translate="yes" approved="no">
+          <source>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</source>
+          <target>Hole Wetter-Echtdaten für den nächstgelegenen Flughafen von noaa.gov. Es ist eine Internet-Verbindung nötig. Wetter wird automatisch erzeugt, sobald ein gültiger METAR vorliegt.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/live-data-name:0" translate="yes" approved="no">
+          <source>Live data</source>
+          <target>Wetter-Echtdaten</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/low-pressure-region-desc:0" translate="yes" approved="no">
+          <source>A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</source>
+          <target>Ein Tiefdruckgebiet, charakterisiert durch steigende Luftmassen, verbreitete Formation von stratiformer Bewölkung und beginnenden Regen.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/low-pressure-region-name:0" translate="yes" approved="no">
+          <source>Low pressure region</source>
+          <target>Ein Tiefdruckgebiet</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/manual-input-desc:0" translate="yes" approved="no">
+          <source>Enter your favorite METAR weather. A valid METAR syntax is required.</source>
+          <target>Gib Dein bevorzugtes Wetter als METAR ein. Es muss ein gültiger Ausdruck sein.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/manual-input-name:0" translate="yes" approved="no">
+          <source>Manual input</source>
+          <target>Manuelle Eingabe</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/marginal-vfr-desc:0" translate="yes" approved="no">
+          <source>After the storm - limited visibility and some showers. Go or No-Go?</source>
+          <target>Nach dem Sturm - Eingeschränkte Sicht, Regenschauer. Go or No-Go?</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/marginal-vfr-name:0" translate="yes" approved="no">
+          <source>Marginal VFR</source>
+          <target>Grenzwertige VFR-Bedingungen</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/stormy-monday-desc:0" translate="yes" approved="no">
+          <source>You're out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</source>
+          <target>Du bist auf ein Abenteuer aus? Böige Winde aus West und einzelne Gewitterzellen sollten vermieden werden. Bitte anschnallen!</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/stormy-monday-name:0" translate="yes" approved="no">
+          <source>Stormy Monday</source>
+          <target>Stürmischer Montag</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/thunderstorm-desc:0" translate="yes" approved="no">
+          <source>A hot and damp summer day with thunderstorms developing in the afternoon. Be prepared for reduction of visibility in showers and strong gusts near thunderstorms</source>
+          <target>Ein heißer und feuchter Tag mit sich entwicklenden Gewittern am Nachmittag. Sei vorbereitet auf reduzierte Sicht in Schauern und starke Böen in Gewitternähe</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/thunderstorm-name:0" translate="yes" approved="no">
+          <source>Thunderstorm</source>
+          <target>Gewitter</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/warm-sector-desc:0" translate="yes" approved="no">
+          <source>A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</source>
+          <target>Ein warmer Abschnitt, charakterisiert durch hohe Luftfeuchtigkeit und Dunst bis in große Höhen, dazu größtenteils konvektive Wolkenentwicklung.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/warm-sector-name:0" translate="yes" approved="no">
+          <source>Warm sector</source>
+          <target>Warmer Abschnitt</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

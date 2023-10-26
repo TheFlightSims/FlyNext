@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- Set of SA farm buildings, for inclusion in a materials file -->
+<PropertyList>
+  <object>
+    <path>Models/Agriculture/sa-horse-farm.ac</path>
+    <path>Models/Agriculture/cattle-farm.ac</path>
+    <path>Models/Agriculture/sa-crop-farm.ac</path>
+    <path>Models/Agriculture/livestock-farm.ac</path>
+    <path>Models/Agriculture/traditional-farm.ac</path>
+    <coverage-m2>10000</coverage-m2>
+    <heading-type>mask</heading-type>
+  </object>
+</PropertyList>

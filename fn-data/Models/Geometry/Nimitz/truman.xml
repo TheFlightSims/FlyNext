@@ -1,0 +1,3924 @@
+<?xml version="1.0"?>
+<!--
+The Truman model is based on the work of user karla, who
+gave permission to use it for FG.
+
+Additional modelling, animations etc.
+added by Michael Habarta 2017
+
+Streamlined for inclusion in FG 
+by Thorsten Renk 2017
+
+-->
+<PropertyList>
+  <description>USS Harry S.Truman - CVN-75</description>
+  <author>Vivian Meazza, Alexis Bory, Michael Habarta</author>
+  <status>early-production</status>
+  <path>truman.ac</path>
+
+  <nasal>
+    <load><![CDATA[
+
+      var carrier = "Truman";
+      var pathc = cmdarg().getPath();
+      var self = cmdarg();
+
+      # register the dialog
+
+      setprop(pathc~"/dlg-name", "Truman");
+
+      # times for components to move to their position
+
+      var elevator_transit_time = 30.0;
+      var door_transit_time = 60.0;
+      var rail_transit_time = 4.0;
+      var jbd_transit_time = 5.0;
+
+      # search for the next free slot in the AI menu and register the Truman control menu
+
+      #var menu_root_nd = props.globals.getNode("/sim/menubar/default/menu[6]",1);
+      #for (var i = 0; 1; i += 1)
+      #		if (menu_root_nd.getChild("item", i, 0) == nil)
+      #			break;
+      #var menu_nd = menu_root_nd.getChild("item", i, 1);
+
+      #menu_nd.getNode("enabled", 1).setBoolValue("true");
+      #menu_nd.getNode("name", 1).setValue("Truman");
+      #menu_nd.getNode("binding", 1).getNode("command", 1).setValue("dialog-show");
+      #menu_nd.getNode("binding", 1).getNode("dialog-name", 1).setValue("TrumanControls");
+      #fgcommand("gui-redraw");
+
+      # set up the animation and course control properties
+
+      setprop("/controls/truman/crew", 0);
+      setprop("/controls/truman/deck-park",0);
+      setprop("/controls/truman/wave-motion",0);
+      setprop("/controls/truman/lights", 0);
+
+      setprop("/controls/truman/turn-to-launch-hdg", 0);
+      setprop("/controls/truman/turn-to-recovery-hdg", 0);
+      setprop("/controls/truman/turn-to-base-course", 1);
+
+      setprop(pathc~"/wave-motion/pitch", 0.0);
+      setprop(pathc~"/wave-motion/roll", 0.0);
+
+
+
+      # init JBD
+
+      setprop("/controls/truman/jbd[0]/state", 0);
+      setprop("/controls/truman/jbd[1]/state", 0);
+      setprop("/controls/truman/jbd[2]/state", 0);
+      setprop("/controls/truman/jbd[3]/state", 0);
+
+
+      # init flight-operations flag (whip antenna animation)
+      setprop("/controls/truman/flight-operations",0);
+
+      # init ai elevators
+      setprop("/controls/truman/elevator[0]/state",1);
+      setprop("/controls/truman/elevator[1]/state",0);
+      setprop("/controls/truman/elevator[2]/state",0);
+      setprop("/controls/truman/elevator[3]/state",1);
+
+
+      # init elevator doors
+      setprop("/controls/truman/door[0]/state",0);
+      setprop("/controls/truman/door[1]/state",0);
+      setprop("/controls/truman/door[2]/state",0);
+      setprop("/controls/truman/door[3]/state",0);
+
+      ###########
+      # elevators
+
+      var elevator1 = aircraft.door.new(pathc~"/surface-positions/elevator[0]", elevator_transit_time, 1);
+      var elevator2 = aircraft.door.new(pathc~"/surface-positions/elevator[1]", elevator_transit_time, 0);
+      var elevator3 = aircraft.door.new(pathc~"/surface-positions/elevator[2]", elevator_transit_time, 0);
+      var elevator4 = aircraft.door.new(pathc~"/surface-positions/elevator[3]", elevator_transit_time, 1);
+
+      var elevator_array = [elevator1, elevator2, elevator3, elevator4];
+
+
+      ################
+      # elevator wires
+
+
+      setprop(pathc~"/surface-positions/elevator[0]/wire-norm", 0);
+      setprop(pathc~"/surface-positions/elevator[1]/wire-norm", 0);
+      setprop(pathc~"/surface-positions/elevator[2]/wire-norm", 0);
+      setprop(pathc~"/surface-positions/elevator[3]/wire-norm", 0);
+
+      ################
+      # elevator rails
+
+      var elevatorr1 = aircraft.door.new(pathc~"/surface-positions/elevator-rail[0]", rail_transit_time, getprop("/controls/truman/elevator[0]/state"));
+      var elevatorr2 = aircraft.door.new(pathc~"/surface-positions/elevator-rail[1]", rail_transit_time, getprop("/controls/truman/elevator[1]/state"));
+      var elevatorr3 = aircraft.door.new(pathc~"/surface-positions/elevator-rail[2]", rail_transit_time, getprop("/controls/truman/elevator[2]/state"));
+      var elevatorr4 = aircraft.door.new(pathc~"/surface-positions/elevator-rail[3]", rail_transit_time, getprop("/controls/truman/elevator[3]/state"));
+
+	var rail_upper_array = [elevatorr1, elevatorr2, elevatorr3, elevatorr4];
+
+
+      #####################
+      # elevator rails door
+
+      var elevatorrd1 = aircraft.door.new(pathc~"/surface-positions/elevator-rail-door[0]", rail_transit_time, getprop("/controls/truman/elevator[0]/state"));
+      var elevatorrd2 = aircraft.door.new(pathc~"/surface-positions/elevator-rail-door[1]", rail_transit_time, getprop("/controls/truman/elevator[1]/state"));
+      var elevatorrd3 = aircraft.door.new(pathc~"/surface-positions/elevator-rail-door[2]", rail_transit_time, getprop("/controls/truman/elevator[2]/state"));
+      var elevatorrd4 = aircraft.door.new(pathc~"/surface-positions/elevator-rail-door[3]", rail_transit_time, getprop("/controls/truman/elevator[3]/state"));
+
+	var rail_lower_array = [elevatorrd1, elevatorrd2, elevatorrd3, elevatorrd4];
+
+
+      ################
+      # elevator doors
+
+      var door1 = aircraft.door.new(pathc~"/surface-positions/elevator-door[0]", door_transit_time, 0);
+      var door2 = aircraft.door.new(pathc~"/surface-positions/elevator-door[1]", door_transit_time, 0);
+      var door3 = aircraft.door.new(pathc~"/surface-positions/elevator-door[2]", door_transit_time, 0);
+      var door4 = aircraft.door.new(pathc~"/surface-positions/elevator-door[3]", door_transit_time, 0);
+
+      var door_array = [door1, door2, door3, door4];
+      
+     
+      ########
+      # whips function
+
+      var whip_antennas = aircraft.door.new(pathc~"/surface-positions/whip-antennas", 6);
+
+      ################
+      # jet blast deflectors
+
+      var jbd1 = aircraft.door.new(pathc~"/surface-positions/jbd[0]", jbd_transit_time, 0);
+      var jbd2 = aircraft.door.new(pathc~"/surface-positions/jbd[1]", jbd_transit_time, 0);
+      var jbd3 = aircraft.door.new(pathc~"/surface-positions/jbd[2]", jbd_transit_time, 0);
+      var jbd4 = aircraft.door.new(pathc~"/surface-positions/jbd[3]", jbd_transit_time, 0);
+ 
+      var jbd_array = [jbd1, jbd2, jbd3, jbd4];
+
+
+
+      print("LOAD ",carrier," prop-path: ", pathc);
+
+      # set tower/active carrier if
+      #  - aircraft is in the air
+      #  - if no carrier is ready (i.e. this is the first)
+      #  - if aircraft is on this very carrier
+      #    problem: cannot be checked !!
+      #
+      var in_air  = !getprop("/gear/gear/wow");
+      #var on_carr = 0;
+
+      # get index of carrier
+      var ci = -1;
+      var p = getprop("/sim/presets/carrier");
+      if ( p != nil and p != "" and p == carrier ) {
+        var i = 0;
+        if ( substr(pathc,size(pathc)-1) == "]" ) {
+          i = substr(pathc,size(pathc)-2,1);
+        }
+      } else {
+        # if no carrier is preset or a different carrier is active
+        # search the index in /ai/models/carrier[x]
+        i = -1;
+        foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")) {
+          i+=1;
+          if ( c.getValue("name") == carrier ) { break; }
+        }
+      }
+      ci = i;
+
+      # check if aircraft is on this carrier
+      # fixme: not clear how to do ?!
+      # on_carr = 1;
+
+      ###########
+      # add AN/SPN-46 see http://chateau-logic.com/content/emesary-nasal-implementation-flightgear
+      # by Richard Harrison (2016)
+      fn_an_spn_46 = getprop("/sim/fg-root") ~ "/Aircraft/Generic/an_spn_46.nas";
+      io.load_nasal(fn_an_spn_46, "an_spn_46");
+      var anspn = an_spn_46.ANSPN46_System.new(carrier, self);
+      anspn.SetChannel(2);
+      var an_spn_46_timer = maketimer(6, func {
+          anspn.Update();
+          an_spn_46_timer.restart(anspn.GetUpdateRate());
+      });
+      an_spn_46_timer.restart(6);
+
+
+     var wave_manager = {
+
+		wave_loop_flag: 0,
+		amp_pitch: 0.2,
+		amp_roll: 0.7,
+	
+		pitch: 0.0,
+		roll: 0.0,
+		
+		ramp_factor: 0.0,
+		ramp_flag: 0,
+	
+		beam: 40.0,
+		length: 310.0,
+
+		toggle: func {
+			var tgt = getprop("/controls/truman/wave-motion");
+
+			if (tgt == 1)
+				{
+				me.wave_loop_flag = 1;
+				print ("Wave motion on");
+				me.wave_loop();
+				me.ramp(1);
+				}
+			else
+				{
+				me.wave_loop_flag = 0;
+				me.ramp(0);
+				}
+		
+		},
+
+
+		setup: func {
+
+			var wind_angle = getprop("/environment/wind-from-heading-deg");
+			#var wavelength = (2.0 * math.pi)/getprop("/environment/wave/freq");
+			var freq = getprop("/environment/wave/freq");
+			var course = getprop(pathc~"/controls/base-course-deg");
+			var speed = getprop(pathc~"/controls/base-speed-kts") * 0.5144;
+
+
+			var encounter_angle_rad = (wind_angle - course) * math.pi/180.0;
+
+			var encounter_freq = freq * (1.0 - freq * speed/9.81 * math.cos(encounter_angle_rad));
+			
+			# the shader generates visible waves at x * freq spacing
+			var lambda = (2.0 * math.pi)/encounter_freq;
+
+
+			print ("Encounter angle: ", encounter_angle_rad * 180/math.pi);
+			print ("Encounter wavelength: ", lambda);
+			print ("Wavelength: ", (2.0 * math.pi)/freq);
+
+		},
+
+		ramp: func (tgt) {
+				
+			if (math.abs(me.ramp_factor -tgt) < 0.01) 
+				{
+				me.ramp_factor = tgt;
+				if (tgt == 0)
+					{
+					me.pitch = 0.0;
+					me.roll = 0.0;
+					setprop(pathc~"/wave-motion/pitch", 0.0);
+					setprop(pathc~"/wave-motion/roll", 0.0);
+					}
+				return;
+				}
+			else
+				{
+				if (tgt > me.ramp_factor)
+					{
+					me.ramp_factor = me.ramp_factor + 0.01;
+					}
+				else 
+					{
+					me.ramp_factor = me.ramp_factor - 0.01;
+					}
+				}
+			if (tgt == 0)
+				{
+				setprop(pathc~"/wave-motion/pitch", me.pitch * me.ramp_factor);
+				setprop(pathc~"/wave-motion/roll", me.roll * me.ramp_factor);
+				}
+
+
+			settimer(func {me.ramp(tgt); }, 0.0);
+		},
+
+		wave_loop: func {
+
+		if (me.wave_loop_flag ==0) {return;}
+
+		var t = getprop("/sim/time/elapsed-sec");
+
+		me.pitch = me.ramp_factor * me.amp_pitch * math.sin(0.6 *  t);
+		setprop(pathc~"/wave-motion/pitch", me.pitch); 
+
+		me.roll = me.ramp_factor * me.amp_roll * math.sin(0.8 *  t);
+		setprop(pathc~"/wave-motion/roll", me.roll); 
+
+		settimer(func {me.wave_loop(); } , 0.0);
+	        },
+
+
+     };
+
+
+	
+    
+     var check_rails = func (i) {
+
+	var el_state = getprop(pathc~"/surface-positions/elevator["~i~"]/position-norm");
+	var el_cmd = getprop("controls/truman/elevator["~i~"]/state");
+	print ("Rail check, state: ", el_state);
+
+	if ((el_state == 0) and (el_cmd == 0))
+		{
+		rail_upper_array[i].close();
+		rail_lower_array[i].close();
+		}
+	else if ((el_state == 1) and (el_cmd == 1))
+		{
+		rail_upper_array[i].open();
+		rail_lower_array[i].open();
+		}
+	else if ((el_state == 0) and (el_cmd == 1))
+		{
+		rail_upper_array[i].close();
+		rail_lower_array[i].open();
+		}
+	else if ((el_state == 1) and (el_cmd == 0))
+		{
+		rail_upper_array[i].close();
+		rail_lower_array[i].open();
+		}
+
+     }
+
+
+
+     var elevator_operate = func (i){
+
+	check_rails(i);
+
+	var tgt = getprop("/controls/truman/elevator["~i~"]/state");
+	if (tgt == 1)
+		{
+		print ("Elevator ", i+1, " up.");
+		elevator_array[i].open();
+
+		}
+	else
+		{
+		print ("Elevator ", i+1, " down.");
+		elevator_array[i].close();
+		}
+	settimer( func {check_rails(i);}, elevator_transit_time + 1.0);
+     }
+
+     var door_operate = func (i){
+
+
+
+	var tgt = getprop("/controls/truman/door["~i~"]/state");
+	if (tgt == 1)
+		{
+		print ("Door ", i+1, " close.");
+		door_array[i].open();
+		}
+	else
+		{
+		print ("Door ", i+1, " open.");
+		door_array[i].close();
+		}
+     }
+
+   var flight_ops = func {
+	
+	var state = getprop("/controls/truman/flight-operations");
+
+	if (state == 0) 
+		{
+		whip_antennas.close();
+		print ("Whip antennas retract.");
+		}
+	else 
+		{
+		whip_antennas.open();
+		print ("Whip antennas deploy.");
+		}
+
+    }
+
+    var jbd_operate = func (i) {
+
+	var tgt = getprop("/controls/truman/jbd["~i~"]/state");
+	if (tgt == 1)
+		{
+		print ("JBD ", i+1, " up.");
+		jbd_array[i].open();
+		}
+	else
+		{
+		print ("JBD ", i+1, " down.");
+		jbd_array[i].close();
+		}
+
+
+    }
+
+    var toggle_lights = func {
+
+   	var state = getprop(pathc~"/controls/lighting/deck-lights");
+	
+	if (state == 0)
+		{
+		setprop(pathc~"/controls/lighting/deck-lights", 1);
+		setprop(pathc~"/controls/lighting/flood-lights-red-norm", 0.7);
+		}
+	else
+		{
+		setprop(pathc~"/controls/lighting/deck-lights", 0);
+		setprop(pathc~"/controls/lighting/flood-lights-red-norm", 0.0);
+		}
+
+    }
+
+
+     var l_flightops = setlistener("/controls/truman/flight-operations", func {flight_ops();},0,0);
+
+     var l_elev1 = setlistener("/controls/truman/elevator/state", func {elevator_operate(0);},0,0);
+     var l_elev2 = setlistener("/controls/truman/elevator[1]/state", func {elevator_operate(1);},0,0);
+     var l_elev3 = setlistener("/controls/truman/elevator[2]/state", func {elevator_operate(2);},0,0);
+     var l_elev4 = setlistener("/controls/truman/elevator[3]/state", func {elevator_operate(3);},0,0);
+
+     var l_door1 = setlistener("/controls/truman/door/state", func {door_operate(0);},0,0);
+     var l_door2 = setlistener("/controls/truman/door[1]/state", func {door_operate(1);},0,0);
+     var l_door3 = setlistener("/controls/truman/door[2]/state", func {door_operate(2);},0,0);
+     var l_door4 = setlistener("/controls/truman/door[3]/state", func {door_operate(3);},0,0);
+
+     var l_jbd1 = setlistener("/controls/truman/jbd[0]/state", func {jbd_operate(0);},0,0);
+     var l_jbd2 = setlistener("/controls/truman/jbd[1]/state", func {jbd_operate(1);},0,0);
+     var l_jbd3 = setlistener("/controls/truman/jbd[2]/state", func {jbd_operate(2);},0,0);
+     var l_jbd4 = setlistener("/controls/truman/jbd[3]/state", func {jbd_operate(3);},0,0);
+
+
+     var l_wave = setlistener("/controls/truman/wave-motion", func {wave_manager.toggle();},0,0);
+     var l_lights = setlistener("/controls/truman/lights", func {toggle_lights();},0,0);
+
+     #var l_wavetest = setlistener("/test/wave", func {wave_manager.setup();},0,0);
+    
+    ]]></load>
+
+    <unload><![CDATA[
+      print("UNLOAD ",carrier," from ", cmdarg().getPath());
+
+      an_spn_46_timer.stop();
+
+     # clean up listeners
+
+     removelistener(l_elev1);
+     removelistener(l_elev2);
+     removelistener(l_elev3);
+     removelistener(l_elev4);
+
+     removelistener(l_door1);
+     removelistener(l_door2);
+     removelistener(l_door3);
+     removelistener(l_door4);
+
+     removelistener(l_wave);
+     removelistener(l_lights);
+
+
+    ]]></unload>
+
+  </nasal>
+
+  <!--<model>
+    <name>Glide-path</name>
+    <path>Models/Geometry/Nimitz/Models/glide-path.xml</path>
+    <offsets>
+      <x-m>174.000</x-m>
+      <y-m> -2.400</y-m>
+      <z-m> 19.700</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>-->
+
+  <animation>
+  	<type>rotate</type>
+  	<property>wave-motion/pitch</property>
+  	<factor>1</factor>
+  	<center>
+   		<x-m>40</x-m>
+   		<y-m>0</y-m>
+   		<z-m>0</z-m>
+  	</center>
+  	<axis>
+   		<x>0</x>
+   		<y>1</y>
+   		<z>0</z>
+  	</axis>
+   </animation>
+
+  <animation>
+  	<type>rotate</type>
+  	<property>wave-motion/roll</property>
+  	<factor>1</factor>
+  	<center>
+   		<x-m>40</x-m>
+   		<y-m>0</y-m>
+   		<z-m>0</z-m>
+  	</center>
+  	<axis>
+   		<x>1</x>
+   		<y>0</y>
+   		<z>0</z>
+  	</axis>
+  </animation>
+
+  <model>
+    <path>Models/Geometry/Nimitz/Models/flols.xml</path>
+    <offsets>
+      <x-m>69.84</x-m>
+      <y-m>-39.67</y-m>
+      <z-m>21.54</z-m>
+      <heading-deg>8</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>Bow-Wave</name>
+    <path>Models/Geometry/Nimitz/Models/Effects/bow_wave_carrier.xml</path>
+    <offsets>
+      <x-m>-15</x-m>
+      <z-m>0.0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>E2C</name>
+    <path>AI/Aircraft/E-2C/Models/E-2C-deckpark.xml</path>
+    <offsets>
+      <!--109.201  40.231  -21.9681-->
+      <x-m>102.74</x-m>
+      <y-m>14.7722</y-m>
+      <z-m>22.6</z-m>
+      <pitch-deg>0.5</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>truman-parks-and-objects</name>
+    <path>Models/Geometry/Nimitz/truman-parks-and-objects.xml</path>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>crew</object-name>
+    <condition>
+      <property>/controls/truman/crew</property>
+    </condition>
+  </animation>
+
+  <model>
+    <name>Ensign</name>
+    <path>Models/Geometry/Nimitz/ensign.xml</path>
+    <offsets>
+      <!--113.263  47.9273  -29.4352-->
+      <x-m>111.36</x-m>
+      <y-m> 28.90</y-m>
+      <z-m> 48.75</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>Flag-Golf</name>
+    <path>Models/Geometry/Nimitz/golf.xml</path>
+    <offsets>
+      <!--109.524  43.3788  -36.5861-->
+      <x-m>111.33</x-m>
+      <y-m>36.5861</y-m>
+      <z-m>43.3788</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>Flag-Foxtrot</name>
+    <path>Models/Geometry/Nimitz/foxtrot.xml</path>
+    <offsets>
+      <!--109.515  43.3368-->
+      <x-m>111.33</x-m>
+      <y-m>21.9681</y-m>
+      <z-m>43.3368</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>Flag-Foxtrot-Dip</name>
+    <path>Models/Geometry/Nimitz/foxtrot.xml</path>
+    <offsets>
+      <!--109.201  40.231  -21.9681-->
+      <x-m>111.33</x-m>
+      <y-m>21.9681</y-m>
+      <z-m>40.231</z-m>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>Flag-Foxtrot</object-name>
+    <condition>
+      <and>
+        <or>
+          <property>controls/turn-to-launch-hdg</property>
+          <property>controls/turn-to-recovery-hdg</property>
+        </or>
+        <property>environment/in-to-wind</property>
+      </and>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>Flag-Foxtrot-Dip</object-name>
+    <condition>
+      <and>
+        <or>
+          <property>controls/turn-to-launch-hdg</property>
+          <property>controls/turn-to-recovery-hdg</property>
+        </or>
+        <not>
+          <property>environment/in-to-wind</property>
+        </not>
+      </and>
+    </condition>
+  </animation>
+
+  <!-- Whip antennae -->
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-1</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>-100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m> 16.063</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-2</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>-100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m> 19.752</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-3</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>-100</factor>
+    <axis>
+      <x1-m>-18.083</x1-m>
+      <y1-m> 35.109</y1-m>
+      <z1-m> 18.515</z1-m>
+      <x2-m>-15.852</x2-m>
+      <y2-m> 36.642</y2-m>
+      <z2-m> 18.515</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-4</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>-100</factor>
+    <axis>
+      <x1-m>-18.083</x1-m>
+      <y1-m> 35.109</y1-m>
+      <z1-m> 18.515</z1-m>
+      <x2-m>-15.852</x2-m>
+      <y2-m> 36.642</y2-m>
+      <z2-m> 18.515</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-5</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>-100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m> 38.090</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-6</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>-100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m> 38.960</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-7</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>-100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m> 38.488</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-8</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m>-38.200</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-9</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m>-38.190</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-10</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m>-37.430</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>antenna-11</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <factor>100</factor>
+    <center>
+      <x-m>  0.000</x-m>
+      <y-m>-16.304</y-m>
+      <z-m> 18.515</z-m>
+    </center>
+    <axis>
+      <x> 1 </x>
+      <y> 0 </y>
+      <z> 0 </z>
+    </axis>
+  </animation>
+
+  <!-- Howdah -->
+  <animation>
+    <type>translate</type>
+    <object-name>Howdah-cover</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <interpolation>
+      <entry><ind>0.00</ind><dep>0.00</dep></entry>
+      <entry><ind>0.15</ind><dep>-0.10</dep></entry>
+      <entry><ind>1.00</ind><dep>-0.10</dep></entry>
+    </interpolation>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>Howdah-cover</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <interpolation>
+      <entry><ind>0.00</ind><dep>0.00</dep></entry>
+      <entry><ind>0.15</ind><dep>0.00</dep></entry>
+      <entry><ind>0.60</ind><dep>-3.00</dep></entry>
+      <entry><ind>1.00</ind><dep>-3.30</dep></entry>
+    </interpolation>
+    <axis>
+      <y>1</y>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>Howdah</object-name>
+    <object-name>Howdah-glass</object-name>
+    <property>surface-positions/whip-antennas/position-norm</property>
+    <interpolation>
+      <entry><ind>0.00</ind><dep>0.00</dep></entry>
+      <entry><ind>0.60</ind><dep>0.00</dep></entry>
+      <entry><ind>1.00</ind><dep>0.80</dep></entry>
+    </interpolation>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <!-- other antennae -->
+  <animation>
+    <type>rotate</type>
+    <object-name>radar_sps48</object-name>
+    <property>/sim/time/elapsed-sec</property>
+    <factor>40</factor>
+    <center>
+      <x-m>102.43</x-m>
+      <y-m>29.41</y-m></center>
+    <axis><z>1</z></axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>radar_sps49</object-name>
+    <property>/sim/time/elapsed-sec</property>
+    <factor>50</factor>
+    <center>
+      <x-m>129.76</x-m>
+      <y-m> 30.83</y-m></center>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>radar_sps43</object-name>
+    <property>/sim/time/elapsed-sec</property>
+    <factor>35</factor>
+    <center>
+      <x-m>104.55</x-m>
+      <y-m> 29.45</y-m>
+    </center>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>radar-1b</object-name>
+    <property>/sim/time/elapsed-sec</property>
+    <factor>65</factor>
+    <center>
+      <x-m>104.75</x-m>
+      <y-m> 32.60</y-m>
+    </center>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>radar_spq9</object-name>
+    <property>/sim/time/elapsed-sec</property>
+    <factor>65</factor>
+    <center>
+      <x-m>107.84</x-m>
+      <y-m>29.405</y-m>
+    </center>
+    <axis><z>1</z></axis>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>Wake</object-name>
+    <condition>
+      <not>
+        <property>/sim/rendering/particles</property>
+      </not>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Bow-Wave</object-name>
+    <object-name>Stern-Wake</object-name>
+    <object-name>Wake</object-name>
+    <property>orientation/roll-deg</property>
+    <factor>1</factor>
+    <center>
+      <y-m>0.00</y-m>
+      <z-m>0.0473</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Wake</object-name>
+    <property>surface-positions/rudder-pos-deg</property>
+    <factor>-0.334</factor>
+    <center>
+      <x-m>-88.6176</x-m>
+      <y-m>0.00</y-m>
+    </center>
+    <axis>
+      <z>-1</z>
+    </axis>
+    <enable-hot type="bool">false</enable-hot>
+  </animation>
+
+  <animation>
+    <object-name>Bow-Wave</object-name>
+    <type>scale</type>
+    <property>velocities/speed-kts</property>
+    <x-factor>0.04</x-factor>
+    <y-factor>0.0</y-factor>
+    <z-factor>0.0</z-factor>
+    <x-offset>0.0</x-offset>
+    <y-offset>1.0</y-offset>
+    <z-offset>1.0</z-offset>
+    <x-min>0.0</x-min>
+    <x-max>1.2</x-max>
+    <center>
+      <x-m>-55.0</x-m>
+      <y-m>3.0</y-m>
+      <z-m>0</z-m>
+    </center>
+  </animation>
+
+  <!-- elevators -->
+  <animation>
+    <type>translate</type>
+    <object-name>Elevator-1</object-name>
+    <object-name>FA18_el3</object-name>
+    <property>surface-positions/elevator[0]/position-norm</property>
+    <factor>11.92</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>Elevator-2</object-name>
+    <property>surface-positions/elevator[1]/position-norm</property>
+    <factor>11.92</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>Elevator-3</object-name>
+    <object-name>tractor-15</object-name>
+    <property>surface-positions/elevator[2]/position-norm</property>
+    <factor>11.90</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>Elevator-4</object-name>
+    <object-name>FA18_el4</object-name>
+    <property>surface-positions/elevator[3]/position-norm</property>
+    <factor>11.92</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <!-- elevator wires -->
+  <animation>
+    <type>scale</type>
+    <object-name>elev-1-wires</object-name>
+    <property>surface-positions/elevator[0]/wire-norm</property>
+    <center>
+      <x-m> 0.00</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.00</z-m>
+    </center>
+    <x-min>1.0</x-min>
+    <y-min>1.0</y-min>
+    <z-min>0.1</z-min>
+    <x-factor>1.0</x-factor>
+    <y-factor>1.0</y-factor>
+    <z-factor>1.0</z-factor>
+  </animation>
+
+  <animation>
+    <type>scale</type>
+    <object-name>elev-2-wires</object-name>
+    <property>surface-positions/elevator[1]/wire-norm</property>
+    <center>
+      <x-m> 0.00</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.00</z-m>
+    </center>
+    <x-min>1.0</x-min>
+    <y-min>1.0</y-min>
+    <z-min>0.1</z-min>
+    <x-factor>1.0</x-factor>
+    <y-factor>1.0</y-factor>
+    <z-factor>1.0</z-factor>
+  </animation>
+
+  <animation>
+    <type>scale</type>
+    <object-name>elev-3-wires</object-name>
+    <property>surface-positions/elevator[2]/wire-norm</property>
+    <center>
+      <x-m> 0.00</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.00</z-m>
+    </center>
+    <x-min>1.0</x-min>
+    <y-min>1.0</y-min>
+    <z-min>0.1</z-min>
+    <x-factor>1.0</x-factor>
+    <y-factor>1.0</y-factor>
+    <z-factor>1.0</z-factor>
+  </animation>
+
+  <animation>
+    <type>scale</type>
+    <object-name>elev-4-wires</object-name>
+    <property>surface-positions/elevator[3]/wire-norm</property>
+    <center>
+      <x-m> 0.00</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.00</z-m>
+    </center>
+    <x-min>1.0</x-min>
+    <y-min>1.0</y-min>
+    <z-min>0.1</z-min>
+    <x-factor>1.0</x-factor>
+    <y-factor>1.0</y-factor>
+    <z-factor>1.0</z-factor>
+  </animation>
+
+  <!-- elevator rails -->
+  <animation>
+    <type>translate</type>
+    <object-name>elev-1-rail</object-name>
+    <property>surface-positions/elevator-rail[0]/position-norm</property>
+    <factor>-0.77</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elev-2-rail</object-name>
+    <property>surface-positions/elevator-rail[1]/position-norm</property>
+    <factor>-0.77</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elev-3-rail</object-name>
+    <property>surface-positions/elevator-rail[2]/position-norm</property>
+    <factor>-0.77</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elev-4-rail</object-name>
+    <property>surface-positions/elevator-rail[3]/position-norm</property>
+    <factor>-0.77</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <!-- elevator door rails -->
+  <animation>
+    <type>translate</type>
+    <object-name>elev-1-rail-door</object-name>
+    <property>surface-positions/elevator-rail-door[0]/position-norm</property>
+    <factor>0.77</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elev-2-rail-door</object-name>
+    <property>surface-positions/elevator-rail-door[1]/position-norm</property>
+    <factor>0.77</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elev-3-rail-door</object-name>
+    <property>surface-positions/elevator-rail-door[2]/position-norm</property>
+    <factor>0.77</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elev-4-rail-door</object-name>
+    <property>surface-positions/elevator-rail-door[3]/position-norm</property>
+    <factor>0.77</factor>
+    <axis>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <!-- elevator doors -->
+  <animation>
+    <type>translate</type>
+    <object-name>elevator-door-1-i</object-name>
+    <property>surface-positions/elevator-door[0]/position-norm</property>
+    <factor>22.5</factor>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elevator-door-1-o</object-name>
+    <property>surface-positions/elevator-door[0]/position-norm</property>
+    <factor>11</factor>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elevator-door-2-i</object-name>
+    <property>surface-positions/elevator-door[1]/position-norm</property>
+    <factor>-22.5</factor>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elevator-door-2-o</object-name>
+    <property>surface-positions/elevator-door[1]/position-norm</property>
+    <factor>-11</factor>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elevator-door-3-i</object-name>
+    <property>surface-positions/elevator-door[2]/position-norm</property>
+    <factor>-22.5</factor>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elevator-door-3-o</object-name>
+    <property>surface-positions/elevator-door[2]/position-norm</property>
+    <factor>-11</factor>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elevator-door-4-i</object-name>
+    <property>surface-positions/elevator-door[3]/position-norm</property>
+    <factor>-22.5</factor>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>elevator-door-4-o</object-name>
+    <property>surface-positions/elevator-door[3]/position-norm</property>
+    <factor>-11</factor>
+    <axis>
+      <x>1</x>
+    </axis>
+  </animation>
+
+  <!--<animation>
+    <type>select</type>
+    <object-name>Pilot-Mast</object-name>
+    <condition>
+      <or>
+        <not>
+          <property>controls/in-to-wind</property>
+        </not>
+        <not>
+          <property>controls/turn-to-launch-hdg</property>
+        </not>
+      </or>
+    </condition>
+  </animation>-->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-1</object-name>
+    <property>surface-positions/jbd[0]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-1</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>-12.2</dep></entry>
+      <entry><ind>0.1666</ind><dep>-20.4</dep></entry>
+      <entry><ind>0.2500</ind><dep>-28.2</dep></entry>
+      <entry><ind>0.3333</ind><dep>-34.6</dep></entry>
+      <entry><ind>0.4166</ind><dep>-40.6</dep></entry>
+      <entry><ind>0.5000</ind><dep>-45</dep></entry>
+      <entry><ind>0.5833</ind><dep>-49</dep></entry>
+      <entry><ind>0.6666</ind><dep>-51.6</dep></entry>
+      <entry><ind>0.7500</ind><dep>-54</dep></entry>
+      <entry><ind>0.8333</ind><dep>-55</dep></entry>
+      <entry><ind>0.9166</ind><dep>-56.2</dep></entry>
+      <entry><ind>1.0000</ind><dep>-56.2</dep></entry>
+    </interpolation>
+    <center>
+      <x-m> 7.20</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.90</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-1-strut-a</object-name>
+    <object-name>JBD-1-strut-b</object-name>
+    <property>surface-positions/jbd[0]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-1</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>5</dep></entry>
+      <entry><ind>0.1666</ind><dep>10</dep></entry>
+      <entry><ind>0.2500</ind><dep>15</dep></entry>
+      <entry><ind>0.3333</ind><dep>20</dep></entry>
+      <entry><ind>0.4166</ind><dep>25</dep></entry>
+      <entry><ind>0.5000</ind><dep>30</dep></entry>
+      <entry><ind>0.5833</ind><dep>35</dep></entry>
+      <entry><ind>0.6666</ind><dep>40</dep></entry>
+      <entry><ind>0.7500</ind><dep>45</dep></entry>
+      <entry><ind>0.8333</ind><dep>50</dep></entry>
+      <entry><ind>0.9166</ind><dep>55</dep></entry>
+      <entry><ind>1.0000</ind><dep>60</dep></entry>
+    </interpolation>
+    <center>
+      <x-m> 9.47</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.60</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-1-strut-b</object-name>
+    <property>surface-positions/jbd[0]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-1</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>-23.4</dep></entry>
+      <entry><ind>0.1666</ind><dep>-39.8</dep></entry>
+      <entry><ind>0.2500</ind><dep>-56.6</dep></entry>
+      <entry><ind>0.3333</ind><dep>-71.6</dep></entry>
+      <entry><ind>0.4166</ind><dep>-86.8</dep></entry>
+      <entry><ind>0.5000</ind><dep>-100</dep></entry>
+      <entry><ind>0.5833</ind><dep>-113</dep></entry>
+      <entry><ind>0.6666</ind><dep>-124.6</dep></entry>
+      <entry><ind>0.7500</ind><dep>-136.2</dep></entry>
+      <entry><ind>0.8333</ind><dep>-146</dep></entry>
+      <entry><ind>0.9166</ind><dep>-156</dep></entry>
+      <entry><ind>1.0000</ind><dep>-165.2</dep></entry>
+    </interpolation>
+    <center>
+      <x-m> 8.38</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.81</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-2</object-name>
+    <property>surface-positions/jbd[1]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-2</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>-12.2</dep></entry>
+      <entry><ind>0.1666</ind><dep>-20.4</dep></entry>
+      <entry><ind>0.2500</ind><dep>-28.2</dep></entry>
+      <entry><ind>0.3333</ind><dep>-34.6</dep></entry>
+      <entry><ind>0.4166</ind><dep>-40.6</dep></entry>
+      <entry><ind>0.5000</ind><dep>-45</dep></entry>
+      <entry><ind>0.5833</ind><dep>-49</dep></entry>
+      <entry><ind>0.6666</ind><dep>-51.6</dep></entry>
+      <entry><ind>0.7500</ind><dep>-54</dep></entry>
+      <entry><ind>0.8333</ind><dep>-55</dep></entry>
+      <entry><ind>0.9166</ind><dep>-56.2</dep></entry>
+      <entry><ind>1.0000</ind><dep>-56.2</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>14.23</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.90</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-2-strut-a</object-name>
+    <object-name>JBD-2-strut-b</object-name>
+    <property>surface-positions/jbd[1]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-2</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>5</dep></entry>
+      <entry><ind>0.1666</ind><dep>10</dep></entry>
+      <entry><ind>0.2500</ind><dep>15</dep></entry>
+      <entry><ind>0.3333</ind><dep>20</dep></entry>
+      <entry><ind>0.4166</ind><dep>25</dep></entry>
+      <entry><ind>0.5000</ind><dep>30</dep></entry>
+      <entry><ind>0.5833</ind><dep>35</dep></entry>
+      <entry><ind>0.6666</ind><dep>40</dep></entry>
+      <entry><ind>0.7500</ind><dep>45</dep></entry>
+      <entry><ind>0.8333</ind><dep>50</dep></entry>
+      <entry><ind>0.9166</ind><dep>55</dep></entry>
+      <entry><ind>1.0000</ind><dep>60</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>16.50</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.60</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-2-strut-b</object-name>
+    <property>surface-positions/jbd[1]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-2</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>-23.4</dep></entry>
+      <entry><ind>0.1666</ind><dep>-39.8</dep></entry>
+      <entry><ind>0.2500</ind><dep>-56.6</dep></entry>
+      <entry><ind>0.3333</ind><dep>-71.6</dep></entry>
+      <entry><ind>0.4166</ind><dep>-86.8</dep></entry>
+      <entry><ind>0.5000</ind><dep>-100</dep></entry>
+      <entry><ind>0.5833</ind><dep>-113</dep></entry>
+      <entry><ind>0.6666</ind><dep>-124.6</dep></entry>
+      <entry><ind>0.7500</ind><dep>-136.2</dep></entry>
+      <entry><ind>0.8333</ind><dep>-146</dep></entry>
+      <entry><ind>0.9166</ind><dep>-156</dep></entry>
+      <entry><ind>1.0000</ind><dep>-165.2</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>15.40</x-m>
+      <y-m> 0.00</y-m>
+      <z-m>19.81</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-3</object-name>
+    <property>surface-positions/jbd[2]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-3</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>-12.2</dep></entry>
+      <entry><ind>0.1666</ind><dep>-20.4</dep></entry>
+      <entry><ind>0.2500</ind><dep>-28.2</dep></entry>
+      <entry><ind>0.3333</ind><dep>-34.6</dep></entry>
+      <entry><ind>0.4166</ind><dep>-40.6</dep></entry>
+      <entry><ind>0.5000</ind><dep>-45</dep></entry>
+      <entry><ind>0.5833</ind><dep>-49</dep></entry>
+      <entry><ind>0.6666</ind><dep>-51.6</dep></entry>
+      <entry><ind>0.7500</ind><dep>-54</dep></entry>
+      <entry><ind>0.8333</ind><dep>-55</dep></entry>
+      <entry><ind>0.9166</ind><dep>-56.2</dep></entry>
+      <entry><ind>1.0000</ind><dep>-56.2</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>105.20</x-m>
+      <y-m>  0.00</y-m>
+      <z-m> 19.90</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-3-strut-a</object-name>
+    <object-name>JBD-3-strut-b</object-name>
+    <property>surface-positions/jbd[2]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-3</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>5</dep></entry>
+      <entry><ind>0.1666</ind><dep>10</dep></entry>
+      <entry><ind>0.2500</ind><dep>15</dep></entry>
+      <entry><ind>0.3333</ind><dep>20</dep></entry>
+      <entry><ind>0.4166</ind><dep>25</dep></entry>
+      <entry><ind>0.5000</ind><dep>30</dep></entry>
+      <entry><ind>0.5833</ind><dep>35</dep></entry>
+      <entry><ind>0.6666</ind><dep>40</dep></entry>
+      <entry><ind>0.7500</ind><dep>45</dep></entry>
+      <entry><ind>0.8333</ind><dep>50</dep></entry>
+      <entry><ind>0.9166</ind><dep>55</dep></entry>
+      <entry><ind>1.0000</ind><dep>60</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>107.46</x-m>
+      <y-m>  0.00</y-m>
+      <z-m> 19.60</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-3-strut-b</object-name>
+    <property>surface-positions/jbd[2]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-3</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>-23.4</dep></entry>
+      <entry><ind>0.1666</ind><dep>-39.8</dep></entry>
+      <entry><ind>0.2500</ind><dep>-56.6</dep></entry>
+      <entry><ind>0.3333</ind><dep>-71.6</dep></entry>
+      <entry><ind>0.4166</ind><dep>-86.8</dep></entry>
+      <entry><ind>0.5000</ind><dep>-100</dep></entry>
+      <entry><ind>0.5833</ind><dep>-113</dep></entry>
+      <entry><ind>0.6666</ind><dep>-124.6</dep></entry>
+      <entry><ind>0.7500</ind><dep>-136.2</dep></entry>
+      <entry><ind>0.8333</ind><dep>-146</dep></entry>
+      <entry><ind>0.9166</ind><dep>-156</dep></entry>
+      <entry><ind>1.0000</ind><dep>-165.2</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>106.37</x-m>
+      <y-m>  0.00</y-m>
+      <z-m> 19.81</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-4</object-name>
+    <property>surface-positions/jbd[3]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-4</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>-12.2</dep></entry>
+      <entry><ind>0.1666</ind><dep>-20.4</dep></entry>
+      <entry><ind>0.2500</ind><dep>-28.2</dep></entry>
+      <entry><ind>0.3333</ind><dep>-34.6</dep></entry>
+      <entry><ind>0.4166</ind><dep>-40.6</dep></entry>
+      <entry><ind>0.5000</ind><dep>-45</dep></entry>
+      <entry><ind>0.5833</ind><dep>-49</dep></entry>
+      <entry><ind>0.6666</ind><dep>-51.6</dep></entry>
+      <entry><ind>0.7500</ind><dep>-54</dep></entry>
+      <entry><ind>0.8333</ind><dep>-55</dep></entry>
+      <entry><ind>0.9166</ind><dep>-56.2</dep></entry>
+      <entry><ind>1.0000</ind><dep>-56.2</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>124.80</x-m>
+      <y-m>  0.00</y-m>
+      <z-m> 19.90</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-4-strut-a</object-name>
+    <object-name>JBD-4-strut-b</object-name>
+    <property>surface-positions/jbd[3]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-4</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>5</dep></entry>
+      <entry><ind>0.1666</ind><dep>10</dep></entry>
+      <entry><ind>0.2500</ind><dep>15</dep></entry>
+      <entry><ind>0.3333</ind><dep>20</dep></entry>
+      <entry><ind>0.4166</ind><dep>25</dep></entry>
+      <entry><ind>0.5000</ind><dep>30</dep></entry>
+      <entry><ind>0.5833</ind><dep>35</dep></entry>
+      <entry><ind>0.6666</ind><dep>40</dep></entry>
+      <entry><ind>0.7500</ind><dep>45</dep></entry>
+      <entry><ind>0.8333</ind><dep>50</dep></entry>
+      <entry><ind>0.9166</ind><dep>55</dep></entry>
+      <entry><ind>1.0000</ind><dep>60</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>127.06</x-m>
+      <y-m>  0.00</y-m>
+      <z-m> 19.60</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>rotate</type>
+    <object-name>JBD-4-strut-b</object-name>
+    <property>surface-positions/jbd[3]/position-norm</property>
+    <!--<condition>
+      <equals>
+        <property>/sim/presets/carrier</property>
+        <value>Truman</value>
+      </equals>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-4</value>
+      </equals>
+    </condition>-->
+    <interpolation>
+      <entry><ind>0.0000</ind><dep>0</dep></entry>
+      <entry><ind>0.0833</ind><dep>-23.4</dep></entry>
+      <entry><ind>0.1666</ind><dep>-39.8</dep></entry>
+      <entry><ind>0.2500</ind><dep>-56.6</dep></entry>
+      <entry><ind>0.3333</ind><dep>-71.6</dep></entry>
+      <entry><ind>0.4166</ind><dep>-86.8</dep></entry>
+      <entry><ind>0.5000</ind><dep>-100</dep></entry>
+      <entry><ind>0.5833</ind><dep>-113</dep></entry>
+      <entry><ind>0.6666</ind><dep>-124.6</dep></entry>
+      <entry><ind>0.7500</ind><dep>-136.2</dep></entry>
+      <entry><ind>0.8333</ind><dep>-146</dep></entry>
+      <entry><ind>0.9166</ind><dep>-156</dep></entry>
+      <entry><ind>1.0000</ind><dep>-165.2</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>125.98</x-m>
+      <y-m>  0.00</y-m>
+      <z-m> 19.81</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <!--Deck Edge Lights-->
+  <model>
+    <name>DeckEdgeLight.001</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-13.38</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <!--<z-m alias="../../../deck/offsets/x-m"/>-->
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.002</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.003</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>9.38</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.004</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>39.00</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.005</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>49.20</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.006</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>58.85</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.007</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>89.02</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.008</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>100.00</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.009</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>108.98</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.010</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>118.95</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.011</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>128.90</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.012</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>137.66</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.013</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>164.60</x-m>
+      <y-m>34.35</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.014</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>166.80</x-m>
+      <y-m>30.00</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>-5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.015</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>182.65</x-m>
+      <y-m>28.50</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>-5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.016</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>197.00</x-m>
+      <y-m>27.00</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>-5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.017</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>203.50</x-m>
+      <y-m>16.80</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>-45</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.018</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>216.60</x-m>
+      <y-m>-16.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>185</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.019</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>206.65</x-m>
+      <y-m>-17.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>185</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.020</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>197.23</x-m>
+      <y-m>-18.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>185</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.021</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>187.82</x-m>
+      <y-m>-19.70</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>185</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.022</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>180.12</x-m>
+      <y-m>-20.20</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>185</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.023</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>176.00</x-m>
+      <y-m>-31.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>75</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.024</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>173.52</x-m>
+      <y-m>-37.60</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.025</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>143.90</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.026</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>132.33</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.027</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>120.98</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.028</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>109.66</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.029</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>98.86</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.030</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>86.01</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.031</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>74.82</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.032</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>63.63</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.033</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>52.43</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.034</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>36.24</x-m>
+      <y-m>-37.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.035</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>29.90</x-m>
+      <y-m>-39.10</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>165</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.036</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>25.00</x-m>
+      <y-m>-40.60</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.037</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>19.50</x-m>
+      <y-m>-40.57</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.038</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-6.00</x-m>
+      <y-m>-42.20</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.039</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-32.20</x-m>
+      <y-m>-21.70</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>175</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.040</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-46.51</x-m>
+      <y-m>-20.30</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>175</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.041</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-59.83</x-m>
+      <y-m>-19.25</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>175</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.042</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-71.80</x-m>
+      <y-m>-18.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>175</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.043</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-83.76</x-m>
+      <y-m>-17.10</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>175</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.044</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-97.09</x-m>
+      <y-m>-15.90</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>175</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.045</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-112.00</x-m>
+      <y-m>-14.80</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>175</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.046</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-34.10</x-m>
+      <y-m>20.10</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.047</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-46.51</x-m>
+      <y-m>19.00</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.048</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-59.83</x-m>
+      <y-m>17.70</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.049</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-71.80</x-m>
+      <y-m>16.33</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.050</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-83.76</x-m>
+      <y-m>15.34</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.051</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-97.09</x-m>
+      <y-m>14.00</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.052</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-111.91</x-m>
+      <y-m>12.60</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.053</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-20.02</x-m>
+      <y-m>29.60</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>35</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DeckEdgeLight.054</name>
+    <path>Models/Geometry/Nimitz/Models/deck-edge-light.xml</path>
+    <offsets>
+      <x-m>-30.79</x-m>
+      <y-m>22.40</y-m>
+      <z-m>20.0238</z-m>
+      <heading-deg>35</heading-deg>
+    </offsets>
+  </model>
+
+  <!--Center Line Lights -->
+  <model>
+    <name>CenterLineLight.02</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>0.347</x-m>
+      <y-m>-28.475</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.03</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>14.612</x-m>
+      <y-m>-26.370</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.04</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>28.877</x-m>
+      <y-m>-24.190</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.05</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>43.142</x-m>
+      <y-m>-21.938</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.06</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>57.408</x-m>
+      <y-m>-19.798</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.07</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>71.673</x-m>
+      <y-m>-17.657</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.08</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>85.938</x-m>
+      <y-m>-15.478</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.09</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>100.204</x-m>
+      <y-m>-13.299</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.10</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>114.469</x-m>
+      <y-m>-11.197</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.11</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>128.734</x-m>
+      <y-m>-8.941</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.12</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>143.00</x-m>
+      <y-m>-6.762</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.13</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>157.265</x-m>
+      <y-m>-4.584</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.14</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>171.53</x-m>
+      <y-m>-2.481</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.15</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>185.796</x-m>
+      <y-m>-0.302</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.16</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>200.061</x-m>
+      <y-m>1.915</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterLineLight.17</name>
+    <path>Models/Geometry/Nimitz/Models/centre-line-light.xml</path>
+    <offsets>
+      <x-m>214.326</x-m>
+      <y-m>4.094</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <!-- Drop Line Lights -->
+  <model>
+    <name>DropLineLight.00</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>17.396</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.01</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>9.748
+      <z-m>16.548</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.02</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>15.698</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.03</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>14.848</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.04</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>13.998</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.05</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>13.148</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.06</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>11.448</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.07</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>10.598</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.08</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>9.748</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.09</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>8.898</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.10</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>8.048</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>DropLineLight.11</name>
+    <path>Models/Geometry/Nimitz/Models/light-drop-line.xml</path>
+    <offsets>
+      <x-m>217.335</x-m>
+      <y-m>4.754</y-m>
+      <z-m>7.198</z-m>
+      <heading-deg>-8.4</heading-deg>
+    </offsets>
+  </model>
+
+  <!-- End Line Lights -->
+  <model>
+    <name>EndLineLight.00</name>
+    <path>Models/Geometry/Nimitz/Models/end-line-light.xml</path>
+    <offsets>
+      <x-m>-5.098</x-m>
+      <y-m>-36.379</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>EndLineLight.01</name>
+    <path>Models/Geometry/Nimitz/Models/end-line-light.xml</path>
+    <offsets>
+      <x-m>-5.506</x-m>
+      <y-m>-34.113</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>EndLineLight.02</name>
+    <path>Models/Geometry/Nimitz/Models/end-line-light.xml</path>
+    <offsets>
+      <x-m>-5.914</x-m>
+      <y-m>-31.848</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>EndLineLight.03</name>
+    <path>Models/Geometry/Nimitz/Models/end-line-light.xml</path>
+    <offsets>
+      <x-m>-6.729</x-m>
+      <y-m>-27.317</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>EndLineLight.04</name>
+    <path>Models/Geometry/Nimitz/Models/end-line-light.xml</path>
+    <offsets>
+      <x-m>-7.137</x-m>
+      <y-m>-25.051</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>EndLineLight.05</name>
+    <path>Models/Geometry/Nimitz/Models/end-line-light.xml</path>
+    <offsets>
+      <x-m>-7.544</x-m>
+      <y-m>-22.785</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <!-- Threshold Lights -->
+  <model>
+    <name>ThresholdLight.00</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>216.786</x-m>
+      <y-m>-8.003</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.01</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>216.533</x-m>
+      <y-m>-6.730</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.02</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>216.281</x-m>
+      <y-m>-5.457</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.03</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>216.104</x-m>
+      <y-m>-4.265</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.04</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>215.927</x-m>
+      <y-m>-3.072</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.05</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>215.749</x-m>
+      <y-m>-1.879</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.06</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>215.572</x-m>
+      <y-m>-0.686</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.07</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>215.395</x-m>
+      <y-m>0.506</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.08</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>215.218</x-m>
+      <y-m>1.699</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.09</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>215.000</x-m>
+      <y-m>2.885</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.10</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>214.686</x-m>
+      <y-m>5.277</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.11</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>214.508</x-m>
+      <y-m>6.470</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.12</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>214.331</x-m>
+      <y-m>7.663</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.13</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>214.154</x-m>
+      <y-m>8.856</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.14</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>213.977</x-m>
+      <y-m>10.048</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.15</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>213.799</x-m>
+      <y-m>11.241</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.16</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>213.602</x-m>
+      <y-m>12.514</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.17</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>213.404</x-m>
+      <y-m>13.786</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.18</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>213.204</x-m>
+      <y-m>15.050</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>ThresholdLight.19</name>
+    <path>Models/Geometry/Nimitz/Models/threshold-light.xml</path>
+    <offsets>
+      <x-m>213.004</x-m>
+      <y-m>16.300</y-m>
+      <z-m>20.075</z-m>
+      <heading-deg>98</heading-deg>
+    </offsets>
+  </model>
+
+  <!-- *** Effects *** -->
+  <model>
+    <name>bowwake-stbd</name>
+    <path>Models/Geometry/Nimitz/Models/Effects/wake_carrier.xml</path>
+    <offsets>
+      <x-m>-98.0</x-m>
+      <y-m>0</y-m>
+      <z-m>2</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>bowwake-port</name>
+    <path>Models/Geometry/Nimitz/Models/Effects/wake_carrier.xml</path>
+    <offsets>
+      <x-m>-98.0</x-m>
+      <y-m>0</y-m>
+      <z-m>2</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+    <overlay>
+      <particlesystem>
+        <placer>
+          <type>segments</type>
+          <vertex>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+          </vertex>
+          <vertex>
+            <x-m>0</x-m>
+            <y-m>-1.0</y-m>
+            <z-m>0</z-m>
+          </vertex>
+          <vertex>
+            <x-m>6.5</x-m>
+            <y-m>-7.5</y-m>
+            <z-m>0</z-m>
+          </vertex>
+          <vertex>
+            <x-m>13</x-m>
+            <y-m>-15.0</y-m>
+            <z-m>0</z-m>
+          </vertex>
+        </placer>
+        <shooter>
+          <theta-min-deg>-80</theta-min-deg>
+          <theta-max-deg>-100</theta-max-deg>
+          <phi-min-deg>85</phi-min-deg>
+          <phi-max-deg>90</phi-max-deg>
+          <rotation-speed>
+            <z-max-deg-sec>15</z-max-deg-sec>
+            <z-min-deg-sec>-15</z-min-deg-sec>
+          </rotation-speed>
+        </shooter>
+      </particlesystem>
+    </overlay>
+  </model>
+
+  <model>
+    <name>sternwake</name>
+    <path>Models/Geometry/Nimitz/Models/Effects/wake2_carrier.xml</path>
+    <offsets>
+      <x-m>210</x-m>
+      <y-m>0</y-m>
+      <z-m>2</z-m>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Models/Generic/Effects/cat-steam.xml</path>
+    <name>cat-steam-1</name>
+    <offsets>
+      <x-m>-108.64</x-m>
+      <y-m>   8.45</y-m>
+      <z-m>  20.00</z-m>
+      <heading-deg>5.3</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Models/Generic/Effects/cat-steam-eng.xml</path>
+    <name>cat-steam-1-eng</name>
+    <offsets>
+      <x-m>-10.00</x-m>
+      <y-m>17.30</y-m>
+      <z-m>20.00</z-m>
+      <heading-deg>174.7</heading-deg>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>cat-steam-1</object-name>
+    <condition>
+      <equals>
+        <property>/sim/presets/parkpos</property>
+        <value>cat-1</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>cat-steam-1-eng</object-name>
+    <condition>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-1</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <model>
+    <path>Models/Generic/Effects/cat-steam.xml</path>
+    <name>cat-steam-2</name>
+    <offsets>
+      <x-m>-102.95</x-m>
+      <y-m> -11.20</y-m>
+      <z-m>  20.00</z-m>
+      <heading-deg>1.6</heading-deg>
+    </offsets>
+    <overlay>
+      <particlesystem>
+        <placer>
+          <type>segments</type>
+          <vertex>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+          </vertex>
+          <vertex>
+            <x-m>51</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+          </vertex>
+          <vertex>
+            <x-m>102</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+          </vertex>
+        </placer>
+      </particlesystem>
+    </overlay>
+  </model>
+
+  <model>
+    <path>Models/Generic/Effects/cat-steam-eng.xml</path>
+    <name>cat-steam-2-eng</name>
+    <offsets>
+      <x-m>-4.30</x-m>
+      <y-m>-8.30</y-m>
+      <z-m>20.00</z-m>
+      <heading-deg>178.4</heading-deg>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>cat-steam-2</object-name>
+    <condition>
+      <equals>
+        <property>/sim/presets/parkpos</property>
+        <value>cat-2</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>cat-steam-2-eng</object-name>
+    <condition>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-2</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <model>
+    <path>Models/Generic/Effects/cat-steam.xml</path>
+    <name>cat-steam-3</name>
+    <offsets>
+      <x-m>-11.47</x-m>
+      <y-m>-30.32</y-m>
+      <z-m> 20.00</z-m>
+      <heading-deg>5</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Models/Generic/Effects/cat-steam-eng.xml</path>
+    <name>cat-steam-3-eng</name>
+    <offsets>
+      <x-m> 87.00</x-m>
+      <y-m>-21.64</y-m>
+      <z-m> 20.00</z-m>
+      <heading-deg>175</heading-deg>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>cat-steam-3</object-name>
+    <condition>
+      <equals>
+        <property>/sim/presets/parkpos</property>
+        <value>cat-3</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>cat-steam-3-eng</object-name>
+    <condition>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-3</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <model>
+    <path>Models/Generic/Effects/cat-steam.xml</path>
+    <name>cat-steam-4</name>
+    <offsets>
+      <x-m>  6.56</x-m>
+      <y-m>-33.98</y-m>
+      <z-m> 20.00</z-m>
+      <heading-deg>0.8</heading-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Models/Generic/Effects/cat-steam-eng.xml</path>
+    <name>cat-steam-4-eng</name>
+    <offsets>
+      <x-m>107.00</x-m>
+      <y-m>-32.55</y-m>
+      <z-m> 20.00</z-m>
+      <heading-deg>179.2</heading-deg>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>cat-steam-4</object-name>
+    <condition>
+      <equals>
+        <property>/sim/presets/parkpos</property>
+        <value>cat-4</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>cat-steam-4-eng</object-name>
+    <condition>
+      <equals>
+        <property>/sim/presets/cat-engaged</property>
+        <value>cat-4</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <!-- Transparent object registration for Rembrandt compatibility -->
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>Howdah-glass</object-name>
+<!--
+    <object-name>glass</object-name>
+    <object-name>radar-screen-transparent</object-name>
+    <object-name>SPS-49-net-tranparent</object-name>
+    <object-name>Antenna-transparent</object-name>
+    <object-name>Net-transparent</object-name>
+    <object-name>island-projector-light-on</object-name>
+    <object-name>island-inside-red-lights</object-name>
+-->
+  </effect>
+  <effect>
+    <inherits-from>Models/Geometry/Nimitz/Effects/flightdeck</inherits-from>
+    <object-name>Flightdeck</object-name>
+    <object-name>Elevator-1-Deck</object-name>
+    <object-name>Elevator-2-Deck</object-name>
+    <object-name>Elevator-3-Deck</object-name>
+    <object-name>Elevator-4-Deck</object-name>
+  </effect>
+
+  <!-- Lighting -->
+  <model>
+    <path>Models/Geometry/Nimitz/truman-rembrandt-lighting.xml</path>
+  </model>
+<!--
+  <animation>
+    <type>select</type>
+    <object-name>island-projector-light-off</object-name>
+    <condition>
+      <less-than-equals>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </less-than-equals>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>island-projector-light-on</object-name>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </greater-than>
+    </condition>
+  </animation>
+-->
+  <animation>
+    <object-name>Flightdeck</object-name>
+    <type>material</type>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </greater-than>
+    </condition>
+    <emission>
+      <factor-prop>controls/lighting/flood-lights-red-norm</factor-prop>
+      <red>0.75</red><green>0.25</green><blue>0.25</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <object-name>Elevator-1-Deck</object-name>
+    <object-name>Elevator-2-Deck</object-name>
+    <object-name>Elevator-3-Deck</object-name>
+    <object-name>Elevator-4-Deck</object-name>
+    <type>material</type>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </greater-than>
+    </condition>
+    <emission>
+      <factor-prop>controls/lighting/flood-lights-red-norm</factor-prop>
+      <red>0.75</red><green>0.25</green><blue>0.25</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>Hangar-Deckhead-white-lights</object-name>
+    <condition>
+      <less-than-equals>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </less-than-equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>Hangar-Deckhead-white-lights</object-name>
+    <condition>
+      <less-than-equals>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </less-than-equals>
+    </condition>
+    <emission>
+      <red>1</red><green>1</green><blue>1</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>Hangar-Deckhead-red-lights</object-name>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </greater-than>
+    </condition>
+  </animation>
+  <animation>
+    <type>material</type>
+    <object-name>Hangar-Deckhead-red-lights</object-name>
+    <object-name>island-inside-red-lights</object-name>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </greater-than>
+    </condition>
+    <emission>
+      <red>1</red><green>0.5</green><blue>0.4</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>Hangar-Deckhead</object-name>
+    <condition>
+      <less-than-equals>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </less-than-equals>
+      <not><property>/sim/rendering/rembrandt/enabled</property></not>
+    </condition>
+    <emission>
+      <factor-prop>controls/lighting/flood-lights-red-norm</factor-prop>
+      <red>1.0</red><green>1.0</green><blue>1.0</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>Hangar-Deckhead</object-name>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </greater-than>
+      <not><property>/sim/rendering/rembrandt/enabled</property></not>
+    </condition>
+    <emission>
+      <factor-prop>controls/lighting/flood-lights-red-norm</factor-prop>
+      <red>0.1875</red><green>0.0625</green><blue>0.0625</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>All-Elevators-Doors</object-name>
+    <object-name>All-Elevators-Drives</object-name>
+    <object-name>Hangar-Plateform</object-name>
+    <object-name>Hangar-Walls</object-name>
+    <object-name>Hangar-Walls-logo</object-name>
+    <object-name>Hangar-Deck</object-name>
+    <condition>
+      <and>
+        <less-than-equals>
+          <property>/sim/time/sun-angle-rad</property>
+          <value>1.57</value>
+        </less-than-equals>
+        <not><property>/sim/rendering/rembrandt/enabled</property></not>
+      </and>
+    </condition>
+    <ambient>
+      <red>0.5</red><green>0.5</green><blue>0.58</blue>
+    </ambient>
+    <emission>
+      <factor-prop>controls/lighting/flood-lights-red-norm</factor-prop>
+      <red>1.0</red><green>1.0</green><blue>1.0</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>All-Elevators-Doors</object-name>
+    <object-name>All-Elevators-Drives</object-name>
+    <object-name>Hangar-Plateform</object-name>
+    <object-name>Hangar-Walls</object-name>
+    <object-name>Hangar-Walls-logo</object-name>
+    <object-name>Hangar-Deck</object-name>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </greater-than>
+      <not><property>/sim/rendering/rembrandt/enabled</property></not>
+    </condition>
+    <ambient>
+      <red>0.2</red><green>0.2</green><blue>0.2</blue>
+    </ambient>
+    <emission>
+      <factor-prop>controls/lighting/flood-lights-red-norm</factor-prop>
+      <factor>1.0</factor>
+      <red>0.75</red><green>0.25</green><blue>0.25</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <object-name>Elevator-1-Deck-stripes</object-name>
+    <object-name>Elevator-2-Deck-stripes</object-name>
+    <object-name>Elevator-3-Deck-stripes</object-name>
+    <object-name>Elevator-4-Deck-stripes</object-name>
+    <object-name>Elevator-1-Deck</object-name>
+    <object-name>Elevator-2-Deck</object-name>
+    <object-name>Elevator-3-Deck</object-name>
+    <object-name>Elevator-4-Deck</object-name>
+    <object-name>JBD1</object-name>
+    <object-name>JBD2</object-name>
+    <object-name>JBD3</object-name>
+    <object-name>JBD4</object-name>
+    <object-name>cat-deck-1</object-name>
+    <object-name>cat-deck-2</object-name>
+    <object-name>cat-deck-3</object-name>
+    <object-name>cat-deck-4</object-name>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.57</value>
+      </greater-than>
+      <not><property>/sim/rendering/rembrandt/enabled</property></not>
+    </condition>
+    <emission>
+      <factor-prop>controls/lighting/flood-lights-red-norm</factor-prop>
+      <factor>0.75</factor>
+      <red>0.75</red><green>0.25</green><blue>0.25</blue>
+    </emission>
+  </animation>
+
+  <!-- Walks -->
+  <animation>
+    <type>select</type>
+    <object-name>Walks</object-name>
+  </animation>
+
+  <!-- Shadows -->
+  <animation>
+    <type>noshadow</type>
+    <object-name>wire-1</object-name>
+    <object-name>wire-2</object-name>
+    <object-name>wire-3</object-name>
+    <object-name>wire-4</object-name>
+  </animation>
+
+  <animation>
+    <type>noshadow</type>
+    <object-name>cat-1</object-name>
+    <object-name>cat-2</object-name>
+    <object-name>cat-3</object-name>
+    <object-name>cat-4</object-name>
+  </animation>
+
+  <!-- *** LoD *** -->
+  <animation>
+    <type>range</type>
+    <max-m>60000</max-m>
+  </animation>
+<!--
+  <animation>
+    <type>range</type>
+    <object-name>1000ft</object-name>
+    <object-name>railing</object-name>
+    <object-name>Net</object-name>
+    <object-name>400ft</object-name>
+    <max-m>400</max-m>
+  </animation>
+-->
+  <animation>
+    <type>range</type>
+    <object-name>Wires</object-name>
+    <object-name>elev-1-wires</object-name>
+    <object-name>elev-2-wires</object-name>
+    <object-name>elev-3-wires</object-name>
+    <object-name>elev-4-wires</object-name>
+<!--
+    <object-name>glass</object-name>
+    <object-name>Howdah-glass</object-name>
+    <object-name>beams</object-name>
+    <object-name>Hull-equipment</object-name>
+    <object-name>Antenna-frame</object-name>
+    <object-name>loud-speakers</object-name>
+-->
+    <max-m>1000</max-m>
+  </animation>
+
+  <animation>
+    <type>range</type>
+    <object-name>3000ft</object-name>
+    <object-name>radar_sps49</object-name>
+    <max-m>3000</max-m>
+  </animation>
+
+  <animation>
+    <type>interaction</type>
+    <object-name>cat-1</object-name>
+    <object-name>cat-2</object-name>
+    <object-name>cat-3</object-name>
+    <object-name>cat-4</object-name>
+    <interaction-type>carrier-catapult</interaction-type>
+  </animation>
+
+  <animation>
+    <type>interaction</type>
+    <object-name>wire-1</object-name>
+    <object-name>wire-2</object-name>
+    <object-name>wire-3</object-name>
+    <object-name>wire-4</object-name>
+    <interaction-type>carrier-wire</interaction-type>
+  </animation>
+
+  <!-- pick animations -->
+  <animation>
+    <type>pick</type>
+    <object-name>cat-deck-1</object-name>
+    <object-name>cat-deck-2</object-name>
+    <object-name>cat-deck-3</object-name>
+    <object-name>cat-deck-4</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>nasal</command>
+        <script>AIcarrier.engageLaunchbar();</script>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>cat</tooltip-id>
+        <label>engage Launch-bar</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD1</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/truman/jbd[0]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd1</tooltip-id>
+        <label>operate JBD1</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD2</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/truman/jbd[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd2</tooltip-id>
+        <label>operate JBD2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD3</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/truman/jbd[2]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd3</tooltip-id>
+        <label>operate JBD3</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>JBD4</object-name>
+
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/truman/jbd[3]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>jbd4</tooltip-id>
+        <label>operate JBD4</label>
+      </binding>
+    </hovered>
+  </animation>
+
+
+
+  <animation>
+    <type>pick</type>
+    <object-name>Flightdeck</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+        <command>property-toggle</command>
+	<property>/controls/truman/lights</property>
+        <!--<script>
+          var p = !getprop("/ai/models/carrier/controls/lighting/deck-lights");
+          if ( p ) { r = 0.3 } else { r = 0 }
+          foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")) {
+            c.getNode("controls/lighting/deck-lights",1).setBoolValue(p);
+            c.getNode("controls/lighting/flood-lights-red-norm",1).setValue(r);
+          }
+        </script>-->
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>lights</tooltip-id>
+        <label>switch lights</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>whip-antennas</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/flight-operations</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>whip</tooltip-id>
+        <label>toggle whip antennas</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <!-- elevators -->
+  <animation>
+    <type>pick</type>
+    <object-name>Elevator-1</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/elevator/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev1</tooltip-id>
+        <label>move elevator 1</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Elevator-2</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/elevator[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev2</tooltip-id>
+        <label>move elevator 2</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Elevator-3</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/elevator[2]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev3</tooltip-id>
+        <label>move elevator 3</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Elevator-4</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/elevator[3]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elev4</tooltip-id>
+        <label>move elevator 4</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <!-- elevator doors -->
+  <animation>
+    <type>pick</type>
+    <object-name>elevator-door-1-i</object-name>
+    <object-name>elevator-door-1-o</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/door/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elevd1</tooltip-id>
+        <label>move elevator 1 doors</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>elevator-door-2-i</object-name>
+    <object-name>elevator-door-2-o</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/door[1]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elevd2</tooltip-id>
+        <label>move elevator 2 doors</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>elevator-door-3-i</object-name>
+    <object-name>elevator-door-3-o</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/door[2]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elevd3</tooltip-id>
+        <label>move elevator 3 doors</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>elevator-door-4-i</object-name>
+    <object-name>elevator-door-4-o</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>property-toggle</command>
+	<property>/controls/truman/door[3]/state</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elevd4</tooltip-id>
+        <label>move elevator 4 doors</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>island</object-name>
+    <object-name>island-details</object-name>
+    <object-name>bridge</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>false</repeatable>
+      <binding>
+	<command>dialog-show</command>
+	<dialog-name>Truman</dialog-name>
+	<property></property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>bridge</tooltip-id>
+        <label>show Truman control dialog</label>
+      </binding>
+    </hovered>
+  </animation>
+
+
+</PropertyList>

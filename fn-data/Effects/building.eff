@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+	<name>Effects/building</name>
+	<inherits-from>Effects/model-combined</inherits-from>
+	<parameters>
+		<texture n="0">
+			<type>2d</type>
+			<image>Textures/buildings.png</image>
+			<filter>linear-mipmap-linear</filter>
+			<wrap-s>repeat</wrap-s>
+			<wrap-t>clamp</wrap-t>
+			<internal-format>normalized</internal-format>
+		</texture>
+		<!-- Normal Map -->
+		<normalmap-enabled type="int"> 1 </normalmap-enabled>
+		<normalmap-dds type="int"> 0 </normalmap-dds>
+		<normalmap-tiling type="float"> 1.0 </normalmap-tiling>
+		<texture n="2">
+			<image>Textures/buildings-normalmap_orig.png</image>
+			<type>2d</type>
+			<filter>linear-mipmap-linear</filter>
+			<wrap-s>repeat</wrap-s>
+			<wrap-t>clamp</wrap-t>
+			<internal-format>normalized</internal-format>
+		</texture>
+		<!-- Light Map -->
+		<texture n="3">
+			<image>Textures/buildings-lightmap.png</image>
+			<type>2d</type>
+			<filter>linear-mipmap-linear</filter>
+			<wrap-s>clamp</wrap-s>
+			<wrap-t>clamp</wrap-t>
+			<internal-format>normalized</internal-format>
+		</texture>
+		<lightmap-enabled type="int"> 1 </lightmap-enabled>
+		<lightmap-multi type="int"> 0 </lightmap-multi>
+		<lightmap-factor type="float" n="0">
+			<use>/sim/time/sun-angle-rad</use>
+		</lightmap-factor>
+		<lightmap-color type="vec3d" n="0"> 0.3 0.3 0.3 </lightmap-color>
+
+		<!-- Reflection -->
+		<reflection-enabled type="int"> 1 </reflection-enabled>
+		<reflect-map-enabled type="int"> 1 </reflect-map-enabled>
+		<reflection-correction type="float"> -0.15 </reflection-correction>
+		<reflection-dynamic type="int"> 0 </reflection-dynamic>
+		<reflection-fresnel type="float"> 0.0 </reflection-fresnel>
+		<reflection-rainbow type="float"> 0.0 </reflection-rainbow>
+		<reflection-noise type="float"> 0.0 </reflection-noise>
+		<texture n= "5" >
+			<type>cubemap</type>
+			<images>
+				<positive-x>Aircraft/Generic/Effects/CubeMaps/buildings/N.png</positive-x>
+				<negative-x>Aircraft/Generic/Effects/CubeMaps/buildings/S.png</negative-x>
+				<positive-y>Aircraft/Generic/Effects/CubeMaps/buildings/W.png</positive-y>
+				<negative-y>Aircraft/Generic/Effects/CubeMaps/buildings/E.png</negative-y>
+				<positive-z>Aircraft/Generic/Effects/CubeMaps/buildings/U.png</positive-z>
+				<negative-z>Aircraft/Generic/Effects/CubeMaps/buildings/D.png</negative-z>
+			</images>
+		</texture>
+		<texture n="6">
+			<!-- instance information from shader -->
+			<type>2d</type>
+			<wrap-s>clamp</wrap-s>
+			<wrap-t>clamp</wrap-t>
+		</texture>
+		<!-- Add the following line to enable snow: -->
+		<snow-enabled>1</snow-enabled>
+		<!--Ambient correction -->
+		<ambient-correction type="float"> 0.0 </ambient-correction>
+		<material>
+			<active>true</active>
+			<color-mode-uniform>1</color-mode-uniform>
+			<ambient type="vec4d">0.6 0.6 0.6 1.0</ambient>
+			<diffuse type="vec4d">1.0 1.0 1.0 1.0</diffuse>
+			<specular type="vec4d">0.0 0.0 0.0 1.0</specular>
+			<emissive type="vec4d">0.02 0.02 0.02 1.0</emissive>
+			<shininess>0.1</shininess>
+			<color-mode>ambient-and-diffuse</color-mode>
+			<color-mode-uniform>ambient-and-diffuse</color-mode-uniform>
+			<!-- DIFFUSE -->
+		</material>
+		<material-id>0</material-id>
+		<blend>
+			<active>0</active>
+			<source>0</source>
+			<destination>0</destination>
+		</blend>
+		<shade-model>flat</shade-model>
+		<cull-face>back</cull-face>
+		<building-flag type="int">1</building-flag>
+
+		<!-- PBR -->
+		<pbr-metallic type="float">0.0</pbr-metallic>
+        <pbr-roughness type="float">1.0</pbr-roughness>
+	</parameters>
+
+	<technique n="4">
+		<!-- Atmospheric scattering technique with model shader-->
+		<pass>
+			<texture-unit n="4">
+				<unit>4</unit>
+				<image>
+					<use>texture[3]/image</use>
+				</image>
+				<type>
+					<use>texture[3]/type</use>
+				</type>
+				<filter>
+					<use>texture[3]/filter</use>
+				</filter>
+				<wrap-s>
+					<use>texture[3]/wrap-s</use>
+				</wrap-s>
+				<wrap-t>
+					<use>texture[3]/wrap-t</use>
+				</wrap-t>
+				<internal-format>
+					<use>texture[3]/internal-format</use>
+				</internal-format>
+			</texture-unit>
+			<program>
+				<vertex-shader n="0">Shaders/building-model-ALS-ultra.vert</vertex-shader>
+				<attribute>
+					<name>instancePosition</name>
+					<index>6</index>
+				</attribute>
+				<attribute>
+					<name>instanceScale</name>
+					<index>7</index>
+				</attribute>
+				<attribute>
+					<name>attrib1</name>
+					<index>10</index>
+				</attribute>
+				<attribute>
+					<name>attrib2</name>
+					<index>11</index>
+				</attribute>
+			</program>
+		</pass>
+	</technique>
+
+	<technique n="5">
+		<!-- Base Atmospheric scattering technique -->
+		<pass>
+			<program>
+				<vertex-shader n="0">Shaders/building-ALS.vert</vertex-shader>
+				<attribute>
+					<name>instancePosition</name>
+					<index>6</index>
+				</attribute>
+				<attribute>
+					<name>instanceScale</name>
+					<index>7</index>
+				</attribute>
+				<attribute>
+					<name>attrib1</name>
+					<index>10</index>
+				</attribute>
+				<attribute>
+					<name>attrib2</name>
+					<index>11</index>
+				</attribute>
+			</program>
+		</pass>
+	</technique>
+
+	<technique n="11">
+		<pass>
+			<program n="0">
+				<vertex-shader n="1">Shaders/building-default.vert</vertex-shader>
+				<attribute>
+					<name>instancePosition</name>
+					<index>6</index>
+				</attribute>
+				<attribute>
+					<name>instanceScale</name>
+					<index>7</index>
+				</attribute>
+				<attribute>
+					<name>attrib1</name>
+					<index>10</index>
+				</attribute>
+				<attribute>
+					<name>attrib2</name>
+					<index>11</index>
+				</attribute>
+			</program>
+		</pass>
+	</technique>
+
+	<!-- HDR deferred pass -->
+	<!-- Overwrite the corresponding model-combined technique -->
+	<technique n="108">
+		<pass>
+			<program>
+				<vertex-shader n="0">Shaders/HDR/model_building.vert</vertex-shader>
+				<attribute>
+					<name>instancePosition</name>
+					<index>6</index>
+				</attribute>
+				<attribute>
+					<name>instanceScale</name>
+					<index>7</index>
+				</attribute>
+				<attribute>
+					<name>attrib1</name>
+					<index>10</index>
+				</attribute>
+				<attribute>
+					<name>attrib2</name>
+					<index>11</index>
+				</attribute>
+			</program>
+		</pass>
+	</technique>
+
+</PropertyList>

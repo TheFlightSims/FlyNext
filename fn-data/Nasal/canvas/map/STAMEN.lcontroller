@@ -1,0 +1,43 @@
+# See: http://wiki.flightgear.org/MapStructure
+# Class things:
+var name = 'STAMEN';
+var parents = [OverlayLayer.Controller];
+var __self__ = caller(0)[0];
+OverlayLayer.Controller.add(name, __self__);
+TileLayer.add(name, {
+	parents: [TileLayer],
+	type: name, # Layer type
+	df_controller: __self__, # controller to use by default -- this one
+});
+
+var new = func(layer) {
+	var m = {
+		parents: [__self__],
+		layer: layer,
+		map: layer.map,
+		listeners: [],
+	};
+
+	layer.makeURL = string.compileTemplate('http://b.tile.stamen.com/terrain/{z}/{x}/{y}.png');
+	layer.makePath = string.compileTemplate(layer.maps_base ~ '/stamen-terrain/{z}/{x}/{y}.png');
+
+   #layer.makeURL = string.compileTemplate('http://b.tile.stamen.com/terrain-background/{z}/{x}/{y}.png');
+	#layer.makePath = string.compileTemplate(layer.maps_base ~ '/stamen-terrain-background/{z}/{x}/{y}.png');
+
+   #layer.makeURL = string.compileTemplate('http://b.tile.stamen.com/toner/{z}/{x}/{y}.png');
+	#layer.makePath = string.compileTemplate(layer.maps_base ~ '/stamen-toner/{z}/{x}/{y}.png');
+
+
+	m.addVisibilityListener();
+	m.addRangeListener();
+	m.addScreenRangeListener();
+	return m;
+};
+
+var updateLayer = func() {
+}
+
+var del = func() {
+	foreach (var l; me.listeners)
+		removelistener(l);
+};

@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<!-- Regional definitions for the Northern Africa -->
+<PropertyList>
+  <name>African mediterranean</name>
+
+  <area>
+    <lon1>-10.02</lon1>
+    <lon2>-3.69</lon2>
+    <lat1>35.98</lat1>
+    <lat2>30.39</lat2>
+  </area>
+
+  <area>
+    <lon1>-3.69</lon1>
+    <lon2>3.50</lon2>
+    <lat1>36.48</lat1>
+    <lat2>34.17</lat2>
+  </area>
+
+  <area>
+    <lon1>3.50</lon1>
+    <lon2>11.6</lon2>
+    <lat1>34.17</lat1>
+    <lat2>37.56</lat2>
+  </area>
+
+  <area>
+    <lon1>9.75</lon1>
+    <lon2>15.38</lon2>
+    <lat1>35.02</lat1>
+    <lat2>31.85</lat2>
+  </area>
+
+  <area>
+    <lon1>19.79</lon1>
+    <lon2>23.68</lon2>
+    <lat1>31.66</lat1>
+    <lat2>33.22</lat2>
+  </area>
+
+  <area>
+    <lon1>-18.43</lon1>
+    <lon2>-13.28</lon2>
+    <lat1>27.47</lat1>
+    <lat2>30.50</lat2>
+  </area>
+
+  <area>
+    <lon1>29.43</lon1>
+    <lon2>33.03</lon2>
+    <lat1>31.75</lat1>
+    <lat2>24.83</lat2>
+  </area>
+
+  <material>
+    <name>pa_shoulder</name>
+    <texture>Runway/pa_shoulder_mediterranean.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>pa_shoulder_f</name>
+    <texture>Runway/pa_shoulder_f_mediterranean.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>pc_shoulder</name>
+    <texture>Runway/pc_shoulder_mediterranean.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>pc_shoulder_f</name>
+    <texture>Runway/pc_shoulder_f_mediterranean.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <name>Greenspace</name>
+    <effect>Effects/grass</effect>
+    <texture-set>
+      <texture>Terrain/grass_dry3a.png</texture>
+      <texture n="13">Terrain/grass_dry2.png</texture>
+      <texture n="14">Terrain/gravel_brown.png</texture>
+      <texture n="15">Terrain/airport_grass_structure_overlay2.png</texture>
+      <texture n="20">Terrain/savanna-grass2.png</texture>
+    </texture-set>
+    <parameters>
+      <hires_overlay_bias>2.5</hires_overlay_bias>
+      <grit_alpha>0.8</grit_alpha>
+      <base_layer_magnification>0.4</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_layer_magnification>6.0</overlay_layer_magnification>
+      <overlay_bias>0.125</overlay_bias>
+      <overlay_alpha>1.21</overlay_alpha>
+      <use_color_overlay>0</use_color_overlay>
+      <use_grain>1</use_grain>
+      <grain_layer_magnification>10.0</grain_layer_magnification>
+      <max_grass_height>0.3</max_grass_height>
+      <grass_density>1.0</grass_density>
+      <grass_groups>2</grass_groups>
+      <grass_modulate_by_overlay>1</grass_modulate_by_overlay>
+      <grass_modulate_height_min>0.0</grass_modulate_height_min>
+    </parameters>
+    <xsize>256</xsize>
+    <ysize>256</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>RainForest</name>
+    <name>MixedForestCover</name>
+    <name>MixedForest</name>
+    <name>DeciduousBroadCover</name>
+    <name>DeciduousForest</name>
+    <name>DeciduousNeedleCover</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/airport_grass2.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+    </texture-set>
+    <parameters>
+      <grain_strength>0.5</grain_strength>
+      <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
+    </parameters>
+    <xsize>10000</xsize>
+    <ysize>10000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <wood-coverage>14000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>25.0</tree-width-m>
+    <rolling-friction>0.8</rolling-friction>
+    <bumpiness>0.85</bumpiness>
+  </material>
+
+  <material>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/california-forest.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="13">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="14">Terrain/gravel_gray.png</texture>
+      <texture n="15">Terrain/gravel_brown.png</texture>
+    </texture-set>
+    <object-mask>Terrain/pantanal-mask.png</object-mask>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <overlay_layer_magnification>60.0</overlay_layer_magnification>
+      <use_grain>0</use_grain>
+      <grain_strength>0.5</grain_strength>
+      <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
+    </parameters>
+    <xsize>10000</xsize>
+    <ysize>10000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <wood-coverage>8000.0</wood-coverage>
+    <tree-texture>Trees/savanna-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>12.0</tree-height-m>
+    <tree-width-m>8.0</tree-width-m>
+    <rolling-friction>0.8</rolling-friction>
+    <bumpiness>0.85</bumpiness>
+  </material>
+
+  <material>
+    <name>Grassland</name>
+    <name>GrassCover</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/pampas-grass.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="13">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="14">Terrain/gravel_gray.png</texture>
+    </texture-set>
+    <parameters>
+      <transition_model>0.5</transition_model>
+      <grain_strength>0.5</grain_strength>
+      <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
+      <transition_model>0.5</transition_model>
+      <use_grain>1</use_grain>
+      <grain_layer_magnification>0.2</grain_layer_magnification>
+      <grit_alpha>0.8</grit_alpha>
+    </parameters>
+    <xsize>10000</xsize>
+    <ysize>10000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <wood-coverage>65000.0</wood-coverage>
+    <tree-texture>Trees/mojave-shrub.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>4.0</tree-height-m>
+    <tree-width-m>2.0</tree-width-m>
+    <rolling-friction>0.4</rolling-friction>
+    <bumpiness>0.65</bumpiness>
+  </material>
+
+  <material>
+    <name>Shrub</name>
+    <name>ShrubCover</name>
+    <name>ShrubGrassCover</name>
+    <name>ScrubCover</name>
+    <name>Scrub</name>
+    <name>Marsh</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/pampas-shrub.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="13">Terrain/grass_dry2a_darker.png</texture>
+      <texture n="14">Terrain/gravel_gray.png</texture>
+    </texture-set>
+    <object-mask>Terrain/pantanal-mask.png</object-mask>
+    <parameters>
+      <hires_overlay_bias><use>/sim/rendering/desert</use></hires_overlay_bias>
+      <rotation_flag>random</rotation_flag>
+      <rotation_scale>1000.0</rotation_scale>
+      <rock_strata>1</rock_strata>
+      <use_grain>1</use_grain>
+      <grain_strength>0.8</grain_strength>
+      <grain_layer_magnification>8.0</grain_layer_magnification>
+      <transition_model>0.5</transition_model>
+      <use_overlay>1</use_overlay>
+      <overlay_scale>10.0</overlay_scale>
+      <overlay_bias>-0.05</overlay_bias>
+      <overlay_alpha>0.75</overlay_alpha>
+      <overlay_hardness>0.2</overlay_hardness>
+      <overlay_density>2.2</overlay_density>
+      <use_color_overlay>0</use_color_overlay>
+      <overlay_layer_magnification>8.0</overlay_layer_magnification>
+    </parameters>
+    <xsize>10000</xsize>
+    <ysize>10000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <wood-coverage>12000.0</wood-coverage>
+    <tree-texture>Trees/mediterranean-shrub.png</tree-texture>
+    <tree-texture>Trees/savanna-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>4.0</tree-height-m>
+    <tree-width-m>4.0</tree-width-m>
+    <rolling-friction>0.4</rolling-friction>
+    <bumpiness>0.65</bumpiness>
+  </material>
+
+  <material>
+    <name>Sclerophyllous</name>
+    <name>FloodLand</name>
+    <name>SaltMarsh</name>
+    <name>HerbWetlandCover</name>
+    <name>WoodedWetlandCover</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/grass_dry3.png</texture>
+      <texture n="11">Terrain/grass_dry3a.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="15">Terrain/airport_grass2.png</texture>
+    </texture-set>
+    <parameters>
+      <grain_strength>0.5</grain_strength>
+      <hires_overlay_bias>-0.08</hires_overlay_bias>
+    </parameters>
+    <xsize>4000</xsize>
+    <ysize>4000</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <wood-coverage>30000.0</wood-coverage>
+    <tree-texture>Trees/mixed-shrub.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>6.0</tree-height-m>
+    <tree-width-m>8.0</tree-width-m>
+    <rolling-friction>0.4</rolling-friction>
+    <bumpiness>0.65</bumpiness>
+  </material>
+
+  <material>
+    <name>DryCropPastureCover</name>
+    <name>DryCrop</name>
+    <name>NaturalCrop</name>
+    <texture-set>
+      <texture>Terrain/california-drycrop.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="13">Terrain/desert-airport2.png</texture>
+    </texture-set>
+    <parameters>
+      <rotation_flag>random</rotation_flag>
+      <hires_overlay_bias>-0.2</hires_overlay_bias>
+      <grain_strength>0.5</grain_strength>
+      <grit_alpha>0.8</grit_alpha>
+      <use_grain>1</use_grain>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.6</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <light-coverage>2000000.0</light-coverage>
+  </material>
+
+  <material>
+    <name>Orchard</name>
+    <name>Olives</name>
+    <name>Vineyard</name>
+    <name>Rice</name>
+    <texture-set>
+      <texture>Terrain/cerrado-crop.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="15">Terrain/sand_hires_ochre.png</texture>
+    </texture-set>
+    <parameters>
+      <rock_strata>1</rock_strata>
+      <use_overlay>1</use_overlay>
+      <hires_overlay_bias>-0.1</hires_overlay_bias>
+      <use_color_overlay>1</use_color_overlay>
+      <grain_strength>0.1</grain_strength>
+      <grit_alpha>0.8</grit_alpha>
+      <use_grain>1</use_grain>
+    </parameters>
+    <object-mask>Terrain/mixedcrop2-mask.png</object-mask>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.7</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <object-group include="Materials/base/sa-farm-buildings.xml"/>
+    <wood-coverage>13500.0</wood-coverage>
+    <tree-texture>Trees/savanna-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>8.0</tree-height-m>
+    <tree-width-m>6.0</tree-width-m>
+  </material>
+
+  <material>
+    <name>IrrCropPastureCover</name>
+    <name>IrrCrop</name>
+    <name>MixedCropPastureCover</name>
+    <name>MixedCrop</name>
+    <name>Crop</name>
+    <name>ComplexCrop</name>
+    <texture-set>
+      <texture>Terrain/cerrado-crop.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="15">Terrain/sand_hires_ochre.png</texture>
+    </texture-set>
+    <parameters>
+      <rock_strata>1</rock_strata>
+      <use_overlay>1</use_overlay>
+      <hires_overlay_bias>-0.15</hires_overlay_bias>
+      <use_color_overlay>1</use_color_overlay>
+      <grain_strength>0.1</grain_strength>
+      <grit_alpha>0.8</grit_alpha>
+      <use_grain>1</use_grain>
+    </parameters>
+    <object-mask>Terrain/mixedcrop2-mask.png</object-mask>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.7</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <object-group include="Materials/base/sa-farm-buildings.xml"/>
+    <wood-coverage>13500.0</wood-coverage>
+    <tree-texture>Trees/savanna-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>8.0</tree-height-m>
+    <tree-width-m>6.0</tree-width-m>
+    <diffuse>
+      <r>0.83</r>
+      <g>0.85</g>
+      <b>0.83</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+  </material>
+
+  <material>
+    <name>DryLake</name>
+    <name>IntermittentReservoir</name>
+    <name>IntermittentLake</name>
+    <texture-set>
+      <texture>Terrain/sand1.png</texture>
+      <texture n="12">Terrain/gravel_gray.png</texture>
+      <texture n="15">Terrain/sand_hires_ochre.png</texture>
+    </texture-set>
+    <parameters>
+      <dot_density>0.2</dot_density>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <shininess>2.5</shininess>
+    <rolling-friction>0.1</rolling-friction>
+    <friction-factor>0.7</friction-factor>
+    <bumpiness>0.1</bumpiness>
+  </material>
+
+   <material>
+    <name>BarrenCover</name>
+    <name>Dirt</name>
+    <name>OpenMining</name>
+    <name>Rock</name>
+    <name>Dump</name>
+    <texture-set>
+      <texture>Terrain/california-rock.png</texture>
+      <texture n="11">Terrain/desert-airport2.png</texture>
+      <texture n="14">Terrain/grain_texture.png</texture>
+    </texture-set>
+    <parameters>
+      <hires_overlay_bias>-0.1</hires_overlay_bias>
+      <grain_strength>0.7</grain_strength>
+    </parameters>
+    <xsize>3000</xsize>
+    <ysize>3000</ysize>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+  </material>
+
+</PropertyList>

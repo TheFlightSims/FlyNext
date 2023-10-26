@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+	<name>winch_failure_dialog</name>
+	<layout>vbox</layout>
+
+
+	<group>
+		<layout>hbox</layout>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+		<text>
+			<halign>center</halign>
+			<label>Simulate Winch Failures</label>
+		</text>
+
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+
+		<button>
+			<legend/>
+			<key>Esc</key>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<border>2</border>
+			<binding>
+				<command>nasal</command>
+				<script>towing.write_config();</script>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+
+	<hrule/>
+	<text>
+		<label>Tow Rope Breakage</label>
+	</text>
+
+	<group>
+		<layout>vbox</layout>
+
+		<checkbox>
+			<halign>left</halign>
+			<name>brkge_enable</name>
+			<label>Enable Rope Breakage</label>
+			<property>/sim/hitches/winch/breakage/enabled</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>brkge_enable</object-name>
+			</binding>
+		</checkbox>
+
+		<group>
+			<layout>hbox</layout>
+			<text>
+				<label>Breakage Height:</label>
+			</text>
+			<slider>
+				<enable>
+					<property>/sim/hitches/winch/breakage/enabled</property>
+					<not>
+						<property>/sim/hitches/winch/breakage/random</property>
+					</not>
+				</enable>
+				<min>0</min>
+				<max>500</max>
+				<property>/sim/hitches/winch/breakage/height</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<text>
+				<enable>
+					<property>/sim/hitches/winch/breakage/enabled</property>
+					<not>
+						<property>/sim/hitches/winch/breakage/random</property>
+					</not>
+				</enable>
+				<property>/sim/hitches/winch/breakage/height</property>
+				<label>500 m AGL</label>
+				<format>%3d m AGL</format>
+				<live>true</live>
+			</text>
+			<vrule />
+			<text>
+				<enable>
+					<property>/sim/hitches/winch/breakage/enabled</property>
+				</enable>
+				<label>- or -</label>
+			</text>
+			<vrule />
+			<checkbox>
+				<enable>
+					<property>/sim/hitches/winch/breakage/enabled</property>
+				</enable>
+				<label>Random Height</label>
+				<name>brkge_random</name>
+				<property>/sim/hitches/winch/breakage/random</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>brkge_random</object-name>
+				</binding>
+			</checkbox>
+		</group>
+	</group>
+
+	<hrule/>
+	<text>
+		<label>Winch Loss of Power</label>
+	</text>
+
+	<group>
+		<layout>vbox</layout>
+
+		<checkbox>
+			<halign>left</halign>
+			<name>l_o_p_enable</name>
+			<label>Enable Winch Loss of Power</label>
+			<property>/sim/hitches/winch/loss-of-power/enabled</property>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>l_o_p_enable</object-name>
+			</binding>
+		</checkbox>
+
+		<group>
+			<layout>hbox</layout>
+			<text>
+				<label>Loss of Power Height:</label>
+			</text>
+			<slider>
+				<enable>
+					<property>/sim/hitches/winch/loss-of-power/enabled</property>
+					<not>
+						<property>/sim/hitches/winch/loss-of-power/random</property>
+					</not>
+				</enable>
+				<min>0</min>
+				<max>500</max>
+				<property>/sim/hitches/winch/loss-of-power/height</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</slider>
+			<text>
+				<enable>
+					<property>/sim/hitches/winch/loss-of-power/enabled</property>
+					<not>
+						<property>/sim/hitches/winch/loss-of-power/random</property>
+					</not>
+				</enable>
+				<property>/sim/hitches/winch/loss-of-power/height</property>
+				<label>500 m AGL</label>
+				<format>%3d m AGL</format>
+				<live>true</live>
+			</text>
+			<vrule />
+			<text>
+				<enable>
+					<property>/sim/hitches/winch/loss-of-power/enabled</property>
+				</enable>
+				<label>- or -</label>
+			</text>
+			<vrule />
+			<checkbox>
+				<enable>
+					<property>/sim/hitches/winch/loss-of-power/enabled</property>
+				</enable>
+				<label>Random Height</label>
+				<name>l_o_p_random</name>
+				<property>/sim/hitches/winch/loss-of-power/random</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>l_o_p_random</object-name>
+				</binding>
+			</checkbox>
+		</group>
+	</group>
+
+</PropertyList>

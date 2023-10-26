@@ -1,0 +1,360 @@
+<PropertyList>
+
+  <name>GoFlight GF EFIS</name>
+  <debug-events type="bool">false</debug-events>
+
+<nasal>
+  <open>
+    <![CDATA[
+
+      var basePath = "/instrumentation/efis[0]/";
+
+      # value is 0..8 for the konb on 738, GF only goes to 10
+      var efisRangeKnobNode = props.globals.getNode(basePath ~ "inputs/range-knob");
+      efisRangeKnobNode.setIntValue(0);
+
+      # value is absolute integer for each click, hmmmm
+      var efisBaroKnobNode = props.globals.getNode(basePath ~ "inputs/baro-knob");
+
+      var setRangeBit = func(bit) {
+        var b = efisRangeKnobNode.getValue() - 1;
+        efisRangeKnobNode.setIntValue(bits.set(b, bit) + 1);
+      }
+
+      var clearRangeBit = func(bit) {
+        var b = efisRangeKnobNode.getValue() - 1;
+        efisRangeKnobNode.setIntValue(bits.clear(b, bit) + 1);
+      }
+
+      var efisNDModeNode = props.globals.getNode(basePath ~ "mfd/mode-num");
+      var setModeBit = func(bit) {
+        var mode = efisNDModeNode.getValue();
+        efisNDModeNode.setIntValue(bits.set(mode, bit));
+      }
+
+      var clearModeBit = func(bit) {
+        var mode = efisNDModeNode.getValue();
+        efisNDModeNode.setIntValue(bits.clear(mode, bit));
+      }
+      ]]>
+  </open>
+</nasal>
+
+<hid-descriptor>
+  <report>
+    <type>input</type>
+    <id>1</id>
+    <unused-bits><size type="int">16</size></unused-bits>
+    <rel-dial-0>
+      <size type="int">8</size>
+      <count type="int">2</count>
+      <is-signed type="bool">true</is-signed>
+    </rel-dial-0>
+    <button-0>
+      <count type="int">24</count>
+    </button-0>
+  </report>
+</hid-descriptor>
+
+  <event>
+    <name>rel-dial-0</name>
+    <binding>
+      <command>property-adjust</command>
+      <property>/input/goflight/efis/height</property>
+      <min type="double">0.0</min>
+    </binding>
+    <interpolater>
+      <mirrored type="bool">true</mirrored>
+      <entry><ind>0</ind><dep>0</dep></entry>
+      <entry><ind>1</ind><dep>1</dep></entry>
+      <entry><ind>2</ind><dep>2</dep></entry>
+      <entry><ind>3</ind><dep>5</dep></entry>
+      <entry><ind>4</ind><dep>10</dep></entry>
+    </interpolater>
+  </event>
+
+  <event>
+    <name>rel-dial-1</name>
+    <binding>
+      <command>property-adjust</command>
+      <property>/instrumentation/efis[0]/inputs/baro-knob</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>TERR Button</desc>
+    <name>button-0</name>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/terr</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>POS Button</desc>
+    <name>button-1</name>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/pos</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>DATA Button</desc>
+    <name>button-2</name>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/data</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>ARPT Button</desc>
+    <name>button-3</name>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/arpt</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>WPT Button</desc>
+    <name>button-4</name>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/wpt</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>STA Button</desc>
+    <name>button-5</name>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/sta</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>WXR Button</desc>
+    <name>button-6</name>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/wxr</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc></desc>
+    <name>button-7</name>
+    <binding>
+      <command>nasal</command>
+      <script>debug.dump("Button 7");</script>
+    </binding>
+  </event>
+
+  <event>
+    <desc></desc>
+    <name>button-8</name>
+    <binding>
+      <command>nasal</command>
+      <script>setModeBit(0)</script>
+    </binding>
+     <mod-up>
+      <binding>
+      <command>nasal</command>
+      <script>clearModeBit(0)</script>
+    </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc></desc>
+    <name>button-9</name>
+    <binding>
+      <command>nasal</command>
+      <script>setModeBit(1)</script>
+    </binding>
+     <mod-up>
+      <binding>
+      <command>nasal</command>
+      <script>clearModeBit(1)</script>
+    </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc></desc>
+    <name>button-10</name>
+    <binding>
+      <command>nasal</command>
+      <script>debug.dump("Button 10");</script>
+    </binding>
+  </event>
+
+  <event>
+    <desc>in/HPA toggle</desc>
+    <name>button-11</name>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/kpa-mode</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>DH/MCA knob push</desc>
+    <name>button-12</name>
+    <binding>
+      <command>nasal</command>
+      <script>debug.dump("DH/MCA toggle");</script>
+    </binding>
+
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/minimums-mode</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc></desc>
+    <name>button-13</name>
+    <binding>
+      <command>nasal</command>
+      <script>setRangeBit(0)</script>
+    </binding>
+     <mod-up>
+      <binding>
+      <command>nasal</command>
+      <script>clearRangeBit(0)</script>
+    </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc></desc>
+    <name>button-14</name>
+    <binding>
+      <command>nasal</command>
+      <script>setRangeBit(1)</script>
+    </binding>
+     <mod-up>
+      <binding>
+      <command>nasal</command>
+      <script>clearRangeBit(1)</script>
+    </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc></desc>
+    <name>button-15</name>
+    <binding>
+      <command>nasal</command>
+      <script>setRangeBit(2)</script>
+    </binding>
+     <mod-up>
+      <binding>
+      <command>nasal</command>
+      <script>clearRangeBit(2)</script>
+    </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc>ADF-L switch</desc>
+    <name>button-16</name>
+    <binding>
+      <command>property-assign</command>
+      <property>/instrumentation/efis/inputs/lh-vor-adf</property>
+      <value>-1</value>
+    </binding>
+    <mod-up>
+      <binding>
+      <command>property-assign</command>
+      <property>/instrumentation/efis/inputs/lh-vor-adf</property>
+      <value>0</value>
+    </binding>
+    </mod-up>
+  </event>
+
+
+  <event>
+    <desc>VOR-L switch</desc>
+    <name>button-17</name>
+    <binding>
+      <command>property-assign</command>
+      <property>/instrumentation/efis/inputs/lh-vor-adf</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+      <command>property-assign</command>
+      <property>/instrumentation/efis/inputs/lh-vor-adf</property>
+      <value>0</value>
+    </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc>ADF-R switch</desc>
+    <name>button-18</name>
+    <binding>
+      <command>property-assign</command>
+      <property>/instrumentation/efis/inputs/rh-vor-adf</property>
+      <value>-1</value>
+    </binding>
+    <mod-up>
+      <binding>
+      <command>property-assign</command>
+      <property>/instrumentation/efis/inputs/rh-vor-adf</property>
+      <value>0</value>
+    </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc>VOR-R switch</desc>
+    <name>button-19</name>
+    <binding>
+      <command>property-assign</command>
+      <property>/instrumentation/efis/inputs/rh-vor-adf</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+      <command>property-assign</command>
+      <property>/instrumentation/efis/inputs/rh-vor-adf</property>
+      <value>0</value>
+    </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc>MTRS Button</desc>
+    <name>button-20</name>
+    <binding>
+      <command>nasal</command>
+      <script>debug.dump("Button MTRS");</script>
+    </binding>
+
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/alt-meters</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>FPV Button</desc>
+    <name>button-21</name>
+    <binding>
+      <command>nasal</command>
+      <script>debug.dump("Button FPV");</script>
+    </binding>
+
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/fpv</property>
+    </binding>
+  </event>
+
+</PropertyList>

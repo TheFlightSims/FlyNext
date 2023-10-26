@@ -1,0 +1,279 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <name>Brazil: Caatinga</name>
+
+  <area>
+    <lon1>-42.00</lon1>
+    <lon2>-34.00</lon2>
+    <lat1>-2.00</lat1>
+    <lat2>-14.0</lat2>
+  </area>
+  
+  <material>
+    <name>pa_shoulder</name>
+    <texture>Runway/pa_shoulder2.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>pa_shoulder_f</name>
+    <texture>Runway/pa_shoulder_f2.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+  
+  <material>
+    <name>pc_shoulder</name>
+    <texture>Runway/pc_shoulder2.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>pc_shoulder_f</name>
+    <texture>Runway/pc_shoulder_f2.png</texture>
+    <parameters>
+      <uvstretch>8.0</uvstretch>
+    </parameters>
+  </material>
+
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <name>Greenspace</name>
+    <effect>Effects/airfield</effect>
+    <texture-set>
+      <texture>Terrain/california-airport.png</texture>
+      <texture n="13">Terrain/california-airport.png</texture>
+      <texture n="14">Terrain/gravel_overlay.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <overlay_alpha>1.0</overlay_alpha>
+      <use_color_overlay>0</use_color_overlay>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <overlay_layer_magnification>16.0</overlay_layer_magnification>
+    </parameters>
+    <xsize>128</xsize>
+    <ysize>128</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>MixedForestCover</name>
+    <name>MixedForest</name>
+    <name>RainForest</name> 
+    <name>DeciduousBroadCover</name>
+    <name>DeciduousForest</name>
+    <name>DeciduousNeedleCover</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+	    <texture>Terrain/tundra-hawaii.png</texture>
+    	<texture n="11">Terrain/dry_pasture4.png</texture>
+    	<texture n="13">Terrain/rock_red.png</texture>
+    </texture-set>
+		<parameters>
+			<hires_overlay_bias>-0.18</hires_overlay_bias>
+		</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <wood-coverage>20000.0</wood-coverage>
+    <tree-texture>Trees/caatinga-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>8.0</tree-height-m>
+    <tree-width-m>8.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+
+  <material>
+    <name>BarrenCover</name>
+    <name>Dirt</name>
+    <name>OpenMining</name>
+    <name>Rock</name>
+    <name>Dump</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+    	<texture>Terrain/gravel_red.png</texture>
+    	<texture n="13">Terrain/rock_red.png</texture>
+    </texture-set>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <!-- <wood-coverage>30000.0</wood-coverage> --> <!-- use this value if mask works -->
+    <wood-coverage>300000.0</wood-coverage>
+    <tree-texture>Trees/caatinga-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>8.0</tree-height-m>
+    <tree-width-m>8.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+    
+  <material>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>
+		<name>Grassland</name>
+    <name>GrassCover</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+    	<texture>Terrain/gravel_red.png</texture>
+    	<texture n="11">Terrain/grass_dry2.png</texture>
+    	<texture n="13">Terrain/rock_red.png</texture>
+    </texture-set>
+		<parameters>
+			<hires_overlay_bias>-0.1</hires_overlay_bias>
+		</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <!-- <wood-coverage>6500.0</wood-coverage> --> <!-- use this value if mask works -->
+    <wood-coverage>65000.0</wood-coverage>
+    <tree-texture>Trees/caatinga-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>8.0</tree-height-m>
+    <tree-width-m>8.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+  
+  <material>
+    <name>ShrubCover</name>
+    <name>ShrubGrassCover</name>
+    <name>ScrubCover</name>
+    <name>Scrub</name>
+    <name>Marsh</name>
+    <name>FloodLand</name>
+    <name>SaltMarsh</name>
+    <name>HerbWetlandCover</name>
+    <name>WoodedWetlandCover</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+    	<texture>Terrain/tundra-hawaii.png</texture>
+    	<texture n="11">Terrain/gravel_red.png</texture>
+    	<texture n="12">Terrain/grass_dry2.png</texture>
+    	<texture n="13">Terrain/rock_red.png</texture>
+    </texture-set>
+		<parameters>
+			<hires_overlay_bias>-0.07</hires_overlay_bias>
+		</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <!-- <wood-coverage>5000.0</wood-coverage> --> <!-- use this value if mask works -->
+    <wood-coverage>50000.0</wood-coverage>
+    <tree-texture>Trees/caatinga-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>10.0</tree-height-m>
+    <tree-width-m>10.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+  </material>
+
+  <material>
+    <name>DryCropPastureCover</name>
+    <name>DryCrop</name>
+    <effect>Effects/forest</effect>
+    <texture-set>
+	    <texture>Terrain/caatinga-crop.png</texture>
+    	<texture n="11">Terrain/gravel_red.png</texture>
+    	<texture n="13">Terrain/rock_red.png</texture>
+    </texture-set> 
+		<parameters>
+			<hires_overlay_bias>-0.12</hires_overlay_bias>
+		</parameters>
+    <object-mask>Terrain/caatinga-crop-mask.png</object-mask>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <!-- <wood-coverage>15000.0</wood-coverage> --> <!-- use this value if mask works -->
+    <wood-coverage>1500000.0</wood-coverage>
+    <tree-texture>Trees/caatinga-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>8.0</tree-height-m>
+    <tree-width-m>8.0</tree-width-m>
+    <rolling-friction>0.7</rolling-friction>
+    <bumpiness>0.8</bumpiness>
+  </material>
+
+  <material>
+    <name>ComplexCrop</name>
+    <name>MixedCrop</name>
+    <name>MixedCropPastureCover</name>
+    <effect>Effects/forest</effect>	
+    <texture-set>
+	    <texture>Terrain/caatinga-crop.png</texture>
+    	<texture n="11">Terrain/gravel_red.png</texture>
+    	<texture n="13">Terrain/rock_red.png</texture>
+    </texture-set> 
+		<parameters>
+			<hires_overlay_bias>-0.12</hires_overlay_bias>
+		</parameters>
+    <object-mask>Terrain/caatinga-crop-mask.png</object-mask>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>900000000.0</light-coverage>
+    <!-- <wood-coverage>12000.0</wood-coverage> --> <!-- use this value if mask works -->
+    <wood-coverage>120000.0</wood-coverage>
+    <tree-texture>Trees/caatinga-trees.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>8.0</tree-height-m>
+    <tree-width-m>8.0</tree-width-m>
+    <rolling-friction>0.7</rolling-friction>
+    <bumpiness>0.8</bumpiness>
+  </material>
+  
+  <material>  
+    <name>MixedForestCover</name>
+    <name>MixedForest</name>
+    <name>RainForest</name>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>
+    <name>DeciduousBroadCover</name>
+    <name>DeciduousForest</name>
+    <name>DeciduousNeedleCover</name>    
+    <effect>Effects/forest</effect>
+    <texture-set>
+      <texture>Terrain/rainforest-hawaii.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
+      <texture n="13">Terrain/rock_brown.png</texture>
+    </texture-set>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>5000000.0</light-coverage>
+    <wood-coverage>7000.0</wood-coverage>
+    <tree-texture>Trees/tropical-alt2.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>18.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>0.95</bumpiness>
+  </material>
+
+</PropertyList>

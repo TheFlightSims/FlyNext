@@ -1,0 +1,90 @@
+// format dfescription: https://www.omg.org/spec/IDL/4.2/PDF
+
+// Adapted from net_fdm.hxx
+module FG
+{
+
+// defining it this way also generates accompanying #defines in the header file.
+const octet DDS_PROP_VERSION = 0;
+const short DDS_PROP_REQUEST = -1;
+const char DDS_MODE_READ = 0;
+const char DDS_MODE_WRITE = 1;
+
+enum propType
+{
+    DDS_NONE,	// The node hasn't been assigned a value yet
+    DDS_ALIAS,	// The node "points" to another node
+    DDS_BOOL,
+    DDS_INT,	// 32-bit integer
+    DDS_LONG,	// 64-bit integer
+    DDS_FLOAT,	// 32-bit floating point number
+    DDS_DOUBLE,	// 64-bit floating point number
+    DDS_STRING,	// UTF-8 string
+    DDS_UNSPECIFIED // Resolves to STRING
+};
+
+union propValue switch ( propType )
+{
+    case DDS_BOOL:
+        char Bool;
+
+    case DDS_NONE:
+    case DDS_INT:
+        long Int32;
+
+    case DDS_LONG:
+        long long Int64;
+
+    case DDS_FLOAT:
+        float Float32;
+
+    case DDS_DOUBLE:
+        double Float64;
+
+    case DDS_ALIAS:
+    case DDS_STRING:
+    case DDS_UNSPECIFIED:
+        string String;
+};
+
+// Initial property request sequence
+// for properties where the id is not yet known:
+// 1. Set id to FG_DDS_PROP_REQUEST
+// 2. Set version to FG_DDS_PROP_VERSION
+// 3. Set mode to FG_DDS_MODE_READ
+// 4. set guid to the 16-char participants GUID
+// 5. Set val type to FG_DDS_STRING
+// 6. Set val String to the propery path
+// 7. Send the package.
+//
+// 8. Wait for an answer
+//    * Check whether guid matches the participants GUID.
+//    * The index of the requested propery path is stored in the id variable
+//      which should be used by successive request as the id for that property.
+//    * The val union holds the value of the propery.
+//
+// Successive property request sequence:
+// 1. Make sure id is to the id of the requested property
+// 2. Make sure version is to FG_DDS_PROP_VERSION
+// 3. Set mode to FG_DDS_MODE_READ or FG_DDS_MODE_WRITE
+// 3a. Optionally set the val union to match the property to overwrite.
+// 4. Send the package.
+//
+// 5. Wait for an answer
+//    * Check whether id matches the requested property id.
+//    * The val union holds the value of the propery.
+struct DDS_prop
+{
+    long id;		// 32-bit property index and DDS id.
+    octet version;	// 8-bit sample-type version number.
+
+    char mode;	// FG_DDS_MODE_READ or FG_DDS_MODE_WRITE
+    propValue val;	// property value or path.
+
+    // A sequence could be used here but unfortunatelly it's initializer
+    // already is 10-bytes in size.
+    octet guid[16];
+};
+#pragma keylist DDS_prop id
+
+}; // module FG

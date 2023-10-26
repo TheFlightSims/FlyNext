@@ -1,0 +1,80 @@
+# See: http://wiki.flightgear.org/MapStructure
+# Class things:
+var name = 'VFRChart';
+var parents = [OverlayLayer.Controller];
+var __self__ = caller(0)[0];
+OverlayLayer.Controller.add(name, __self__);
+TileLayer.add(name, {
+	parents: [TileLayer],
+	type: name, # Layer type
+	df_controller: __self__, # controller to use by default -- this one
+});
+
+var new = func(layer) {
+	var m = {
+		parents: [__self__],
+		layer: layer,
+		map: layer.map,
+		listeners: [],
+		source: nil,
+	};
+
+	#layer.makeURL = string.compileTemplate('http://vfrmap.com/20140918/tiles/vfrc/{z}/{y}/{x}.jpg');
+	#layer.makePath = string.compileTemplate(layer.maps_base ~ '/vfrchart/{z}/{x}/{tms_y}.png');
+
+	layer.max_zoom = 14;
+	layer.min_zoom = 4;
+
+	m.sources = [
+			{ name : 'US',
+				url : 'http://vfrmap.com/20140918/tiles/vfrc/{z}/{tms_y}/{x}.jpg',
+				path : layer.maps_base ~ '/vfrmap/{z}/{tms_y}/{x}.jpg',
+				min_zoom : 3, max_zoom : 12,
+				min_lat : 16, max_lat : 72,
+				min_lon : -179, max_lon: -60
+			},
+			{ name: 'DE',
+			 url : 'https://secais.dfs.de/static-maps/ICAO500-2015-EUR-Reprojected_07/tiles/{z}/{x}/{y}.png',
+			 path : layer.maps_base ~ '/secais/{z}/{x}/{y}.png',
+			 min_zoom : 5, max_zoom : 15,
+			 min_lat : 46, max_lat : 55.1,
+			 min_lon : 5, max_lon: 16.5  }
+		];
+
+
+	m.addVisibilityListener();
+	m.addRangeListener();
+	m.addScreenRangeListener();
+
+
+	return m;
+};
+
+var updateLayer = func() {
+	# Choose a source for the maps based on location.  For the moment
+	# this purely based on lat/lon bounds, but should be something
+	# more advanced as we get more sources.
+	var lat = me.map.getLat();
+	var lon = me.map.getLon();
+
+
+	foreach	(var source; me.sources) {
+		if ((source.min_lat < lat) and (source.max_lat > lat) and
+				(source.min_lon < lon) and (source.max_lon > lon)   )
+		{
+			if (source.name != me.source) {
+				me.layer.min_zoom = source.min_zoom;
+				me.layer.max_zoom = source.max_zoom;
+				me.layer.makeURL = string.compileTemplate(source.url);
+				me.layer.makePath = string.compileTemplate(source.path);
+				me.source = source.name;
+			}
+		}
+	}
+};
+
+var del = func() {
+	#print(name~".lcontroller.del()");
+	foreach (var l; me.listeners)
+		removelistener(l);
+};

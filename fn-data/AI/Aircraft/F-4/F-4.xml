@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    <path>F-4_lowpoly.ac</path>
+    <animation>
+        <type>select</type>
+        <object-name>landing-gear</object-name>
+        <condition>
+            <greater-than>
+                <property>gear/gear[0]/position-norm</property>
+                <value>0.6</value>
+            </greater-than>
+        </condition>
+    </animation>
+</PropertyList>

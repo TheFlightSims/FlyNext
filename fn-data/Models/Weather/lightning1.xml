@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+ <path>lightning1.ac</path>
+  	<offsets>
+      	 	<x-m> 0.00 </x-m>
+       		<y-m> 0.01</y-m>
+       		<z-m>-1.20 </z-m>
+    	</offsets>
+
+ 
+	<effect>
+		<object-name>rect</object-name>
+		<inherits-from>Effects/lightning</inherits-from>
+	</effect>
+
+
+  <animation>
+  		<type>scale</type>
+  		<x-offset>700.0</x-offset>
+  		<y-offset>700.0</y-offset>
+ 		<z-offset>1000.0</z-offset>
+  </animation>
+
+  <animation>
+    	<type>material</type>
+   	<emission>
+      		<red>   0.9 </red>
+      		<green> 0.9 </green>
+		<blue>  1.0 </blue>
+    	</emission>
+  </animation>
+
+ <animation>
+  <type>select</type>
+  <condition>
+   <and>
+   <greater-than>
+    <property>/environment/lightning/flash</property>
+    <value>0.0</value>
+   </greater-than>
+   <equals>
+     <property>/local-weather/lightning/model-index</property>
+     <value>1</value>
+   </equals>
+  </and>
+  </condition>
+ </animation>
+
+<animation>
+  <type>billboard</type>
+  <spherical>false</spherical>
+</animation>
+ 
+<animation>
+  <enable-hot type="bool">false</enable-hot>
+</animation>
+
+
+	<animation>
+		<type>noshadow</type>
+	</animation>
+</PropertyList>

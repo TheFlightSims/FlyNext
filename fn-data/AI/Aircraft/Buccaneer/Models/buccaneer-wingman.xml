@@ -1,0 +1,706 @@
+﻿<?xml version="1.0"?>
+<!-- Buccaneer model config file -->
+<!-- Vivian Meazza 2007/10/1 vivian.meazza@lineone.net -->
+<!-- Ver 0.1.0 -->
+<!-- Richard Harrison 2020-02-22 - low poly version -->
+<PropertyList>
+	<path>buccaneer-low-poly.ac</path>
+
+
+	<offsets>
+		<x-m>0</x-m>
+	</offsets>
+
+	<!-- *********** Rudder *************** -->
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Rudder</object-name>
+		<property>surface-positions/rudder-pos-norm</property>
+		<factor>-15</factor>
+		<axis>
+			<x1-m>16.0501</x1-m>
+			<y1-m>0</y1-m>
+			<z1-m>1.18808</z1-m>
+			<x2-m>16.6735</x2-m>
+			<y2-m>0</y2-m>
+			<z2-m>2.79738</z2-m>
+		</axis>
+	</animation>
+
+	<!--  ********** Ailerons ************ -->
+	<!-- Port -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Aileron-Port</object-name>
+		<property>surface-positions/left-aileron-pos-norm</property>
+		<factor>-42.5</factor>
+		<axis>
+			<x1-m>11.1886</x1-m>
+			<y1-m>-2.9227</y1-m>
+			<z1-m>0.366716</z1-m>
+			<x2-m>12.6736</x2-m>
+			<y2-m>-6.54553</y2-m>
+			<z2-m>0.275412</z2-m>
+		</axis>
+	</animation>
+
+	<!-- Starboard -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Aileron-Stbd</object-name>
+		<property>surface-positions/right-aileron-pos-norm</property>
+		<factor>42.5</factor>
+		<axis>
+			<x1-m>11.1886</x1-m>
+			<y1-m>2.9227</y1-m>
+			<z1-m>0.366716</z1-m>
+			<x2-m>12.6736</x2-m>
+			<y2-m>6.54553</y2-m>
+			<z2-m>0.275412</z2-m>
+		</axis>
+	</animation>
+
+	<!-- ********************* Elevators ***************** -->
+	<!--
+	-->
+	<!-- Tail Plane-->
+	<animation>
+		<type>rotate</type>
+		<object-name>Tail-Assmbly</object-name>
+		<property>surface-positions/elevator-pos-norm</property>
+		<factor>10</factor>
+		<center>
+			<x-m>16.2535.57</x-m>
+			<y-m>0</y-m>
+			<z-m>3.18725</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- Port -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Flap-Tail-Port</object-name>
+		<property>surface-positions/tail-flaps-pos-norm</property>
+		<factor>30</factor>
+		<axis>
+			<x1-m>17.1088</x1-m>
+			<y1-m>-2.194</y1-m>
+			<z1-m>3.19493</z1-m>
+			<x2-m>16.5068</x2-m>
+			<y2-m>-0.12744</y2-m>
+			<z2-m>3.19004</z2-m>
+		</axis>
+	</animation>
+
+	<!-- Stbd -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Flap-Tail-Stbd</object-name>
+		<property>surface-positions/tail-flaps-pos-norm</property>
+		<factor>-30</factor>
+		<axis>
+			<x1-m>17.1088</x1-m>
+			<y1-m>2.194</y1-m>
+			<z1-m>3.19493</z1-m>
+			<x2-m>16.5068</x2-m>
+			<y2-m>0.12744</y2-m>
+			<z2-m>3.19004</z2-m>
+		</axis>
+	</animation>
+
+	<!--  ************** Flaps ******************** -->
+	<!--
+	-->
+	<!-- Port -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Flap-Port</object-name>
+		<property>surface-positions/flap-pos-norm</property>
+		<factor>45</factor>
+		<axis>
+			<x1-m>11.1477</x1-m>
+			<y1-m>-2.92065</y1-m>
+			<z1-m>0.366882</z1-m>
+			<x2-m>10.6706</x2-m>
+			<y2-m>-1.69491</y2-m>
+			<z2-m>0.354456</z2-m>
+		</axis>
+	</animation>
+
+	<!-- Stbd -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Flap-Stbd</object-name>
+		<property>surface-positions/flap-pos-norm</property>
+		<factor>-45</factor>
+		<axis>
+			<x1-m>11.1477</x1-m>
+			<y1-m>2.92065</y1-m>
+			<z1-m>0.366882</z1-m>
+			<x2-m>10.6706</x2-m>
+			<y2-m>1.69491</y2-m>
+			<z2-m>0.354456</z2-m>
+		</axis>
+	</animation>
+
+	<!-- ****************** Undercarriage **************** -->
+	<!--
+	-->
+	<!-- Front U/C -->
+	<!--
+	-->
+	<!-- Extend/Retract -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Gear-Nose</object-name>
+		<object-name>Cone-texture</object-name>
+		<object-name>Cone</object-name>
+		<object-name>Light</object-name>
+		<property>gear/gear[0]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>82.5</dep>
+			</entry>
+			<!--<entry>
+				<ind>0.25</ind>
+				<dep>82.5</dep>
+			</entry>-->
+			<entry>
+				<ind>1</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>3.16747</x-m>
+			<y-m>0.0</y-m>
+			<z-m>-0.472047</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- Open/Close Doors -->
+	<!-- Door -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Door-Front</object-name>
+		<property>gear/gear/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>0.1</ind>
+				<dep>90</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>90</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>3.01056</x1-m>
+			<y1-m>0.146521</y1-m>
+			<z1-m>-0.624665</z1-m>
+			<x2-m>4.79913</x2-m>
+			<y2-m>0.152957</y2-m>
+			<z2-m>-0.717831</z2-m>
+		</axis>
+	</animation>
+
+	<!-- nose wheel castering -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Assmbly-Lower-Nose</object-name>
+		<object-name>F-Arm</object-name>
+		<object-name>F-DArm</object-name>
+		<!--<object-name>Light</object-name>
+    <object-name>Cone-texture</object-name>
+    <object-name>Cone</object-name>-->
+		<property>gear/gear/caster-angle-deg</property>
+		<!--		<property>gear/gear[0]/steering-norm</property>-->
+		<factor>1</factor>
+		<axis>
+			<x1-m>3.374</x1-m>
+			<y1-m>0</y1-m>
+			<z1-m>-0.374706</z1-m>
+			<x2-m>3.374</x2-m>
+			<y2-m>0</y2-m>
+			<z2-m>-0.999678</z2-m>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Pivot-Bracket</object-name>
+		<!--<object-name>Wheel-Fork-Pivot</object-name>-->
+		<property>gear/gear/caster-angle-deg</property>
+		<!--<property>gear/gear[0]/steering-norm</property>-->
+		<factor>1</factor>
+		<axis>
+			<x1-m>3.374</x1-m>
+			<y1-m>0</y1-m>
+			<z1-m>-0.374706</z1-m>
+			<x2-m>3.374</x2-m>
+			<y2-m>0</y2-m>
+			<z2-m>-0.999678</z2-m>
+		</axis>
+	</animation>
+
+	<!-- Compression -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Assmbly-Lower-Nose</object-name>
+		<property>gear/gear[0]/compression-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>-2</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>18</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>3.17039</x-m>
+			<y-m>-1.92861</y-m>
+			<z-m>-1.36823</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>Oleo-Nose</object-name>
+		<property>gear/gear[0]/compression-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>-0.0093</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0.1</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<!-- *** Tail Bumper *** -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Tail-Bumper</object-name>
+		<property>gear/gear[3]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>75</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>13.9884</x-m>
+			<y-m>0.0</y-m>
+			<z-m>-0.420321</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<!-- Compression -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Tail-Bumper</object-name>
+		<property>gear/gear[3]/compression-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>35</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>13.9884</x-m>
+			<y-m>0.0</y-m>
+			<z-m>-0.420321</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+
+	-->
+	<!-- Main U/C Left-->
+	<!--
+	-->
+	<!-- Extend/Retract -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Gear-Main-Port</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>64</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>-2</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>8.97018</x-m>
+			<y-m>-1.84485</y-m>
+			<z-m>0.26455</z-m>
+		</center>
+		<axis>
+			<x>1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Assmbly-Lower-Port</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>64</dep>
+			</entry>
+			<entry>
+				<ind>0.35</ind>
+				<dep>64</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>9.0435</x-m>
+			<y-m>1.92861</y-m>
+			<z-m>-0.672172</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>Oleo-Port</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0.1975</dep>
+			</entry>
+			<entry>
+				<ind>0.35</ind>
+				<dep>0.1975</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Door-Main-Port</object-name>
+		<property>gear/gear[1]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>-67.5</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>9.09345</x1-m>
+			<y1-m>-2.03621</y1-m>
+			<z1-m>0.193093</z1-m>
+			<x2-m>9.91029</x2-m>
+			<y2-m>-2.03621</y2-m>
+			<z2-m>0.208715</z2-m>
+		</axis>
+	</animation>
+
+	<!-- Compression -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Assmbly-Lower-Port</object-name>
+		<property>gear/gear[1]/compression-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>-4</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>60</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>9.0435</x-m>
+			<y-m>-1.92861</y-m>
+			<z-m>-0.672172</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>Oleo-Port</object-name>
+		<property>gear/gear[1]/compression-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>-0.0075</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0.19</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<!-- hide the undercarriage when retracted -->
+	<animation>
+		<type>select</type>
+		<object-name>Gear-Main-Port</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.02</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+	<!-- Main U/C - Right -->
+	<!--
+	-->
+	<!-- Extend/Retract -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Gear-Main-Stbd</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>64</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>-2</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>8.97018</x-m>
+			<y-m>1.84485</y-m>
+			<z-m>0.26455</z-m>
+		</center>
+		<axis>
+			<x>-1</x>
+			<y>0</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Assmbly-Lower-Stbd</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>64</dep>
+			</entry>
+			<entry>
+				<ind>0.35</ind>
+				<dep>64</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>9.0435</x-m>
+			<y-m>1.92861</y-m>
+			<z-m>-0.672172</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>Oleo-Stbd</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0.1975</dep>
+			</entry>
+			<entry>
+				<ind>0.35</ind>
+				<dep>0.1975</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>rotate</type>
+		<object-name>Door-Main-Stbd</object-name>
+		<property>gear/gear[2]/position-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>67.5</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x1-m>9.09345</x1-m>
+			<y1-m>2.03621</y1-m>
+			<z1-m>0.193093</z1-m>
+			<x2-m>9.91029</x2-m>
+			<y2-m>2.03621</y2-m>
+			<z2-m>0.208715</z2-m>
+		</axis>
+	</animation>
+
+	<!-- Compression -->
+	<animation>
+		<type>rotate</type>
+		<object-name>Assmbly-Lower-Stbd</object-name>
+		<property>gear/gear[2]/compression-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>-4</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>60</dep>
+			</entry>
+		</interpolation>
+		<center>
+			<x-m>9.0435</x-m>
+			<y-m>1.92861</y-m>
+			<z-m>-0.672172</z-m>
+		</center>
+		<axis>
+			<x>0</x>
+			<y>-1</y>
+			<z>0</z>
+		</axis>
+	</animation>
+
+	<animation>
+		<type>translate</type>
+		<object-name>Oleo-Stbd</object-name>
+		<property>gear/gear[2]/compression-norm</property>
+		<interpolation>
+			<entry>
+				<ind>0</ind>
+				<dep>0.0075</dep>
+			</entry>
+			<entry>
+				<ind>1</ind>
+				<dep>0.1900</dep>
+			</entry>
+		</interpolation>
+		<axis>
+			<x>0</x>
+			<y>0</y>
+			<z>1</z>
+		</axis>
+	</animation>
+
+	<!-- hide the undercarriage when retracted -->
+	<animation>
+		<type>select</type>
+		<object-name>Gear-Main-Stbd</object-name>
+		<condition>
+			<greater-than>
+				<property>gear/gear[0]/position-norm</property>
+				<value>0.02</value>
+			</greater-than>
+		</condition>
+	</animation>
+
+
+
+	
+</PropertyList>

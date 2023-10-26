@@ -1,0 +1,42 @@
+<PropertyList>
+
+  <name>DISABLED Leo Bodnar BU0836A Interface</name>
+  <debug-events type="bool">false</debug-events>
+
+
+  <event>
+    <desc>Aileron</desc>
+    <name>abs-x-rotate</name>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/aileron</property>
+      <offset>-1.0</offset>
+      <factor>-1.0</factor>
+    </binding>
+  </event>
+
+  <event>
+    <desc>Elevator</desc>
+    <name>abs-y-rotate</name>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/elevator</property>
+      <offset>-1.0</offset>
+      <factor>-1.0</factor>
+    </binding>
+  </event>
+<!--
+  <event>
+    <desc>Rudder</desc>
+    <name>abs-z-translate</name>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/rudder</property>
+      <offset>-0.5</offset>
+      <factor>-2.0</factor>
+      <power type="double">1.0</power>
+    </binding>
+
+  </event>
+-->
+</PropertyList>

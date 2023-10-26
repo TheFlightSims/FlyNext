@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+    
+    <name>highlighting</name>
+    <layout>vbox</layout>
+    <resizable>true</resizable>
+    <default-padding>6</default-padding>
+    
+    <!-- titlebar -->
+    <group>
+        <layout>hbox</layout>
+        <empty><stretch>1</stretch></empty>
+
+        <text>
+            <label>Highlighting</label>
+        </text>
+
+        <empty><stretch>1</stretch></empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+
+    <hrule/>
+        
+    <!-- checkbox -->
+    <checkbox>
+        <row>0</row>
+        <col>0</col>
+        <property>sim/highlighting/enabled</property>
+        <label>Enable highlighting</label>
+        <binding>
+            <command>dialog-apply</command>
+        </binding>
+    </checkbox>
+    
+    <hrule/>
+
+    <!-- properties, dialogs, menus, keypresses. -->
+    <property-list>
+        <name>property-list</name>
+        <pref-height>200</pref-height>
+        <pref-width>200</pref-width>
+        <halign>fill</halign>
+        <valign>fill</valign>
+        <stretch>true</stretch>
+        <property>/sim/highlighting/current-ptr</property>
+        <readonly>true</readonly>
+        <binding>
+            <command>dialog-apply</command>
+            <object-name>property-list</object-name>
+        </binding>
+    </property-list>
+
+    <nasal>
+        <open>
+            printf("open");
+            var self = cmdarg();
+            var dlgname = self.getNode("name").getValue();
+            var dlg = props.globals.getNode("/sim/gui/dialogs/" ~ dlgname, 1);
+            var update_interval = 0.5;
+            
+            var update = func(w) {
+                self.setValues({ "dialog-name": dlgname, "object-name": w });
+                fgcommand("dialog-update", self);
+            }
+            var auto_update = func {
+                update("property-list");
+                if (update_interval)
+                    settimer(auto_update, update_interval, 1);
+            }
+            auto_update();
+        </open>
+        <close>
+            update_interval = 0;
+        </close>
+    </nasal>
+
+</PropertyList>

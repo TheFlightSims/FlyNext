@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+	<description>Liaoning</description>
+	<author>Daniel Overbeck, Richard Harrison, Uxman (3d)</author>
+	<!-- 3d model from: https://sketchfab.com/3d-models/kuznetsov-aircraft-carrier-460d73a91efb49298c86ee347fae397c -->
+	<status>early-production</status>
+	<path>Kuznetsov.ac</path>
+	<nasal>
+		<load>
+			<![CDATA[
+			var self = cmdarg();
+			print("Model load Liaoning ", self.getPath());
+			var pathc = self.getPath();
+
+			# register the dialog
+
+			setprop(pathc~"/dlg-name", "Liaoning");
+
+
+
+	        ################
+	        # jet blast deflectors
+			var jbd_transit_time = 5.0;
+			setprop("/controls/liaoning/jbd[0]/state", 0);
+			setprop("/controls/liaoning/jbd[1]/state", 0);
+			setprop("/controls/liaoning/jbd[2]/state", 0);
+		
+	        var jbd0 = aircraft.door.new(pathc~"/surface-positions/jbd[0]", jbd_transit_time, 0);
+	        var jbd1 = aircraft.door.new(pathc~"/surface-positions/jbd[1]", jbd_transit_time, 0);
+	        var jbd2 = aircraft.door.new(pathc~"/surface-positions/jbd[2]", jbd_transit_time, 0);
+
+			var jbd_array = [jbd0, jbd1, jbd2];
+			var jbd_operate = func (i) {
+				var tgt = getprop("/controls/liaoning/jbd["~i~"]/state");
+				if (tgt == 1) {
+					print ("JBD ", i+1, " up.");
+					jbd_array[i].open();
+				} else {
+					print ("JBD ", i+1, " down.");
+					jbd_array[i].close();
+				}
+			}
+			var l_jbd0 = setlistener("/controls/liaoning/jbd[0]/state", func {jbd_operate(0);},0,0);
+			var l_jbd1 = setlistener("/controls/liaoning/jbd[1]/state", func {jbd_operate(1);},0,0);
+			var l_jbd2 = setlistener("/controls/liaoning/jbd[2]/state", func {jbd_operate(2);},0,0);
+   
+
+			setprop("/controls/liaoning/turn-to-launch-hdg", 0);
+			setprop("/controls/liaoning/turn-to-recovery-hdg", 0);
+			setprop("/controls/liaoning/turn-to-base-course", 1);
+			]]>
+		</load>
+	<unload>
+        <![CDATA[ 
+     	# clean up listeners
+     	removelistener(l_jbd0);
+     	removelistener(l_jbd1);
+     	removelistener(l_jbd2);
+        ]]>
+	</unload>
+	</nasal>
+	<model>
+		<name>flols</name>
+		<path>Models/Geometry/Nimitz/Models/flols.xml</path>
+		<offsets>
+			<x-m>65</x-m>
+			<y-m>-37</y-m>
+			<z-m>17</z-m>
+			<heading-deg>20</heading-deg>
+		</offsets>
+	</model>
+	<animation>
+		<type>range</type>
+		<min-m>0</min-m>
+		<max-m>30000</max-m>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>Radar</object-name>
+		<property>/sim/time/elapsed-sec</property>
+		<factor>35</factor>
+		<center>
+			<x-m>81.8</x-m>
+			<y-m>25.1</y-m>
+		</center>
+		<axis>
+			<z>1</z>
+		</axis>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>JetBlastDeflector-1</object-name>
+		<property>surface-positions/jbd[0]/position-norm</property>
+		<interpolation>
+			<entry><ind>0.0000</ind><dep>0</dep></entry>
+			<entry><ind>0.0833</ind><dep>12.2</dep></entry>
+			<entry><ind>0.1666</ind><dep>20.4</dep></entry>
+			<entry><ind>0.2500</ind><dep>28.2</dep></entry>
+			<entry><ind>0.3333</ind><dep>34.6</dep></entry>
+			<entry><ind>0.4166</ind><dep>40.6</dep></entry>
+			<entry><ind>0.5000</ind><dep>45</dep></entry>
+			<entry><ind>0.5833</ind><dep>49</dep></entry>
+			<entry><ind>0.6666</ind><dep>51.6</dep></entry>
+			<entry><ind>0.7500</ind><dep>54</dep></entry>
+			<entry><ind>0.8333</ind><dep>55</dep></entry>
+			<entry><ind>0.9166</ind><dep>56.2</dep></entry>
+			<entry><ind>1.0000</ind><dep>56.2</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>15.8</x-m>
+			<y-m>0</y-m>
+			<z-m>15.17</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>JetBlastDeflector-2</object-name>
+		<property>surface-positions/jbd[1]/position-norm</property>
+		<interpolation>
+			<entry><ind>0.0000</ind><dep>0</dep></entry>
+			<entry><ind>0.0833</ind><dep>12.2</dep></entry>
+			<entry><ind>0.1666</ind><dep>20.4</dep></entry>
+			<entry><ind>0.2500</ind><dep>28.2</dep></entry>
+			<entry><ind>0.3333</ind><dep>34.6</dep></entry>
+			<entry><ind>0.4166</ind><dep>40.6</dep></entry>
+			<entry><ind>0.5000</ind><dep>45</dep></entry>
+			<entry><ind>0.5833</ind><dep>49</dep></entry>
+			<entry><ind>0.6666</ind><dep>51.6</dep></entry>
+			<entry><ind>0.7500</ind><dep>54</dep></entry>
+			<entry><ind>0.8333</ind><dep>55</dep></entry>
+			<entry><ind>0.9166</ind><dep>56.2</dep></entry>
+			<entry><ind>1.0000</ind><dep>56.2</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>15.8</x-m>
+			<y-m>0</y-m>
+			<z-m>15.17</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>JetBlastDeflector-3</object-name>
+		<property>surface-positions/jbd[2]/position-norm</property>
+		<interpolation>
+			<entry><ind>0.0000</ind><dep>0</dep></entry>
+			<entry><ind>0.0833</ind><dep>12.2</dep></entry>
+			<entry><ind>0.1666</ind><dep>20.4</dep></entry>
+			<entry><ind>0.2500</ind><dep>28.2</dep></entry>
+			<entry><ind>0.3333</ind><dep>34.6</dep></entry>
+			<entry><ind>0.4166</ind><dep>40.6</dep></entry>
+			<entry><ind>0.5000</ind><dep>45</dep></entry>
+			<entry><ind>0.5833</ind><dep>49</dep></entry>
+			<entry><ind>0.6666</ind><dep>51.6</dep></entry>
+			<entry><ind>0.7500</ind><dep>54</dep></entry>
+			<entry><ind>0.8333</ind><dep>55</dep></entry>
+			<entry><ind>0.9166</ind><dep>56.2</dep></entry>
+			<entry><ind>1.0000</ind><dep>56.2</dep></entry>
+		</interpolation>
+		<center>
+			<x-m>107.9</x-m>
+			<y-m>0</y-m>
+			<z-m>15.17</z-m>
+		</center>
+		<axis>
+			<y>-1</y>
+		</axis>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>JetBlastDeflector-1</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/liaoning/jbd[0]/state</property>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>JetBlastDeflector-2</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/liaoning/jbd[1]/state</property>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>pick</type>
+		<object-name>JetBlastDeflector-3</object-name>
+		<action>
+			<button>0</button>
+			<repeatable>false</repeatable>
+			<binding>
+				<command>property-toggle</command>
+				<property>/controls/liaoning/jbd[2]/state</property>
+			</binding>
+		</action>
+	</animation>
+	<animation>
+		<type>interaction</type>
+		<object-name>wire-1</object-name>
+		<object-name>wire-2</object-name>
+		<object-name>wire-3</object-name>
+		<object-name>wire-4</object-name>
+		<interaction-type>carrier-wire</interaction-type>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>Bow-Wave</object-name>
+		<object-name>Stern-Wake</object-name>
+		<object-name>Wake</object-name>
+		<property>orientation/roll-deg</property>
+		<factor>1</factor>
+		<center><y-m>0.00</y-m><z-m>0.0473</z-m></center>
+		<axis><x>1</x></axis>
+	</animation>
+	<animation>
+		<type>rotate</type>
+		<object-name>Wake</object-name>
+		<property>surface-positions/rudder-pos-deg</property>
+		<factor>-0.334</factor>
+		<x-m>-88.6176</x-m>
+		<y-m>0.00</y-m>
+		<axis><z>-1</z></axis>
+		<enable-hot type="bool">false</enable-hot>
+	</animation>
+	<animation>
+		<type>noshadow</type>
+		<object-name>wire-1</object-name>
+		<object-name>wire-2</object-name>
+		<object-name>wire-3</object-name>
+		<object-name>wire-4</object-name>
+		<object-name>Wake</object-name>
+	</animation>
+</PropertyList>

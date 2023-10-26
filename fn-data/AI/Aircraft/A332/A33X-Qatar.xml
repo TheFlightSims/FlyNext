@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<PropertyList include="A33X-main.xml">
+
+ <texture-path>Textures/QatarAirways</texture-path>
+
+</PropertyList>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/bloom-upsample</name>
+  <parameters>
+    <filter-radius><use>/sim/rendering/hdr/bloom/filter-radius</use></filter-radius>
+  </parameters>
+  <technique n="1">
+    <pass>
+      <blend>
+        <active>true</active>
+        <source>one</source>
+        <destination>one</destination>
+      </blend>
+      <program>
+        <vertex-shader>Shaders/HDR/quad.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/bloom_upsample.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+      <uniform>
+        <name>filter_radius</name>
+        <type>float</type>
+        <value><use>filter-radius</use></value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

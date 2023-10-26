@@ -1,0 +1,435 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+	<name>als-filters</name>
+	<layout>vbox</layout>
+	<padding>20</padding>
+
+	<group>
+		<layout>hbox</layout>
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<text>
+			<label>ALS filter settings (experimental)</label>
+		</text>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<keynum>27</keynum>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+	</group>
+
+	<hrule/>
+
+	<!--<text>
+		<label>NOTE: To make full use of these filters</label>
+		<color>
+			<red>1.0</red>
+			<green>0.6</green>
+			<blue>0.3</blue>
+		</color>
+	</text>
+
+	<text>
+		<label>you should use maximum shader settings</label>
+		<color>
+			<red>1.0</red>
+			<green>0.6</green>
+			<blue>0.3</blue>
+		</color>
+	</text>
+
+	<hrule/>-->
+
+	<group>
+		<layout>vbox</layout>
+
+		<checkbox>
+			<halign>left</halign>
+			<enable>
+				<property>/sim/rendering/shaders/skydome</property>
+			</enable>
+			<label>Enable filters</label>
+			<name>master</name>
+			<property>/sim/rendering/als-filters/use-filtering</property>
+			<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-night-vision</property>
+					<value type="bool">false</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-IR-vision</property>
+					<value type="bool">false</value>
+				</binding>
+			<binding>
+				<command>dialog-apply</command>
+				<object-name>master</object-name>
+			</binding>
+		</checkbox>
+
+		<group>
+			<layout>hbox</layout>
+
+			<radio>
+				<halign>left</halign>
+				<label>Normal</label>
+				<live>true</live>
+				<property>/sim/rendering/als-filters/use-normal-filters</property>
+				<enable>
+					<property>/sim/rendering/shaders/skydome</property>
+					<property>/sim/rendering/als-filters/use-filtering</property>
+				</enable>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-night-vision</property>
+					<value type="bool">false</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-IR-vision</property>
+					<value type="bool">false</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-normal-filters</property>
+					<value type="bool">true</value>
+				</binding>
+			</radio>
+
+
+			<radio>
+				<halign>left</halign>
+				<label>Night vision</label>
+				<live>true</live>
+				<property>/sim/rendering/als-filters/use-night-vision</property>
+				<enable>
+					<property>/sim/rendering/shaders/skydome</property>
+					<property>/sim/rendering/als-filters/use-filtering</property>
+				</enable>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-night-vision</property>
+					<value type="bool">true</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-normal-filters</property>
+					<value type="bool">false</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-IR-vision</property>
+					<value type="bool">false</value>
+				</binding>
+			</radio>
+	
+			<radio>
+				<halign>right</halign>
+				<label>Infrared vision</label>
+				<live>true</live>
+				<property>/sim/rendering/als-filters/use-IR-vision</property>
+				<enable>
+					<property>/sim/rendering/shaders/skydome</property>
+					<property>/sim/rendering/als-filters/use-filtering</property>
+				</enable>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-IR-vision</property>
+					<value type="bool">true</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-night-vision</property>
+					<value type="bool">false</value>
+				</binding>
+				<binding>
+					<command>property-assign</command>
+					<property>/sim/rendering/als-filters/use-normal-filters</property>
+					<value type="bool">false</value>
+				</binding>
+			</radio>
+
+		</group>
+
+		<hrule/>
+
+		<group>
+			<layout>hbox</layout>
+
+			<text>
+				<halign>left</halign>
+				<label>Brightness</label>
+				<enable>
+					<and>
+						<property>/sim/rendering/shaders/skydome</property>
+						<property>/sim/rendering/als-filters/use-filtering</property>
+					</and>
+				</enable>
+			</text>
+
+			<group>
+				<layout>table</layout>
+
+				<slider>
+					<row>0</row>
+					<col>0</col>
+					<halign>right</halign>
+					<name>brightness-default</name>
+					<visible>
+						<and>
+							<not>
+								<property>/sim/rendering/als-filters/use-night-vision</property>
+							</not>
+							<not>
+								<property>/sim/rendering/als-filters/use-IR-vision</property>
+							</not>
+						</and>
+					</visible>
+					<enable>
+						<and>
+							<property>/sim/rendering/shaders/skydome</property>
+							<property>/sim/rendering/als-filters/use-filtering</property>
+						</and>
+					</enable>
+					<pref-width>250</pref-width>
+					<min>0.5</min>
+					<max>2</max>
+					<step>0.01</step>
+					<live>true</live>
+					<property>/sim/rendering/als-filters/brightness</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>brightness-default</object-name>
+					</binding>
+				</slider>
+	
+				<slider>
+					<row>0</row>
+					<col>0</col>
+					<halign>right</halign>
+					<name>brightness-night</name>
+					<visible>
+						<property>/sim/rendering/als-filters/use-night-vision</property>
+					</visible>
+					<enable>
+						<and>
+							<property>/sim/rendering/shaders/skydome</property>
+							<property>/sim/rendering/als-filters/use-filtering</property>
+						</and>
+					</enable>
+					<pref-width>250</pref-width>
+					<min>0.5</min>
+					<max>5</max>
+					<step>0.01</step>
+					<live>true</live>
+					<property>/sim/rendering/als-filters/brightness</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>brightness-night</object-name>
+					</binding>
+				</slider>
+
+				<slider>
+					<row>0</row>
+					<col>0</col>
+					<halign>right</halign>
+					<name>brightness-IR</name>
+					<visible>
+						<property>/sim/rendering/als-filters/use-IR-vision</property>
+					</visible>
+					<enable>
+						<and>
+							<property>/sim/rendering/shaders/skydome</property>
+							<property>/sim/rendering/als-filters/use-filtering</property>
+						</and>
+					</enable>
+					<pref-width>250</pref-width>
+					<min>0.4</min>
+					<max>2</max>
+					<step>0.01</step>
+					<live>true</live>
+					<property>/sim/rendering/als-filters/brightness</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>brightness-IR</object-name>
+					</binding>
+				</slider>
+
+			</group>
+
+		</group>
+
+		<group>
+			<layout>hbox</layout>
+
+			<text>
+				<halign>left</halign>
+				<label>Gamma</label>
+				<enable>
+					<and>
+						<property>/sim/rendering/shaders/skydome</property>
+						<property>/sim/rendering/als-filters/use-filtering</property>
+					</and>
+				</enable>
+			</text>
+
+			<group>
+				<layout>table</layout>
+
+				<slider>
+					<row>0</row>
+					<col>0</col>
+					<halign>right</halign>
+					<name>gamma-default</name>
+					<visible>
+					  <and>
+					    <not>
+					      <property>/sim/rendering/als-filters/use-night-vision</property>
+					    </not>
+					    <not>
+					      <property>/sim/rendering/als-filters/use-IR-vision</property>
+					    </not>
+					  </and>
+					</visible>
+					<enable>
+						<and>
+							<property>/sim/rendering/shaders/skydome</property>
+							<property>/sim/rendering/als-filters/use-filtering</property>
+						</and>
+					</enable>
+					<pref-width>250</pref-width>
+					<min>0</min>
+					<max>0.8</max>
+					<step>0.01</step>
+					<live>true</live>
+					<property>/sim/rendering/als-filters/gamma</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>gamma-default</object-name>
+					</binding>
+				</slider>
+
+				<slider>
+					<row>0</row>
+					<col>0</col>
+					<halign>right</halign>
+					<name>gamma-night</name>
+					<visible>
+						<property>/sim/rendering/als-filters/use-night-vision</property>
+					</visible>
+					<enable>
+						<and>
+							<property>/sim/rendering/shaders/skydome</property>
+							<property>/sim/rendering/als-filters/use-filtering</property>
+						</and>
+					</enable>
+					<pref-width>250</pref-width>
+					<min>-0.5</min>
+					<max>0.5</max>
+					<step>0.01</step>
+					<live>true</live>
+					<property>/sim/rendering/als-filters/gamma</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>gamma-night</object-name>
+					</binding>
+				</slider>
+
+				<slider>
+					<row>0</row>
+					<col>0</col>
+					<halign>right</halign>
+					<name>gamma-IR</name>
+					<visible>
+						<property>/sim/rendering/als-filters/use-IR-vision</property>
+					</visible>
+					<enable>
+						<and>
+							<property>/sim/rendering/shaders/skydome</property>
+							<property>/sim/rendering/als-filters/use-filtering</property>
+						</and>
+					</enable>
+					<pref-width>250</pref-width>
+					<min>0</min>
+					<max>1</max>
+					<step>0.01</step>
+					<live>true</live>
+					<property>/sim/rendering/als-filters/gamma</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>gamma-IR</object-name>
+					</binding>
+				</slider>
+
+			</group>
+
+		</group>
+
+
+	</group>
+
+	<hrule/>
+
+	<!--<text>
+		<label>To get reasonable results in night vision you have to adjust </label>
+	</text>
+
+	<text>
+		<label>brightness and gamma dependent on the current scene lighting</label>
+	</text>
+
+	<text>
+		<label>(Time of day, moonlight, etc.)</label>
+	</text>
+
+	<hrule/>-->
+
+	<group>
+		<layout>hbox</layout>
+
+		<button>
+			<legend>Reset filters</legend>
+				<enable>
+					<and>
+						<property>/sim/rendering/shaders/skydome</property>
+						<property>/sim/rendering/als-filters/use-filtering</property>
+					</and>
+				</enable>
+			<binding>
+				<command>property-assign</command>
+				<property>sim/rendering/als-filters/brightness</property>
+				<value type="float">1.0</value>
+			</binding>
+			<binding>
+				<command>property-assign</command>
+				<property>sim/rendering/als-filters/gamma</property>
+				<value type="float">0.0</value>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Close</legend>
+			<default>true</default>
+			<key>Esc</key>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+
+</PropertyList>

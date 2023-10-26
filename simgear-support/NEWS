@@ -1,0 +1,439 @@
+Version 1.9.0
+* Thu Dec 18 15:12:15 CST 2008
+
+
+Version 1.8.6
+* Mon Dec  1 14:02:47 CST 2008
+
+
+Version 1.8.5
+* October 30, 2008 (source code snapshot release)
+
+
+New in 0.3.10
+* April 5, 2006
+
+* Add a small accessor function to expose local timezone offset.
+* Improved exception handling and made output more helpful in various places.
+* Better pbuffer runtime detection.
+* Add directory creation capability to file/path library.
+* Added a basic reference counting class to improve robustness of
+  memory management in places.  Use this for all scenegraph
+  references, sgmaterial references, sgmatmodel references, and
+  sgsoundsample references.
+* Add support for point sprites.
+* Updates to rain cone rendering.
+* Add a new vector library and integrate that with improved coordinate
+  system conversion code.
+* Mutex locking and cleanup improvements in the threading abstraction
+  library.
+* Add MacOS RenderTexture support.
+* Add a Nasal based io libarary that is not activated by default.
+* Added a set of MS-VC8 project files.
+
+* Various platform related bug fixes.
+* Various compiler related bug/warning fixes.
+* Clean up some things that triggered valgrind warnings.
+* Fix a Nasal cmp() bug.
+* Removed ancient version of zlib from distribution.
+
+
+New in 0.3.9
+* November 17, 2005
+
+* Add support for OpenAL 1.1 (with a separate alut library.)
+* Add support for volumetric shadows.  Aircraft can cast shadows on themselves
+  as well as onto the ground (by Harald Johnsen.)
+* New 3d volumetric clouds by Harald Johnsen (along with several rounds of
+  followup fixes and improvements.)
+* Remove Mark Harris's old 3d clouds because they were never properly
+  integrated.  And we now have new 3d clouds.
+* Add support for seasonal textures (with a set of winter textures added
+  to FlightGear.)
+* Updated Nasal scripting system.  Adds several new syntax convenience
+  features, fixes parser bugs, fixes several internal bugs.
+* Our 3d cockpit jitter problem is fixed (woohoo!)
+* Add code to support rendering to a texture.
+* Allow "tip" popups to pop themselves down after the appropriate
+  timeout, even if the sim time is paused.
+* Various low model level animation fixes and additions ... color,
+  transparency, 'chrome' effects, randomized spin, etc.
+* Create our own portable stdint.h implementation.
+* Fixed several memory leaks.
+* removeChildren() added to the property system.
+* Fix many cases of 'const'.
+* Fixes for cygwin, solaris/sun, Mac OS X, MSVC, gcc-3.4.x.
+
+
+New in 0.3.8
+* January 18, 2005
+
+* Configure script does a sanity check for the existence of openal.
+* Better pthreads detection for FreeBSD.
+* Abstract out the location of gl.h, glu.h, and glut.h so we can more
+  easily support MacOS which puts these in an oddball location.
+* Added two new debug output types for instrumentation and systems.
+* Add a name parameter to the waypoint class for supporting a route
+  manager in the flightgear gps module.
+* Make display list usage optional.
+* Event manager: specifying a zero delay will force event execution in
+  the next frame rather than entering an infinite loop.
+* gcc-4.0 fix.
+* Fixes to property tree loading and saving.
+* Make volume inaudible at startup.
+* Solaris fixes.
+* For low density cloud coverage, blend the layer to nothing as we pass
+  through instead of fully engulfing the aircraft in the cloud.
+* Add several new capabilities to the texture management code for building
+  normal maps and doing some simple on-the-fly effects on textures.
+* Better error message for sound problems.
+* Add support for binding a thread to a specific CPU.
+
+
+New in 0.3.7
+* October 12, 2004
+
+* Add support for parsing xml from an in memory buffer, not just a file.
+* Don't reduce visibility for a "clear" cloud layer.
+* Add support for audio orientation (direction and cone) for internal
+  view and tower view.
+* Add support for drawing from display lists rather than in immediate mode.
+  This provides a big performance improvement on many systems.
+
+
+New in 0.3.6
+* July 29, 2004
+
+* Better MinGW support
+* A bit better handling of OpenAL under Cygwin
+* Switched audio system from plib's "sl/sm" to OpenAL.
+* Add support for scaling an object based on distance.  The scaling
+  factor is determined by a lookup table based on distance.
+* Add a "flash" animation type.
+* Fix cloud positioning/animation bugs.
+* Fix an off-by-one error in props_io.cxx
+* Clip audio gain (volume) to 1.0
+
+
+New in 0.3.5
+* March 26, 2004
+
+* Added Andy's nasal interpreter for small built in scripting tasks.
+  Nasal integrates nicely with FlightGear's property system.
+* Added new (much simpler) metar parsing code (removed older more
+  complex code.)
+* Support VASI/PAPI lights correctly.
+* Fixes to cloud animation.
+* Updates to sky dome coloring as well as sun/moon coloring.
+* Vary environment lighting with visibility (subtlety.)
+* Support control of alpha test in model animation.
+* Complete rewrite of the event manager.
+* Updates to low level socket code to make it more flexible.
+* Win32 serial port communication fixes.
+* sg_geodesy rewritten to be more accurate and robust and symmetric.
+
+
+New in 0.3.4
+* October 22, 2003
+
+* Removed Metakit, FlightGear no longer uses it.
+* Removed all glut dependencies from SimGear.
+* Moved FGEventMgr and FGSubsystemMgr over to SimGear.
+* Some more incremental work on 3D clouds.
+* Added some "fastmath" functions.
+* Some lighting tweaks and fixes (especially for taxiways.)
+* Added support for "blend" and "scale" and "texture" animations.
+* Added support for animating rotations around an arbitrary axis (so the
+  aircraft designer isn't forced to figure out animations as a combination
+  of rotations around X, Y, and X axes.
+* Updates to sky dome modeling and make cloud layers follow the curve
+  of the earth (sort of.)
+* Updates to sky dome, cloud, and sunrise/sunset color and lighting
+  effects to make them more realistic and lifelike.
+* Better support for detecting and using OpenGL extensions at run time.
+* Add support for win32-pthreads in MSVC.NET
+* Various MSVC fixes.
+* Various Solaris fixes.
+* Various cygwin/mingwin fixes.
+* Various Mac OS X fixes.
+* Various Irix fixes.
+
+
+New in 0.3.3
+* June 3, 2003
+
+* Fix a compile problem for cygwin
+* Updated/tweaked doxygen documentation in several areas
+
+
+New in 0.3.2
+* June 2, 2003
+
+* Moved quite a bit of low level model management and "state"
+  management code from FlightGear into SimGear and did a substantial
+  amount of restructuring and dependency clean up in the process.
+  Created a "scene" subdirectory with sub-subdirectories for material
+  management, basic model and model animation management, sky
+  rendering, and low level loaders for the "TerraGear" tile object format.
+* Removed support of the flat shaded and non-textured material
+  property variants.  You can still do these things, but extra states
+  are no longer set up automatically.
+* Removed 3d clouds from the default build ... these need a maintainer
+  or better yet, a complete plib-based rewrite.
+* Moved the FlightGear sound effect manager code over to SimGear.
+* Updated the cloud layer surface to better follow the inverted bowl
+  shape.
+* Much work on cloud/sky coloring, and also much work on
+  sunset/sunrise coloring.
+* Fixed an obscure bug in cloud texture loading which caused each
+  cloud texture to be loaded 5 times.  Ouch!
+* Various class and function renaming to make them better fit into the
+  standard SimGear naming scheme.
+* Added some additional convenience functions to the SGPath class.
+* Upgraded the distributed version of metakit.
+* FreeBSD fixes.
+* Irix fixes (better STL/ISO C++ header support.)
+* Mingwin fixes.
+* Better MacOS support
+* MSVC fixes.
+
+
+New in 0.3.1
+* December 4, 2002
+
+* Fix a major packaging blunder with several missing files.
+
+
+New in 0.3.0
+* December 3, 2002
+
+* removed interpreter subdir
+* NOMINAX fix for Cygwin/gcc-3.2
+* Added some prototype 3d clouds based on Mark Harris's demos.
+* Simplified the command manager interface
+* Allow an "include" attribute on root PropertyList element.
+
+
+New in 0.2.0
+* September 6, 2002
+
+* Modernized the autoconf/make scripts, plus lots of tweaks and enhancements.
+* Removed efence support (in favor of valgrind.)
+
+* Added a javascript interpreter.
+* SGSocket reimplemented on top of plib/net libs.
+* Added a new random number generation algorithm.
+* Total rewrite of the strutils package.
+
+* Patch for the random number seed.
+* IA-64 w/ Intel compiler fixes.
+* MSVC/MINGW fixes.
+* Mac OS X fixes.
+* Irix fixes.
+* Code clean ups to remove warning messages.
+* Optimizations in sg_binobj to reduce the amount of memory copying
+  needed when loading a binobj format file.
+* Fixed a couple places where variables could be used before they were
+  initialized.
+* Various property manager fixes and improvements.
+* Fixes to cloud layer management code.
+* Made the sky dome more flexible to facilitate use in other applications.
+
+
+New in 0.0.18
+* April 20, 2002
+
+* Created a src/libs subdirectory for several packages that need to be
+  installed by the user but are used by many other packages and may already
+  be installed.  So we just bundle the source separately as a convenience
+  if the user needs to build and install these.
+* Upgrade to zlib-1.1.4 (security fix)
+* Upgrade to metakit-2.4.2-32.tar.gz (latest upstream release)
+* Added support for point objects in the scenery file format.
+* Additions to the binary file format to make it *much* more flexible.
+  For each major primitive type: points, triangles, fans, and strips, you
+  can specify an index list of vertices, normals, colors, and texture
+  coordinates.  You can skip any of these you like to save on space.
+* Added support for new file features in the binary -> ascii scenery file
+  decoder.
+* Various code clean ups.
+* Separate XML I/O operations into a separate header file.
+* Major property manager rewrite, then lots of followup cleaning and
+  improvements.
+
+
+New in 0.0.17 (final)
+* February 16, 2002
+
+* Explicitely reset the glBlendFunc() after drawing the moon for the
+  Voodoo2 linux driver since it seems to have a bug in glPopAttrib().
+
+
+New in 0.0.17pre2
+* February 13, 2002
+
+* Replaced some cout's with SG_LOG's
+
+
+New in 0.0.17pre1
+* February 12, 2002
+
+* Removed metakit and zlib from build process.  Tarballs are still included
+  for those who's systems don't provide these packages.
+* MSVC fixes.
+* IRIX fixes.
+* Mingwin fixes.
+* Mac OS X fixes.
+* FreeBSD fixes.
+* Added support for Intel's C++ compiler under Linux.
+* Attempt to build in support for various non-compatible automake/autoconf
+  versions.
+* Fix for a problem that could lead to a bogus build for people with voodoo
+  cards.
+* Added Norman's jpegfactory code which can create jpeg format screen shots
+  of a live running application.
+* implemented set/get_log_classes and set/get_log_priority.
+* Socket library improvements.
+* Added a C++ exception abstraction.
+* Property manager fixes and improvements including node path caching
+  and debug tracing of property reads/writes.
+* Updates/fixes to xml handling.
+
+
+New in 0.0.16
+* July 12, 2001
+* Various changes to the property manager implementation to better support
+  dumping out the desired portions of the property tree to file.
+* Don't compile the metakit demos by default (causes problems for Irix)'
+* Other various tweaks for Irix.
+* Added a virtual destructor to XMLVisitor to fix a warning message.
+* Check for valid hostname lookup in sg_socket.cxx
+* Add a function to return modified julian date without creating an
+  entire SGTime class.  This avoids an extraneous warning about not
+  being able to find a timezone.
+* Created a mailing list for cvs commit messages.
+* Fixed a potential array under/over run bug in interpolator.cxx
+* Removed all references to SGValue from the property manager.  Added
+  support for an "archive" bit in the property manager to control
+  which values get written out.
+* Added SGCommandState class so that commands can compile and save
+  copies of their arguments for efficiency if they are called multiple
+  times.
+* Added Brian Baul's "tr" tiled rendering low level support library.
+  This along with some higher level code in flightgear allows us to do
+  ultra-hires tiled screen dumps suitable for large format printers.
+  (Norman Vine)
+
+
+New in 0.0.15
+* June 20, 2001
+* Various bug fixes, tweaks, and optimizations.
+* Added a command manager (analogous to the property manager)
+* Better Irix Mips support.
+* Various gcc-3.0 fixes.
+* Various MSVC fixes.
+* Added MSVC project files (automatically generated from the unix
+  automake configuration files.)
+* Removed total size limitation on interpolation table module.
+* Various Cygwin fixes.
+* Added some convenience functions to point3d.
+* Various compiler warning fixes.
+* Added a thread wrapper class (currently only supports pthreads)
+* Added IO routines for a lowlevel, native simgear binary 3d file
+  format optimized for TerraGear terrain.
+* Better endianness checking and support for the binary file
+  read/write routines.
+* Added doxygen comments for all public interface code.  Documentation
+  can be accessed via the SimGear web page.
+* Many FG -> SG name space changes for better consistency throughout
+  this package.
+* Added property aliases, repeated name tags, and a general xml
+  inclusion facilities.  Many other property manager clean ups
+  following a complete rewrite.
+* Fixed some critical null pointer bugs in property manager.
+* Magnetic variation can now be fetched for any arbitrary location.
+
+
+New in 0.0.14
+* December 14, 2000
+* Added a module to manage waypoints and routes, calculate bearing and
+  distance to next waypoint, lateral distance off route, etc.
+* Moved some of the basic time management code over from flightgear.
+* Bucket dimensions can be returned in meters
+* Added SOCK_STREAM (TCP) socket support to the networking code.
+* Updated random number generator interface so application can provide
+  it's own seed value as well as use the default time seed.
+* Added a routine to calculate the distance between a point and a line segment.
+* Updates to the property manager and the property list loader/saver.
+* Added an explanation of the rational behind our terrain texture coordinate
+  generation code.
+* Fixed sky dome so that the color at the horizon will always match
+  the specified fog color.
+* Did a fair amount of fg -> sg name space updating (lots left to do.)
+* Added support for KAI C++ on linux.
+* MSVC tweaks.
+* MacOS tweaks.
+* FreeBSD tweaks.
+
+
+New in 0.0.13
+* September 14, 2000
+* Added support for reading and writing xml files (easyxml)
+* Then updates to property manager and xml code.
+* Update magnetic variation code.
+* Sky code now uses glPushAttrib and glPopAttrib so it plays better with
+  other ssg based apps.
+* MacOS tweaks.
+* MSVC tweaks.
+
+
+New in 0.0.12
+* July 19, 2000
+* Converted project license from GPL to LGPL.
+* Moved low level IO (socket, file, serial) code over to SimGear.
+* Moved ephemeral code into simgear
+* Moved basic world time code into simgear
+* Added a property manager (registry)
+* Some documentation added.
+
+
+New in 0.0.11
+* July 3, 2000
+* Replaced gdbm with metakit
+* Added drop in sky (depends on plib)
+* Added spherical course and dist given two points calculations
+* MSVC5 fixes
+* Math/bucket/tiling tweaks from Norman Vine
+
+
+New in 0.0.7
+* March 29, 2000
+* Added support for RedHat package building contributed by Habibie 
+  <habibie@MailandNews.com>
+* Added gdbm to SimGear.  Many systems will already have gdbm installed so
+  it is only built if it doesn't already exist on the user's platform.
+  gdbm is a set of database routines that use extendible hashing and works
+  similar to the standard UNIX dbm routines.  This guarantees the availability
+  of gdbm to any application that uses SimGear.
+* Optimizations and bullet proofing of magnetic variation code by Norman 
+  Vine and Ed Williams
+
+
+New in 0.0.6
+* March 27, 2000
+* Added Nima World Magnetic Model 2000 contributed by Ed Williams
+* Fixes for MSVC++
+
+
+New in 0.0.5
+* March 17, 2000
+* Restructured directory layout to facilitate windows/mac IDE builds.
+
+
+New in 0.0.4
+* Removed mat3.h and friends (we now use plib's sg lib for these sorts of 
+  things.)
+
+
+New in 0.0.3
+* Release that coincides with FlightGear-0.7.2

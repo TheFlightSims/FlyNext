@@ -1,0 +1,144 @@
+<PropertyList>
+
+  <name>GoFlight GoFlight GF-T8 control module</name>
+  <debug-events type="bool">false</debug-events>
+
+<nasal>
+  <open>
+    <![CDATA[
+   
+      ]]>
+  </open>
+</nasal>
+
+  <event>
+    <name>led-misc-1</name>
+    <setting>
+      <value>1</value>
+      <condition>
+        <equals>
+          <property>/input/goflight/mfr/active</property>
+          <value>0</value>
+        </equals>
+      </condition>
+    </setting>
+    <setting>
+      <value>0</value>
+      <condition>
+        <not-equals>
+          <property>/input/goflight/mfr/active</property>
+          <value>0</value>
+        </not-equals>
+      </condition>
+    </setting>
+  </event>
+
+  <event>
+    <name>led-misc-2</name>
+    <setting>
+      <value>1</value>
+      <condition>
+        <equals>
+          <property>/input/goflight/mfr/active</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </setting>
+    <setting>
+      <value>0</value>
+      <condition> <command>property-swap</command>
+      <property>/input/goflight/mfr/standby-mhz</property>
+      <property>/input/goflight/mfr/selected-mhz</property>
+        <not-equals>
+          <property>/input/goflight/mfr/active</property>
+          <value>1</value>
+        </not-equals>
+      </condition>
+    </setting>
+  </event>
+
+  <event>
+    <name>led-misc-6</name>
+    <setting>
+      <property>/controls/flight/autospeedbrake</property>
+    </setting>
+  </event>
+
+  <event>
+    <name>led-misc-7</name>
+    <setting>
+      <property>/controls/gear/brake-parking</property>
+    </setting>
+  </event>
+
+  <event>
+    <name>display-brightness</name>
+    <setting>
+      <property>/input/goflight/tf8/brightness</property>
+    </setting>
+  </event>
+
+  <event>
+    <desc>Transfer Button</desc>
+    <name>button-1</name>
+    <binding>
+     
+    </binding>
+  </event>
+
+  <event>
+    <desc>Nav 1 Button</desc>
+    <name>button-2</name>
+    <binding>
+      <command>nasal</command>
+      <script>print('TF8 button2')</script>
+    </binding>
+        <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>print('TF8 button 2 down')</script>
+      </binding>
+    </mod-up>
+  </event>
+
+  <event>
+    <desc>Button 3</desc>
+    <name>button-3</name>
+    <binding>
+      <command>nasal</command>
+      <script>print('TF8 button 3')</script>
+    </binding>
+  </event>
+
+  <event>
+    <desc>Button 4</desc>
+    <name>button-4</name>
+    <binding>
+      <command>nasal</command>
+      <script>print('TF8 button 4 up')</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>print('TF8 button 4 down')</script>
+      </binding>
+    </mod-up>
+  </event>
+
+    <event>
+    <desc>Parking brake toggle</desc>
+    <name>button-8</name>
+    <binding>
+      <command>property-assign</command>
+      <property>/controls/gear/brake-parking</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+        <binding>
+      <command>property-assign</command>
+      <property>/controls/gear/brake-parking</property>
+      <value>0</value>
+      </binding>
+    </mod-up>
+  </event>
+</PropertyList>

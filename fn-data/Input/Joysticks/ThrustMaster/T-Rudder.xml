@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<!--
+************************************************************************
+* Setup for Thrustmaster T-Flight rudder pedals.
+*
+* These are USB rudder pedals with toe brakes.  Bindings are as
+* follows:
+*
+* Axis 0 (toe, right pedal): right differential brake
+* Axis 1 (toe, left pedal): left differential brake
+* Axis 2 (combined sliding pedal action): rudder (and nosewheel)
+*
+* Settings are similar to the pedals found in the Logitecgh G940 set:
+* Axes are numbered right-to-left for brakes.
+* Offset and Factor values are negative.
+************************************************************************
+* Re: Joystick xml codes Library project - open for contributi
+* Postby EFConrad » Fri Nov 25, 2016 10:15 am
+************************************************************************
+$Id$
+-->
+
+<PropertyList>
+
+ <name>T-Rudder</name>
+ <name>Thrustmaster T-Rudder</name>
+
+ <axis n="1">
+  <desc>Brake left</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/gear/brake-left</property>
+   <offset>-1.0</offset>
+   <factor>-0.5</factor>
+  </binding>
+ </axis>
+
+ <axis n="0">
+  <desc>Brake right</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/gear/brake-right</property>
+   <offset>-1.0</offset>
+   <factor>-0.5</factor>
+  </binding>
+ </axis>
+
+ <axis n="2">
+  <desc>Rudder</desc>
+  <binding>
+   <command>property-scale</command>
+   <property>/controls/flight/rudder</property>
+   <factor>1.0</factor>
+   <power>2</power>
+   <offset>0.0</offset>
+  </binding>
+ </axis>
+
+</PropertyList>

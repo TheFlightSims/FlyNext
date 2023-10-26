@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>Eyjafjallajokull</name>
+	<layout>vbox</layout>
+	<default-padding>1</default-padding>
+	<modal>false</modal>
+	<width>400</width>
+
+	<empty>
+		<pref-height>6</pref-height>
+	</empty>
+
+	<text>
+		<label>Eyjafjallajokull activity</label>
+	</text>
+
+	<empty>
+		<pref-height>4</pref-height>
+	</empty>
+
+	<hrule/>
+
+ <group>
+    <layout>table</layout>
+  
+    <text>
+      <label>Main crater activity</label>
+      <halign>left</halign>
+      <row>0</row>
+      <col>0</col>
+    </text>
+	
+	<text>
+      <label>dormant</label>
+      <row>0</row>
+      <col>1</col>
+    </text>
+
+    <slider>
+      <name>main</name>
+      <row>0</row>
+      <col>2</col>
+      <min>0</min>
+      <max>1</max>
+      <step>1</step>
+      <live>true</live>
+      <property>/environment/volcanoes/eyjafjallajokull/main-activity</property>
+      <binding>
+        <command>dialog-apply</command>
+        <object-name>main</object-name>
+      </binding>
+    </slider>
+
+    <text>
+      <label>active</label>
+      <row>0</row>
+      <col>3</col>
+    </text>
+
+
+	
+	
+
+
+
+</group>
+
+
+        <empty>
+		<pref-height>12</pref-height>
+	</empty>
+
+	<hrule/>
+
+	<empty>
+		<pref-height>20</pref-height>
+	</empty>
+
+ <group>
+    <layout>table</layout>
+
+	<button>
+       		<row>0</row>
+        	<col>0</col>
+		<legend>OK</legend>
+		<default>true</default>
+		<equal>true</equal>
+		<binding>
+			<command>dialog-apply</command>
+		</binding>
+
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+
+	<button>
+       		<row>0</row>
+        	<col>1</col>
+		<legend>Close</legend>
+		<default>true</default>
+		<key>Esc</key>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+
+</group>
+
+</PropertyList>

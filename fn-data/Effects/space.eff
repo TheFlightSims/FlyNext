@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Altitude-dependent scattered light -->
+<PropertyList>
+  <name>Effects/space</name>
+  <inherits-from>Effects/model-default</inherits-from>
+ 
+
+ <technique n="5">
+ <pass>
+ <program>
+        <vertex-shader n="0">Shaders/space-ALS-base.vert</vertex-shader>
+        <fragment-shader n="0">Shaders/space-ALS-base.frag</fragment-shader>
+  </program>
+  </pass>
+
+ </technique>
+</PropertyList>

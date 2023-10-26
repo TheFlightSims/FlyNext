@@ -1,0 +1,11 @@
+<div class="tabs vtabs">
+
+    <ul data-bind="foreach: topics">
+        <li data-bind="text: $data,
+                   css: { selected: $data == $parent.selectedTopic() },
+                   click: $parent.selectTopic"></li>
+    </ul>
+</div>
+<div id="vtabs-content" data-bind="component: { name: selectedComponent, params: { props: $root.props }}">
+    
+</div>

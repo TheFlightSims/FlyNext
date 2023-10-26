@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Saab Fairchild 340A Converted Freighter</description>
+  <author>Ian Tolosa</author>
+  <path>Models/SF3.ac</path>
+  <offsets>
+    <pitch-deg>0</pitch-deg>
+  </offsets>
+  <animation>
+    <type>select</type>
+    <object-name>SF3_Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>120</value>
+      </less-than>
+    </condition>
+  </animation>
+   <animation>
+    <type>spin</type>
+    <object-name>SF3_Prop_L</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>11</factor>
+    <center>
+      <x-m>-3.32505</x-m>
+      <y-m>-3.355</y-m>
+      <z-m>2.17847</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>spin</type>
+    <object-name>SF3_Prop_R</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>10</factor>
+    <center>
+      <x-m>-3.32505</x-m>
+      <y-m>3.355</y-m>
+      <z-m>2.17847</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/SF3/Effects/SFF-LightMap</inherits-from>
+    <object-name>SF3_Body</object-name>
+    <object-name>SF3_Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/SF3-NavLights.xml</path>
+  </model>
+</PropertyList>

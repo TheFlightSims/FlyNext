@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>A330-200</description>
+  <author>3D Model Innis Cunningham, UV map liveries Brett Harrison</author>
+  <path>Models/A332.ac</path>
+  <!-- Show Gear only when speed under 200 knots for parking and taxi and take off phases -->
+  <animation>
+    <type>select</type>
+    <object-name>gear</object-name>
+    <condition>
+      <greater-than>
+        <property>gear/gear[0]/position-norm</property>
+        <value>0.25</value>
+      </greater-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/A332/Effects/332-LightMap</inherits-from>
+    <object-name>body</object-name>
+    <object-name>gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/332-NavLights.xml</path>
+  </model>
+</PropertyList>

@@ -1,0 +1,213 @@
+<PropertyList>
+
+  <name>GoFlight MFR</name>
+  <debug-events type="bool">false</debug-events>
+
+<nasal>
+  <open>
+    <![CDATA[
+    var activeChannel = 0;
+    var activeNode = props.globals.getNode("/input/goflight/mfr/active", 1);
+    var standbyNode = props.globals.getNode("/input/goflight/mfr/standby-mhz", 1);
+    var selectedNode = props.globals.getNode("/input/goflight/mfr/selected-mhz", 1);
+    var brightnessNode = props.globals.getNode("/input/goflight/mfr/brightness", 8);
+
+    var updateActive = func(newActive)
+    {
+      activeChannel = newActive;
+      activeNode.setValue(activeChannel);
+
+      printlog("info", "GoFlight MFR: Active channel is now:" ~ activeChannel);
+      var prefix = "/instrumentation/nav[" ~ activeChannel ~ "]/frequencies/";
+
+      standbyNode.unalias();
+      standbyNode.alias(props.globals.getNode(prefix ~ "standby-mhz"));
+
+      selectedNode.unalias();
+      selectedNode.alias(props.globals.getNode(prefix ~ "selected-mhz"));
+    }
+
+    var cycleActive = func() {
+      activeChannel = activeChannel + 1;
+      if (activeChannel >= 2) activeChannel = 0;
+      updateActive();
+    }
+
+    # map decimal digits 0..9 to standard 7-segment LCD pattern
+    var translateDigitToSevenSegment = [0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f];
+
+    var formatFrequency = func(freqMhz)
+    {
+      var s = sprintf("%.3f", freqMhz);
+      var padCount = 6 - size(s);
+      var r = "";
+
+      while (padCount > 0) {
+        r ~= chr(0);
+        padCount -=1;
+      }
+
+      for (var i=0; i < size(s); i += 1) {
+        if (s[i] == `.`) {
+          # set the high bit to correspond to the decimal
+          var lastIndex = size(r) - 1;
+          r[lastIndex] = r[lastIndex] + 0x80;
+        } else {
+          var digitCode = s[i] - `0`;
+          r ~= chr(translateDigitToSevenSegment[digitCode]);
+        }
+      }
+
+      return r;
+    }
+
+    var standbyAlphanumeric = func() {
+      return formatFrequency(standbyNode.getValue());
+    }
+
+    var selectedAlphanumeric = func() {
+      return formatFrequency(selectedNode.getValue());
+    }
+
+    updateActive(0);
+      ]]>
+  </open>
+</nasal>
+
+  <event>
+    <name>rel-dial-0</name>
+    <binding>
+      <command>property-adjust</command>
+      <property>/input/goflight/mfr/standby-mhz</property>
+      <min type="double">108.0</min>
+      <max type="double">117.95</max>
+      <wrap type="bool">true</wrap>
+    </binding>
+    <interpolater>
+      <entry><ind>0</ind><dep>0</dep></entry>
+      <entry><ind>1</ind><dep>1</dep></entry>
+      <entry><ind>2</ind><dep>2</dep></entry>
+      <entry><ind>3</ind><dep>4</dep></entry>
+      <entry><ind>4</ind><dep>8</dep></entry>
+    </interpolater>
+  </event>
+
+<event>
+  <name>rel-dial-1</name>
+  <binding>
+    <command>property-adjust</command>
+    <property>/input/goflight/mfr/standby-mhz</property>
+    <factor type="double">0.025</factor>
+    <min type="double">108.0</min>
+    <max type="double">117.95</max>
+    <wrap type="bool">true</wrap>
+  </binding>
+  <interpolater>
+    <entry><ind>0</ind><dep>0</dep></entry>
+    <entry><ind>1</ind><dep>1</dep></entry>
+    <entry><ind>2</ind><dep>2</dep></entry>
+    <entry><ind>3</ind><dep>4</dep></entry>
+    <entry><ind>4</ind><dep>8</dep></entry>
+  </interpolater>
+</event>
+
+<report>
+  <report-id type="int">3</report-id>
+  <watch>/input/goflight/mfr/active</watch>
+  <!-- we can't watch the /input/goflight/mfr property, because it's an alias
+    and value changed notifications don't propogate. Bah. -->
+  <watch>/instrumentation/nav[0]/frequencies/selected-mhz</watch>
+  <watch>/instrumentation/nav[1]/frequencies/selected-mhz</watch>
+  <nasal-function>selectedAlphanumeric</nasal-function>
+</report>
+
+<report>
+  <report-id type="int">5</report-id>
+  <watch>/input/goflight/mfr/active</watch>
+  <!-- we can't watch the /input/goflight/mfr property, because it's an alias
+    and value changed notifications don't propogate. Bah. -->
+  <watch>/instrumentation/nav[0]/frequencies/standby-mhz</watch>
+  <watch>/instrumentation/nav[1]/frequencies/standby-mhz</watch>
+  <nasal-function>standbyAlphanumeric</nasal-function>
+</report>
+
+  <event>
+    <name>led-misc-1</name>
+    <setting>
+      <value>1</value>
+      <condition>
+        <equals>
+          <property>/input/goflight/mfr/active</property>
+          <value>0</value>
+        </equals>
+      </condition>
+    </setting>
+    <setting>
+      <value>0</value>
+      <condition>
+        <not-equals>
+          <property>/input/goflight/mfr/active</property>
+          <value>0</value>
+        </not-equals>
+      </condition>
+    </setting>
+  </event>
+
+  <event>
+    <name>led-misc-2</name>
+    <setting>
+      <value>1</value>
+      <condition>
+        <equals>
+          <property>/input/goflight/mfr/active</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </setting>
+    <setting>
+      <value>0</value>
+      <condition>
+        <not-equals>
+          <property>/input/goflight/mfr/active</property>
+          <value>1</value>
+        </not-equals>
+      </condition>
+    </setting>
+  </event>
+
+  <event>
+    <name>display-brightness</name>
+    <setting>
+      <property>/input/goflight/mfr/brightness</property>
+    </setting>
+  </event>
+
+  <event>
+    <desc>Transfer Button</desc>
+    <name>button-1</name>
+    <binding>
+      <command>property-swap</command>
+      <property>/input/goflight/mfr/standby-mhz</property>
+      <property>/input/goflight/mfr/selected-mhz</property>
+    </binding>
+  </event>
+
+  <event>
+    <desc>Nav 1 Button</desc>
+    <name>button-2</name>
+    <binding>
+      <command>nasal</command>
+      <script>updateActive(0)</script>
+    </binding>
+  </event>
+
+  <event>
+    <desc>Nav 2 Button</desc>
+    <name>button-3</name>
+    <binding>
+      <command>nasal</command>
+      <script>updateActive(1)</script>
+    </binding>
+  </event>
+
+</PropertyList>

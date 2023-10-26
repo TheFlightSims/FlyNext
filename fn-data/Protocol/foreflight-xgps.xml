@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+  <comment>
+    GPS information for ForeFlight or Garmin Pilot.
+
+    Broadcast (or send to specific IP) via UDP on port 49002 at 1 Hz:
+
+    --generic=socket,out,1,255.255.255.255,49002,udp,foreflight-xgps
+
+    See https://www.foreflight.com/support/network-gps/
+  </comment>
+  <generic>
+    <output>
+      <line_separator>newline</line_separator>
+      <var_separator>,</var_separator>
+      <chunk>
+        <name>Record type (XGPS) and simulator name</name>
+        <format>XGPSFlightGear</format>
+      </chunk>
+      <chunk>
+        <name>Longitude (deg)</name>
+        <type>float</type>
+        <format>%.3f</format>
+        <node>/position/longitude-deg</node>
+      </chunk>
+      <chunk>
+        <name>Latitude (deg)</name>
+        <type>float</type>
+        <format>%.3f</format>
+        <node>/position/latitude-deg</node>
+      </chunk>
+      <chunk>
+        <name>Altitude MSL (m)</name>
+        <type>float</type>
+        <format>%.1f</format>
+        <node>/position/altitude-ft</node>
+        <factor>0.3038</factor>
+      </chunk>
+      <chunk>
+        <name>Track (deg true)</name>
+        <type>float</type>
+        <format>%.3f</format>
+        <node>/orientation/track-deg</node>
+      </chunk>
+      <chunk>
+        <name>Ground speed (m/sec)</name>
+        <type>float</type>
+        <format>%.1lf</format>
+        <node>/velocities/groundspeed-kt</node>
+        <factor>0.50277</factor>
+      </chunk>
+    </output>
+  </generic>
+</PropertyList>

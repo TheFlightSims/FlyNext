@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>McDonnell Douglas MD-11</description>
+  <author>Ian (Yves) Tolosa, Nov 2018 - with parts of FDM model by jormapaappa1235, tikibar, and Joshua Davidson</author>
+  <path>Models/M1F.ac</path>
+  <!-- Gear Showed only < 170 knotspeed -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>170</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/M11/Effects/M1F-LightMap</inherits-from>
+    <object-name>M1F</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/M11-NavLights.xml</path>
+  </model>
+</PropertyList>

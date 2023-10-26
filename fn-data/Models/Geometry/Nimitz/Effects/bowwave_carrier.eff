@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+
+    <name>bowwave-truman</name>
+    <inherits-from>Effects/bowwave</inherits-from>
+
+    <parameters>
+		<speed-kt>
+			<use>controls/base-speed-kts</use>
+		</speed-kt>
+		<heading-deg>
+			<use>controls/base-course-deg</use>
+		</heading-deg>
+
+ 
+    </parameters>
+
+</PropertyList>

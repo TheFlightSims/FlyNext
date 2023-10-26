@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+  <params>
+    <power-source>/controls/lighting/nav-light</power-source>
+    <name>UfoLight</name>
+    <r>0.5</r>
+    <g>0.5</g>
+    <b>0.5</b>
+    <x-m/>
+    <y-m/>
+    <z-m/>
+    <heading-deg/>
+  </params>
+  <!-- search lights -->
+  <animation>
+    <type>select</type>
+    <object-name alias="/params/name"/>
+    <condition>
+      <property alias="/params/power-source"/>
+    </condition>
+  </animation>
+  <light>
+    <name alias="/params/name"/>
+    <type>point</type>
+    <position>
+      <x alias="/params/x-m"/>
+      <y alias="/params/y-m"/>
+      <z alias="/params/z-m"/>
+    </position>
+    <ambient>
+      <r alias="/params/r"/>
+      <g alias="/params/g"/>
+      <b alias="/params/b"/>
+      <a>1.0</a>
+    </ambient>
+    <diffuse>
+      <r>1.0</r>
+      <g>0.9</g>
+      <b>0.7</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.99</r>
+      <g>0.9</g>
+      <b>0.7</b>
+      <a>1.0</a>
+    </specular>
+    <debug-color>
+      <r>0.5</r>
+      <g>0.5</g>
+      <b>0</b>
+      <a>1.0</a>
+    </debug-color>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.35</l>
+      <q>0.44</q>
+    </attenuation>
+    <range-m>13</range-m>
+  </light>
+</PropertyList>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/ws30-water</name>
+  <inherits-from>Effects/ws30</inherits-from>
+  <!-- 
+       ALS ultra shaders.
+  -->  
+
+  <technique n="5">
+    <pass n="0">
+      <program n="0">
+        <fragment-shader n="0">Shaders/ws30-water-ALS-ultra.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
+
+  <!-- ALS High and Medium settings technique. 
+       Uses quality_level and tquality_level uniforms to change quality in fragment shader.
+  -->
+
+  <technique n="6">
+    <pass n="0">
+      <program n="0">
+        <fragment-shader n="0">Shaders/ws30-water-ALS-detailed.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
+
+  <!-- ALS low settings technique -->
+
+  <technique n="7">
+    <pass n="0">
+      <program n="0">
+        <fragment-shader n="0">Shaders/ws30-water-ALS.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
+
+  <!-- Non-ALS technique with texture rotation -->
+  <technique n="11">
+    <pass n="0">
+      <!-- Hardcoded texture unit as we don't do a material lookup -->
+      <texture-unit>
+        <unit>0</unit>
+        <type>2d</type>
+        <image>Textures/Terrain/water.png</image>
+        <filter>linear-mipmap-linear</filter>
+        <wrap-s>repeat</wrap-s>
+        <wrap-t>repeat</wrap-t>
+        <environment>
+          <mode>modulate</mode>
+        </environment>
+      </texture-unit>
+
+      <program n="0">
+        <!-- Note different index -->
+        <fragment-shader n="1">Shaders/ws30-water-q1.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
+
+  <!-- Minimal technique -->
+  <technique n="12">
+    <pass n="0">
+      <!-- Hardcoded texture unit as we don't do a material lookup -->
+      <texture-unit>
+        <unit>0</unit>
+        <type>2d</type>
+        <image>Textures/Terrain/water.png</image>
+        <filter>linear-mipmap-linear</filter>
+        <wrap-s>repeat</wrap-s>
+        <wrap-t>repeat</wrap-t>
+        <environment>
+          <mode>modulate</mode>
+        </environment>
+      </texture-unit>
+
+      <program n="0">
+        <!-- Note different index -->
+        <fragment-shader n="1">Shaders/ws30-water-q1.frag</fragment-shader>
+      </program>
+    </pass>
+  </technique>
+
+
+</PropertyList>

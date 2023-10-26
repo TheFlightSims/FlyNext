@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <name>Hawaii Big Island</name>
+  <area>
+    <lon1>-156.5</lon1>
+    <lon2>-154.0</lon2>
+    <lat1>18.8</lat1>
+    <lat2>20.5</lat2>
+  </area>
+
+  <condition>
+    <equals>
+      <property>sim/startup/season</property>
+      <value>summer</value>
+    </equals>
+  </condition>
+  
+  
+  <material>
+    <name>Lava</name>
+    <name>Burnt</name>
+	<effect>Effects/terrain-overlay</effect>
+	<texture-set>
+      <texture>Terrain/lava1.png</texture>
+	  <texture n="12">Terrain/rocks-lava.png</texture>
+	  <texture n="11">Terrain/lava_hires.png</texture>
+	  <texture n="13">Terrain/rocks-lava.png</texture>
+	  <texture n="20">Terrain/lava_hires.png</texture>
+	</texture-set>
+	<parameters>
+	  <hires_overlay_bias>-0.05</hires_overlay_bias> 
+	  <transition_model>1.0</transition_model> 
+	  <max_overlay_height>1.2</max_overlay_height>
+	  <overlay_hardness>1.0</overlay_hardness>
+	  <overlay_density>0.1</overlay_density>
+	  <overlay_autumn_flag>0</overlay_autumn_flag>
+	  <overlay_brightness_top>0.8</overlay_brightness_top>
+	  <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+	</parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+  </material>
+  
+ </PropertyList>

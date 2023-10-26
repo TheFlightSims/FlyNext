@@ -1,0 +1,630 @@
+<?xml version="1.0"?>
+<!-- Regional definitions for Europe -->
+<PropertyList>
+  <name>Europe</name>
+  <area>
+    <lon1>2.0</lon1>
+    <lon2>40.0</lon2>
+    <lat1>35.0</lat1>
+    <lat2>90.0</lat2>
+  </area>
+
+  <area>
+    <lon1>-20.0</lon1>
+    <lon2>40.0</lon2>
+    <lat1>35.0</lat1>
+    <lat2>49.8</lat2>
+  </area>
+
+  <condition>
+    <equals>
+      <property>sim/startup/season</property>
+      <value>summer</value>
+    </equals>
+  </condition>
+
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <effect>Effects/grass</effect>
+    <texture-set>
+      <texture>Terrain/airport-grass-summer.png</texture>
+      <texture n="13">Terrain/airport-grass-summer.png</texture>
+      <texture n="14">Terrain/airport_grass_structure_overlay2.png</texture>
+      <texture n="20">Terrain/airport-grass-summer.png</texture>
+    </texture-set>
+    <parameters>
+      <grit_alpha>0.4</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <overlay_layer_magnification>60.0</overlay_layer_magnification>
+      <!-- overlay_alpha is greater than one here. 
+           Reason: structure texture alpha was multiplied by 0.7 to 
+                   work for lowest cases when that texture is used in
+                   the grain slot which doesn't have alpha as of Oct 2020.
+                   Target alpha multiplier is ~0.85. 0.85/0.7 = 1.21
+      -->
+      <overlay_alpha>1.21</overlay_alpha>
+      <use_grain>0</use_grain>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
+      <max_grass_height>0.3</max_grass_height>
+      <grass_density>1.0</grass_density>
+      <grass_groups>2</grass_groups>
+      <grass_modulate_by_overlay>0</grass_modulate_by_overlay>
+      <grass_modulate_height_min>0.0</grass_modulate_height_min>
+    </parameters>
+    <xsize>256</xsize>
+    <ysize>256</ysize>
+    <light-coverage>4000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+    <load-resistance>1e30</load-resistance>    
+  </material>
+
+  <material>
+    <name>Greenspace</name>
+    <effect>Effects/agriculture</effect>
+    <texture>Terrain/golfcourse1-autumn.png</texture>
+    <object-mask>Terrain/golfcourse1.mask.png</object-mask>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
+    <xsize>800</xsize>
+    <ysize>800</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <wood-coverage>500.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+  </material>
+
+   <material>
+    <name>BarrenCover</name>
+    <name>Dirt</name>
+    <name>OpenMining</name>
+    <name>Rock</name>
+    <name>Dump</name>
+    <name>Cliffs</name>
+    <effect>Effects/rock</effect>
+    <texture-set>
+      <texture>Terrain/rock.png</texture>
+      <texture n="11">Terrain/grass_hires.png</texture>
+      <texture n="12">Terrain/rock_alt.png</texture>
+      <texture n="13">Terrain/rock.png</texture>
+      <texture n="14">Terrain/grain_texture.png</texture>
+    </texture-set>
+    <parameters>
+      <grain_strength>0.7</grain_strength>
+      <transition_model>0.3</transition_model>
+      <hires_overlay_bias>-0.2</hires_overlay_bias>
+      <overlay-alpha type="float">0.4</overlay-alpha>
+      <overlay-bias type="float">0.0</overlay-bias>
+      <contrast type="float">1.0</contrast>
+      <crack-depth type="float">0.6</crack-depth>
+      <crack-pattern-stretch type="float">7.0</crack-pattern-stretch>
+      <rock-brightness type="float">1.0</rock-brightness>
+      <grain-fade-power type="float">1.0</grain-fade-power>
+      <rock_strata>0</rock_strata>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+  </material>
+
+  <material>
+  <name>CropGrassCover</name>
+  <name>CropGrass</name>
+  <effect>Effects/cropgrass</effect>
+  <tree-effect>Effects/tree-european-deciduous</tree-effect>
+  <texture>Terrain/irrcrop.png</texture>
+  <object-mask>Terrain/irrcrop.mask.png</object-mask>
+  <parameters>
+    <rotation_flag>0</rotation_flag>
+    <rotation_scale>8000.0</rotation_scale>
+  </parameters>
+  <xsize>3000</xsize>
+  <ysize>3000</ysize>
+  <solid>1</solid>
+  <friction-factor>0.9</friction-factor>
+  <rolling-friction>0.1</rolling-friction>
+  <bumpiness>0.6</bumpiness>
+  <load-resistance>1e30</load-resistance>
+  <object-group include="Materials/base/farm-buildings.xml"/>
+  <light-coverage>2000000.0</light-coverage>
+  <wood-coverage>10000.0</wood-coverage>
+  <tree-texture>Trees/deciduous-alt.png</tree-texture>
+  <tree-varieties>8</tree-varieties>
+  <tree-height-m>20.0</tree-height-m>
+  <tree-width-m>12.0</tree-width-m>
+</material>
+
+  <material>
+    <effect>Effects/agriculture</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
+    <name>NaturalCrop</name>
+    <texture>Terrain/drycrop.png</texture>
+    <object-mask>Terrain/drycrop.mask.png</object-mask>
+    <parameters>
+      <rotation_flag>0</rotation_flag>
+      <rotation_scale>8000.0</rotation_scale>
+      <edge-hardness>0.5</edge-hardness>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <wood-coverage>5000.0</wood-coverage>
+    <object-group include="Materials/base/farm-buildings.xml"/>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+  </material>
+
+  <material>
+    <name>BuiltUpCover</name>
+    <name>Urban</name>
+    <tree-effect>Effects/tree-european-deciduous</tree-effect>
+    <effect>Effects/urban</effect>
+    <texture-set>
+      <texture>Terrain/18th_century_city.png</texture>
+      <texture n="2">Terrain/18th_century_city-relief-light.png</texture>
+    </texture-set>    
+    <object-mask>Terrain/18th_century_city.mask.png</object-mask>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <light-coverage>100000.0</light-coverage>
+    <emissive>
+      <r>0.05</r>
+      <g>0.05</g>
+      <b>0.02</b>
+      <a>1.0</a>
+    </emissive>
+    <object-group include="Materials/base/urban-buildings.xml"/>
+    <building-coverage>500.0</building-coverage>
+    <building-small-ratio>0.4</building-small-ratio>
+    <building-small-min-floors>3</building-small-min-floors>
+    <building-small-max-width-m>30.0</building-small-max-width-m>
+    <building-small-min-depth-m>10.0</building-small-min-depth-m>
+    <building-small-max-depth-m>30.0</building-small-max-depth-m>
+    <building-medium-ratio>0.6</building-medium-ratio>
+    <building-large-ratio>0.2</building-large-ratio>
+    <building-texture>Textures/buildings.png</building-texture>
+    <building-lightmap>Textures/buildings-lightmap.png</building-lightmap>
+    <wood-coverage>250000.0</wood-coverage>
+    <tree-texture>Trees/deciduous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>15.0</tree-height-m>
+    <tree-width-m>10.0</tree-width-m>
+    <parameters>
+      <edge-hardness>0.8</edge-hardness>
+    </parameters>
+  </material>
+
+  <material>
+    <name>Construction</name>
+    <name>Industrial</name>
+    <effect>Effects/urban</effect>
+    <tree-effect>Effects/tree-european-deciduous</tree-effect>
+    <texture-set>
+      <texture>Terrain/industrial-alt.png</texture>
+      <texture n="2">Terrain/industrial-alt-relief-light.png</texture>
+    </texture-set>
+    <texture-set>
+      <texture>Terrain/industrial-alt2.png</texture>
+      <texture n="2">Terrain/industrial-alt2-relief-light.png</texture>
+    </texture-set>
+    <object-mask>Terrain/industrial.alt.mask.png</object-mask>
+    <object-mask>Terrain/industrial.alt2.mask.png</object-mask>
+    <parameters>
+      <urban_blend>1</urban_blend>
+      <blend_bias>0.2</blend_bias>
+      <hires_overlay_bias>-1.0</hires_overlay_bias>
+      <edge-hardness>0.8</edge-hardness>
+    </parameters>
+    <xsize>1024</xsize>
+    <ysize>1024</ysize>
+    <light-coverage>100000.0</light-coverage>
+    <emissive>
+      <r>0.05</r>
+      <g>0.05</g>
+      <b>0.02</b>
+      <a>1.0</a>
+    </emissive>
+    <object-group include="Materials/base/industrial-buildings.xml">
+      <object>
+        <path>Models/Industrial/Industrial110x185.xml</path>
+        <path>Models/Industrial/Industrial150x115.xml</path>
+        <path>Models/Industrial/Industrial85x160.xml</path>
+        <coverage-m2>5000</coverage-m2>
+        <heading-type>mask</heading-type>
+        <spacing-m>80</spacing-m>
+      </object>
+    </object-group>
+    <building-medium-max-floors>4</building-medium-max-floors>
+    <wood-coverage>1000.0</wood-coverage>
+    <tree-texture>Trees/deciduous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>15.0</tree-height-m>
+    <tree-width-m>10.0</tree-width-m>
+  </material>
+
+  <material>
+    <name>Town</name>
+    <name>SubUrban</name>
+    <effect>Effects/urban</effect>
+    <tree-effect>Effects/tree-european-deciduous</tree-effect>
+    <texture-set>
+      <texture>Terrain/town-europe-autumn.png</texture>
+      <texture n="2">Terrain/town-europe-relief-light.png</texture>
+    </texture-set>    
+    <object-mask>Terrain/town-europe.mask.png</object-mask>
+    <xsize>1024</xsize>
+    <ysize>1024</ysize>
+    <light-coverage>100000.0</light-coverage>
+    <emissive>
+      <r>0.05</r>
+      <g>0.05</g>
+      <b>0.02</b>
+      <a>1.0</a>
+    </emissive>
+    <object-group include="Materials/base/town-buildings.xml"/>
+    <building-coverage>500.0</building-coverage>
+    <building-small-ratio>0.9</building-small-ratio>
+    <building-medium-ratio>0.1</building-medium-ratio>
+    <building-large-ratio>0.0</building-large-ratio>
+    <building-medium-max-floors>4</building-medium-max-floors>
+    <building-texture>Textures/buildings.png</building-texture>
+    <building-lightmap>Textures/buildings-lightmap.png</building-lightmap>
+    <wood-coverage>1000.0</wood-coverage>
+    <tree-texture>Trees/deciduous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>15.0</tree-height-m>
+    <tree-width-m>10.0</tree-width-m>
+    <parameters>
+      <edge-hardness>0.9</edge-hardness>
+    </parameters>
+  </material>
+
+  <material>
+    <name>Marsh</name>
+    <name>FloodLand</name>
+    <name>SaltMarsh</name>
+    <name>HerbWetlandCover</name>
+    <name>WoodedWetlandCover</name>
+    <texture>Terrain/marsh2a.png</texture>
+    <texture>Terrain/marsh3a.png</texture>
+    <texture>Terrain/marsh4a.png</texture>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <solid>1</solid>
+    <light-coverage>40000000.0</light-coverage>
+    <friction-factor>0.8</friction-factor>
+    <rolling-friction>0.3</rolling-friction>
+    <bumpiness>0.2</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <name>Littoral</name>
+    <effect>Effects/water</effect>
+    <texture-set>
+      <texture>Terrain/tidal.png</texture>
+      <texture n="10">Terrain/mud.png</texture>
+      <texture n="14">Terrain/sand_overlay.png</texture>
+      <texture n="15">Terrain/sand1.png</texture>
+      <texture n="20">Terrain/sand6_hires.png</texture>
+    </texture-set>
+    <parameters>
+      <ice_cover><use>/environment/sea/surface/delta-T-tide</use></ice_cover>
+      <grit_alpha>0.4</grit_alpha>
+      <base_layer_magnification>1.0</base_layer_magnification>
+      <use_overlay>1</use_overlay>
+      <overlay_bias>0.5</overlay_bias>
+      <use_color_overlay>0</use_color_overlay>
+      <overlay_layer_magnification>60.0</overlay_layer_magnification>
+      <overlay_alpha>1.21</overlay_alpha>
+      <use_grain>0</use_grain>
+      <grain_layer_magnification>4.0</grain_layer_magnification>
+      <waterline-start>0.99</waterline-start>
+      <waterline-end>0.995</waterline-end>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <light-coverage>40000000.0</light-coverage>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.8</friction-factor>
+    <rolling-friction>0.4</rolling-friction>
+    <bumpiness>0.2</bumpiness>
+    <load-resistance>1e30</load-resistance>
+  </material>
+
+  <material>
+    <effect>Effects/agriculture</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
+    <name>MixedCropPastureCover</name>
+    <name>MixedCrop</name>
+    <name>ComplexCrop</name>
+    <texture>Terrain/countryside1.green.png</texture>
+    <texture>Terrain/countryside3.green.png</texture>
+    <object-mask>Terrain/countryside1.green.mask.png</object-mask>
+    <object-mask>Terrain/countryside3.green.mask.png</object-mask>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.7</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <object-group include="Materials/base/farm-buildings.xml"/>
+    <wood-coverage>2000.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+    <parameters>
+      <edge-hardness>0.1</edge-hardness>
+    </parameters>
+  </material>
+
+  <material>
+    <effect>Effects/agriculture</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
+    <name>DryCrop</name>
+    <name>DryCropPastureCover</name>
+    <name>GreenSpace</name>
+    <texture>Terrain/countryside2.green.png</texture>
+    <texture>Terrain/countryside4.green.png</texture>
+    <object-mask>Terrain/countryside2.green.mask.png</object-mask>
+    <object-mask>Terrain/countryside4.green.mask.png</object-mask>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.7</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <object-group include="Materials/base/farm-buildings.xml"/>
+    <wood-coverage>2000.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+    <parameters>
+      <edge-hardness>0.1</edge-hardness>
+    </parameters>
+  </material>
+
+  <material>
+    <effect>Effects/crop</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
+    <name>IrrCropPastureCover</name>
+    <name>IrrCrop</name>
+    <name>Orchard</name>
+    <name>Olives</name>
+    <name>Vineyard</name>
+    <name>Rice</name>
+    <texture>Terrain/irrcrop-europe-autumn.png</texture>
+    <object-mask>Terrain/irrcrop-europe.mask.png</object-mask>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.3</rolling-friction>
+    <bumpiness>0.6</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <object-group include="Materials/base/farm-buildings.xml"/>
+    <wood-coverage>5000.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+  </material>
+
+    <material>
+    <effect>Effects/terrain-overlay</effect>
+    <tree-effect>Effects/tree-european-deciduous</tree-effect>
+    <name>DeciduousBroadCover</name>
+    <name>DeciduousForest</name>
+    <name>Bog</name>
+    <name>Heath</name>
+    <texture-set>
+      <texture>Terrain/deciduous-hires-autumn.png</texture>
+      <texture n="20">Terrain/mixedforest-hires-autumn.png</texture>
+    </texture-set>
+    <parameters>
+      <max_overlay_height>2.0</max_overlay_height>
+      <overlay_hardness>0.0</overlay_hardness>
+      <overlay_density>1.0</overlay_density>
+      <overlay_autumn_flag>1</overlay_autumn_flag>
+      <overlay_brightness_top>1.4</overlay_brightness_top>
+      <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/deciduous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>15.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>0.85</bumpiness>
+  </material>
+
+   <material>
+    <effect>Effects/terrain-overlay</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
+    <name>MixedForestCover</name>
+    <name>MixedForest</name>
+    <name>RainForest</name>
+    <texture-set>
+     <texture>Terrain/mixedforest-hires-autumn.png</texture>
+     <texture n="12">Terrain/rock.png</texture> 
+     <texture n="15">Terrain/rock.png</texture>
+     <texture n="20">Terrain/mixedforest-hires-autumn.png</texture>
+     </texture-set>
+     <parameters>
+      <hires_overlay_bias>-0.1</hires_overlay_bias>
+      <transition_model>0.9</transition_model>
+      <dot_density>0.2</dot_density>
+      <max_overlay_height>2.0</max_overlay_height>
+      <overlay_hardness>0.0</overlay_hardness>
+      <overlay_density>1.0</overlay_density>
+      <overlay_autumn_flag>1</overlay_autumn_flag>
+      <overlay_brightness_top>1.4</overlay_brightness_top>
+      <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
+      <edge-hardness>0.8</edge-hardness>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>5000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>15.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>0.95</bumpiness>
+  </material>  
+  
+  <material>
+    <name>EvergreenBroadCover</name>
+    <name>EvergreenForest</name>
+    <effect>Effects/terrain-overlay</effect>
+    <texture-set>
+     <texture>Terrain/forest1a.png</texture>
+      <texture n="11">Terrain/grass_hires.png</texture>
+      <texture n="12">Terrain/rock.png</texture>
+      <texture n="15">Terrain/rock.png</texture>
+      <texture n="20">Terrain/mixedforest-hires.png</texture>
+    </texture-set>
+    <parameters>
+      <hires_overlay_bias>-0.1</hires_overlay_bias>
+      <transition_model>0.9</transition_model>
+      <dot_density>0.2</dot_density>
+      <max_overlay_height>2.0</max_overlay_height>
+      <overlay_hardness>0.0</overlay_hardness>
+      <overlay_density>1.0</overlay_density>
+      <overlay_autumn_flag>1</overlay_autumn_flag>
+      <overlay_brightness_top>1.4</overlay_brightness_top>
+      <overlay_brightness_bottom>0.6</overlay_brightness_bottom>
+      <edge-hardness>0.8</edge-hardness>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <wood-coverage>4000.0</wood-coverage>
+    <tree-texture>Trees/coniferous-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>25.0</tree-height-m>
+    <tree-width-m>18.0</tree-width-m>
+    <rolling-friction>1</rolling-friction>
+    <bumpiness>1</bumpiness>
+   </material>  
+   
+  <material>
+    <effect>Effects/terrain-overlay</effect>
+    <tree-effect>Effects/tree-european-mixed</tree-effect>
+    <name>Grassland</name>
+    <texture-set>
+     <texture>Terrain/dry_pasture4.png</texture>
+     <texture n="12">Terrain/tundra-hawaii-green-autumn.png</texture>
+     <texture n="20">Terrain/tundra-hawaii-green.png</texture>	 
+    </texture-set>
+    <parameters>
+      <max_overlay_height>0.2</max_overlay_height>
+      <overlay_hardness>0.0</overlay_hardness>
+      <overlay_density>1.0</overlay_density>
+      <overlay_autumn_flag>1</overlay_autumn_flag>
+      <overlay_brightness_top>1.4</overlay_brightness_top>
+      <overlay_brightness_bottom>0.6</overlay_brightness_bottom>	
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>2000000.0</light-coverage>
+    <diffuse>
+      <r>0.93</r>
+      <g>0.95</g>
+      <b>0.93</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.12</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <solid>1</solid>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+    <load-resistance>1e30</load-resistance>
+    <wood-coverage>150000.0</wood-coverage>
+    <tree-texture>Trees/mixed-alt.png</tree-texture>
+    <tree-varieties>8</tree-varieties>
+    <tree-height-m>20.0</tree-height-m>
+    <tree-width-m>12.0</tree-width-m>
+  </material>   
+
+</PropertyList>

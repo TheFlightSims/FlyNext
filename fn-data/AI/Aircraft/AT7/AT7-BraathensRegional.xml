@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<PropertyList include="AT7-main.xml">
+ <texture-path>Textures/BraathensRegional</texture-path>
+
+</PropertyList>

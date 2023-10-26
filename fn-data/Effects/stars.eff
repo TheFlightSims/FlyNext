@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <name>Effects/stars</name>
+
+  <!-- Fixed-pipeline fallback -->
+  <technique n="11">
+    <pass>
+      <!--
+          An empty pass should be fine as we are filling the stateset manually
+          in simgear/scene/sky/stars.cxx
+      -->
+    </pass>
+  </technique>
+
+  <technique n="109">
+    <scheme>hdr-geometry</scheme>
+  </technique>
+</PropertyList>

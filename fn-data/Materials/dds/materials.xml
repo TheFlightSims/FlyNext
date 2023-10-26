@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- FlightGear Materials File. See Docs/README.materials for details. -->
+
+<PropertyList>
+
+<!-- Base materials -->
+<region include="Materials/dds/global.xml"/>
+<region include="Materials/dds/global-summer.xml"/>
+<region include="Materials/dds/global-winter.xml"/>
+
+<!-- Urban shader -->
+<region include="Materials/dds/urban.xml"/>
+
+</PropertyList>

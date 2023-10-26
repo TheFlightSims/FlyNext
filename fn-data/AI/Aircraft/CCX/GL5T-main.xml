@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PropertyList>
+    <description>Bombardier-Global-5000</description>
+    <author>Brett Harrison</author>
+    <path>Models/bomb-5000.ac</path>
+	
+
+	
+    <animation>
+        <type>select</type>
+        <object-name>gear</object-name>
+        <condition>
+            <less-than>
+                <property>velocities/true-airspeed-kt</property>
+                <value>160</value>
+            </less-than>
+        </condition>
+    </animation>
+</PropertyList>

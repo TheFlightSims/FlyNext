@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <name>Kauai</name>
+  <area>
+    <lon1>-160.0</lon1>
+    <lon2>-159.0</lon2>
+    <lat1>21.5</lat1>
+    <lat2>22.5</lat2>
+  </area>
+
+  <condition>
+    <equals>
+      <property>sim/startup/season</property>
+      <value>summer</value>
+    </equals>
+  </condition>
+  
+  
+  <material>
+    <name>ShrubCover</name>
+    <name>ShrubGrassCover</name>
+    <name>ScrubCover</name>
+    <name>Scrub</name>
+    <name>Sclerophyllous</name>
+	<effect>Effects/terrain-overlay</effect>
+    <texture-set>
+      <texture>Terrain/shrub-hawaii-green.png</texture>
+      <texture n="11">Terrain/rainforest-hawaii.png</texture>
+      <texture n="12">Terrain/shrub-hawaii-green.png</texture>
+      <texture n="13">Terrain/shrub-hawaii.png</texture>
+      <texture n="15">Terrain/rainforest-hawaii.png</texture>
+	  <texture n="20">Terrain/evergreen.png</texture>
+	  <texture n="21">Terrain/evergreen.png</texture>
+    </texture-set>
+    <parameters>
+      <transition_model>1.0</transition_model>
+	  <rock_strata>1</rock_strata>
+	  <max_overlay_height>2.0</max_overlay_height>
+	  <overlay_hardness>0.0</overlay_hardness>
+	  <overlay_density>0.7</overlay_density>
+	  <overlay_scale>2.0</overlay_scale>
+	  <overlay_autumn_flag>0</overlay_autumn_flag>
+	  <overlay_brightness_top>0.8</overlay_brightness_top>
+	  <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+	  <overlay_steepness_factor>0.3</overlay_steepness_factor>
+	  <overlay_secondary_flag>1</overlay_secondary_flag>
+	  <overlay_secondary_hardness>0.0</overlay_secondary_hardness>
+	  <overlay_secondary_density>0.7</overlay_secondary_density>
+    </parameters>
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <diffuse>
+      <r>0.86</r>
+      <g>0.86</g>
+      <b>0.86</b>
+      <a>1.0</a>
+    </diffuse>
+    <specular>
+      <r>0.1</r>
+      <g>0.1</g>
+      <b>0.1</b>
+      <a>1.0</a>
+    </specular>
+    <shininess>1.2</shininess>
+    <light-coverage>20000000.0</light-coverage>
+    <wood-coverage>6000.0</wood-coverage>
+    <tree-texture>Trees/hawaii-shrub.png</tree-texture>
+    <tree-varieties>4</tree-varieties>
+    <tree-height-m>8.0</tree-height-m>
+    <tree-width-m>16.0</tree-width-m>
+    <rolling-friction>0.6</rolling-friction>
+    <bumpiness>0.4</bumpiness>
+  </material>
+  
+  <material>
+    <name>BarrenCover</name>
+    <name>Dirt</name>
+    <name>OpenMining</name>
+    <name>Rock</name>
+    <name>Dump</name>
+	<effect>Effects/terrain-overlay</effect>
+    <texture-set>
+      <texture>Terrain/shrub-hawaii.png</texture>
+      <texture n="12">Terrain/shrub-hawaii.png</texture>
+      <texture n="13">Terrain/shrub-hawaii.png</texture>
+	  <texture n="20">Terrain/evergreen.png</texture>
+    </texture-set>
+    <parameters>
+      <transition_model>0.0</transition_model>
+	  <rock_strata>1</rock_strata>
+	  <overlay_hardness>0.0</overlay_hardness>
+	  <overlay_density>0.5</overlay_density>
+	  <overlay_scale>2.0</overlay_scale>
+	  <overlay_autumn_flag>0</overlay_autumn_flag>
+	  <overlay_brightness_top>0.8</overlay_brightness_top>
+	  <overlay_brightness_bottom>0.4</overlay_brightness_bottom>
+	  <overlay_steepness_factor>0.6</overlay_steepness_factor>
+    </parameters>
+    <xsize>1000</xsize>
+    <ysize>1000</ysize>
+    <solid>1</solid>
+    <friction-factor>0.9</friction-factor>
+    <rolling-friction>0.1</rolling-friction>
+    <bumpiness>0.3</bumpiness>
+  </material>
+  
+ </PropertyList>

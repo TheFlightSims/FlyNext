@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/text-default</name>
+  <technique n="10">
+    <pass>
+      <lighting>true</lighting>
+      <blend>
+        <active>true</active>
+      </blend>
+      <rendering-hint>transparent</rendering-hint>
+      <program>
+        <vertex-shader>Shaders/text.vert</vertex-shader>
+        <fragment-shader>Shaders/text.frag</fragment-shader>
+        <fragment-shader>Shaders/include_fog.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>glyphTexture</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

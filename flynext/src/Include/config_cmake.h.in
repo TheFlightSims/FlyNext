@@ -1,0 +1,82 @@
+
+
+#cmakedefine FG_NDEBUG
+
+#cmakedefine ENABLE_SIMD
+#cmakedefine ENABLE_SP_FDM
+#cmakedefine JSBSIM_USE_GROUNDREACTIONS
+
+// JSBSim needs this, to switch from standalone to in-FG mode
+#define FGFS
+
+#define PU_USE_NONE // PLIB needs this to avoid linking to GLUT
+
+#cmakedefine ENABLE_PLIB_JOYSTICK
+
+// threads are required (used to be optional)
+#define ENABLE_THREADS 1
+
+// audio support is assumed
+#define ENABLE_AUDIO_SUPPORT 1
+
+#cmakedefine HAVE_SYS_TIME_H
+#cmakedefine HAVE_WINDOWS_H
+#cmakedefine HAVE_MKFIFO
+
+#define VERSION "@FLIGHTGEAR_VERSION@"
+#define FLIGHTGEAR_VERSION "@FLIGHTGEAR_VERSION@"
+#define FLIGHTGEAR_MAJOR_VERSION @FG_VERSION_MAJOR@
+#define FLIGHTGEAR_MINOR_VERSION @FG_VERSION_MINOR@
+#define FLIGHTGEAR_PATCH_VERSION @FG_VERSION_PATCH@
+
+#cmakedefine ENABLE_UIUC_MODEL
+#cmakedefine ENABLE_LARCSIM
+#cmakedefine ENABLE_YASIM
+#cmakedefine ENABLE_JSBSIM
+
+#define PKGLIBDIR "@FG_DATA_DIR@"
+#define FGSRCDIR "@PROJECT_SOURCE_DIR@"
+#define FGBUILDDIR "@PROJECT_BINARY_DIR@"
+#define WEB_BROWSER "@WEB_BROWSER@"
+
+// Ensure FG_HAVE_xxx always have a value
+#define FG_HAVE_HLA (@FG_HAVE_HLA@ + 0)
+#define FG_HAVE_DDS (@FG_HAVE_DDS@ + 0)
+#define FG_HAVE_GPERFTOOLS (@FG_HAVE_GPERFTOOLS@ + 0)
+
+
+#cmakedefine SYSTEM_SQLITE
+
+#cmakedefine ENABLE_IAX
+
+#cmakedefine HAVE_DBUS
+
+#cmakedefine ENABLE_HID_INPUT
+#cmakedefine ENABLE_PLIB_JOYSTICK
+
+#cmakedefine HAVE_QT
+#cmakedefine ENABLE_QQ_UI
+
+#cmakedefine HAVE_SYS_TIME_H
+#cmakedefine HAVE_SYS_TIMEB_H
+#cmakedefine HAVE_TIMEGM
+#cmakedefine HAVE_DAYLIGHT
+#cmakedefine HAVE_FTIME
+#cmakedefine HAVE_GETTIMEOFDAY
+
+#define FG_TEST_SUITE_DATA "@FG_TEST_SUITE_DATA@"
+
+#define FG_BUILD_TYPE "@FG_BUILD_TYPE@"
+
+#cmakedefine HAVE_PUI
+
+#cmakedefine HAVE_QRC_TRANSLATIONS
+
+#cmakedefine ENABLE_SWIFT
+
+#cmakedefine HAVE_SENTRY
+#define SENTRY_API_KEY "@sentry_api_key@"
+
+#cmakedefine ENABLE_OSGXR
+
+#cmakedefine ENABLE_HUD

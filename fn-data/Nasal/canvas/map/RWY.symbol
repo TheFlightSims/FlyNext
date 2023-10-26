@@ -1,0 +1,197 @@
+# See: http://wiki.flightgear.org/MapStructure
+# Class things:
+var name = 'RWY';
+var parents = [DotSym];
+var __self__ = caller(0)[0];
+DotSym.makeinstance( name, __self__ );
+
+SymbolLayer.get(name).df_style = {
+	surface_color: canvas.SURFACECOLORS,
+	text_alignment:  "center-center",
+	text_bgcolor: [0,0,0,0],
+	text_color: [0,0.6,0.85],
+	text_mode: canvas.Text.TEXT,
+	text_padding: 0,
+	text_size: 14,
+	text_font: "LiberationFonts/LiberationSans-Regular.ttf",
+	show_labels: 0,
+};
+
+var element_type = "group"; # we want a group, becomes "me.element"
+var rwys = nil;
+
+var SURFACECOLORS = {
+	1 : { type: "asphalt",  r:0.2,  g:0.2, b:0.2 },
+	2 : { type: "concrete", r:0.3,  g:0.3, b:0.3 },
+	3 : { type: "turf",     r:0.2,  g:0.5, b:0.2 },
+	4 : { type: "dirt",     r:0.4,  g:0.3, b:0.3 },
+	5 : { type: "gravel",   r:0.35, g:0.3, b:0.3 },
+#  Helipads
+	6 : { type: "asphalt",  r:0.2,  g:0.2, b:0.2 },
+	7 : { type: "concrete", r:0.3,  g:0.3, b:0.3 },
+	8 : { type: "turf",     r:0.2,  g:0.5, b:0.2 },
+	9 : { type: "dirt",     r:0.4,  g:0.3, b:0.3 },
+	0 : { type: "gravel",   r:0.35, g:0.3, b:0.3 },
+};
+
+
+var init = func {
+	var apt=airportinfo(me.model.id);
+	var rwys = apt.runwaysWithoutReciprocals();
+
+	foreach (var rw1; rwys)
+  {
+		var clr = me.style.surface_color[rw1.surface];
+		if (clr == nil) { clr = SURFACECOLORS[rw1.surface]};
+		if (clr == nil) { clr = SURFACECOLORS[0]};
+
+		var icon_rw =
+		me.element.createChild("path", "runway-" ~ rw1.id)
+		.setStrokeLineWidth(0.5)
+		.setColor(1.0,1.0,1.0)
+		.setColorFill(clr.r, clr.g, clr.b);
+
+		var rwy1 = Runway.new(rw1);
+		var beg_thr  = rwy1.pointOffCenterline(rw1.threshold);
+		var beg_thr1 = rwy1.pointOffCenterline(rw1.threshold,  0.5 * rw1.width);
+		var beg_thr2 = rwy1.pointOffCenterline(rw1.threshold, -0.5 * rw1.width);
+		var beg1 = rwy1.pointOffCenterline(0,  0.5 * rw1.width);
+		var beg2 = rwy1.pointOffCenterline(0, -0.5 * rw1.width);
+
+		var rw2 = rw1.reciprocal;
+		var rwy2 = Runway.new(rw2);
+		var end_thr  = rwy2.pointOffCenterline(rw2.threshold);
+		var end_thr1 = rwy2.pointOffCenterline(rw2.threshold,  0.5 * rw2.width);
+		var end_thr2 = rwy2.pointOffCenterline(rw2.threshold, -0.5 * rw2.width);
+		var end1 = rwy2.pointOffCenterline(0,  0.5 * rw2.width);
+		var end2 = rwy2.pointOffCenterline(0, -0.5 * rw2.width);
+
+		icon_rw.setDataGeo
+		(
+			[ canvas.Path.VG_MOVE_TO,
+			canvas.Path.VG_LINE_TO,
+			canvas.Path.VG_LINE_TO,
+			canvas.Path.VG_LINE_TO,
+			canvas.Path.VG_CLOSE_PATH ],
+			[ beg1[0], beg1[1],
+			beg2[0], beg2[1],
+			end1[0], end1[1],
+			end2[0], end2[1] ]
+		);
+
+		var icon_cl =
+		me.element.createChild("path", "centerline")
+		.setStrokeLineWidth(0.5)
+		.setColor(1,1,1)
+		.setStrokeDashArray([15, 10]);
+
+		icon_cl.setDataGeo
+		(
+			[ canvas.Path.VG_MOVE_TO,
+			canvas.Path.VG_LINE_TO ],
+			[ beg_thr[0], beg_thr[1],
+			end_thr[0], end_thr[1] ]
+		);
+
+		var icon_thr =
+		me.element.createChild("path", "threshold")
+		.setStrokeLineWidth(1.5)
+		.setColor(1,1,1);
+
+		icon_thr.setDataGeo
+		(
+			[ canvas.Path.VG_MOVE_TO,
+			canvas.Path.VG_LINE_TO,
+			canvas.Path.VG_MOVE_TO,
+			canvas.Path.VG_LINE_TO ],
+			[ beg_thr1[0], beg_thr1[1],
+				beg_thr2[0], beg_thr2[1],
+				end_thr1[0], end_thr1[1],
+				end_thr2[0], end_thr2[1] ]
+		);
+
+		if (me.style.show_labels == 1) {
+			var coord1 = geo.Coord.new();
+			coord1.set_latlon(rw1.lat, rw1.lon);
+			coord1.apply_course_distance(rw1.heading, - 50.0);
+
+			var coord2 = geo.Coord.new();
+			coord2.set_latlon(rw2.lat, rw2.lon);
+			coord2.apply_course_distance(rw2.heading, - 50.0);
+
+			var txt1 = me.element.createChild("text", "rwy1label")
+				.setText(rw1.id)
+				.setGeoPosition(coord1.lat(), coord1.lon())
+				.setFont(me.style.text_font)
+				.setFontSize(me.style.text_size)
+				.setAlignment(me.style.text_alignment)
+				.setPadding(me.style.text_padding)
+				.setDrawMode(me.style.text_mode)
+				.setColor(me.style.text_color)
+				.setColorFill(me.style.text_bgcolor);
+
+			var txt1 =  me.element.createChild("text", "rwy2label")
+				.setText(rw2.id)
+				.setGeoPosition(coord2.lat(), coord2.lon())
+				.setFont(me.style.text_font)
+				.setFontSize(me.style.text_size)
+				.setAlignment(me.style.text_alignment)
+				.setPadding(me.style.text_padding)
+				.setDrawMode(me.style.text_mode)
+				.setColor(me.style.text_color)
+				.setColorFill(me.style.text_bgcolor);
+		}
+	}
+
+	#draw helipads
+  foreach(var hp; keys(apt.helipads))
+  {
+    var hp = apt.runway(hp);
+		var clr = me.style.surface_color[hp.surface];
+    if (clr == nil) { clr = SURFACECOLORS[hp.surface]};
+		if (clr == nil) { clr = SURFACECOLORS[0]};
+
+    var icon_hp =
+    me.element.createChild("path", "helipad-" ~ hp.id)
+    .setStrokeLineWidth(0.5)
+    .setColor(1.0,1.0,1.0)
+    .setColorFill(clr.r, clr.g, clr.b);
+
+    var heli = Runway.new(hp);
+    var p1  = heli.pointOffCenterline(0.5 * hp.length, 0.5 * hp.width);
+    var p2 = heli.pointOffCenterline(0.5 * hp.length, -0.5 * hp.width);
+    var p3 = heli.pointOffCenterline(-0.5 * hp.length, -0.5 * hp.width);
+    var p4 = heli.pointOffCenterline(-0.5 * hp.length, 0.5 * hp.width);
+
+    icon_hp.setDataGeo
+    (
+    [ canvas.Path.VG_MOVE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_LINE_TO,
+    canvas.Path.VG_CLOSE_PATH ],
+    [ p1[0], p1[1],
+    p2[0], p2[1],
+    p3[0], p3[1],
+    p4[0], p4[1] ]
+    );
+
+		if (me.style.show_labels == 1) {
+			var coord1 = geo.Coord.new();
+			coord1.set_latlon(rw1.lat, rw1.lon);
+			coord1.apply_course_distance(rw1.heading, - 50.0);
+
+			var txt1 = me.element.createChild("text", "hplabel")
+				.setText(hp.id)
+				.setGeoPosition(coord1.lat(), coord1.lon())
+				.setFont(me.style.text_font)
+				.setFontSize(me.style.text_size)
+				.setAlignment(me.style.text_alignment)
+				.setPadding(me.style.text_padding)
+				.setDrawMode(me.style.text_mode)
+				.setColor(me.style.text_color)
+				.setColorFill(me.style.text_bgcolor);
+		}
+  }
+};
+var draw = func;

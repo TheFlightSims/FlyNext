@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+  <sim>
+    <exclude-from-gui type="bool">true</exclude-from-gui>
+    <flight-model>aisim</flight-model>
+    <aero>c172p</aero>
+  </sim>
+</PropertyList>

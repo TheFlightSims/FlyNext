@@ -1,0 +1,248 @@
+AUTOMATIC PUSHBACK FOR FLIGHTGEAR
+
+Version 2.0.1
+
+Copyright (c) 2018 Autopush authors:
+ Joshua Davidson http://github.com/Octal450
+ Merspieler http://gitlab.com/merspieler
+Some of the code (c) FlightGear
+Distribute under the terms of GPLv2.
+
+
+This project aims to develop a generic pushback for JSBSim and YASim
+aircraft, with the following characteristics.
+
+1. Do the pushback procedure automatically.
+2. Scale to different aircraft with minimum changes to their logic.
+3. Use no computer resources in flight.
+
+
+INSTALLATION
+
+Minimum FlightGear version: 2018.0
+
+NOTE: these steps cover the minimal testing setup. To get the most
+realism out of Autopush, you will have to add logic aircraft-side as
+described in the last step.
+
+1. Copy the autopush.config.xml.template into your aircraft directory
+and the Goldhofert.xml into <your-airfraft>/Models/Autopush/
+
+2. Set up the pushback logic.
+
+Add the following line under <sim><model> of your set.xml
+
+<autopush include="autopush-config.xml"/>
+
+Rename autopush-config.xml.template to autopush-config.xml and edit
+the file as described below.
+
+Alternatively, you can copy the contents of
+autopush-config.xml.template to under <sim><model><autopush> of your
+set.xml and make these modifications there.
+
+Change the aliases to point to the following data:
+
+steer-cmd-norm   nose wheel steering command norm
+yaw              nose wheel steering output norm or angle (see below)
+chocks           chocks command bool (or leave it until step 7)
+available        pushback availability bool (or leave it until step 7)
+
+Replace the MULTIPLIER in yaw-mult with:
+
+max steering angle  if yaw is norm
+1.0                 if yaw is degrees
+57.3                if yaw is radians
+
+Replace PITCH with the pushback's pitch relative to aircraft. If your
+aircraft's ground pitch varies greatly, you can make an alias to
+property with calculated relative pitch.
+
+Replace MIN_RADIUS with the minimum allowed turning radius in m of the
+center of the aircraft during pushback procedure.
+
+NOTE: on some aircraft the turning radius is different for taxi and
+pushback. Please check the aircraft's literature.
+
+Replace STOP_DIST with the stopping distance in m from pushback speed.
+
+Add under <nasal> of your set.xml:
+
+ <autopush>
+  <file>Nasal/Autopush/autopush.nas</file>
+ </autopush>
+ <autopush_driver>
+  <file>Nasal/Autopush/driver.nas</file>
+ </autopush_driver>
+ <dynarr>
+  <file>Nasal/Autopush/dynarr.nas</file>
+ </dynarr>
+ <autopush_route>
+  <file>Nasal/Autopush/route.nas</file>
+ </autopush_route>
+
+Add under <sim><aircraft-data> of your set.xml:
+
+ <path>/sim/model/autopush/route/show</path>
+ <path>/sim/model/autopush/route/show-wingtip</path>
+
+3. Connect the force to FDM.
+
+ 3.a. JSBSim:
+
+  3.a.1. Add the following under <external_reactions> of your JSBSim
+         XML.
+
+ <force name="tractor" frame="BODY">
+  <location unit="M">
+   <x>FRONT-X</x>
+   <y>FRONT-Y</y>
+   <z>FRONT-Z</z>
+  </location>
+  <direction>
+   <x>1.0</x>
+   <y>0.0</y>
+   <z>0.0</z>
+  </direction>
+ </force>
+
+Replace FRONT-X, FRONT-Y, FRONT-Z with coordinates of your front
+bogey.
+
+  3.a.2. Add the following under <fdm><jsbsim><external_reactions> of
+         your set.xml.
+
+   <tractor>
+    <magnitude alias="/sim/model/autopush/force-lbf"/>
+    <x alias="/sim/model/autopush/force-x"/>
+    <y alias="/sim/model/autopush/force-y"/>
+    <z alias="/sim/model/autopush/force-z"/>
+   </tractor>
+
+ 3.b. YASim. Add the following under <airplane> of your YASim xml.
+
+ <thruster x="FRONT-X" y="FRONT-Y" z="FRONT-Z" vx="1" vy="0" vz="0" thrust="100000.0">
+  <control-input axis="/sim/model/autopush/force-x-yasim" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
+ </thruster>
+ <thruster x="FRONT-X" y="FRONT-Y" z="FRONT-Z" vx="0" vy="1" vz="0" thrust="100000.0">
+  <control-input axis="/sim/model/autopush/force-y-yasim" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
+ </thruster>
+ <thruster x="FRONT-X" y="FRONT-Y" z="FRONT-Z" vx="0" vy="0" vz="1" thrust="100000.0">
+  <control-input axis="/sim/model/autopush/force-z-yasim" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
+ </thruster>
+
+Replace FRONT-X, FRONT-Y, FRONT-Z with coordinates of your front
+bogey.
+
+4. Add the pushback model to your Model XML:
+
+ <model>
+  <name>Pushback</name>
+  <path>MODEL</path>
+  <offsets>
+   <x-m>FRONT-X</x-m>
+   <y-m>FRONT-Y</y-m>
+   <z-m>FRONT-Z</z-m>
+  </offsets>
+ </model>
+
+Replace FRONT-X, FRONT-Y, FRONT-Z with coordinates of your front
+bogey. Replace MODEL with one of the following file names:
+
+Autopush/Goldhofert.xml  for Goldhofer towbarless pushback
+
+Edit the "SETTINGS" part in the beginning of the Goldhofert.xml to match
+your setup.
+
+5. Add gui/dialogs/autopush.xml to your aircraft's menu (see
+   FlightGear documentation for editing the menu).
+
+6. Launch the simulator and try Autopush. After making sure it works,
+   complete the support by implementing some logic in your aircraft
+   and connecting the rest of the interface.
+
+CAUTION.
+1. Make sure to HAVE A BACK-UP COPY of your work.
+2. If anything is not clear in the instruction below, do not guess --
+   contact the authors.
+
+ 7.1. When pushback is connected ("/sim/model/autopush/connected"),
+      nose wheel steering must actuate at different speed, depending
+      on its rollspeed. The exact dependency is different per aircraft
+      and used pushback visual, and for most aircraft the only way to
+      find it is trial and error until it "looks right":
+      - the input must be taken from pushback steering command norm
+        (set by autopush-config.xml, default:
+        "/controls/flight/rudder");
+      - the output must be written to pushback orientation in degrees,
+        radians or norm (set by autopush-config.xml, default:
+        "/gear/gear[0]/steering-norm").
+
+ 7.2. Set or alias (in autopush-config.xml) the availability property
+      "/sim/model/autopush/available". It must be false if e.g. the
+      aircraft is moving too fast, the front wheel is not touching
+      the ground, the aircraft is damaged or is outside of an airport
+      etc.
+
+ 7.3. Make Autopush remove wheel chocks by setting the alias in
+      autopush-config.xml to the chocks property. (default:
+      "/controls/gear/wheel-chocks").
+
+ 7.4. Optionally, Autopush may be made visible in multiplayer by
+      duplicating the properties used in its model.xml into some
+      unused MP properties. See the list in
+
+https://sourceforge.net/p/flightgear/flightgear/ci/next/tree/src/MultiPlayer/multiplaymgr.cxx
+
+      around line 215, and then using those properties in the
+      "SETTINGS" part of Autopush model.xml.
+
+   After making these changes check the Autopush model.xml's settings
+   and make sure they match the setup. Launch the simulator and try
+   Autopush.
+
+
+TUNING
+
+There should normally be no need to change the coefficients, because
+the inertia of different aircraft is already taken into account. But
+the gear setup may differ enough to require some tuning.
+
+If these settings are changed during simulation, they take effect
+after disconnecting and reconnecting the pushback.
+
+Pushback (/sim/model/autopush):
+
+Coefficient  Unit                    Description
+
+K_p          ((km/h)/s)/(km/h)       Proportional coefficient of PID.
+                                     Defines the start/stop throttle
+                                     and immediate response to speed
+                                     difference deltaV = V_set - V.
+
+F_p          (km/h)/s                Proportional clipping.
+
+K_i          ((km/h)/s)/((km/h)*s)   Integral coefficient of PID.
+                                     Defines how fast the steady
+                                     throttle is ramped during the
+                                     push.
+
+F_i          (km/h)/s                Integral clipping.
+
+K_d          -((km/h)/s)/((km/h)/s)  Differential coefficient of PID.
+                                     Stabilizes the approaching of
+                                     steady throttle.
+
+F_d          (km/h)/s                Differential clipping.
+
+Pushback driver (/sim/model/autopush/driver):
+
+Coefficient  Unit        Description
+
+F_V          km/h        Max towing speed in auto mode.
+K_psi        1/deg       Amount of steering per heading correction.
+F_psi        1/deg       Max steering per heading correction.
+K_deltapsi   -1/(deg/s)  Amount of steering compensation per heading
+                         derivative.
+F_psi        1/(deg/s)   Max amount of steering compensation per
+                         heading derivative.

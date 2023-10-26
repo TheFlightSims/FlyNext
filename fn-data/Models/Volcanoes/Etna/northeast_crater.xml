@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+
+<!-- Etna northeast crater activity -->
+
+
+<PropertyList>
+
+
+	<model>
+	  <path>etna_smoke_main.xml</path>
+      <offsets>
+        <x-m>50.0</x-m>
+        <y-m>-10.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		 <and>
+	     <greater-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>0</value>
+		 </greater-than>
+	     <less-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>3</value>
+		 </less-than>
+		 </and>
+	  </condition>
+    </model>
+	
+	<model>
+	  <path>etna_smoke_minor.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>110.0</y-m>
+        <z-m>-20.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		 <and>
+	     <greater-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>0</value>
+		 </greater-than>
+	     <less-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>3</value>
+		 </less-than>
+		 </and>
+	  </condition>
+    </model>
+	
+	<model>
+	  <path>etna_smoke_minor.xml</path>
+      <offsets>
+        <x-m>-120.0</x-m>
+        <y-m>40.0</y-m>
+        <z-m>-20.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		 <and>
+	     <greater-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>0</value>
+		 </greater-than>
+	     <less-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>3</value>
+		 </less-than>
+		 </and>
+	  </condition>
+    </model>
+	
+	<model>
+	  <path>etna_smoke_minor.xml</path>
+      <offsets>
+        <x-m>-60.0</x-m>
+        <y-m>-80.0</y-m>
+        <z-m>-20.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+		 <and>
+	     <greater-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>0</value>
+		 </greater-than>
+	     <less-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>3</value>
+		 </less-than>
+		 </and>
+	  </condition>
+    </model>
+
+	<model>
+	  <path>etna_ne_lava_fountain.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+	     <equals>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>2</value>
+		 </equals>
+	  </condition>
+    </model>
+
+	<model>
+	  <path>etna_ne_lava_fountain_inner.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+	     <equals>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>2</value>
+		 </equals>
+	  </condition>
+    </model>
+	
+	<model>
+	  <path>etna_ne_ash_eruption.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+	     <greater-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>2</value>
+		 </greater-than>
+	  </condition>
+    </model>
+	
+	<model>
+	  <path>etna_ne_ash_eruption_secondary.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+         <heading-deg>0</heading-deg>
+	  </offsets>
+	  <condition>
+	     <greater-than>
+			<property>/environment/volcanoes/etna/northeast-activity</property>
+			<value>2</value>
+		 </greater-than>
+	  </condition>
+    </model>
+	
+
+	
+
+ 
+
+
+</PropertyList>

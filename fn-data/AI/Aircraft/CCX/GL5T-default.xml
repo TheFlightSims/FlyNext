@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<PropertyList include="GL5T-main.xml">
+  <texture-path>Textures/default</texture-path>
+
+</PropertyList>

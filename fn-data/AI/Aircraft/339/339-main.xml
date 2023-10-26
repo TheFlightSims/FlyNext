@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Airbus A330-900 (NEO)</description>
+  <author>Ian (Yves) Tolosa, Feb 2022</author>
+  <path>Models/339.ac</path>
+  <!-- Pitch Forward so nosewheel on ground -->
+  <offsets>
+    <pitch-deg>-1.2</pitch-deg>
+  </offsets>
+  <!-- Gear Animation -->
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>150</value>
+      </less-than>
+    </condition>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/339/Effects/339-LightMap</inherits-from>
+    <object-name>339</object-name>
+	<object-name>Gear</object-name>
+  </effect>
+    <!-- ALS Navigation Lights Objects -->
+    <model>
+    <path>Lights/339-NavLights.xml</path>
+  </model>
+</PropertyList>

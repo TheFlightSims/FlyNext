@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Bombardier Dash-8, Series 400 (Model 402)</description>
+  <author>Ian Tolosa</author>
+  <path>Models/DH4.ac</path>
+  <!-- Tilt Aircraft so Nose Wheels touch ground -->
+  <offsets>
+    <pitch-deg>-1.15</pitch-deg>
+  </offsets>
+ <!-- Show Gear if Airspeeed under 120 kts -->
+  <animation>
+    <type>select</type>
+    <object-name>DH4_Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>120</value>
+      </less-than>
+    </condition>
+  </animation>
+<!-- Show Propellers' Blur if Speed over 15 kts -->
+ <animation>
+    <type>select</type>
+    <object-name>DH4_Blur</object-name>
+    <condition>
+      <greater-than-equals>
+        <property>velocities/true-airspeed-kt</property>
+        <value>15</value>
+      </greater-than-equals>
+    </condition>
+  </animation>
+ <!-- Propellers rotate x4 factor or airspeed -->
+ <animation>
+    <type>spin</type>
+    <object-name>DH4_PropL</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>4</factor>
+    <center>
+      <x-m>-5.36179</x-m>
+      <y-m>-4.39</y-m>
+      <z-m>3.135</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>spin</type>
+    <object-name>DH4_PropR</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>4</factor>
+    <center>
+      <x-m>-5.36179</x-m>
+      <y-m>4.39</y-m>
+      <z-m>3.135</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <!-- Tail and Windows Illumination at Night Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/DH4/Effects/DH4-LightMap</inherits-from>
+    <object-name>DH4_Body</object-name>
+    <object-name>DH4_Gear</object-name>
+    <object-name>DH4_PropL</object-name>
+    <object-name>DH4_PropR</object-name>
+  </effect>
+  <!-- Add Navigation Red/Green/White Lights Objects -->
+  <model>
+    <path>Lights/DH4-NavLights.xml</path>
+  </model>
+</PropertyList>

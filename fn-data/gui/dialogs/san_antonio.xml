@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>SanAntonio</name>
+	<modal>false</modal>
+	<layout>vbox</layout>
+
+
+
+
+	<group>
+		<layout>hbox</layout>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<text>
+			<label>USS San Antonio Controls</label>
+		</text>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<keynum>27</keynum>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+
+	<hrule/>
+
+	<group>
+		<layout>table</layout>
+
+		<text>
+			<label>Course</label>
+			<row>0</row>
+			<col>0</col>
+		</text>
+
+		<radio>
+			<row>1</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to launch course</label>
+			<property>/controls/sanantonio/turn-to-launch-hdg</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/sanantonio/turn-to-launch-hdg");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+						
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "San Antonio")
+							{
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(v);
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-base-course").setBoolValue(0);
+							}
+						}
+
+						setprop("/controls/sanantonio/turn-to-base-course", 0);
+						setprop("/controls/sanantonio/turn-to-recovery-hdg", 0);
+				</script>
+			</binding>
+		</radio>
+
+		<radio>
+			<row>2</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to recovery course</label>
+			<property>/controls/sanantonio/turn-to-recovery-hdg</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/sanantonio/turn-to-recovery-hdg");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "San Antonio")
+							{
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(v);
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-base-course").setBoolValue(0);
+							}
+						}
+
+						setprop("/controls/sanantonio/turn-to-base-course", 0);
+						setprop("/controls/sanantonio/turn-to-launch-hdg", 0);
+				</script>
+			</binding>
+		</radio>
+
+		<radio>
+			<row>3</row>
+			<col>0</col>
+			<halign>left</halign>
+			<label>Turn to base course</label>
+			<property>/controls/sanantonio/turn-to-base-course</property>
+			<live>true</live>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>nasal</command>
+				<script>
+					var v = getprop("/controls/sanantonio/turn-to-base-course");
+						foreach (var c; props.globals.getNode("/ai/models").getChildren("carrier")){
+
+						if (c.getNode("name").getValue() != nil and c.getNode("name").getValue() == "San Antonio")
+							{
+							c.getNode("controls/turn-to-base-course").setBoolValue(v);
+							c.getNode("controls/turn-to-recovery-hdg").setBoolValue(0);
+							c.getNode("controls/turn-to-launch-hdg").setBoolValue(0);
+							}
+						}
+
+						setprop("/controls/sanantonio/turn-to-launch-hdg", 0);
+						setprop("/controls/sanantonio/turn-to-recovery-hdg", 0);
+				</script>
+			</binding>
+		</radio>
+		</group>
+
+		<hrule/>
+
+
+	<group>
+		<layout>hbox</layout>
+		<default-padding>6</default-padding>
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+
+		<button>
+			<legend>OK</legend>
+			<default>true</default>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Apply</legend>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-apply</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Reset</legend>
+			<equal>true</equal>
+			<binding>
+				<command>dialog-update</command>
+			</binding>
+		</button>
+
+		<button>
+			<legend>Cancel</legend>
+			<equal>true</equal>
+			<key>Esc</key>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+
+		<empty>
+			<stretch>true</stretch>
+		</empty>
+	</group>
+</PropertyList>

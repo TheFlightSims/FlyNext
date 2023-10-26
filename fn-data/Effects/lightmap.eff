@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+Legacy Effect.
+It's kept for backwards compatibility and should not be used on new projects.
+-->
+<PropertyList>
+  <name>Effects/lightmap</name>
+  <inherits-from>Effects/model-default</inherits-from>
+</PropertyList>

@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>
+
+<particlesystem>
+	 <name>etna-ne-ash-eruption-secondary</name>
+	 <texture>ash.png</texture>
+	 <emissive>false</emissive>
+	 <lighting>false</lighting>
+	 <x-m>0.0</x-m>
+	 <y-m>0.0</y-m>
+	 <z-m>0.0</z-m>
+	 <roll-deg>0.0</roll-deg>
+	 <pitch-deg>0.0</pitch-deg>
+	 <heading-deg>0.0</heading-deg>
+
+		 
+	 <attach>global</attach>
+	 
+	 <placer>
+		 <type>point</type>
+	 </placer>
+	 
+	 <shooter>
+		 <theta-min-deg>0</theta-min-deg>
+		 <theta-max-deg>5</theta-max-deg>
+		 <phi-min-deg>0</phi-min-deg>
+		 <phi-max-deg>360</phi-max-deg>
+		<speed-mps>
+		<value>200</value>
+		<spread>180</spread>
+		</speed-mps>
+		 <rotation-speed>
+			<x-min-deg-sec>0</x-min-deg-sec>
+			<y-min-deg-sec>0</y-min-deg-sec>
+			<z-min-deg-sec>-20</z-min-deg-sec>
+			<x-max-deg-sec>0</x-max-deg-sec>
+			<y-max-deg-sec>0</y-max-deg-sec>
+			<z-max-deg-sec>20</z-max-deg-sec>
+		 </rotation-speed>
+	 </shooter>
+	 
+	 <counter>
+		 <particles-per-sec>
+			 <value>10</value>
+			 <spread>1</spread>
+		 </particles-per-sec>
+	 </counter>
+	 
+	 <align>billboard</align>
+	 
+	 <particle>
+		 <start>
+			 <color>
+				<red>
+						<property>/rendering/scene/diffuse/green</property>
+					</red>
+					<green>
+						<property>/rendering/scene/diffuse/green</property>
+					</green>
+					<blue>
+						<property>/rendering/scene/diffuse/green</property>
+					</blue>
+					<alpha>
+						<value>0.5</value>
+					</alpha>
+			 </color>
+			 <size>
+				 <value>100.0</value>
+			 </size>
+		 </start>
+		 <end>
+			 <color>
+				 <red>
+						<property>/rendering/scene/diffuse/green</property>
+					</red>
+					<green>
+						<property>/rendering/scene/diffuse/green</property>
+					</green>
+					<blue>
+						<property>/rendering/scene/diffuse/green</property>
+					</blue>
+					<alpha>
+						<value>0.3</value>
+					</alpha>
+			 </color>
+			 <size>
+				 <value>850.0</value>
+			 </size>
+		 </end>
+		 <life-sec>
+			 <value>80</value>
+		 </life-sec>
+		 <mass-kg>6.15</mass-kg>
+		 <radius-m>0.05</radius-m>
+	 </particle>
+	 
+	 <program>
+		 <fluid>air</fluid>
+		 <gravity type="bool">false</gravity>
+		 <wind type="bool">true</wind>
+	 </program>
+	 
+</particlesystem>
+
+
+	<animation>
+ 		<object-name>etna-ne-ash-eruption-secondary</object-name>
+  		<type>rotate</type>
+  		<property>/environment/volcanoes/etna/ash-ne-alpha</property>
+  		<factor>1</factor>
+  		<center>
+   			<x-m>0</x-m>
+   			<y-m>0</y-m>
+   			<z-m>0</z-m>
+  		</center>
+  		<axis>
+   			<x>0</x>
+   			<y>1</y>
+   			<z>0</z>
+  		</axis>
+ 	</animation>
+	
+		<animation>
+ 		<object-name>etna-ne-ash-eruption-secondary</object-name>
+  		<type>rotate</type>
+  		<property>/environment/volcanoes/etna/ash-ne-beta</property>
+  		<factor>1</factor>
+  		<center>
+   			<x-m>0</x-m>
+   			<y-m>0</y-m>
+   			<z-m>0</z-m>
+  		</center>
+  		<axis>
+   			<x>1</x>
+   			<y>0</y>
+   			<z>0</z>
+  		</axis>
+ 	</animation>
+
+</PropertyList>

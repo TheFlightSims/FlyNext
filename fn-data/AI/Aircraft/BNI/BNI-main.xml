@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PropertyList>
+  <description>Britten-Norman BN-2 Islander</description>
+  <author>Paul RICHTER, Syd Adams, Keith Paterson, Ian Tolosa</author>
+  <path>Models/BNI.ac</path>
+  <animation>
+    <type>select</type>
+    <object-name>Gear</object-name>
+    <condition>
+      <less-than>
+        <property>velocities/true-airspeed-kt</property>
+        <value>120</value>
+      </less-than>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>prop-blur</object-name>
+    <condition>
+      <greater-than-equals>
+        <property>velocities/true-airspeed-kt</property>
+        <value>15</value>
+      </greater-than-equals>
+    </condition>
+  </animation>
+   <animation>
+    <type>spin</type>
+    <object-name>prop-left</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>19</factor>
+    <center>
+      <x-m>-1.75671</x-m>
+      <y-m>-1.881</y-m>
+      <z-m>1.70835</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>spin</type>
+    <object-name>prop-right</object-name>
+    <property>velocities/true-airspeed-kt</property>
+    <factor>20</factor>
+    <center>
+      <x-m>-1.75671</x-m>
+      <y-m>1.881</y-m>
+      <z-m>1.70835</z-m>
+    </center>
+    <axis>
+      <x>1.000</x>
+      <y>0.000</y>
+      <z>0.000</z>
+    </axis>
+  </animation>
+  <!-- Tail and Windows Lightmap Effect -->
+  <effect>
+    <inherits-from>AI/Aircraft/BNI/Effects/BNI-LightMap</inherits-from>
+    <object-name>BNI</object-name>
+    <object-name>Gear</object-name>
+  </effect>
+  <!-- Add Navigation Lights Objects -->
+  <model>
+    <path>Lights/BNI-NavLights.xml</path>
+  </model>
+</PropertyList>

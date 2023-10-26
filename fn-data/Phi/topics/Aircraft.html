@@ -1,0 +1,13 @@
+
+<div class="tabs vtabs">
+    <img data-bind="attr: { src: thumbnailUrl }" style="width: 100%; border-radius: 10px; box-shadow: 0px 7px 9px #666666;">
+
+    <ul data-bind="foreach: topics">
+        <li
+            data-bind="text: $data,
+                   css: { selected: $data == $parent.selectedTopic() },
+                   click: $parent.selectTopic"></li>
+    </ul>
+</div>
+<div id="vtabs-content" data-bind="component: { name: selectedComponent }">
+</div>

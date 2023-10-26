@@ -1,0 +1,925 @@
+-*- coding: utf-8; fill-column: 72; -*-
+
+Add-ons in FlightGear
+=====================
+
+This document explains how add-ons work in FlightGear. The add-on
+feature was first added in FlightGear 2017.3. This document describes an
+evolution of the framework that appeared in FlightGear 2017.4.
+
+
+Contents
+--------
+
+1. Terminology
+
+2. The addon-metadata.xml file
+
+3. Add-ons and the Property Tree
+
+   a) Add-on metadata
+   b) Subtree reserved for add-on developers
+
+4. Resources under the add-on directory
+
+5. Persistent storage location for add-ons
+
+6. Add-on-specific menus and dialogs
+
+   a) Add-on-specific menus
+   b) Add-on-specific dialogs
+
+7. How to run code after an add-on is loaded
+
+8. Overview of the C++ API
+
+9. Nasal API
+
+10. Add-on development; in-sim reload of Nasal code
+
+
+Introduction
+------------
+
+fgfs can be passed the --addon=<path> option, where <path> indicates an
+add-on directory. Such a directory, when used as the argument of
+--addon, receives special treatment :
+
+  1) The add-on directory is added to the list of aircraft paths.
+
+  2) The add-on directory must contain a PropertyList file called
+     addon-metadata.xml that gives the name of the add-on, its
+     identifier (id), its version and possibly a few other things (see
+     details below).
+
+  3) The add-on directory may contain a PropertyList file called
+     addon-config.xml, in which case it will be loaded into the Property
+     Tree at FlightGear startup, as if it were passed to the --config
+     fgfs option.
+
+  4) The add-on directory must contain a Nasal file called
+     addon-main.nas. This file will be loaded at startup too, and its
+     main() function run in the namespace __addon[ADDON_ID]__, where
+     ADDON_ID is the add-on identifier specified in the
+     addon-metadata.xml file. The main() function is passed one
+     argument: the addons.Addon object (a Nasal ghost, see below)
+     corresponding to the add-on being loaded. This operation is done by
+     $FG_ROOT/Nasal/addons.nas at the time of this writing.
+
+Also, the Property Tree is populated (under /addons) with information
+about registered add-ons. More details will be given below.
+
+The --addon option can be specified zero or more times; each of the
+operations indicated above is carried out for every specified add-on in
+the order given by the --addon options used: that's what we call add-on
+registration order, or add-on load order. In other words, add-ons are
+registered and loaded in the order specified by the --addon options
+used.
+
+
+1. Terminology
+   ~~~~~~~~~~~
+
+add-on base path
+
+  Path to a directory containing all of the add-on files. This is the
+  path passed to the --addon fgfs option, when one wants to load the
+  add-on in question.
+
+add-on identifier (id)
+
+  A string such as org.flightgear.addons.ATCChatter or
+  user.joe.MyGreatAddon, used to uniquely identify an add-on. The add-on
+  identifier is declared in <path>/addon-metadata.xml, where <path> is
+  the add-on base path.
+
+add-on registration
+
+  When a --addon option is processed, FlightGear ensures that the add-on
+  identifier found in the corresponding addon-metadata.xml file isn't
+  already used by an add-on from a previous --addon option on the same
+  command line, and stores the add-on metadata inside dedicated C++
+  objects. This process is called add-on registration.
+
+add-on loading
+
+  The following sequence of actions:
+
+    a) loading an add-on's addon-main.nas file in the namespace
+       __addon[ADDON_ID]__
+    b) calling its main() function
+
+  is performed later (see $FG_ROOT/Nasal/addons.nas) and called add-on
+  loading.
+
+
+2. The addon-metadata.xml file
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Every add-on must have in its base directory a file called
+'addon-metadata.xml'. This section explains how to write this file.
+
+Sample addon-metadata.xml file
+==============================
+
+Here is an example of an addon-metadata.xml file, for a hypothetical
+add-on called “Flying Turtle” distributed by Joe User:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+
+  <PropertyList>
+    <meta>
+      <file-type type="string">FlightGear add-on metadata</file-type>
+      <format-version type="int">1</format-version>
+    </meta>
+
+    <addon>
+      <identifier type="string">user.joe.FlyingTurtle</identifier>
+      <name type="string">Flying Turtle</name>
+      <version type="string">1.0.0rc2</version>
+
+      <authors>
+        <author>
+          <name type="string">Joe User</name>
+          <email type="string">optional_address@example.com</email>
+          <url type="string">http://joe.example.com/foobar/</url>
+        </author>
+
+        <author>
+          <name type="string">Jane Maintainer</name>
+          <email type="string">jane@example.com</email>
+          <url type="string">https://jane.example.com/</url>
+        </author>
+      </authors>
+
+      <maintainers>
+        <maintainer>
+          <name type="string">Jane Maintainer</name>
+          <email type="string">jane@example.com</email>
+          <url type="string">https://jane.example.com/</url>
+        </maintainer>
+      </maintainers>
+
+      <short-description type="string">
+        Allow flying with new foobar powers.
+      </short-description>
+
+      <long-description type="string">
+        This add-on enables something really great involving turtles...
+      </long-description>
+
+      <localized>
+        <fr>
+          <short-description type="string">
+            Permet de voler avec de nouveaux pouvoirs foobar.
+          </short-description>
+          <name>
+          Tortue volante
+          </name>
+        </fr>
+        <de>
+        <short-description type="string">
+         Erlaube das Fliegen mit neuen Foobar-Kräften.
+          </short-description>
+        </de>
+      </localized>
+
+      <license>
+        <designation type="string">
+          GNU GPL version 2 or later
+        </designation>
+
+        <file type="string">
+          COPYING
+        </file>
+
+        <url type="string">
+          https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
+        </url>
+      </license>
+
+      <min-FG-version type="string">2017.4.0</min-FG-version>
+      <max-FG-version type="string">none</max-FG-version>
+
+      <urls>
+        <home-page type="string">
+          https://example.com/quux
+        </home-page>
+
+        <download type="string">
+          https://example.com/quux/download
+        </download>
+
+        <support type="string">
+          https://example.com/quux/support
+        </support>
+
+        <code-repository type="string">
+          https://example.com/quux/code-repository
+        </code-repository>
+      </urls>
+
+      <tags>
+        <tag type="string">first tag</tag>
+        <tag type="string">second tag</tag>
+        <tag type="string">etc.</tag>
+      </tags>
+    </addon>
+  </PropertyList>
+
+General rules
+=============
+
+We use the terms “field” or “node” interchangeably here to refer to
+nodes of the addon-metadata.xml PropertyList file (technically, a field
+always has a value, possibly empty, therefore fields are all leaf
+nodes).
+
+Leading and trailing whitespace in each field of addon-metadata.xml is
+removed. All other whitespace is a priori preserved (this could depend
+on the particular field, though).
+
+Most fields are optional. In most cases, omitting a field is the same as
+leaving it empty. But don't write empty tag fields, it is really too
+ugly. ;-)
+
+Name and id
+===========
+
+Nodes: /addon/name and /addon/identifier
+
+The add-on name is the pretty form. It should not be overly long, but
+otherwise isn't constrained. On the other hand, the add-on identifier
+(id), which serves to uniquely identify an add-on:
+  - must contain only ASCII letters (A-Z, a-z) and dots ('.');
+  - must be in reverse DNS style (even if the domain doesn't exist),
+    e.g., org.flightgear.addons.ATCChatter for an add-on distributed in
+    FGAddon, or user.joe.FlyingTurtle for Joe User's “Flying Turtle”
+    add-on. Of course, if Joe User owns a domain name and uses it to
+    distribute his add-on, he should put it here.
+
+Authors and maintainers
+=======================
+
+Nodes: /addon/authors and /addon/maintainers
+
+Authors are people who contributed significantly to the add-on.
+Maintainers are people currently in charge of maintaining it.
+
+It is possible to declare any number of authors and any number of
+maintainers---the example above shows only one maintainer for shortness,
+but this is not a restriction.
+
+For each author and maintainer, you can give a name, an email address
+and a URL. The name must be non-empty, but the email address and URL
+need not be specified or may be left empty, which is equivalent.
+Obviously, if no email address nor URL is given for any maintainer, it
+is highly desirable that /addon/urls/support contains a usable URL for
+contacting the add-on maintainers.
+
+The data in children nodes of /addon/maintainers may refer either to
+real persons or to more abstract entities such as mailing-lists. In case
+of a real person, the corresponding URL, if specified, is expected to be
+the person's home page. On the other hand, if a declared “maintainer” is
+a mailing-list, a good use for the 'url' field is to indicate the
+address of a web page from which people can subscribe to the
+mailing-list.
+
+Short and long descriptions
+===========================
+
+Nodes: /addon/short-description and /addon/long-description
+
+The short description should fit on one line (try not to exceed, say, 78
+characters), and in general consist of only one sentence.
+
+The long description is essentially free-form, but only break lines when
+you do want a line break at this point. In other words, don't wrap lines
+manually in the XML file: this will be automatically done by the
+software displaying the add-on description, according to the particular
+line width it uses (which can depend on the user's screen or
+configuration, etc.). A single \n inside a paragraph (see footnote [1])
+means a hard line break. Two \n in a row (i.e., a blank line) should be
+used to separate paragraphs. Example:
+
+This is a paragraph.
+This is the second line of the same paragraph. It can be very, very, very long and contain several sentences.
+
+This is a different paragraph. Again, don't break lines (i.e., don't press Enter) unless a particular formatting reason makes it necessary. For instance, it is okay to break lines in order to present a list of items, but not for line wrapping.
+
+Licensing terms
+===============
+
+Nodes: /addon/license/designation
+       /addon/license/file
+       /addon/license/url
+
+The /add-on/license/designation node should describe the add-on
+licensing terms in a short but accurate way, if possible. If this is not
+practically doable, use the value “Custom”. If the add-on is distributed
+under several licenses, use the value “Multiple”. In all cases, make
+sure the licensing terms are clearly specified in other files of the
+add-on (typically, at least README.txt or COPYING). Values for
+/add-on/license/designation could be “GNU GPL version 2 or later”, “CC0
+1.0 Universal”, “3-clause BSD”, etc.
+
+In most cases, the add-on should contain a file containing the full
+license text. Use the /add-on/license/file node to point to this file:
+it should contain a file path that is relative to the add-on base
+directory. This path must use slash separators ('/'), even if you use
+Windows.
+
+The /add-on/license/url node should contain a single URL if there is an
+official, stable URL for the license under which the add-on is
+distributed. The term “official” here is to be interpreted in the
+context of the particular license. For instance, for a GNU license
+(GPL2, LGPL2.1, etc.), the URL domain must be gnu.org; for a CC license
+(CC0 1.0 Universal, CC-BY-SA 4.0...), it must be creativecommons.org,
+etc.
+
+Minimum and maximum FlightGear versions
+=======================================
+
+Nodes: /addon/min-FG-version and /addon/max-FG-version
+
+These two nodes are optional and may be omitted unless the add-on is
+known not to work with particular FlightGear versions.
+/addon/min-FG-version defaults to 2017.4.0 and /addon/max-FG-version to
+the special value 'none' (only allowed for /addon/max-FG-version). Apart
+from this special case, every non-empty value present in one of these
+two fields must be a proper FlightGear version number usable with
+simgear::strutils::compare_versions(), for instance '2017.4.1'.
+
+Add-on version
+==============
+
+Node: /addon/version
+
+The /addon/version node gives the version of the add-on and must obey a
+strict syntax[2], which is a subset of what is described in PEP 440:
+
+  https://www.python.org/dev/peps/pep-0440/
+
+Valid examples are, in increasing sort order:
+
+  1.2.5.dev1      # first development release of 1.2.5
+  1.2.5.dev4      # fourth development release of 1.2.5
+  1.2.5
+  1.2.9
+  1.2.10a1.dev2   # second dev release of the first alpha release of 1.2.10
+  1.2.10a1        # first alpha release of 1.2.10
+  1.2.10b5        # fifth beta release of 1.2.10
+  1.2.10rc12      # twelfth release candidate for 1.2.10
+  1.2.10
+  1.3.0
+  2017.4.12a2
+  2017.4.12b1
+  2017.4.12rc1
+  2017.4.12
+
+.devN suffixes can of course be used on beta and release candidates too,
+just as with the 1.2.10a1.dev2 example given above for an alpha release.
+Note that a development release always sorts before the corresponding
+non-development release (e.g., 2017.2.1b5.dev4 comes before 2017.2.1b5).
+
+Translations
+============
+
+Certain nodes can be translated based on the active languages within FlightGear.
+Especially, the name and descriptions can be translated, by adding them to
+a language node beneath 'localized', as show in the example above. Where there is
+no translation for a particular value, the default one is used.
+
+Other fields
+============
+
+The other nodes of 'addon-metadata.xml' should be self-explanatory. :-)
+
+
+3. Add-ons and the Property Tree
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+a) Add-on metadata
+   ^^^^^^^^^^^^^^^
+
+The most important metadata for each registered add-on is made
+accessible in the Property Tree under /addons/by-id/ADDON_ID and the
+property /addons/by-id/ADDON_ID/loaded can be checked or listened to, in
+order to determine when a particular add-on is loaded. There is also a
+Nasal interface to access add-on metadata in a convenient way (see
+below).
+
+More precisely, when an add-on is registered, its name, id, base path,
+version (converted to a string), loaded status (boolean) and load
+sequence number (int) become available in the Property Tree as
+/addons/by-id/ADDON_ID/{name,id,path,version,loaded,load-seq-num}. The
+loaded status is initially false, and set to true when the add-on
+loading phase is complete.
+
+There are also /addons/addon[i]/path nodes where i is 0 for the first
+registered add-on, 1 for the second one, etc.
+
+
+b) Subtree reserved for add-on developers
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For each add-on, the subtree of the global Property Tree starting at
+/addons/by-id/ADDON_ID/addon-devel is reserved for the specific needs of
+the add-on, where ADDON_ID stands for the add-on identifier. For
+instance, developers of the add-on whose identifier is
+user.joe.FlyingTurtle can store whatever they want under
+/addons/by-id/user.joe.FlyingTurtle/addon-devel with the assurance that
+doing this won't clash with properties used by the add-on framework.
+
+Example:
+
+  /addons/by-id/user.joe.FlyingTurtle/addon-devel/some/property and
+  /addons/by-id/user.joe.FlyingTurtle/addon-devel/other/property
+
+  could be two properties used for the specific needs of the
+  add-on whose identifier is user.joe.FlyingTurtle.
+
+Add-on developers should *not* use other places in the /addons subtree
+of the Property Tree for their custom properties.
+
+
+4. Resources under the add-on directory
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Many functions in FlightGear use files that are located using the
+SimGear ResourceManager class. This class allows one to point to files
+by relative path in aircraft source files and other places. The resource
+manager queries a set of providers, some of which look inside aircraft
+paths (starting with the current aircraft), others inside scenery paths,
+others under $FG_ROOT, etc. The first file that matches the specified
+resource path is used.
+
+One of these providers only handles resource paths with a very specific
+syntax, which is:
+
+  [addon=ADDON_ID]path/relative/to/the/addon/directory
+
+  (for instance, [addon=user.joe.FlyingTurtle]images/eject-button.png)
+
+When you use such a syntax in a place that is expected to contain a
+resource path, it will only find the specified file under the directory
+of the add-on whose identifier is ADDON_ID. This allows one to
+specifically target a particular file inside a particular add-on,
+instead of crossing fingers and hoping that the specified resource won't
+be found by coincidence in another place such as an aircraft directory,
+a scenery directory or inside $FG_ROOT (such mistakes can easily happen
+when unrelated places use files with rather generic names, such as
+button.png, system.xml, etc.).
+
+The [addon=ADDON_ID]relative/path syntax is useful where resources are
+specified inside non-Nasal files (e.g., in property-rule configuration
+files, which use the XML format). For the particular case of Nasal code,
+there is a better way that is explained below (see “Nasal API”): the
+resourcePath() method of addons.Addon objects returns a string like
+"[addon=ADDON_ID]relative/path" when you pass it the string
+"relative/path". This is a good thing to use, because then your Nasal
+code doesn't need to know about the particular syntax for
+add-on-specific resources and, more interestingly, doesn't have to
+hardcode the add-on identifier every time you need to access a resource
+inside the add-on directory.
+
+4.1 Resources extending $FG_ROOT
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Add-ons can options supply a special sub-directory which is searched when
+FlightGear looks for files normally residing in $FG_ROOT. For example input
+configurations, network protocols and other non-aircraft resources. Since
+these files cannot use the scheme above, a different approach is used. If
+an add-on defines a subdirectory called 'FGData', this is becomes an
+additional data directory to be searched for any such standard files. For
+security reasons, add-on FGData extensions are searched after the main
+$FG_ROOT location, so that an addon cannot maliciously replace a core resource.
+
+Only some files currently support being added via this mechanism, so if you
+find a non-working case which would be useful, please request it via the
+developer mailing list.
+
+
+5. Persistent storage location for add-ons
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If an add-on needs to store data that persists across FlightGear
+sessions, it can use a specific directory tree whose path is obtained
+with addon.storagePath, where 'addon' is an addons.Addon instance. This
+corresponds to $FG_HOME/Export/Addons/ADDON_ID, however it is simpler
+and better to use addon.storagePath instead of hardcoding and manually
+assembling this path in each add-on. Since the directory is likely not
+to exist until the add-on creates it, the recommended usage pattern is
+the following:
+
+  1) Create the add-on-specific storage directory if it doesn't already
+     exist, and optionally get its path at the same time:
+
+       storageDir = addon.createStorageDir();
+
+     Typically, you'll run this in the add-on main() function (at least,
+     early enough) if your add-on uses the storage directory. Note that
+     there is no need to check yourself whether the directory already
+     exists: addon.createStorageDir() does that for you.
+
+  2) At any time, you can get a path to the add-on-specific storage
+     directory with:
+
+       storageDir = addon.storagePath
+
+     Accessing addon.storagePath doesn't check for the existence nor the
+     type of $FG_HOME/Export/Addons/ADDON_ID, thus it is a bit faster
+     than addon.createStorageDir(). Use addon.storagePath whenever you
+     know that the directory has already been created.
+
+The features described in this section were added in FlightGear 2018.2.
+
+
+6. Add-on-specific menus and dialogs
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+a) Add-on-specific menus
+   ^^^^^^^^^^^^^^^^^^^^^
+
+Add-ons can easily provide their own menus. If an add-on is loaded that
+has a file named 'addon-menubar-items.xml' in its base directory, the
+menus described in this file are added to the FlightGear menu bar. The
+file should look like this:
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PropertyList>
+  <meta>
+    <file-type type="string">FlightGear add-on menu bar items</file-type>
+    <format-version type="int">1</format-version>
+  </meta>
+
+  <menubar-items>
+    <menu>
+      ...
+    </menu>
+
+    ...
+
+    <menu>
+      ...
+    </menu>
+  </menubar-items>
+</PropertyList>
+
+In this file, each <menu> element must be a valid menu description for
+the FlightGear menu system (the FlightGear standard menubar in
+$FG_ROOT/gui/menubar.xml provides good examples). Here is an example
+that adds one menu with an entry for running some Nasal code and another
+entry for opening a custom dialog (see below for add-on-specific dialogs):
+
+    <menu>
+      <label>My Menu</label>
+      <enabled type="bool">true</enabled>
+
+      <item>
+        <label>Run Foobar Nasal</label>
+        <binding>
+          <command>nasal</command>
+          <script>foobar.doBaz();</script>
+        </binding>
+      </item>
+
+      <item>
+        <label>My Foobar Dialog</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>my-foobar-dialog</dialog-name>
+        </binding>
+      </item>
+    </menu>
+
+This feature was added in FlightGear 2018.2.
+
+  For older versions, one can add menus via addon-config.xml, but it's a
+  bit hackish because of the menu index problem.
+
+
+b) Add-on-specific dialogs
+   ^^^^^^^^^^^^^^^^^^^^^^^
+
+As is the case for aircraft, add-ons can provide their own dialogs by
+shipping the corresponding XML files in the subfolder gui/dialogs of the
+add-on base directory. In other words, with a file like
+
+  <addon-base-path>/gui/dialogs/my-foobar-dialog.xml
+
+starting with:
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <PropertyList>
+    <name>my-foobar-dialog</name>
+
+  ...
+
+the following <item> element inside 'addon-menubar-items.xml' (see
+above) describes a valid menu entry for showing the custom dialog.
+
+      <item>
+        <label>My Foobar Dialog</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>my-foobar-dialog</dialog-name>
+        </binding>
+      </item>
+
+See $FG_ROOT/gui/dialogs to get inspiration from FlightGear's standard
+dialogs.
+
+This feature was added in FlightGear 2018.2.
+
+
+7. How to run code after an add-on is loaded
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You may want to set up Nasal code to be run after an add-on is loaded;
+here is how to do that:
+
+  var addonId = "user.joe.FlyingTurtle";
+  var loadedFlagNode = props.globals.getNode("/addons")
+                                    .getChild("by-id", 0, 1)
+                                    .getChild(addonId, 0, 1)
+                                    .getChild("loaded", 0, 1);
+
+  if (loadedFlagNode.getBoolValue()) {
+    logprint(5, addonId ~ " is already loaded");
+  } else {
+    # Define a function to be called after the add-on is loaded
+    var id = setlistener(
+      loadedFlagNode,
+      func(changedNode, listenedNode) {
+        if (listenedNode.getBoolValue()) {
+          removelistener(id);
+          logprint(5, addonId ~ " is loaded");
+        };
+      },
+      0, 0);
+  }
+
+
+8. Overview of the C++ API
+   ~~~~~~~~~~~~~~~~~~~~~~~
+
+The add-on C++ infrastructure mainly relies on the following classes:
+AddonManager, Addon and AddonVersion. AddonManager is used to register
+add-ons, which later leads to their loading. AddonManager relies on an
+std::map<std::string, AddonRef>, where keys are add-on identifiers and
+AddonRef is SGSharedPtr<Addon> at the time of this writing (changing it
+to another kind of smart pointer should be a mere one-line change). This
+map holds the metadata of each registered add-on. Accessor methods are
+available for:
+
+  - retrieving the lists of registered and loaded add-ons;
+
+  - checking if a particular add-on has already been registered or
+    loaded;
+
+  - for each add-on, obtaining an Addon instance which can be queried
+    for its identifier, its name, identifier, version, base path, the
+    minimum and maximum FlightGear versions it requires, its base node
+    in the Property Tree, its order in the load sequence...
+
+The AddonVersion class handles everything about add-on version numbers:
+  - initialization from the individual components or from a string;
+  - conversion to a string and output to an std::ostream;
+  - access to every component;
+  - comparisons using the standard operators: ==, !=, <, <=, >, >=.
+
+Registering an add-on using AddonManager::registerAddon() ensures
+uniqueness of the add-on identifier and makes its name, identifier, base
+path, version (converted to a string), loaded status (boolean) and load
+sequence number (int) available in the Property Tree as
+/addons/by-id/ADDON_ID/{name,id,path,version,loaded,load-seq-num}.
+
+Note: if C++ code needs to use the add-on base path, better use
+      AddonManager::addonBasePath() or Addon::getBasePath(), whose
+      return values can't be tampered with by Nasal code.
+
+AddonManager::registerAddon() fails with a specific exception if the
+running FlightGear instance doesn't match the min-FG-version and
+max-FG-version requirements declared in the addon-metadata.xml file, as
+well as in the obvious other cases (required files such as
+addon-metadata.xml not found, invalid syntax in such files, etc.). The
+code in options.cxx (fgOptAddon()) catches such exceptions and displays
+the appropriate error message with SG_LOG() and
+fatalMessageBoxThenExit().
+
+
+9. Nasal API
+   ~~~~~~~~~
+
+The Nasal add-on API all lives in the 'addons' namespace. It gives Nasal
+code easy access to add-on metadata, for instance like this:
+
+  var myAddon = addons.getAddon("user.joe.FlyingTurtle");
+  print(myAddon.id);
+  print(myAddon.name);
+  print(myAddon.version.str());
+
+  foreach (var author; myAddon.authors) {
+    print(author.name, " ", author.email, " ", author.url);
+  }
+
+  foreach (var maintainer; myAddon.maintainers) {
+    print(maintainer.name, " ", maintainer.email, " ", maintainer.url);
+  }
+
+  print(myAddon.shortDescription);
+  print(myAddon.longDescription);
+  print(myAddon.licenseDesignation);
+  print(myAddon.licenseFile);
+  print(myAddon.licenseUrl);
+  print(myAddon.basePath);
+  print(myAddon.minFGVersionRequired);
+  print(myAddon.maxFGVersionRequired);
+  print(myAddon.homePage);
+  print(myAddon.downloadUrl);
+  print(myAddon.supportUrl);
+  print(myAddon.codeRepositoryUrl);
+
+  foreach (var tag; myAddon.tags) {
+    print(tag);
+  }
+
+  print(myAddon.loadSequenceNumber);
+  # myAddon.node is a props.Node object for /addons/by-id/ADDON_ID
+  print(myAddon.node.getPath());
+
+Among other things, the Nasal add-on API allows one to get the version
+of any registered add-on as a ghost and reliably compare it to another
+instance of addons.AddonVersion:
+
+  var myAddon = addons.getAddon("user.joe.FlyingTurtle");
+  var firstVersionOK = addons.AddonVersion.new("2.12.5rc1");
+  # Or alternatively:
+  #   var firstVersionOK = addons.AddonVersion.new(2, 12, 5, "rc1");
+
+  if (myAddon.version.lowerThan(firstVersionOK)) {
+    ...
+
+Here follows the complete Nasal add-on API, at the time of this writing.
+All strings are encoded in UTF-8.
+
+Queries to the AddonManager:
+
+  addons.isAddonRegistered(string addonId) -> bool (1 or 0)
+  addons.registeredAddons()                -> vector<addons.Addon>
+                                              (in registration/load order)
+  addons.isAddonLoaded(string addonId)     -> bool (1 or 0)
+  addons.loadedAddons()                    -> vector<addons.Addon>
+                                              (in lexicographic order)
+  addons.getAddon(string addonId)          -> addons.Addon instance (ghost)
+
+Read-only data members (attributes) of addons.Addon objects:
+
+  id                    the add-on identifier, in reverse DNS style (string)
+  name                  the add-on “pretty name” (string)
+  version               the add-on version (instance of addons.AddonVersion,
+                        ghost)
+  authors               the add-on authors (vector of addons.Author ghosts)
+  maintainers           the add-on maintainers (vector of addons.Maintainer
+                        ghosts)
+  shortDescription      the add-on short description (string)
+  longDescription       the add-on long description (string)
+  licenseDesignation    licensing terms: "GNU GPL version 2 or later",
+                        "CC0 1.0 Universal", etc. (string)
+  licenseFile           relative, slash-separated path to a file under
+                        the add-on base directory containing the license
+                        text (string)
+  licenseUrl            stable, official URL for the add-on license text
+                        (string)
+  basePath              path to the add-on base directory (string)
+  storagePath           path to the add-on storage directory (string)
+                        This is $FG_HOME/Export/Addons/ADDON_ID.
+                        [added in FlightGear 2018.2]
+  minFGVersionRequired  minimum required FG version for the add-on (string)
+  maxFGVersionRequired  max. required FG version... or "none" (string)
+  homePage              add-on home page (string)
+  downloadUrl           add-on download URL (string)
+  supportUrl            add-on support URL (string)
+  codeRepositoryUrl     URL pointing to the development repository of
+                        the add-on (Git, Subversion, etc.; string)
+  tags                  vector containing the add-on tags used to help
+                        users find add-ons (vector of strings)
+  node                  base node for the add-on in the Property Tree:
+                        /addons/by-id/ADDON_ID (props.Node object)
+  loadSequenceNumber    0 for the first registered add-on, 1 for the
+                        second one, etc. (integer)
+
+Member functions (methods) of addons.Addon objects:
+
+  createStorageDir() -> string
+                        Create the add-on storage directory if it
+                        doesn't already exist (that is,
+                        $FG_HOME/Export/Addons/ADDON_ID). Return its
+                        path as a string.
+                        [added in FlightGear 2018.2]
+  resourcePath(string relPath) -> string
+                        Return a resource path suitable for use with the
+                        simgear::ResourceManager. 'relPath' must be
+                        relative to the add-on base directory, and
+                        mustn't start with a '/'. You can use this
+                        method for instance to specify an image file for
+                        display in a Canvas widget.
+
+                        In you want a full path to the resource file
+                        (e.g., for troubleshooting), call resolvepath()
+                        with the return value of addons.Addon.resourcePath().
+
+Read-only data members (attributes) of addons.AddonVersion objects:
+
+  majorNumber           non-negative integer
+  minorNumber           non-negative integer
+  patchLevel            non-negative integer
+  suffix                string such as "", "a1", "b2.dev45", "rc12"...
+
+Member functions (methods) of addons.AddonVersion objects:
+
+  new(string version)                           | construct from string
+
+  new(int major, int minor=0, int patchLevel=0, | construct
+      string suffix="")                         | from components
+
+  str()                                         | string representation
+
+  equal(addons.AddonVersion other)              |
+  nonEqual(addons.AddonVersion other)           | compare to another
+  lowerThan(addons.AddonVersion other)          | addons.AddonVersion
+  lowerThanOrEqual(addons.AddonVersion other)   | instance
+  greaterThan(addons.AddonVersion other)        |
+  greaterThanOrEqual(addons.AddonVersion other) |
+
+Read-only data members (attributes) of addons.Author objects:
+
+  name                  author name (non-empty string)
+  email                 email address of the author (string)
+  url                   home page of the author (string)
+
+Read-only data members (attributes) of addons.Maintainer objects:
+
+  name                  maintainer name (non-empty string)
+  email                 email address of the maintainer (string)
+  url                   home page of the maintainer, if a person; if the
+                        maintainer is a mailing-list, the URL can point
+                        to a web page from which people can subscribe to
+                        that mailing-list (string)
+
+
+10. Add-on development; in-sim reload of Nasal code
+---------------------------------------------------
+
+!!! WARNING:
+!!! The reload feature is meant for developers only, it should not be made
+!!! visible to end users. Unexpected side effects may occur due to reload,
+!!! if not implemented correctly.
+!!! We really don't want users to send bug reports due to reload going wrong.
+
+To make development of add-ons less time consuming, you can reload the
+Nasal part of your add-on without having to restart FlightGear. When an
+add-on is loaded, setlistener() and maketimer() wrappers are installed
+in the add-on's own namespace; these wrappers shadow and call themselves
+the standard setlistener() and maketimer() functions. The setlistener()
+and maketimer() wrapper functions keep track of every listener and timer
+they create. When the add-on is removed (e.g., as part of its reload
+sequence), removelistener() is called for each of these listeners, and
+each timer has its stop() method called.
+_
+For the time being, you have to track any other resources outside the
+namespace of your add-on by yourself and clean them up in the unload()
+function, e.g. delete canvas or close any files you opened.
+
+You can define this unload() function in the addon-main.nas file. When
+your add-on is reloaded, its unload() function, if defined, will be
+called with one argument: the addons.Addon object (a Nasal ghost)
+corresponding to your add-on. unload() is run in the add-on's own
+namespace.
+
+In FlightGear Versions before 2020.1 the reload is triggered by setting the 
+property /addon/by-id/ADDON_ID/reload to true (replace ADDON_ID with your
+particular add-on identifier). 
+
+!!! Since version 2020.1 reload should be done like this: 
+!!! fgcommand("addon-reload", props.Node.new({'id': 'ADDON_ID'}));
+
+You can add a menu item to trigger the reload easily, but it should be removed 
+before publishing your add-on to endusers (see the above warning).
+
+Please have a look at the skeleton add-on at
+https://sourceforge.net/p/flightgear/fgaddon/HEAD/tree/trunk/Addons/Skeleton/
+
+
+Footnotes
+---------
+
+[1] \n represents end-of-line in string literals of languages such as C,
+    C++, Python and many others. We use this convention here to
+    represent the end-of-line character sequence in the XML data.
+
+[2] MAJOR.MINOR.PATCHLEVEL[{a|b|rc}N1][.devN2] where MAJOR, MINOR and
+    PATCHLEVEL are non-negative integers, and N1 and N2 are positive
+    integers.

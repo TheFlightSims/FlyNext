@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!-- Regional definitions for the United Kingdom -->
+<PropertyList>
+  <name>United Kingdom Barra</name>
+  <area>
+    <lon1>-7.46</lon1>
+    <lon2>-7.42</lon2>
+    <lat1>57.01</lat1>
+    <lat2>57.03</lat2>
+  </area>
+
+  <condition>
+    <equals>
+      <property>sim/startup/season</property>
+      <value>summer</value>
+    </equals>
+  </condition>
+
+  <material>
+    <name>Grass</name>
+    <name>Airport</name>
+    <name>AirportKeep</name>
+    <texture-set>
+      <texture>Terrain/sand4.png</texture>
+      <texture n="11">Terrain/sand_hires.png</texture>
+    </texture-set>
+    <texture-set>
+      <texture>Terrain/sand5.png</texture>
+      <texture n="11">Terrain/sand_hires.png</texture>
+    </texture-set>
+    <texture-set>
+      <texture>Terrain/sand6.png</texture>
+      <texture n="11">Terrain/sand_hires.png</texture>
+    </texture-set>
+    <!--<texture>Terrain/sand4.png</texture>
+  <texture>Terrain/sand5.png</texture>
+  <texture>Terrain/sand6.png</texture>-->
+    <xsize>2000</xsize>
+    <ysize>2000</ysize>
+    <light-coverage>10000000.0</light-coverage>
+    <shininess>2.5</shininess>
+    <friction-factor>0.7</friction-factor>
+    <rolling-friction>0.04</rolling-friction>
+    <bumpiness>0.1</bumpiness>
+</material>
+
+</PropertyList>

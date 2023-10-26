@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <type>csm</type>
+  <effect-scheme>classic-shadow</effect-scheme>
+  <clear-mask>depth</clear-mask>
+  <!-- Only render objects with the CAST_SHADOW bit flag -->
+  <cull-mask>0x000004</cull-mask>
+  <render-at-night>false</render-at-night>
+  <condition>
+	<property>/sim/rendering/shadows/enabled</property>
+  </condition>
+  <attachment>
+    <buffer>sun-shadowmap-atlas</buffer>
+    <component>depth</component>
+  </attachment>
+</PropertyList>

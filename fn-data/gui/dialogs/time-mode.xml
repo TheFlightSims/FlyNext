@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <name>time-mode</name>
+
+    <layout>vbox</layout>
+
+    <!-- titlebar -->
+    <group>
+        <layout>hbox</layout>
+        <empty>
+            <stretch>1</stretch>
+        </empty>
+
+        <text>
+            <label>Time Mode</label>
+        </text>
+
+        <empty>
+            <stretch>1</stretch>
+        </empty>
+
+        <button>
+            <pref-width>16</pref-width>
+            <pref-height>16</pref-height>
+            <legend></legend>
+            <keynum>27</keynum>
+            <border>2</border>
+            <binding>
+                <command>dialog-close</command>
+            </binding>
+        </button>
+    </group>
+
+    <hrule/>
+
+    <group>
+        <layout>vbox</layout>
+        <group>
+            <layout>hbox</layout>
+            <radio>
+                <halign>left</halign>
+                <label>Real time</label>
+                <property>/sim/multiplay/lag/master</property>
+                <live>true</live>
+                <binding>
+                    <command>dialog-apply</command>
+                </binding>
+                <binding>
+                    <command>nasal</command>
+                    <script>
+                        var v = props.globals.getNode("/sim/multiplay/lag/master").getBoolValue();
+                        if (v) {
+                            props.globals.getNode("/sim/time/simple-time/enabled", 1).setBoolValue(0);
+                        }
+                    </script>
+                </binding>
+            </radio>
+            <button>
+                <legend>Real time lag settings</legend>
+                <binding>
+                    <command>dialog-show</command>
+                    <dialog-name>lag-adjust</dialog-name>
+                </binding>
+            </button>
+        </group>
+        <radio>
+            <halign>left</halign>
+            <label>Simple time</label>
+            <property>/sim/time/simple-time/enabled</property>
+            <live>true</live>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+            <binding>
+                <command>nasal</command>
+                <script>
+                    var v = props.globals.getNode("/sim/time/simple-time/enabled").getBoolValue();
+                    if (v) {
+                        props.globals.getNode("/sim/multiplay/lag/master", 1).setBoolValue(0);
+                    }
+                </script>
+            </binding>
+        </radio>
+        <input>
+            <property>/sim/time/fixed-dt</property>
+            <label>Fixed dt</label>
+            <live>true</live>
+            <halign>left</halign>
+            <label></label>
+            <binding>
+                <command>dialog-apply</command>
+            </binding>
+        </input>
+    </group>
+
+</PropertyList>

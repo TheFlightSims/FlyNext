@@ -1,0 +1,2061 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2.xsd">
+  <file original="" source-language="en-US" target-language="tr" datatype="plaintext" xml:space="preserve">
+    <body>
+      <group restype="x-trolltech-linguist-context" resname="menu">
+        <trans-unit id="menu/adjust-hud:0" translate="yes" approved="yes">
+          <source>Adjust HUD Properties</source>
+          <target>HUD Özelliklerini Ayarlayın</target>
+        </trans-unit>
+        <trans-unit id="menu/adjust-lod:0" translate="yes" approved="yes">
+          <source>Adjust LOD Ranges</source>
+          <target>LOD Aralıklarını Ayarla</target>
+        </trans-unit>
+        <trans-unit id="menu/ai:0" translate="yes" approved="yes">
+          <source>AI</source>
+          <target>Tüm</target>
+        </trans-unit>
+        <trans-unit id="menu/ai-objects:0" translate="yes" approved="yes">
+          <source>AI Objects</source>
+          <target>AI Nesneleri</target>
+        </trans-unit>
+        <trans-unit id="menu/aircraft-center:0" translate="yes" approved="yes">
+          <source>Aircraft Center (Experimental)</source>
+          <target>Uçak Merkezi (Deneysel)</target>
+        </trans-unit>
+        <trans-unit id="menu/aircraft-checklists:0" translate="yes" approved="yes">
+          <source>Aircraft Checklists</source>
+          <target>Uçak Kontrol Listeleri</target>
+        </trans-unit>
+        <trans-unit id="menu/aircraft-keys:0" translate="yes" approved="yes">
+          <source>Aircraft Help</source>
+          <target>Uçak Yardımı</target>
+        </trans-unit>
+        <trans-unit id="menu/als-filter-effects:0" translate="yes" approved="yes">
+          <source>ALS Filter Effects</source>
+          <target>ALS Filtre Efektleri</target>
+        </trans-unit>
+        <trans-unit id="menu/atc-in-range:0" translate="yes" approved="yes">
+          <source>ATC Services in Range</source>
+          <target>Aralıktaki ATC Hizmetleri</target>
+        </trans-unit>
+        <trans-unit id="menu/autopilot:0" translate="yes" approved="yes">
+          <source>Autopilot</source>
+          <target>Otomatik pilot</target>
+        </trans-unit>
+        <trans-unit id="menu/autopilot-settings:0" translate="yes" approved="yes">
+          <source>Autopilot Settings</source>
+          <target>Otomatik Pilot Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/autostart:0" translate="yes" approved="yes">
+          <source>Autostart</source>
+          <target>Otomatik başlatma</target>
+        </trans-unit>
+        <trans-unit id="menu/basic-keys:0" translate="yes" approved="yes">
+          <source>Basic Simulator Keys</source>
+          <target>Temel Simülatör Tuşları</target>
+        </trans-unit>
+        <trans-unit id="menu/carrier:0" translate="yes" approved="yes">
+          <source>Carrier Controls</source>
+          <target>Taşıyıcı Kontrolleri</target>
+        </trans-unit>
+        <trans-unit id="menu/cockpit-view-options:0" translate="yes" approved="yes">
+          <source>Cockpit View Options</source>
+          <target>Kokpit Görünümü Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="menu/common-keys:0" translate="yes" approved="yes">
+          <source>Common Aircraft Keys</source>
+          <target>Ortak Uçak Anahtarları</target>
+        </trans-unit>
+        <trans-unit id="menu/configure-dev-extension:0" translate="yes" approved="yes">
+          <source>Configure Development Extensions</source>
+          <target>Geliştirme Uzantılarını Yapılandırma</target>
+        </trans-unit>
+        <trans-unit id="menu/cycle-gui:0" translate="yes" approved="yes">
+          <source>Cycle GUI Style</source>
+          <target>Döngü ARAYÜZ Stili</target>
+        </trans-unit>
+        <trans-unit id="menu/debug:0" translate="yes" approved="yes">
+          <source>Debug</source>
+          <target>Hata ayıklama</target>
+        </trans-unit>
+        <trans-unit id="menu/development-keys:0" translate="yes" approved="yes">
+          <source>Development Keys</source>
+          <target>Geliştirme Anahtarları</target>
+        </trans-unit>
+        <trans-unit id="menu/display-marker:0" translate="yes" approved="yes">
+          <source>Display Tutorial Marker</source>
+          <target>Eğitici İşaretçiyi Görüntüle</target>
+        </trans-unit>
+        <trans-unit id="menu/doc-browser:0" translate="yes" approved="yes">
+          <source>Documentation Browser</source>
+          <target>Belge Tarayıcı</target>
+        </trans-unit>
+        <trans-unit id="menu/dump-scene-graph:0" translate="yes" approved="yes">
+          <source>Dump Scene Graph</source>
+          <target>Döküm Sahne Grafiği</target>
+        </trans-unit>
+        <trans-unit id="menu/earthview:0" translate="yes" approved="yes">
+          <source>Earthview orbital rendering</source>
+          <target>Dünya görünümü yörünge oluşturma</target>
+        </trans-unit>
+        <trans-unit id="menu/environment:0" translate="yes" approved="yes">
+          <source>Environment</source>
+          <target>Çevre</target>
+        </trans-unit>
+        <trans-unit id="menu/environment-settings:0" translate="yes" approved="yes">
+          <source>Environment Settings</source>
+          <target>Ortam Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/equipment:0" translate="yes" approved="yes">
+          <source>Equipment</source>
+          <target>Teçhizat</target>
+        </trans-unit>
+        <trans-unit id="menu/error-reports:0" translate="yes" approved="yes">
+          <source>View Errors</source>
+          <target>Hataları Görüntüle</target>
+        </trans-unit>
+        <trans-unit id="menu/exit:0" translate="yes" approved="yes">
+          <source>Quit</source>
+          <target>Çık</target>
+        </trans-unit>
+        <trans-unit id="menu/failure-submenu:0" translate="yes" approved="yes">
+          <source>--- Failures ---</source>
+          <target>--- Başarısızlıklar ---</target>
+        </trans-unit>
+        <trans-unit id="menu/fg1000-mfd:0" translate="yes" approved="yes">
+          <source>FG1000 MFD</source>
+          <target>FG1000 MFD</target>
+        </trans-unit>
+        <trans-unit id="menu/fg1000-pfd:0" translate="yes" approved="yes">
+          <source>FG1000 PFD</source>
+          <target>FG1000 PFD</target>
+        </trans-unit>
+        <trans-unit id="menu/fgcom-settings:0" translate="yes" approved="yes">
+          <source>FGCom Settings</source>
+          <target>FGCom Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/file:0" translate="yes" approved="yes">
+          <source>File</source>
+          <target>Dosya</target>
+        </trans-unit>
+        <trans-unit id="menu/flight-recorder-control:0" translate="yes" approved="yes">
+          <source>Flight Recorder Control</source>
+          <target>Uçuş Kaydedici Kontrolü</target>
+        </trans-unit>
+        <trans-unit id="menu/fuel-and-payload:0" translate="yes" approved="yes">
+          <source>Fuel and Payload</source>
+          <target>Yakıt ve Yük</target>
+        </trans-unit>
+        <trans-unit id="menu/global-weather:0" translate="yes" approved="yes">
+          <source>Weather</source>
+          <target>Hava durumu</target>
+        </trans-unit>
+        <trans-unit id="menu/goto-airport:0" translate="yes" approved="yes">
+          <source>Select Airport</source>
+          <target>Havalimanı Seçin</target>
+        </trans-unit>
+        <trans-unit id="menu/gps:0" translate="yes" approved="yes">
+          <source>GPS Settings</source>
+          <target>GPS Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/help:0" translate="yes" approved="yes">
+          <source>Help</source>
+          <target>Yardım</target>
+        </trans-unit>
+        <trans-unit id="menu/help-browser:0" translate="yes" approved="yes">
+          <source>Help (opens in browser)</source>
+          <target>Yardım (tarayıcıda açılır)</target>
+        </trans-unit>
+        <trans-unit id="menu/highlighting:0" translate="yes" approved="yes">
+          <source>Highlighting</source>
+          <target>Vurgulama</target>
+        </trans-unit>
+        <trans-unit id="menu/immatriculation:0" translate="yes" approved="yes">
+          <source>Immatriculation</source>
+          <target>Kayıt</target>
+        </trans-unit>
+        <trans-unit id="menu/input-config:0" translate="yes" approved="yes">
+          <source>Mouse Configuration</source>
+          <target>Fare Yapılandırması</target>
+        </trans-unit>
+        <trans-unit id="menu/instrument-failures:0" translate="yes" approved="yes">
+          <source>Instrument Failures</source>
+          <target>Cihaz Arızaları</target>
+        </trans-unit>
+        <trans-unit id="menu/instrument-settings:0" translate="yes" approved="yes">
+          <source>Instrument Settings</source>
+          <target>Cihaz Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/interface-config:0" translate="no" approved="yes">
+          <source>User-interface Options</source>
+          <target>Kullanıcı Arayüzü Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="menu/jetway:0" translate="yes" approved="yes">
+          <source>Jetway Settings</source>
+          <target>Jet yolu Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/joystick-config:0" translate="yes" approved="yes">
+          <source>Joystick Configuration</source>
+          <target>Joystick Yapılandırması</target>
+        </trans-unit>
+        <trans-unit id="menu/joystick-info:0" translate="yes" approved="yes">
+          <source>Joystick Information</source>
+          <target>Joystick Bilgileri</target>
+        </trans-unit>
+        <trans-unit id="menu/lag-adjust:0" translate="yes" approved="yes">
+          <source>Lag Settings</source>
+          <target>Gecikme Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/light-switches:0" translate="yes" approved="yes">
+          <source>Light switches</source>
+          <target>Işık anahtarları</target>
+        </trans-unit>
+        <trans-unit id="menu/load-tape:0" translate="yes" approved="yes">
+          <source>Load Flight Recorder Tape</source>
+          <target>Uçuş Kaydedici Bandını Yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/local_weather:0" translate="yes" approved="yes">
+          <source>Local Weather (Test)</source>
+          <target>Yerel Hava Durumu (Test)</target>
+        </trans-unit>
+        <trans-unit id="menu/location:0" translate="yes" approved="yes">
+          <source>Location</source>
+          <target>Konum</target>
+        </trans-unit>
+        <trans-unit id="menu/logging:0" translate="yes" approved="yes">
+          <source>Logging</source>
+          <target>Günlük</target>
+        </trans-unit>
+        <trans-unit id="menu/map:0" translate="yes" approved="yes">
+          <source>Map</source>
+          <target>Harita</target>
+        </trans-unit>
+        <trans-unit id="menu/map-browser:0" translate="yes" approved="yes">
+          <source>Map (opens in browser)</source>
+          <target>Harita (tarayıcıda açılır)</target>
+        </trans-unit>
+        <trans-unit id="menu/map-canvas:0" translate="yes" approved="yes">
+          <source>Map (Canvas)</source>
+          <target>Harita (Tuval)</target>
+        </trans-unit>
+        <trans-unit id="menu/menu-about:0" translate="yes" approved="yes">
+          <source>About</source>
+          <target>Hakkında</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-carrier:0" translate="yes" approved="yes">
+          <source>MPCarrier Selection</source>
+          <target>MP Taşıyıcı Seçimi</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-chat:0" translate="yes" approved="yes">
+          <source>Chat Dialog</source>
+          <target>Sohbet İletişim Kutusu</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-chat-menu:0" translate="yes" approved="yes">
+          <source>Chat Menu</source>
+          <target>Sohbet Menüsü</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-list:0" translate="yes" approved="yes">
+          <source>Pilot List</source>
+          <target>Pilot Listesi</target>
+        </trans-unit>
+        <trans-unit id="menu/mp-settings:0" translate="yes" approved="yes">
+          <source>Multiplayer Settings</source>
+          <target>Çok Oyunculu Ayarlar</target>
+        </trans-unit>
+        <trans-unit id="menu/multiplayer:0" translate="yes" approved="yes">
+          <source>Multiplayer</source>
+          <target>Çok oyunculu</target>
+        </trans-unit>
+        <trans-unit id="menu/nasal-console:0" translate="yes" approved="yes">
+          <source>Nasal Console</source>
+          <target>Burun Konsolu</target>
+        </trans-unit>
+        <trans-unit id="menu/nasal-repl-interpreter:0" translate="yes" approved="yes">
+          <source>Nasal REPL Interpreter</source>
+          <target>Burun REPL Tercümanı</target>
+        </trans-unit>
+        <trans-unit id="menu/next-waypoint:0" translate="yes" approved="yes">
+          <source>Next Waypoint</source>
+          <target>Sonraki Ara Nokta</target>
+        </trans-unit>
+        <trans-unit id="menu/performance-monitor:0" translate="yes" approved="yes">
+          <source>Monitor System Performance</source>
+          <target>Sistem Performansını İzleyin</target>
+        </trans-unit>
+        <trans-unit id="menu/pilot-offset:0" translate="yes" approved="yes">
+          <source>Adjust View Position</source>
+          <target>Görünüm Konumunu Ayarla</target>
+        </trans-unit>
+        <trans-unit id="menu/position-in-air:0" translate="yes" approved="yes">
+          <source>Position Aircraft In Air</source>
+          <target>Uçağı Havada Konumlandır</target>
+        </trans-unit>
+        <trans-unit id="menu/previous-waypoint:0" translate="yes" approved="yes">
+          <source>Previous Waypoint</source>
+          <target>Önceki Ara Nokta</target>
+        </trans-unit>
+        <trans-unit id="menu/print-rendering-statistics:0" translate="yes" approved="yes">
+          <source>Print Rendering Statistics</source>
+          <target>Baskı Oluşturma İstatistikleri</target>
+        </trans-unit>
+        <trans-unit id="menu/print-scene-info:0" translate="yes" approved="yes">
+          <source>Print Visible Scene Info</source>
+          <target>Görünür Sahne Bilgilerini Yazdır</target>
+        </trans-unit>
+        <trans-unit id="menu/property-browser:0" translate="yes" approved="yes">
+          <source>Browse Internal Properties</source>
+          <target>Dahili Özelliklere Göz Atma</target>
+        </trans-unit>
+        <trans-unit id="menu/pushback:0" translate="yes" approved="yes">
+          <source>Pushback</source>
+          <target>Geri itme</target>
+        </trans-unit>
+        <trans-unit id="menu/radio:0" translate="yes" approved="yes">
+          <source>Radio Settings</source>
+          <target>Radyo Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/random-attitude:0" translate="yes" approved="yes">
+          <source>Random Attitude</source>
+          <target>Rastgele Tutum</target>
+        </trans-unit>
+        <trans-unit id="menu/random-failures:0" translate="yes" approved="yes">
+          <source>Random Failures</source>
+          <target>Rastgele Başarısızlıklar</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-autopilot:0" translate="yes" approved="yes">
+          <source>Reload Autopilot</source>
+          <target>Otomatik Pilotu Yeniden Yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-gui:0" translate="yes" approved="yes">
+          <source>Reload GUI</source>
+          <target>ARAYÜZÜ Yeniden yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-hud:0" translate="yes" approved="yes">
+          <source>Reload HUD</source>
+          <target>HUD'i yeniden yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-input:0" translate="yes" approved="yes">
+          <source>Reload Input</source>
+          <target>Girişi Yeniden Yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-materials:0" translate="yes" approved="yes">
+          <source>Reload Materials</source>
+          <target>Malzemeleri Yeniden Yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-model:0" translate="yes" approved="yes">
+          <source>Reload Aircraft Model</source>
+          <target>Uçak Modelini Yeniden Yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-network:0" translate="yes" approved="yes">
+          <source>Reload Network</source>
+          <target>Ağı Yeniden Yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-panel:0" translate="yes" approved="yes">
+          <source>Reload Panel</source>
+          <target>Paneli Yeniden Yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/reload-scenery:0" translate="yes" approved="yes">
+          <source>Reload Scenery</source>
+          <target>Manzarayı Yeniden Yükle</target>
+        </trans-unit>
+        <trans-unit id="menu/rembrandt-buffers-choice:0" translate="yes" approved="yes">
+          <source>Select Rendering Buffers</source>
+          <target>İşleme Arabelleğini Seçin</target>
+        </trans-unit>
+        <trans-unit id="menu/rendering-buffers:0" translate="yes" approved="yes">
+          <source>Hide/Show Rendering Buffers</source>
+          <target>İşleme Arabelleğini Gizle/Göster</target>
+        </trans-unit>
+        <trans-unit id="menu/rendering-options:0" translate="yes" approved="yes">
+          <source>Rendering Options</source>
+          <target>İşleme Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="menu/replay:0" translate="yes" approved="yes">
+          <source>Instant Replay</source>
+          <target>Anında Tekrar Oynatma</target>
+        </trans-unit>
+        <trans-unit id="menu/reset:0" translate="yes" approved="yes">
+          <source>Reset</source>
+          <target>Sıfırla</target>
+        </trans-unit>
+        <trans-unit id="menu/route-manager:0" translate="yes" approved="yes">
+          <source>Route Manager</source>
+          <target>Rota Yöneticisi</target>
+        </trans-unit>
+        <trans-unit id="menu/save-tape:0" translate="yes" approved="yes">
+          <source>Save Flight Recorder Tape</source>
+          <target>Uçuş Kaydedici Bandını Kaydet</target>
+        </trans-unit>
+        <trans-unit id="menu/scenario:0" translate="yes" approved="yes">
+          <source>Traffic and Scenario Settings</source>
+          <target>Trafik ve Senaryo Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/select-livery:0" translate="yes" approved="yes">
+          <source>Select Livery</source>
+          <target>Tasarım Seç</target>
+        </trans-unit>
+        <trans-unit id="menu/show-hide-yokes:0" translate="yes" approved="yes">
+          <source>Show/hide yokes</source>
+          <target>Boyundurukları göster/gizle</target>
+        </trans-unit>
+        <trans-unit id="menu/snap-shot:0" translate="yes" approved="yes">
+          <source>Screenshot</source>
+          <target>Ekran görüntüsü</target>
+        </trans-unit>
+        <trans-unit id="menu/snap-shot-dir:0" translate="yes" approved="yes">
+          <source>Screenshot Directory</source>
+          <target>Ekran Görüntüsü Dizini</target>
+        </trans-unit>
+        <trans-unit id="menu/sound-config:0" translate="yes" approved="yes">
+          <source>Sound Configuration</source>
+          <target>Ses Yapılandırması</target>
+        </trans-unit>
+        <trans-unit id="menu/statistics-display:0" translate="yes" approved="yes">
+          <source>Cycle On-Screen Statistics</source>
+          <target>Ekran İstatistikleri Döngü</target>
+        </trans-unit>
+        <trans-unit id="menu/stereoscopic-options:0" translate="yes" approved="yes">
+          <source>Stereoscopic View Options</source>
+          <target>Stereoskopik Görünüm Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="menu/stopwatch:0" translate="yes" approved="yes">
+          <source>Stopwatch</source>
+          <target>Kronometre</target>
+        </trans-unit>
+        <trans-unit id="menu/swift_connection:0" translate="yes" approved="yes">
+          <source>swift Connection</source>
+          <target>hızlı Bağlantı</target>
+        </trans-unit>
+        <trans-unit id="menu/system-failures:0" translate="yes" approved="yes">
+          <source>System Failures</source>
+          <target>Sistem Arızaları</target>
+        </trans-unit>
+        <trans-unit id="menu/tanker:0" translate="yes" approved="yes">
+          <source>Tanker Controls</source>
+          <target>Tanker Kontrolleri</target>
+        </trans-unit>
+        <trans-unit id="menu/terrasync:0" translate="yes" approved="yes">
+          <source>Scenery Download</source>
+          <target>Manzara İndir</target>
+        </trans-unit>
+        <trans-unit id="menu/tiller-steering:0" translate="yes" approved="yes">
+          <source>Tiller Steering</source>
+          <target>Yeke Direksiyon</target>
+        </trans-unit>
+        <trans-unit id="menu/time-mode:0" translate="yes" approved="yes">
+          <source>Time Mode</source>
+          <target>Zaman Modu</target>
+        </trans-unit>
+        <trans-unit id="menu/time-settings:0" translate="yes" approved="yes">
+          <source>Time Settings</source>
+          <target>Zaman Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/toggle-fullscreen:0" translate="yes" approved="yes">
+          <source>Toggle Fullscreen</source>
+          <target>Tam ekrana Geç</target>
+        </trans-unit>
+        <trans-unit id="menu/toggle-glide-slope:0" translate="yes" approved="yes">
+          <source>Toggle Glide Slope Tunnel</source>
+          <target>Kayma Eğimi Tünelini Değiştir</target>
+        </trans-unit>
+        <trans-unit id="menu/tower-position:0" translate="yes" approved="yes">
+          <source>Tower Position</source>
+          <target>Kule Konumu</target>
+        </trans-unit>
+        <trans-unit id="menu/tutorial-start:0" translate="yes" approved="yes">
+          <source>Tutorials</source>
+          <target>Öğreticiler</target>
+        </trans-unit>
+        <trans-unit id="menu/video-control:0" translate="yes" approved="yes">
+          <source>Video Control</source>
+          <target>Video Kontrolü</target>
+        </trans-unit>
+        <trans-unit id="menu/video-start:0" translate="yes" approved="yes">
+          <source>Video Start</source>
+          <target>Videoyu Başlat</target>
+        </trans-unit>
+        <trans-unit id="menu/video-stop:0" translate="yes" approved="yes">
+          <source>Video Stop</source>
+          <target>Videoyu Durdur</target>
+        </trans-unit>
+        <trans-unit id="menu/view:0" translate="yes" approved="yes">
+          <source>View</source>
+          <target>Görünüm</target>
+        </trans-unit>
+        <trans-unit id="menu/view-clone:0" translate="yes" approved="yes">
+          <source>Add Clone View</source>
+          <target>Klon Görünümü Ekle</target>
+        </trans-unit>
+        <trans-unit id="menu/view-last-pair:0" translate="yes" approved="yes">
+          <source>Add Pair View</source>
+          <target>Çift Görünüm Ekle</target>
+        </trans-unit>
+        <trans-unit id="menu/view-last-pair-double:0" translate="yes" approved="yes">
+          <source>Add Pair Foreground View</source>
+          <target>Çift Ön Plan Görünümü Ekle</target>
+        </trans-unit>
+        <trans-unit id="menu/view-options:0" translate="yes" approved="yes">
+          <source>View Options</source>
+          <target>Görünüm Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="menu/view-push:0" translate="yes" approved="yes">
+          <source>Push Pair View</source>
+          <target>Çift Görünümü İtin</target>
+        </trans-unit>
+        <trans-unit id="menu/volcanoes:0" translate="yes" approved="yes">
+          <source>Volcanoes</source>
+          <target>Volkanlar</target>
+        </trans-unit>
+        <trans-unit id="menu/vr-options:0" translate="yes" approved="yes">
+          <source>VR Options</source>
+          <target>VR Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="menu/walker:0" translate="yes" approved="yes">
+          <source>Walker</source>
+          <target>Yürüteç</target>
+        </trans-unit>
+        <trans-unit id="menu/walker-animation-dialog:0" translate="yes" approved="yes">
+          <source>Walker animation dialog</source>
+          <target>Yürüteç animasyonu iletişim kutusu</target>
+        </trans-unit>
+        <trans-unit id="menu/walker-equipment:0" translate="yes" approved="yes">
+          <source>Select Equipment</source>
+          <target>Ekipman Seçin</target>
+        </trans-unit>
+        <trans-unit id="menu/walker-theme:0" translate="yes" approved="yes">
+          <source>Select Theme</source>
+          <target>Tema Seçin</target>
+        </trans-unit>
+        <trans-unit id="menu/walker-toggle-outside:0" translate="yes" approved="yes">
+          <source>Toggle Walker outside</source>
+          <target>Yürüteç'i dışarıda aç/kapat</target>
+        </trans-unit>
+        <trans-unit id="menu/wildfire-settings:0" translate="yes" approved="yes">
+          <source>Wildfire Settings</source>
+          <target>Orman Yangını Ayarları</target>
+        </trans-unit>
+        <trans-unit id="menu/wingman:0" translate="yes" approved="yes">
+          <source>Wingman Controls</source>
+          <target>Kanat Adamı Kontrolleri</target>
+        </trans-unit>
+        <trans-unit id="menu/write-video-config:0" translate="yes" approved="yes">
+          <source>Save Video Configuration</source>
+          <target>Video Yapılandırmasını Kaydet</target>
+        </trans-unit>
+      </group>
+      <group restype="x-trolltech-linguist-context" resname="options">
+        <trans-unit id="options/AV400-desc:0" translate="yes" approved="yes">
+          <source>Emit the Garmin AV400 protocol required to drive a Garmin 196/296 series GPS</source>
+          <target>Garmin 196/296 serisi GPS'i sürmek için gereken Garmin AV400 protokolünü yayınlayın</target>
+        </trans-unit>
+        <trans-unit id="options/AV400Sim-desc:0" translate="yes" approved="yes">
+          <source>Emit the set of AV400 strings required to drive a Garmin 400-series GPS from FlightGear</source>
+          <target>Garmin 400 serisi bir GPS'i Flightgear'da sürmek için gereken AV400 dizelerini yayınlayın</target>
+        </trans-unit>
+        <trans-unit id="options/AV400WSimA-desc:0" translate="yes" approved="yes">
+          <source>Open connection for "A" channel using Garmin WAAS GPS protocol</source>
+          <target>Garmin WAAS GPS protokolünü kullanarak "A" kanalı için bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/AV400WSimB-desc:0" translate="yes" approved="yes">
+          <source>Open connection for "B" channel using Garmin WAAS GPS protocol</source>
+          <target>Garmin WAAS GPS protokolünü kullanarak "B" kanalı için bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/addon-desc:0" translate="yes" approved="yes">
+          <source>Specify a path to addon;</source>
+          <target>Eklenti için bir yol belirtin;</target>
+        </trans-unit>
+        <trans-unit id="options/adf1-desc:0" translate="yes" approved="yes">
+          <source>Set the ADF1 radio frequency, optionally preceded by a card rotation.</source>
+          <target>ADF1 radyo frekansını, isteğe bağlı olarak bir kart dönüşünden önce ayarlayın.</target>
+        </trans-unit>
+        <trans-unit id="options/adf2-desc:0" translate="yes" approved="yes">
+          <source>Set the ADF2 radio frequency, optionally preceded by a card rotation.</source>
+          <target>ADF2 radyo frekansını, isteğe bağlı olarak bir kart dönüşünden önce ayarlayın.</target>
+        </trans-unit>
+        <trans-unit id="options/aero-desc:0" translate="yes" approved="yes">
+          <source>Select aircraft aerodynamics model to load</source>
+          <target>Yüklenecek uçak aerodinamik modelini seçin</target>
+        </trans-unit>
+        <trans-unit id="options/ai-scenario:0" translate="yes" approved="yes">
+          <source>Add and enable a new scenario. Multiple options are allowed.</source>
+          <target>Yeni bir senaryo ekleyin ve etkinleştirin. Birden fazla seçeneğe izin verilir.</target>
+        </trans-unit>
+        <trans-unit id="options/aircraft-desc:0" translate="yes" approved="yes">
+          <source>Select an aircraft profile as defined by a top level &lt;name&gt;-set.xml</source>
+          <target>Üst düzey &lt;name&gt;-set.xml tarafından tanımlandığı gibi bir uçak profili seçin</target>
+        </trans-unit>
+        <trans-unit id="options/aircraft-dir-desc:0" translate="yes" approved="yes">
+          <source>Specify the exact directory to use for the aircraft (normally not required, but may be useful). Interpreted relatively to the current directory. Causes the &lt;path-cache&gt; from autosave_X_Y.xml, as well as --fg-aircraft and the FG_AIRCRAFT environment variable to be bypassed.</source>
+          <target>Hava aracı için kullanılacak tam dizini belirtin (normalde gerekli değildir, ancak yararlı olabilir). Geçerli dizine göre yorumlanır. autosave_X_Y.xml'deki &lt;path-cache&gt; öğesinin yanı sıra --fg-aircraft ve FG_AIRCRAFT ortam değişkeninin atlanmasına neden olur.</target>
+        </trans-unit>
+        <trans-unit id="options/aircraft-model-options:0" translate="no" approved="yes">
+          <source>Aircraft model directory (UIUC FDM ONLY)</source>
+          <target>Uçak modeli dizini (YALNIZCA UIUC FDM)</target>
+        </trans-unit>
+        <trans-unit id="options/aircraft-options:0" translate="yes" approved="yes">
+          <source>Aircraft</source>
+          <target>Uçak</target>
+        </trans-unit>
+        <trans-unit id="options/airport-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position relative to an airport</source>
+          <target>Bir havaalanına göre başlangıç konumunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/allow-nasal-from-sockets-desc:0" translate="yes" approved="yes">
+          <source>Remove security flag, which means that network connections will be allowed full access to the simulator including running arbitrary scripts. Ensure you have adequate security (such as a firewall which blocks external connections).</source>
+          <target>Güvenlik işaretini kaldırın; bu, ağ bağlantılarının simülatöre rastgele komut dosyaları çalıştırmak da dahil olmak üzere tam erişime izin verileceği anlamına gelir. Yeterli güvenliğe sahip olduğunuzdan emin olun (harici bağlantıları engelleyen bir güvenlik duvarı gibi).</target>
+        </trans-unit>
+        <trans-unit id="options/allow-nasal-read-desc:0" translate="yes" approved="yes">
+          <source>Allow Nasal scripts to read files from directories listed as path (separate multiple paths with a semicolon (Windows) or a colon (UNIX)). By default, for security reasons, Nasal scripts can only read data from certain directories, such as $FG_ROOT, $FG_HOME, etc.</source>
+          <target>Nasal komut dosyalarının yol olarak listelenen dizinlerdeki dosyaları okumasına izin verin (birden çok yolu noktalı virgül (Windows) veya iki nokta üst üste (UNIX) ile ayırın). Varsayılan olarak, güvenlik nedenleriyle, Nasal komut dosyaları yalnızca $FG_ROOT, $FG_HOME vb. gibi belirli dizinlerdeki verileri okuyabilir.</target>
+        </trans-unit>
+        <trans-unit id="options/altitude-desc:0" translate="yes" approved="yes">
+          <source>Starting altitude</source>
+          <target>Başlangıç irtifası</target>
+        </trans-unit>
+        <trans-unit id="options/arm-desc:0" translate="yes" approved="yes">
+          <source>Specify a multiplier for the aspect ratio.</source>
+          <target>En boy oranı için bir çarpan belirtin.</target>
+        </trans-unit>
+        <trans-unit id="options/atcsim-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the ATC sim protocol (atc610x)</source>
+          <target>ATC sim protokolünü (atc610x) kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/atlas-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the Atlas protocol</source>
+          <target>Atlas protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/audio-options:0" translate="yes" approved="yes">
+          <source>Audio Options</source>
+          <target>Ses Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/avionics-options:0" translate="yes" approved="yes">
+          <source>Avionics Options</source>
+          <target>Elektronik Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/bpp-desc:0" translate="yes" approved="yes">
+          <source>Specify the bits per pixel</source>
+          <target>Piksel başına bitleri belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/browser-app-desc:0" translate="yes" approved="yes">
+          <source>Specify path to your web browser</source>
+          <target>Web tarayıcınızın yolunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/callsign-desc:0" translate="yes" approved="yes">
+          <source>Assign a unique name to a player</source>
+          <target>Bir oyuncuya benzersiz bir ad atayın</target>
+        </trans-unit>
+        <trans-unit id="options/carrier-abeam-desc:0" translate="no" approved="yes">
+          <source>Start on downwind abeam the selected carrier (must also specify a carrier)</source>
+          <target>Seçilen taşıyıcıya doğru rüzgar yönünde başlayın (ayrıca bir taşıyıcı belirtmelidir)</target>
+        </trans-unit>
+        <trans-unit id="options/carrier-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position on an AI carrier</source>
+          <target>Bir AI taşıyıcısında başlangıç pozisyonunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/carrier-position-desc:0" translate="yes" approved="yes">
+          <source>Specify a starting position relative to the carrier where you can use the predefined abeam (start on downwind abeam) or FLOLS (start on final approach) values, or specify the name of the carrier's parking position. Must also specify a carrier.</source>
+          <target>Önceden tanımlanmış başlangıç (rüzgar yönünde başla) veya FLOLS (son yaklaşmada başla) değerlerini kullanabileceğiniz veya taşıyıcının park konumunun adını belirtebileceğiniz, taşıyıcıya göre bir başlangıç konumu belirtin. Ayrıca bir taşıyıcı belirtmelidir.</target>
+        </trans-unit>
+        <trans-unit id="options/ceiling-desc:0" translate="yes" approved="yes">
+          <source>Create an overcast ceiling, optionally with a specific thickness (defaults to 2000 ft).</source>
+          <target>İsteğe bağlı olarak belirli bir kalınlığa sahip bir bulutlu tavan oluşturun (varsayılanı 2000 fit'dir).</target>
+        </trans-unit>
+        <trans-unit id="options/com1-desc:0" translate="yes" approved="yes">
+          <source>Set the COM1 radio frequency</source>
+          <target>COM1 radyo frekansını ayarlayın</target>
+        </trans-unit>
+        <trans-unit id="options/com2-desc:0" translate="yes" approved="yes">
+          <source>Set the COM2 radio frequency</source>
+          <target>COM2 radyo frekansını ayarlayın</target>
+        </trans-unit>
+        <trans-unit id="options/composite-viewer-desc:0" translate="yes" approved="yes">
+          <source>Enable CompositeViewer (extra view windows)</source>
+          <target>Kompozit Görüntüleyiciyi Etkinleştir (ek görünüm pencereleri)</target>
+        </trans-unit>
+        <trans-unit id="options/compositor-desc:0" translate="yes" approved="yes">
+          <source>Specify the path to XML file for multi-pass rendering. The path is relative to $FG_ROOT (defaults to Compositor/default.xml).</source>
+          <target>Çok geçişli işleme için XML dosyasının yolunu belirtin. Yol, $FG_ROOT'a göredir (varsayılan olarak Compositor/default.xml'dir).</target>
+        </trans-unit>
+        <trans-unit id="options/config-desc:0" translate="yes" approved="yes">
+          <source>Load additional properties from path</source>
+          <target>Yoldan ek özellikler yükle</target>
+        </trans-unit>
+        <trans-unit id="options/console-desc:0" translate="yes" approved="yes">
+          <source>Display console (Windows specific)</source>
+          <target>Ekran konsolu (Windows'a özel)</target>
+        </trans-unit>
+        <trans-unit id="options/data-desc:0" translate="yes" approved="yes">
+          <source>Specify an additional base data directory (FGData), before the $FG_ROOT directory</source>
+          <target>$FG_ROOT dizininden önce ek bir temel veri dizini (FGData) belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/debugging-options:0" translate="yes" approved="yes">
+          <source>Debugging Options</source>
+          <target>Hata Ayıklama Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/developer-desc:0" translate="yes" approved="yes">
+          <source>Enable developer mode</source>
+          <target>Geliştirici modunu etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/disable-ai-models-desc:0" translate="yes" approved="yes">
+          <source>Deprecated option (disable internal AI subsystem)</source>
+          <target>Kullanımdan kaldırılan seçenek (dahili AI alt sistemini devre dışı bırakın)</target>
+        </trans-unit>
+        <trans-unit id="options/disable-ai-traffic-desc:0" translate="yes" approved="yes">
+          <source>Disable artificial traffic.</source>
+          <target>Yapay trafiği devre dışı bırakın.</target>
+        </trans-unit>
+        <trans-unit id="options/disable-anti-alias-hud-desc:0" translate="yes" approved="yes">
+          <source>Disable anti-aliased HUD</source>
+          <target>Kenar yumuşatma HUD'sini devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-auto-coordination-desc:0" translate="yes" approved="yes">
+          <source>Disable auto coordination</source>
+          <target>Otomatik koordinasyonu devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-clock-freeze-desc:0" translate="yes" approved="yes">
+          <source>Clock advances normally</source>
+          <target>Saat normal ilerler</target>
+        </trans-unit>
+        <trans-unit id="options/disable-clouds-desc:0" translate="yes" approved="yes">
+          <source>Disable 2D (flat) cloud layers</source>
+          <target>2B (düz) bulut katmanlarını devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-clouds3d-desc:0" translate="yes" approved="yes">
+          <source>Disable 3D (volumetric) cloud layers</source>
+          <target>3B (hacimsel) bulut katmanlarını devre dışı bırakın</target>
+        </trans-unit>
+        <trans-unit id="options/disable-distance-attenuation:0" translate="yes" approved="yes">
+          <source>Disable runway light distance attenuation</source>
+          <target>Pist ışık mesafesi zayıflamasını devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-enhanced-lighting:0" translate="yes" approved="yes">
+          <source>Disable enhanced runway lighting</source>
+          <target>Gelişmiş pist aydınlatmasını devre dışı bırakın</target>
+        </trans-unit>
+        <trans-unit id="options/disable-fgcom-desc:0" translate="yes" approved="yes">
+          <source>Disable FGCom built-in</source>
+          <target>Yerleşik FGCom'u devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-freeze-desc:0" translate="yes" approved="yes">
+          <source>Start in a running state</source>
+          <target>Çalışan bir durumda başlayın</target>
+        </trans-unit>
+        <trans-unit id="options/disable-fuel-freeze-desc:0" translate="yes" approved="yes">
+          <source>Fuel is consumed normally</source>
+          <target>Yakıt normal olarak tüketilir</target>
+        </trans-unit>
+        <trans-unit id="options/disable-fullscreen-desc:0" translate="yes" approved="yes">
+          <source>Disable fullscreen mode</source>
+          <target>Tam ekran modunu devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-gui-desc:0" translate="yes" approved="yes">
+          <source>Enable headless mode</source>
+          <target>Başsız modu etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/disable-hold-short-desc:0" translate="yes" approved="yes">
+          <source>Disable the move to hold short position for multiplayer</source>
+          <target>Çok oyunculu için kısa pozisyon tutma hareketini devre dışı bırakın</target>
+        </trans-unit>
+        <trans-unit id="options/disable-horizon-effect:0" translate="yes" approved="yes">
+          <source>Disable celestial body growth illusion near the horizon</source>
+          <target>Ufka yakın gök cismi büyüme yanılsamasını devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-hud-3d-desc:0" translate="yes" approved="yes">
+          <source>Disable 3D HUD</source>
+          <target>3B HUD'yi devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-hud-desc:0" translate="yes" approved="yes">
+          <source>Disable Heads Up Display (HUD)</source>
+          <target>Baş Üstü Göstergesini (HUD) Devre Dışı Bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-mouse-pointer-desc:0" translate="yes" approved="yes">
+          <source>Disable extra mouse pointer</source>
+          <target>Fazladan fare işaretçisini devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-panel-desc:0" translate="yes" approved="yes">
+          <source>Disable instrument panel</source>
+          <target>Gösterge panelini devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-random-buildings-desc:0" translate="yes" approved="yes">
+          <source>Exclude random buildings objects</source>
+          <target>Rastgele bina nesnelerini hariç tut</target>
+        </trans-unit>
+        <trans-unit id="options/disable-random-objects-desc:0" translate="yes" approved="yes">
+          <source>Exclude random scenery objects</source>
+          <target>Rastgele manzara nesnelerini hariç tut</target>
+        </trans-unit>
+        <trans-unit id="options/disable-random-vegetation-desc:0" translate="yes" approved="yes">
+          <source>Exclude random vegetation objects</source>
+          <target>Rastgele bitki örtüsü nesnelerini hariç tut</target>
+        </trans-unit>
+        <trans-unit id="options/disable-real-weather-fetch-desc:0" translate="yes" approved="yes">
+          <source>Disable METAR based real weather fetching</source>
+          <target>METAR tabanlı gerçek hava durumu alımını devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-rembrandt-desc:0" translate="no" approved="yes">
+          <source>Disable Rembrandt rendering</source>
+          <target>Rembrandt oluşturmayı devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-save-on-exit:0" translate="yes" approved="yes">
+          <source>Don't save preferences upon program exit</source>
+          <target>Program çıkışında tercihleri kaydetme</target>
+        </trans-unit>
+        <trans-unit id="options/disable-sentry-desc:0" translate="yes" approved="yes">
+          <source>Disable crash and error reports from being sent to the development team for analysis</source>
+          <target>Kilitlenme ve hata raporlarının analiz için geliştirme ekibine gönderilmesini devre dışı bırakın</target>
+        </trans-unit>
+        <trans-unit id="options/disable-sound-desc:0" translate="yes" approved="yes">
+          <source>Disable sound effects</source>
+          <target>Ses efektlerini devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-specular-highlight:0" translate="yes" approved="yes">
+          <source>Disable specular reflections on textured objects</source>
+          <target>Dokulu nesnelerde aynasal yansımaları devre dışı bırakın</target>
+        </trans-unit>
+        <trans-unit id="options/disable-splash-screen-desc:0" translate="yes" approved="yes">
+          <source>Disable splash screen</source>
+          <target>Açılış ekranını devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-terrasync-desc:0" translate="yes" approved="yes">
+          <source>Disable automatic scenery downloads/updates</source>
+          <target>Otomatik manzara indirmelerini/güncellemelerini devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-texture-cache-desc:0" translate="yes" approved="yes">
+          <source>Disable texture cache (DDS)</source>
+          <target>Doku önbelleğini (DDS) devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-textures-desc:0" translate="yes" approved="yes">
+          <source>Disable textures</source>
+          <target>Dokuları devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-vr-desc:0" translate="yes" approved="yes">
+          <source>Disable VR</source>
+          <target>VR'ı Devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/disable-wireframe-desc:0" translate="yes" approved="yes">
+          <source>Disable wireframe drawing mode</source>
+          <target>Tel kafes çizim modunu devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/dme-desc:0" translate="yes" approved="yes">
+          <source>Slave the DME to one of the NAV radios, or set its internal frequency.</source>
+          <target>DME'yi NAV telsizlerinden birine bağımlı hale getirin veya dahili frekansını ayarlayın.</target>
+        </trans-unit>
+        <trans-unit id="options/download-dir-desc:0" translate="yes" approved="yes">
+          <source>Base directory to use for aircraft and scenery downloads (the TerraSync scenery directory may be specifically set with --terrasync-dir)</source>
+          <target>Uçak ve manzara indirmeleri için kullanılacak temel dizin (TerraSync manzara dizini özellikle --terrasync-dir ile ayarlanabilir)</target>
+        </trans-unit>
+        <trans-unit id="options/enable-ai-models-desc:0" translate="yes" approved="yes">
+          <source>Enable AI subsystem (required for multi-player, AI traffic and many other animations)</source>
+          <target>AI alt sistemini etkinleştir (çok oyunculu, AI trafiği ve diğer birçok animasyon için gereklidir)</target>
+        </trans-unit>
+        <trans-unit id="options/enable-ai-traffic-desc:0" translate="yes" approved="yes">
+          <source>Enable artificial traffic.</source>
+          <target>Yapay trafiği etkinleştirin.</target>
+        </trans-unit>
+        <trans-unit id="options/enable-anti-alias-hud-desc:0" translate="yes" approved="yes">
+          <source>Enable anti-aliased HUD</source>
+          <target>Kenar yumuşatılmış HUD'yi etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-auto-coordination-desc:0" translate="yes" approved="yes">
+          <source>Enable auto coordination</source>
+          <target>Otomatik koordinasyonu etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-clock-freeze-desc:0" translate="yes" approved="yes">
+          <source>Do not advance clock</source>
+          <target>Saati ilerletme</target>
+        </trans-unit>
+        <trans-unit id="options/enable-clouds-desc:0" translate="yes" approved="yes">
+          <source>Enable 2D (flat) cloud layers</source>
+          <target>2B (düz) bulut katmanlarını etkinleştirin</target>
+        </trans-unit>
+        <trans-unit id="options/enable-clouds3d-desc:0" translate="yes" approved="yes">
+          <source>Enable 3D (volumetric) cloud layers</source>
+          <target>3B (hacimsel) bulut katmanlarını etkinleştirin</target>
+        </trans-unit>
+        <trans-unit id="options/enable-distance-attenuation:0" translate="yes" approved="yes">
+          <source>Enable runway light distance attenuation</source>
+          <target>Pist ışık mesafesi zayıflamasını etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-enhanced-lighting:0" translate="yes" approved="yes">
+          <source>Enable enhanced runway lighting</source>
+          <target>Gelişmiş pist aydınlatmasını etkinleştirin</target>
+        </trans-unit>
+        <trans-unit id="options/enable-fgcom-desc:0" translate="yes" approved="yes">
+          <source>Enable FGCom built-in</source>
+          <target>Yerleşik FGCom'u etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-freeze-desc:0" translate="yes" approved="yes">
+          <source>Start in a frozen state</source>
+          <target>Donmuş durumda başla</target>
+        </trans-unit>
+        <trans-unit id="options/enable-fuel-freeze-desc:0" translate="yes" approved="yes">
+          <source>Fuel tank quantity forced to remain constant</source>
+          <target>Sabit kalmaya zorlanan yakıt deposu miktarı</target>
+        </trans-unit>
+        <trans-unit id="options/enable-fullscreen-desc:0" translate="yes" approved="yes">
+          <source>Enable fullscreen mode</source>
+          <target>Tam ekran modunu etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-horizon-effect:0" translate="yes" approved="yes">
+          <source>Enable celestial body growth illusion near the horizon</source>
+          <target>Ufka yakın gök cismi büyüme yanılsamasını etkinleştirin</target>
+        </trans-unit>
+        <trans-unit id="options/enable-hud-3d-desc:0" translate="yes" approved="yes">
+          <source>Enable 3D HUD</source>
+          <target>3B HUD'yi etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-hud-desc:0" translate="yes" approved="yes">
+          <source>Enable Heads Up Display (HUD)</source>
+          <target>Baş Üstü Göstergesini (HUD) Etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-mouse-pointer-desc:0" translate="yes" approved="yes">
+          <source>Enable extra mouse pointer</source>
+          <target>Fazladan fare işaretçisini etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-mouse-pointer-desc:1" translate="yes" approved="yes">
+          <source>(i.e. for full screen Voodoo based cards)</source>
+          <target>(yani tam ekran Voodoo tabanlı kartlar için)</target>
+        </trans-unit>
+        <trans-unit id="options/enable-panel-desc:0" translate="yes" approved="yes">
+          <source>Enable instrument panel</source>
+          <target>Gösterge panelini etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-random-buildings-desc:0" translate="yes" approved="yes">
+          <source>Include random buildings objects</source>
+          <target>Rastgele bina nesnelerini dahil et</target>
+        </trans-unit>
+        <trans-unit id="options/enable-random-objects-desc:0" translate="yes" approved="yes">
+          <source>Include random scenery objects</source>
+          <target>Rastgele manzara nesnelerini dahil et</target>
+        </trans-unit>
+        <trans-unit id="options/enable-random-vegetation-desc:0" translate="yes" approved="yes">
+          <source>Include random vegetation objects</source>
+          <target>Rastgele bitki örtüsü nesnelerini dahil et</target>
+        </trans-unit>
+        <trans-unit id="options/enable-real-weather-fetch-desc:0" translate="yes" approved="yes">
+          <source>Enable METAR based real weather fetching (this requires an open internet connection)</source>
+          <target>METAR tabanlı gerçek hava durumu alımını etkinleştirin (bu, açık bir internet bağlantısı gerektirir)</target>
+        </trans-unit>
+        <trans-unit id="options/enable-rembrandt-desc:0" translate="no" approved="yes">
+          <source>Enable Rembrandt rendering</source>
+          <target>Rembrandt oluşturmayı etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-save-on-exit:0" translate="yes" approved="yes">
+          <source>Allow saving preferences at program exit</source>
+          <target>Program çıkışında tercihleri kaydetmeye izin ver</target>
+        </trans-unit>
+        <trans-unit id="options/enable-sentry-desc:0" translate="yes" approved="yes">
+          <source>Enable crash and error reports to be sent to the development team for analysis</source>
+          <target>Analiz için geliştirme ekibine gönderilecek kilitlenme ve hata raporlarını etkinleştirin</target>
+        </trans-unit>
+        <trans-unit id="options/enable-sound-desc:0" translate="yes" approved="yes">
+          <source>Enable sound effects</source>
+          <target>Ses efektlerini etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-specular-highlight:0" translate="yes" approved="yes">
+          <source>Enable specular reflections on textured objects</source>
+          <target>Dokulu nesneler üzerinde aynasal yansımaları etkinleştirin</target>
+        </trans-unit>
+        <trans-unit id="options/enable-splash-screen-desc:0" translate="yes" approved="yes">
+          <source>Enable splash screen</source>
+          <target>Açılış ekranını etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-terrasync-desc:0" translate="yes" approved="yes">
+          <source>Enable automatic scenery downloads/updates</source>
+          <target>Otomatik manzara indirmelerini/güncellemelerini etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-texture-cache-desc:0" translate="yes" approved="yes">
+          <source>Enable texture cache (DDS)</source>
+          <target>Doku önbelleğini (DDS) etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-textures-desc:0" translate="yes" approved="yes">
+          <source>Enable textures</source>
+          <target>Dokuları etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-vr-desc:0" translate="yes" approved="yes">
+          <source>Enable VR</source>
+          <target>VR'ı Etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/enable-wireframe-desc:0" translate="yes" approved="yes">
+          <source>Enable wireframe drawing mode</source>
+          <target>Tel kafes çizim modunu etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/environment-options:0" translate="yes" approved="yes">
+          <source>Environment Options</source>
+          <target>Çevre Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/failure-desc:0" translate="yes" approved="yes">
+          <source>Fail the pitot, static, vacuum, or electrical system (repeat the option for multiple system failures).</source>
+          <target>Pitot, statik, vakum veya elektrik sisteminde başarısız olun (birden çok sistem arızası için seçeneği tekrarlayın).</target>
+        </trans-unit>
+        <trans-unit id="options/fdm-desc:0" translate="yes" approved="yes">
+          <source>Select the core flight dynamics model</source>
+          <target>Çekirdek uçuş dinamiği modelini seçin</target>
+        </trans-unit>
+        <trans-unit id="options/fdm-desc:1" translate="yes" approved="yes">
+          <source>Can be one of jsb, larcsim, yasim, magic, balloon, ada, external, or null</source>
+          <target>jsb, larcsim, yasim, sihir, balon, ada, harici veya boş'dan biri olabilir</target>
+        </trans-unit>
+        <trans-unit id="options/fdm-options:0" translate="yes" approved="yes">
+          <source>Flight Model</source>
+          <target>Uçuş Modeli</target>
+        </trans-unit>
+        <trans-unit id="options/features-options:0" translate="yes" approved="yes">
+          <source>Features</source>
+          <target>Özellikler</target>
+        </trans-unit>
+        <trans-unit id="options/fg-aircraft-desc:0" translate="yes" approved="yes">
+          <source>Specify additional aircraft directory path(s) (alternatively, you can use --aircraft-dir to target a specific aircraft in a given directory)</source>
+          <target>Ek uçak dizin yolunu/yollarını belirtin (alternatif olarak, belirli bir dizindeki belirli bir uçağı hedeflemek için --aircraft-dir kullanabilirsiniz)</target>
+        </trans-unit>
+        <trans-unit id="options/fg-root-desc:0" translate="yes" approved="yes">
+          <source>Specify the root data path</source>
+          <target>Kök veri yolunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/fg-scenery-desc:0" translate="yes" approved="yes">
+          <source>Specify the scenery path(s);</source>
+          <target>Manzara yolunu/yollarını belirtin;</target>
+        </trans-unit>
+        <trans-unit id="options/fg-scenery-desc:1" translate="yes" approved="yes">
+          <source>Defaults to $FG_ROOT/Scenery</source>
+          <target>Varsayılan olarak $FG_ROOT/Scenery</target>
+        </trans-unit>
+        <trans-unit id="options/fgviewer-desc:0" translate="yes" approved="yes">
+          <source>Use a model viewer rather than load the entire simulator;</source>
+          <target>Tüm simülatörü yüklemek yerine bir model görüntüleyici kullanın;</target>
+        </trans-unit>
+        <trans-unit id="options/fix-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position relative to a fix</source>
+          <target>Bir düzeltmeye göre başlangıç konumunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/flarm-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the Flarm protocol, which includes NMEA/GPS and traffic reporting messages</source>
+          <target>NMEA/GPS ve trafik raporlama mesajlarını içeren Alev protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/flight-plan-desc:0" translate="yes" approved="yes">
+          <source>Read all waypoints from a file</source>
+          <target>Bir dosyadan tüm yol noktalarını okuyun</target>
+        </trans-unit>
+        <trans-unit id="options/fog-disable-desc:0" translate="yes" approved="yes">
+          <source>Disable fog/haze</source>
+          <target>Sis/pusu devre dışı bırak</target>
+        </trans-unit>
+        <trans-unit id="options/fog-fastest-desc:0" translate="yes" approved="yes">
+          <source>Enable fastest fog/haze</source>
+          <target>En hızlı sis/pusu etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/fog-nicest-desc:0" translate="yes" approved="yes">
+          <source>Enable nicest fog/haze</source>
+          <target>En güzel sis/pus'u etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/fov-desc:0" translate="yes" approved="yes">
+          <source>Specify field of view angle</source>
+          <target>Görüş açısı alanını belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/fpe-desc:0" translate="yes" approved="yes">
+          <source>Abort on encountering a floating point exception;</source>
+          <target>Bir kayan nokta istisnasıyla karşılaşmayı iptal edin;</target>
+        </trans-unit>
+        <trans-unit id="options/garmin-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the Garmin GPS protocol</source>
+          <target>Garmin GPS protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/general-options:0" translate="yes" approved="yes">
+          <source>General Options</source>
+          <target>Genel Seçenekler</target>
+        </trans-unit>
+        <trans-unit id="options/generic-desc:0" translate="yes" approved="yes">
+          <source>Open connection using a predefined communication interface and a preselected communication protocol</source>
+          <target>Önceden tanımlanmış bir iletişim arayüzü ve önceden seçilmiş bir iletişim protokolü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/geometry-desc:0" translate="yes" approved="yes">
+          <source>Specify window geometry (640x480, etc)</source>
+          <target>Pencere geometrisini belirtin (640x480, vb.)</target>
+        </trans-unit>
+        <trans-unit id="options/glideslope-desc:0" translate="yes" approved="yes">
+          <source>Specify flight path angle (can be positive)</source>
+          <target>Uçuş yolu açısını belirtin (pozitif olabilir)</target>
+        </trans-unit>
+        <trans-unit id="options/gmt:0" translate="yes" approved="yes">
+          <source>GMT</source>
+          <target>GMT</target>
+        </trans-unit>
+        <trans-unit id="options/graphics-preset-desc:0" translate="yes" approved="yes">
+          <source>Set graphic options from one of the presets</source>
+          <target>Ön ayarlardan birinden grafik seçeneklerini ayarlayın</target>
+        </trans-unit>
+        <trans-unit id="options/heading-desc:0" translate="yes" approved="yes">
+          <source>Specify heading (yaw) angle (Psi)</source>
+          <target>Yön (yaw) açısını (Psi) belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/help-desc:0" translate="yes" approved="yes">
+          <source>Show the most relevant command line options</source>
+          <target>En alakalı komut satırı seçeneklerini göster</target>
+        </trans-unit>
+        <trans-unit id="options/httpd-desc:0" translate="yes" approved="yes">
+          <source>Enable http server on the specified address. Specify the port or address:port to bind to.</source>
+          <target>Belirtilen adreste http sunucusunu etkinleştirin. Bağlantı noktası veya adresi belirtin:bağlanacak bağlantı noktası.</target>
+        </trans-unit>
+        <trans-unit id="options/hud-culled-desc:0" translate="yes" approved="yes">
+          <source>Hud displays percentage of triangles culled</source>
+          <target>Hud, ayıklanan üçgenlerin yüzdesini gösterir</target>
+        </trans-unit>
+        <trans-unit id="options/hud-options:0" translate="yes" approved="yes">
+          <source>Hud Options</source>
+          <target>Hud Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/hud-tris-desc:0" translate="yes" approved="yes">
+          <source>Hud displays number of triangles rendered</source>
+          <target>Hud, oluşturulan üçgenlerin sayısını görüntüler</target>
+        </trans-unit>
+        <trans-unit id="options/igc-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the International Gliding Commission protocol</source>
+          <target>Uluslararası Planör Komisyonu protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/ignore-autosave-desc:0" translate="yes" approved="yes">
+          <source>Ignore the autosave file, i.e. the settings saved  in this file will not be loaded during startup, nor will the settings be saved to this file when closing the simulator</source>
+          <target>Otomatik kaydetme dosyasını yoksayın, yani bu dosyaya kaydedilen ayarlar başlatma sırasında yüklenmeyecek ve simülatör kapatılırken ayarlar bu dosyaya kaydedilmeyecektir</target>
+        </trans-unit>
+        <trans-unit id="options/in-air-desc:0" translate="yes" approved="yes">
+          <source>Start in air (implied when using --altitude)</source>
+          <target>Havada başlayın ( --yükseklik kullanılırken ima edilir)</target>
+        </trans-unit>
+        <trans-unit id="options/io-options:0" translate="yes" approved="yes">
+          <source>IO Options</source>
+          <target>GÇ Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/joyclient-desc:0" translate="yes" approved="yes">
+          <source>Open connection to an Agwagon joystick</source>
+          <target>Agwagon joystick'e açık bağlantı</target>
+        </trans-unit>
+        <trans-unit id="options/jpg-httpd-desc:0" translate="yes" approved="yes">
+          <source>Enable screen shot http server on the specified port (replaced by --httpd)</source>
+          <target>Belirtilen bağlantı noktasında ekran görüntüsü http sunucusunu etkinleştir (--httpd ile değiştirilir)</target>
+        </trans-unit>
+        <trans-unit id="options/jsbsim-output-directive-file-desc:0" translate="yes" approved="yes">
+          <source>Log JSBSim properties in a CSV file. An output directives file contains an &lt;output type="CSV"&gt;&lt;/output&gt; element, within which should be specified the parameters or parameter groups that should be logged.</source>
+          <target>JSBSim özelliklerini bir CSV dosyasına kaydedin. Bir çıktı yönergeleri dosyası, içinde günlüğe kaydedilmesi gereken parametrelerin veya parametre gruplarının belirtilmesi gereken bir &lt;output type="CSV"&gt;&lt;/output&gt; öğesi içerir.</target>
+        </trans-unit>
+        <trans-unit id="options/jsclient-desc:0" translate="yes" approved="yes">
+          <source>Open connection to a remote joystick</source>
+          <target>Uzak bir joystick ile bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/json-report-desc:0" translate="yes" approved="yes">
+          <source>Print a report in JSON format on the standard output, giving information such as the FlightGear version, $FG_ROOT, $FG_HOME, aircraft and scenery paths, etc.</source>
+          <target>FlightGear sürümü, $FG_ROOT, $FG_HOME, uçak ve manzara yolları vb. gibi bilgileri veren standart çıktıda JSON formatında bir rapor yazdırın.</target>
+        </trans-unit>
+        <trans-unit id="options/language-desc:0" translate="yes" approved="yes">
+          <source>Select the language for this session</source>
+          <target>Bu oturum için dil seçin</target>
+        </trans-unit>
+        <trans-unit id="options/lat-desc:0" translate="yes" approved="yes">
+          <source>Starting latitude (south = -)</source>
+          <target>Başlangıç enlemi (güney = -)</target>
+        </trans-unit>
+        <trans-unit id="options/launcher-desc:0" translate="yes" approved="yes">
+          <source>Use GUI launcher</source>
+          <target>GKA başlatıcısını kullan</target>
+        </trans-unit>
+        <trans-unit id="options/livery-desc:0" translate="yes" approved="yes">
+          <source>Select aircraft livery</source>
+          <target>Uçak görünümünü seçin</target>
+        </trans-unit>
+        <trans-unit id="options/load-tape-create-video:0" translate="yes" approved="yes">
+          <source>Encode video while replaying tape specified by --load-tape</source>
+          <target>--kaseti yükle ile belirtilen bandı yeniden oynatırken videoyu kodlayın</target>
+        </trans-unit>
+        <trans-unit id="options/load-tape-desc:0" translate="yes" approved="yes">
+          <source>Load recording of earlier FlightGear session. For &lt;name&gt;, if &lt;name&gt; ends with .fgdata it is treated as the local path of the recording file; otherwise we form the local path by prepending &lt;name&gt; with the tape directory and appending ".fgtape". For &lt;url&gt; (starting with http:// or https://) we download the remote recording (which must be a Continuous recording) in the background to a url-dependent filename while replaying it; if the url-dependent filename already exists it is assumed to be a truncated download and we only download any remaining data.</source>
+          <target>Önceki FlightGear oturumunun kaydını yükleyin. &lt;name&gt; için, &lt;name&gt; .fgdata ile bitiyorsa, kayıt dosyasının yerel yolu olarak kabul edilir; aksi takdirde yerel yolu, &lt;name&gt; ile teyp dizini ekleyerek ve ".fgtape" ekleyerek oluştururuz. &lt;url&gt; için (http:// veya https:// ile başlayarak) arka planda uzaktan kaydı (Sürekli kayıt olması gerekir) yeniden oynatırken url'ye bağlı bir dosya adına indiririz; url'ye bağlı dosya adı zaten mevcutsa, bunun kesilmiş bir indirme olduğu varsayılır ve yalnızca kalan verileri indiririz.</target>
+        </trans-unit>
+        <trans-unit id="options/load-tape-fixed-dt:0" translate="yes" approved="yes">
+          <source>Set fixed-dt mode while replaying tape specified by --load-tape</source>
+          <target>--kaseti yükle tarafından belirtilen kaseti yeniden yürütürken sabit dt modunu ayarlayın</target>
+        </trans-unit>
+        <trans-unit id="options/local-aircraft-time:0" translate="yes" approved="yes">
+          <source>local aircraft time</source>
+          <target>yerel uçak saati</target>
+        </trans-unit>
+        <trans-unit id="options/lod-levels-desc:0" translate="yes" approved="yes">
+          <source>Specify the detail levels, where levels are a space-separated numeric list of levels. The default is "1 3 5 7 9".</source>
+          <target>Düzeylerin boşlukla ayrılmış sayısal bir düzey listesi olduğu ayrıntı düzeylerini belirtin. Varsayılan "1 3 5 7 9"dur.</target>
+        </trans-unit>
+        <trans-unit id="options/lod-range-mult-desc:0" translate="yes" approved="yes">
+          <source>Specify the range multiplier (point from low to fine detail). Defaults is 2.</source>
+          <target>Aralık çarpanını belirtin (düşük ayrıntıdan ince ayrıntıya kadar). Varsayılanlar 2'dir.</target>
+        </trans-unit>
+        <trans-unit id="options/lod-res-desc:0" translate="yes" approved="yes">
+          <source>Specify the resolution of the terrain grid. Defaults is 1.</source>
+          <target>Arazi ızgarasının çözünürlüğünü belirtin. Varsayılanlar 1'dir.</target>
+        </trans-unit>
+        <trans-unit id="options/lod-texturing-desc:0" translate="yes" approved="yes">
+          <source>Specify the method of texturing the terrain. The default is bluemarble.</source>
+          <target>Araziyi düzebleme yöntemini belirtin. Varsayılan, mavi mermer'dir.</target>
+        </trans-unit>
+        <trans-unit id="options/log-class-desc:0" translate="yes" approved="yes">
+          <source>Specify which logging class(es) to use</source>
+          <target>Hangi günlüğe kaydetme sınıflarının kullanılacağını belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/log-dir-desc:0" translate="yes" approved="yes">
+          <source>Log to directory DIR. The special value 'desktop' causes logging to the desktop (OS-dependent location). This option may be given several times, using a different value each time. Inside the specified directory, the written log file is named FlightGear_YYYY-MM-DD_&lt;num&gt;.log, where &lt;num&gt; takes the values 0, 1, 2, etc.</source>
+          <target>DIR dizinine giriş yapın. 'Masaüstü' özel değeri, masaüstünde oturum açmaya neden olur (işletim sistemine bağlı konum). Bu seçenek, her seferinde farklı bir değer kullanılarak birkaç kez verilebilir. Belirtilen dizinin içinde, yazılı günlük dosyası FlightGear_YYYY-AA-GG_&lt;num&gt;.log olarak adlandırılır, burada &lt;num&gt; 0, 1, 2 vb. değerleri alır.</target>
+        </trans-unit>
+        <trans-unit id="options/log-level-desc:0" translate="yes" approved="yes">
+          <source>Specify which logging level to use</source>
+          <target>Hangi günlük kaydı düzeyinin kullanılacağını belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/lon-desc:0" translate="yes" approved="yes">
+          <source>Starting longitude (west = -)</source>
+          <target>Başlangıç boylamı (batı = -)</target>
+        </trans-unit>
+        <trans-unit id="options/mach-desc:0" translate="yes" approved="yes">
+          <source>Specify initial mach number</source>
+          <target>İlk makine numarasını belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/materials-file-desc:0" translate="yes" approved="yes">
+          <source>Specify the materials file used to render the scenery (default: Materials/regions/materials.xml)</source>
+          <target>Manzarayı oluşturmak için kullanılan malzeme dosyasını belirtin (varsayılan: Malzemeler/bölgeler/materials.xml)</target>
+        </trans-unit>
+        <trans-unit id="options/max-fps-desc:0" translate="yes" approved="yes">
+          <source>Maximum frame rate in Hz.</source>
+          <target>Hz cinsinden azami kare hızı.</target>
+        </trans-unit>
+        <trans-unit id="options/metar-desc:0" translate="yes" approved="yes">
+          <source>Pass a METAR string to set up static weather (this implies --disable-real-weather-fetch)</source>
+          <target>Statik hava durumunu ayarlamak için bir METAR dizesi iletin (bu --gerçek-hava durumu-devre dışı anlamına gelir)</target>
+        </trans-unit>
+        <trans-unit id="options/min-aircraft-status:0" translate="yes" approved="yes">
+          <source>Allows you to define a minimum status level (=development status) for all listed aircraft</source>
+          <target>Listelenen tüm uçaklar için bir asgari durum seviyesi (=geliştirme durumu) tanımlamanıza izin verir</target>
+        </trans-unit>
+        <trans-unit id="options/model-hz-desc:0" translate="yes" approved="yes">
+          <source>Run the FDM this rate (iterations per second)</source>
+          <target>FDM'yi bu hızda çalıştırın (saniyede yineleme)</target>
+        </trans-unit>
+        <trans-unit id="options/multiplay-desc:0" translate="yes" approved="yes">
+          <source>Specify multipilot communication settings;</source>
+          <target>Çoklu pilot iletişim ayarlarını belirtin;</target>
+        </trans-unit>
+        <trans-unit id="options/multiplayer-options:0" translate="yes" approved="yes">
+          <source>MultiPlayer Options</source>
+          <target>Çoklu Oyuncu Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/multiple-instance:0" translate="yes" approved="yes">
+          <source>multiple instances can be used</source>
+          <target>birden fazla örnek kullanılabilir</target>
+        </trans-unit>
+        <trans-unit id="options/native-ctrls-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the FG Native Controls protocol</source>
+          <target>FG Doğal Denetimler protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/native-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the FG Native protocol</source>
+          <target>FG Doğal protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/native-fdm-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the FG Native FDM protocol</source>
+          <target>FG Doğal FDM protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/native-gui-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the FG Native GUI protocol</source>
+          <target>FG Doğal GKA protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/nav1-desc:0" translate="yes" approved="yes">
+          <source>Set the NAV1 radio frequency, optionally preceded by a radial.</source>
+          <target>NAV1 radyo frekansını, başında isteğe bağlı olarak bir radyal gelecek şekilde ayarlayın.</target>
+        </trans-unit>
+        <trans-unit id="options/nav2-desc:0" translate="yes" approved="yes">
+          <source>Set the NAV2 radio frequency, optionally preceded by a radial.</source>
+          <target>NAV2 radyo frekansını, başında isteğe bağlı olarak bir radyal gelecek şekilde ayarlayın.</target>
+        </trans-unit>
+        <trans-unit id="options/ndb-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position relative to an NDB</source>
+          <target>Bir NDB'ye göre başlangıç konumunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/ndb-freq-desc:0" translate="yes" approved="yes">
+          <source>Specify the frequency of the NDB. Use with --ndb=ID</source>
+          <target>NDB'nin frekansını belirtin. --ndb=ID ile kullan</target>
+        </trans-unit>
+        <trans-unit id="options/network-options:0" translate="yes" approved="yes">
+          <source>Network Options</source>
+          <target>Ağ Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/nmea-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the NMEA protocol</source>
+          <target>NMEA protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/no-default-config-desc:0" translate="yes" approved="yes">
+          <source>Do not load any default configuration files (like .fgfsrc) unless explicitly specified with --config.</source>
+          <target>--yapılandırma ile açıkça belirtilmediği sürece, varsayılan yapılandırma dosyalarını (.fgfsrc gibi) yüklemeyin.</target>
+        </trans-unit>
+        <trans-unit id="options/notrim-desc:0" translate="yes" approved="yes">
+          <source>Do NOT attempt to trim the model</source>
+          <target>Modeli kırpmaya ÇALIŞMAYIN</target>
+        </trans-unit>
+        <trans-unit id="options/notrim-desc:1" translate="yes" approved="yes">
+          <source>(only with fdm=jsbsim)</source>
+          <target>(yalnızca fdm=jsbsim ile)</target>
+        </trans-unit>
+        <trans-unit id="options/offset-azimuth-desc:0" translate="yes" approved="yes">
+          <source>Specify heading to reference point</source>
+          <target>Referans noktasına istikamet belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/offset-distance-desc:0" translate="yes" approved="yes">
+          <source>Specify distance to reference point (nautical miles)</source>
+          <target>Referans noktasına olan mesafeyi belirtin (deniz mili)</target>
+        </trans-unit>
+        <trans-unit id="options/on-ground-desc:0" translate="yes" approved="yes">
+          <source>Start at ground level (default)</source>
+          <target>Zemin seviyesinde başla (varsayılan)</target>
+        </trans-unit>
+        <trans-unit id="options/opengc-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the OpenGC protocol</source>
+          <target>OpenGC protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/parking-id-desc:0" translate="yes" approved="yes">
+          <source>Specify parking position at an airport (must also specify an airport)</source>
+          <target>Bir havaalanında park yeri belirtin (bir havaalanı da belirtilmelidir)</target>
+        </trans-unit>
+        <trans-unit id="options/parkpos-desc:0" translate="yes" approved="yes">
+          <source>Same as the --parking-id option</source>
+          <target>--park kimliği seçeneğiyle aynı</target>
+        </trans-unit>
+        <trans-unit id="options/pitch-desc:0" translate="yes" approved="yes">
+          <source>Specify pitch angle (Theta)</source>
+          <target>Adım açısını belirtin (Teta)</target>
+        </trans-unit>
+        <trans-unit id="options/position-options:0" translate="yes" approved="yes">
+          <source>Initial Position and Orientation</source>
+          <target>İlk Konum ve Yönelim</target>
+        </trans-unit>
+        <trans-unit id="options/prop-desc:0" translate="yes" approved="yes">
+          <source>Set property &lt;name&gt; to &lt;value&gt;. &lt;type&gt; can be one of string, double, float, long, int, or bool.</source>
+          <target>&lt;name&gt; özelliğini &lt;value&gt; olarak ayarlayın. &lt;type&gt; dize, çift, kayan, uzun, int veya bool olabilir.</target>
+        </trans-unit>
+        <trans-unit id="options/props-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the interactive property manager</source>
+          <target>Etkileşimli özellik yöneticisini kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/proxy-desc:0" translate="yes" approved="yes">
+          <source>Specify which proxy server (and port) to use. The username and password are optional and should be MD5 encoded already. This option is only useful when used in conjunction with the real-weather-fetch option.</source>
+          <target>Hangi proxy sunucusunun (ve bağlantı noktasının) kullanılacağını belirtin. Kullanıcı adı ve parola isteğe bağlıdır ve önceden MD5 olarak kodlanmış olmalıdır. Bu seçenek yalnızca gerçek hava durumu getirme seçeneğiyle birlikte kullanıldığında kullanışlıdır.</target>
+        </trans-unit>
+        <trans-unit id="options/pve-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the PVE protocol</source>
+          <target>PVE protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/random-objects-desc:0" translate="yes" approved="yes">
+          <source>(buildings, etc.)</source>
+          <target>(binalar vb.)</target>
+        </trans-unit>
+        <trans-unit id="options/random-wind-desc:0" translate="yes" approved="yes">
+          <source>Set up random wind direction and speed</source>
+          <target>Rastgele rüzgar yönünü ve hızını ayarlayın</target>
+        </trans-unit>
+        <trans-unit id="options/ray-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the Ray Woodworth motion chair protocol</source>
+          <target>Ray Woodworth hareketli sandalye protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/read-only-desc:0" translate="yes" approved="yes">
+          <source>Make $FG_HOME read-only</source>
+          <target>$FG_HOME'u salt okunur yap</target>
+        </trans-unit>
+        <trans-unit id="options/rendering-options:0" translate="yes" approved="yes">
+          <source>Rendering Options</source>
+          <target>İşleme Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/restart-launcher-desc:0" translate="yes" approved="yes">
+          <source>Open Launcher automatically when exiting FlightGear</source>
+          <target>FlightGear'dan çıkarken Başlatıcı'yı otomatik olarak açın</target>
+        </trans-unit>
+        <trans-unit id="options/restore-defaults-desc:0" translate="yes" approved="yes">
+          <source>Reset all user settings to their defaults (rendering options etc)</source>
+          <target>Tüm kullanıcı ayarlarını varsayılanlarına sıfırlayın (oluşturma seçenekleri vb.)</target>
+        </trans-unit>
+        <trans-unit id="options/roc-desc:0" translate="yes" approved="yes">
+          <source>Specify initial climb rate (can be negative)</source>
+          <target>İlk tırmanma oranını belirtin (negatif olabilir)</target>
+        </trans-unit>
+        <trans-unit id="options/roll-desc:0" translate="yes" approved="yes">
+          <source>Specify roll angle (Phi)</source>
+          <target>Yuvarlanma açısını belirtin (Phi)</target>
+        </trans-unit>
+        <trans-unit id="options/route-options:0" translate="yes" approved="yes">
+          <source>Route/Way Point Options</source>
+          <target>Rota/Yol Noktası Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/rul-desc:0" translate="yes" approved="yes">
+          <source>Open connection using the RUL protocol</source>
+          <target>RUL protokolünü kullanarak bağlantıyı açın</target>
+        </trans-unit>
+        <trans-unit id="options/runway-no-desc:0" translate="yes" approved="yes">
+          <source>Specify starting runway (must also specify an airport)</source>
+          <target>Başlangıç pistini belirtin (bir havalimanı da belirtilmelidir)</target>
+        </trans-unit>
+        <trans-unit id="options/season-desc:0" translate="no" approved="yes">
+          <source>Specify the startup season</source>
+          <target>Başlangıç sezonunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/shading-flat-desc:0" translate="yes" approved="yes">
+          <source>Enable flat shading</source>
+          <target>Düz gölgelemeyi etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/shading-smooth-desc:0" translate="yes" approved="yes">
+          <source>Enable smooth shading</source>
+          <target>Düzgün gölgelemeyi etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/show-aircraft-desc:0" translate="yes" approved="yes">
+          <source>Print a list of the currently available aircraft types</source>
+          <target>Şu anda mevcut olan uçak türlerinin bir listesini yazdırın</target>
+        </trans-unit>
+        <trans-unit id="options/show-sound-devices-desc:0" translate="yes" approved="yes">
+          <source>Show a list of available audio device</source>
+          <target>Kullanılabilir ses cihazının listesini göster</target>
+        </trans-unit>
+        <trans-unit id="options/situation-options:0" translate="yes" approved="yes">
+          <source>Situation Options</source>
+          <target>Durum Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/sound-device-desc:0" translate="yes" approved="yes">
+          <source>Explicitly specify the audio device to use</source>
+          <target>Kullanılacak ses cihazını açıkça belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/speed-desc:0" translate="yes" approved="yes">
+          <source>Run the FDM 'n' times faster than real time</source>
+          <target>FDM'yi 'n' kez gerçek zamandan daha hızlı çalıştırın</target>
+        </trans-unit>
+        <trans-unit id="options/start-date-desc:0" translate="yes" approved="yes">
+          <source>Specify a starting date/time with respect to</source>
+          <target>Şuna göre bir başlangıç tarihi/saati belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/state-desc:0" translate="yes" approved="yes">
+          <source>Specify the initial state of the aircraft to the given value</source>
+          <target>Verilen değere uçağın ilk durumunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/system-time:0" translate="yes" approved="yes">
+          <source>system time</source>
+          <target>sistem zamanı</target>
+        </trans-unit>
+        <trans-unit id="options/telnet-desc:0" translate="yes" approved="yes">
+          <source>Enable telnet server on the specified port</source>
+          <target>Belirtilen bağlantı noktasında telnet sunucusunu etkinleştir</target>
+        </trans-unit>
+        <trans-unit id="options/terrain-engine-desc:0" translate="yes" approved="yes">
+          <source>Specify the terrain engine you want to use: tilecache or pagedLOD</source>
+          <target>Kullanmak istediğiniz arazi motorunu belirtin: tilecache veya pagedLOD</target>
+        </trans-unit>
+        <trans-unit id="options/terrasync-dir-desc:0" translate="yes" approved="yes">
+          <source>Set target directory for scenery downloads</source>
+          <target>Manzara indirmeleri için hedef dizini ayarla</target>
+        </trans-unit>
+        <trans-unit id="options/texture-cache-dir-desc:0" translate="yes" approved="yes">
+          <source>Specify the DDS texture cache directory to be different than the default location</source>
+          <target>DDS doku önbellek dizinini varsayılan konumdan farklı olacak şekilde belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/texture-filtering-desc:0" translate="yes" approved="yes">
+          <source>Anisotropic Texture Filtering: values should be 1 (default), 2, 4, 8 or 16</source>
+          <target>Anizotropik Doku Filtreleme: değerler 1 (varsayılan), 2, 4, 8 veya 16 olmalıdır</target>
+        </trans-unit>
+        <trans-unit id="options/time-match-local-desc:0" translate="yes" approved="yes">
+          <source>Synchronize time with local real-world time</source>
+          <target>Zamanı yerel gerçek dünya saati ile senkronize edin</target>
+        </trans-unit>
+        <trans-unit id="options/time-match-real-desc:0" translate="yes" approved="yes">
+          <source>Synchronize time with real-world time</source>
+          <target>Zamanı gerçek dünya saati ile senkronize edin</target>
+        </trans-unit>
+        <trans-unit id="options/time-offset-desc:0" translate="yes" approved="yes">
+          <source>Add this time offset</source>
+          <target>Bu zaman ofsetini ekle</target>
+        </trans-unit>
+        <trans-unit id="options/time-options:0" translate="yes" approved="yes">
+          <source>Time Options</source>
+          <target>Zaman Seçenekleri</target>
+        </trans-unit>
+        <trans-unit id="options/timeofday-desc:0" translate="yes" approved="yes">
+          <source>Specify a time of day</source>
+          <target>Günün saatini belirtme</target>
+        </trans-unit>
+        <trans-unit id="options/trace-read-desc:0" translate="yes" approved="yes">
+          <source>Trace the reads for a property;</source>
+          <target>Bir özellik için okumaları izleme;</target>
+        </trans-unit>
+        <trans-unit id="options/trace-write-desc:0" translate="yes" approved="yes">
+          <source>Trace the writes for a property;</source>
+          <target>Bir özellik için yazılanları takip edin;</target>
+        </trans-unit>
+        <trans-unit id="options/trim-desc:0" translate="yes" approved="yes">
+          <source>Trim the model</source>
+          <target>Modeli kırp</target>
+        </trans-unit>
+        <trans-unit id="options/trim-desc:1" translate="yes" approved="yes">
+          <source>(only with fdm=jsbsim)</source>
+          <target>(yalnızca fdm=jsbsim ile)</target>
+        </trans-unit>
+        <trans-unit id="options/turbulence-desc:0" translate="yes" approved="yes">
+          <source>Specify turbulence from 0.0 (calm) to 1.0 (severe)</source>
+          <target>0,0 (sakin) ile 1,0 (şiddetli) arasında türbülansı belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/uBody-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along the body X axis</source>
+          <target>Gövde X ekseni boyunca hızı belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/uninstall-desc:0" translate="yes" approved="yes">
+          <source>Remove $FG_HOME directory. For Windows, it additionally removes TerraSync, Aircraft and TextureCache directories from download directory.</source>
+          <target>$FG_HOME dizinini kaldırın. Windows için ayrıca TerraSync, Aircraft ve TextureCache dizinlerini indirme dizininden kaldırır.</target>
+        </trans-unit>
+        <trans-unit id="options/units-feet-desc:0" translate="yes" approved="yes">
+          <source>Use feet for distances</source>
+          <target>Mesafeler için feet kullanın</target>
+        </trans-unit>
+        <trans-unit id="options/units-meters-desc:0" translate="yes" approved="yes">
+          <source>Use meters for distances</source>
+          <target>Mesafeler için metre kullanın</target>
+        </trans-unit>
+        <trans-unit id="options/usage:0" translate="yes" approved="yes">
+          <source>Usage: fgfs [ option ... ]</source>
+          <target>Kullanım: fgfs [ seçenek ... ]</target>
+        </trans-unit>
+        <trans-unit id="options/use-with-terrain-engine-pagedlod:0" translate="yes" approved="yes">
+          <source>Use with --terrain-engine=pagedLOD</source>
+          <target>İle kullanın --arazi-motoru=pagedLOD</target>
+        </trans-unit>
+        <trans-unit id="options/vBody-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along the body Y axis</source>
+          <target>Gövde Y ekseni boyunca hızı belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/vDown-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along a vertical axis</source>
+          <target>Dikey bir eksen boyunca hızı belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/vEast-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along a West-East axis</source>
+          <target>Batı-Doğu ekseni boyunca hızı belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/vNorth-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along a South-North axis</source>
+          <target>Güney-Kuzey ekseni boyunca hızı belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/vc-desc:0" translate="yes" approved="yes">
+          <source>Specify initial airspeed</source>
+          <target>İlk hava hızını belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/vehicle-desc:0" translate="yes" approved="yes">
+          <source>Same as the --aircraft option</source>
+          <target>--uçak seçeneğiyle aynı</target>
+        </trans-unit>
+        <trans-unit id="options/verbose-desc:0" translate="yes" approved="yes">
+          <source>Show all command line options when combined with --help or -h</source>
+          <target>--yardım veya -h ile birleştirildiğinde tüm komut satırı seçeneklerini göster</target>
+        </trans-unit>
+        <trans-unit id="options/verbose-help:0" translate="yes" approved="yes">
+          <source>For a complete list of options use --help --verbose</source>
+          <target>Seçeneklerin tam listesi için --yardım --ayrıntılı kullanın</target>
+        </trans-unit>
+        <trans-unit id="options/version-desc:0" translate="yes" approved="yes">
+          <source>Display the current FlightGear version</source>
+          <target>Geçerli FlightGear sürümünü görüntüleyin</target>
+        </trans-unit>
+        <trans-unit id="options/view-offset-desc:0" translate="yes" approved="yes">
+          <source>Specify the default forward view direction as an offset from straight ahead. Allowable values are LEFT, RIGHT, CENTER, or a specific number in degrees</source>
+          <target>Düz ileriden öteleme olarak varsayılan ileri görüş yönünü belirtin. İzin verilen değerler SOL, SAĞ, MERKEZ veya derece cinsinden belirli bir sayıdır</target>
+        </trans-unit>
+        <trans-unit id="options/visibility-desc:0" translate="yes" approved="yes">
+          <source>Specify initial visibility in meters</source>
+          <target>İlk görünürlüğü metre cinsinden belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/visibility-miles-desc:0" translate="yes" approved="yes">
+          <source>Specify initial visibility in statute miles</source>
+          <target>İlk görünürlüğü nizami mil olarak belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/vor-desc:0" translate="yes" approved="yes">
+          <source>Specify starting position relative to a VOR</source>
+          <target>Bir VOR'a göre başlangıç konumunu belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/vor-freq-desc:0" translate="yes" approved="yes">
+          <source>Specify the frequency of the VOR. Use with --vor=ID</source>
+          <target>VOR frekansını belirtin. --vor=ID ile kullanın</target>
+        </trans-unit>
+        <trans-unit id="options/wBody-desc:0" translate="yes" approved="yes">
+          <source>Specify velocity along the body Z axis</source>
+          <target>Gövde Z ekseni boyunca hızı belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/wind-desc:0" translate="yes" approved="yes">
+          <source>Specify wind coming from DIR (degrees) at SPEED (knots)</source>
+          <target>DIR'den (derece) gelen rüzgarı HIZ'da (knot) belirtin</target>
+        </trans-unit>
+        <trans-unit id="options/wp-desc:0" translate="yes" approved="yes">
+          <source>Specify a waypoint for the GC autopilot;</source>
+          <target>GC otopilot için bir ara nokta belirleyin;</target>
+        </trans-unit>
+      </group>
+      <group restype="x-trolltech-linguist-context" resname="sys">
+        <trans-unit id="sys/binding-subsystems:0" translate="yes" approved="yes">
+          <source>binding subsystems</source>
+          <target>bağlayıcı alt sistemler</target>
+        </trans-unit>
+        <trans-unit id="sys/creating-subsystems:0" translate="yes" approved="yes">
+          <source>creating subsystems</source>
+          <target>alt sistemler oluştur</target>
+        </trans-unit>
+        <trans-unit id="sys/downloading-scenery:0" translate="yes" approved="yes">
+          <source>downloading scenery</source>
+          <target>manzara indir</target>
+        </trans-unit>
+        <trans-unit id="sys/error-3D-model-load:0" translate="yes" approved="yes">
+          <source>Error loading 3D model</source>
+          <target>3B model yüklenirken hata oluştu</target>
+        </trans-unit>
+        <trans-unit id="sys/error-aircraft-systems:0" translate="yes" approved="yes">
+          <source>Errors occured loading aircraft systems (fuel, electrical, hydrualics)</source>
+          <target>Uçak sistemlerinde (yakıt, elektrik, hidrolik) yüklenirken oluşan hatalar</target>
+        </trans-unit>
+        <trans-unit id="sys/error-audio-fx-load:0" translate="yes" approved="yes">
+          <source>Audio FX description contains errors</source>
+          <target>Ses FX açıklaması hatalar içeriyor</target>
+        </trans-unit>
+        <trans-unit id="sys/error-btg-load:0" translate="yes" approved="yes">
+          <source>Errors loading terrain (BTG)</source>
+          <target>Arazi yüklenirken hatalar (BTG)</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-addon:0" translate="yes" approved="yes">
+          <source>The add-on '%VALUE%' contains errors. Please report this to the add-on developers.</source>
+          <target>'%VALUE%' eklentisi hatalar içeriyor. Lütfen bunu eklenti geliştiricilerine bildirin.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-aircraft:0" translate="yes" approved="yes">
+          <source>This aircraft (%VALUE%) contains errors. This may include visual issues, or the aircraft might not fly at all. Check for an updated version of the aircraft from its developers.</source>
+          <target>Bu uçak (%VALUE%) hatalar içeriyor. Bu, görsel sorunları içerebilir veya uçak hiç uçmayabilir. Geliştiricilerinden uçağın güncellenmiş bir versiyonunu kontrol edin.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-aircraft-from-hangar:0" translate="yes" approved="yes">
+          <source>The selected aircraft (%VALUE%) contains errors. This may cause visual issues, or the aircraft might not fly at all. Please report the information below to the aircraft hangar's maintainers.</source>
+          <target>Seçilen uçak (%VALUE%) hata içeriyor. Bu, görsel sorunlara neden olabilir veya uçak hiç uçmayabilir. Lütfen aşağıdaki bilgileri uçak hangarının bakım görevlilerine bildirin.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-custom-scenery:0" translate="yes" approved="yes">
+          <source>The custom scenery at '%VALUE%' contains errors. Parts may be missing, or the scenery may not load at all. Check for an updated version of the scenery.</source>
+          <target>'%VALUE%' konumundaki özel manzara hatalar içeriyor. Parçalar eksik olabilir veya manzara hiç yüklenmeyebilir. Manzaranın güncellenmiş bir versiyonunu kontrol edin.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-fgdata:0" translate="yes" approved="yes">
+          <source>Errors were found loading the core simulator files (FGData). This usually indicates a problem with the installation, or your local disk.</source>
+          <target>Çekirdek simülatör dosyaları (FGData) yüklenirken hatalar bulundu. Bu genellikle kurulumda veya yerel diskinizde bir sorun olduğunu gösterir.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-input-device:0" translate="yes" approved="yes">
+          <source>The joystick (input device) '%VALUE%' couldn't be loaded correctly. This usually means its configuration file is incorrect.</source>
+          <target>Joystick (giriş aygıtı) '%VALUE%' doğru yüklenemedi. Bu genellikle yapılandırma dosyasının yanlış olduğu anlamına gelir.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-multiplayer:0" translate="yes" approved="yes">
+          <source>Loading a model for another pilot (via multi-player) failed. The other pilot will appear as a default model. (You can disable these errors from the multiplayer settings dialog)</source>
+          <target>Başka bir pilot için (çok oyunculu aracılığıyla) bir model yüklenemedi. Diğer pilot varsayılan model olarak görünecektir. (Bu hataları çok oyunculu ayarlar iletişim kutusundan devre dışı bırakabilirsiniz)</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-out-of-memory:0" translate="yes" approved="yes">
+          <source>Allocating memory failed. Some resources will not be loaded. Adjust your settings to reduce view distance or number of objects loaded.</source>
+          <target>Bellek ayırma başarısız oldu. Bazı kaynaklar yüklenmeyecek. Görüş mesafesini veya yüklenen nesne sayısını azaltmak için ayarlarınızı yapın.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-scenario:0" translate="yes" approved="yes">
+          <source>The scenario '%VALUE%' contains errors, and may not work correctly.</source>
+          <target>'%VALUE%' senaryosu hatalar içeriyor ve düzgün çalışmayabilir.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-shaders:0" translate="yes" approved="yes">
+          <source>Problems occurred loading visual effects (shaders). This can cause objects to be invisible or appear incorrect. It can sometimes be fixed by changing rendering settings inside FlightGear, or occasionally, by updating the drivers for your graphics card.</source>
+          <target>Görsel efektler (gölgelendiriciler) yüklenirken sorunlar oluştu. Bu, nesnelerin görünmez olmasına veya yanlış görünmesine neden olabilir. Bazen FlightGear içindeki işleme ayarlarını değiştirerek veya bazen grafik kartınızın sürücülerini güncelleyerek düzeltilebilir.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-terrasync:0" translate="yes" approved="yes">
+          <source>Scenery downloaded via TerraSync is not loading correctly. The usually indicates a problem with your network connection or local disk.</source>
+          <target>TerraSync ile indirilen manzara düzgün yüklenmiyor. Genellikle ağ bağlantınızda veya yerel diskinizde bir sorun olduğunu gösterir.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-traffic:0" translate="yes" approved="yes">
+          <source>Problems occured loading simulated aircaft traffic: some traffic may not appear.</source>
+          <target>Simüle edilmiş uçak trafiği yüklenirken sorunlar oluştu: bazı trafik görünmeyebilir.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-category-unknown:0" translate="yes" approved="yes">
+          <source>Errors occurred in an unknown part of FlightGear. Please report this bug to the FlightGear development team.</source>
+          <target>FlightGear'ın bilinmeyen bir bölümünde hatalar oluştu. Lütfen bu hatayı FlightGear geliştirme ekibine bildirin.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-dialog-load:0" translate="yes" approved="yes">
+          <source>Errors loading user-interface</source>
+          <target>Kullanıcı arayüzü yüklenirken hatalar</target>
+        </trans-unit>
+        <trans-unit id="sys/error-input-device-config:0" translate="yes" approved="yes">
+          <source>Errors loading input device configuration</source>
+          <target>Giriş cihazı yapılandırması yüklenirken hatalar</target>
+        </trans-unit>
+        <trans-unit id="sys/error-loading-texture:0" translate="yes" approved="yes">
+          <source>Texture failed to load</source>
+          <target>Doku yüklenemedi</target>
+        </trans-unit>
+        <trans-unit id="sys/error-missing-shader:0" translate="yes" approved="yes">
+          <source>Shader / Effect problems</source>
+          <target>Gölgelendirici / Efekt sorunları</target>
+        </trans-unit>
+        <trans-unit id="sys/error-next-steps:0" translate="yes" approved="yes">
+          <source>This dialog is work-in-progress. The information included above may not be fully correct, so please check the detailed information below and give feedback if something seems wrong. Please include all the information below, as well as the message above.</source>
+          <target>Bu diyalog devam eden bir çalışmadır. Yukarıda verilen bilgiler tam olarak doğru olmayabilir, bu nedenle lütfen aşağıdaki ayrıntılı bilgileri kontrol edin ve bir şeyler yanlış görünüyorsa geri bildirimde bulunun. Lütfen aşağıdaki tüm bilgileri ve yukarıdaki mesajı ekleyin.</target>
+        </trans-unit>
+        <trans-unit id="sys/error-scenery-load:0" translate="yes" approved="yes">
+          <source>Errors loading scenery</source>
+          <target>Manzara yüklenirken hatalar</target>
+        </trans-unit>
+        <trans-unit id="sys/error-terraysnc:0" translate="yes" approved="yes">
+          <source>Errors downloading scenery from TerraSync</source>
+          <target>TerraSync'ten sahne indirirken hatalar</target>
+        </trans-unit>
+        <trans-unit id="sys/error-type-bad-data:0" translate="yes" approved="yes">
+          <source>File or resource is invalid or corrupted</source>
+          <target>Dosya veya kaynak geçersiz veya bozuk</target>
+        </trans-unit>
+        <trans-unit id="sys/error-type-bad-header:0" translate="yes" approved="yes">
+          <source>File or resource header is incorrect</source>
+          <target>Dosya veya kaynak başlığı yanlış</target>
+        </trans-unit>
+        <trans-unit id="sys/error-type-io:0" translate="yes" approved="yes">
+          <source>Unable to read/write files correctly (check permissions and disk space)</source>
+          <target>Dosyalar doğru okunamıyor/yazamıyor (izinleri ve disk alanını kontrol edin)</target>
+        </trans-unit>
+        <trans-unit id="sys/error-type-misconfigured:0" translate="yes" approved="yes">
+          <source>The resource contains a configuration problem</source>
+          <target>Kaynak bir yapılandırma sorunu içeriyor</target>
+        </trans-unit>
+        <trans-unit id="sys/error-type-network:0" translate="yes" approved="yes">
+          <source>Network connection failure</source>
+          <target>Ağ bağlantısı hatası</target>
+        </trans-unit>
+        <trans-unit id="sys/error-type-not-found:0" translate="yes" approved="yes">
+          <source>The file or resource was not found</source>
+          <target>Dosya veya kaynak bulunamadı</target>
+        </trans-unit>
+        <trans-unit id="sys/error-type-out-of-memory:0" translate="yes" approved="yes">
+          <source>Unable to allocate sufficient memory</source>
+          <target>Yeterli bellek ayrılamadı</target>
+        </trans-unit>
+        <trans-unit id="sys/error-type-unknown:0" translate="yes" approved="yes">
+          <source>Unknown error</source>
+          <target>Bilinmeyen hata</target>
+        </trans-unit>
+        <trans-unit id="sys/error-xml-load-command:0" translate="yes" approved="yes">
+          <source>Scripted loading of XML failed</source>
+          <target>Komut dosyasıyla XML yüklemesi başarısız oldu</target>
+        </trans-unit>
+        <trans-unit id="sys/error-xml-model-load:0" translate="yes" approved="yes">
+          <source>Errors loading model XML</source>
+          <target>Model XML yüklenirken hatalar</target>
+        </trans-unit>
+        <trans-unit id="sys/finalize-position:0" translate="yes" approved="yes">
+          <source>finalizing position</source>
+          <target>pozisyonu sonlandırma</target>
+        </trans-unit>
+        <trans-unit id="sys/finishing-subsystems:0" translate="yes" approved="yes">
+          <source>finalizing subsystems</source>
+          <target>alt sistemleri sonlandırma</target>
+        </trans-unit>
+        <trans-unit id="sys/init:0" translate="yes" approved="yes">
+          <source>initializing</source>
+          <target>başlatılıyor</target>
+        </trans-unit>
+        <trans-unit id="sys/init-graphics:0" translate="yes" approved="yes">
+          <source>initializing graphics engine</source>
+          <target>grafik motoru başlatılıyor</target>
+        </trans-unit>
+        <trans-unit id="sys/init-scenery:0" translate="yes" approved="yes">
+          <source>initializing scenery</source>
+          <target>manzara başlatılıyor</target>
+        </trans-unit>
+        <trans-unit id="sys/init-subsystems:0" translate="yes" approved="yes">
+          <source>initializing subsystems</source>
+          <target>alt sistemler başlatılıyor</target>
+        </trans-unit>
+        <trans-unit id="sys/license-url:0" translate="yes" approved="yes">
+          <source>Licensed under the GNU GPL. See https://www.flightgear.org for more information.</source>
+          <target>GNU GPL altında lisanslanmıştır. Daha fazla bilgi için https://www.flightgear.org adresine bakın.</target>
+        </trans-unit>
+        <trans-unit id="sys/loading-aircraft:0" translate="yes" approved="yes">
+          <source>loading aircraft</source>
+          <target>uçak yükleniyor</target>
+        </trans-unit>
+        <trans-unit id="sys/loading-aircraft-list:0" translate="yes" approved="yes">
+          <source>loading aircraft list</source>
+          <target>uçak listesi yükleniyor</target>
+        </trans-unit>
+        <trans-unit id="sys/loading-nav-dat:0" translate="yes" approved="yes">
+          <source>loading navigation data</source>
+          <target>navigasyon verilerinin yükleniyor</target>
+        </trans-unit>
+        <trans-unit id="sys/loading-scenery:0" translate="yes" approved="yes">
+          <source>loading scenery</source>
+          <target>manzara yükleniyor</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-fixes:0" translate="yes" approved="yes">
+          <source>loading fixes</source>
+          <target>düzeltmeler yükleniyor</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-load-percent:0" translate="yes" approved="yes">
+          <source>[VALUE]% complete</source>
+          <target>%[VALUE] tamamlandı</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-loading-airports:0" translate="yes" approved="yes">
+          <source>loading airport data</source>
+          <target>havaalanı verileri yükleniyor</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-navaids:0" translate="yes" approved="yes">
+          <source>loading navigation aid data</source>
+          <target>navigasyon yardım verileri yükleniyor</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-pois:0" translate="yes" approved="yes">
+          <source>loading points of interest</source>
+          <target>ilgi noktaları yükleniyor</target>
+        </trans-unit>
+        <trans-unit id="sys/navdata-reading-apt-dat-files:0" translate="yes" approved="yes">
+          <source>reading airport data</source>
+          <target>havaalanı verileri okunuyor</target>
+        </trans-unit>
+        <trans-unit id="sys/scenery-extract:0" translate="yes" approved="yes">
+          <source>extracting [VALUE]</source>
+          <target>[VALUE] ayıklanıyor</target>
+        </trans-unit>
+        <trans-unit id="sys/settings-migration-text:0" translate="yes" approved="yes">
+          <source>Saved settings were migrated from a previous version of FlightGear. If you encounter any problems when using the system, try restoring the default settings, before reporting a problem. Saved settings can affect the appearance, performance and features of the simulator.</source>
+          <target>Kaydedilen ayarlar, FlightGear'ın önceki bir sürümünden taşındı. Sistemi kullanırken herhangi bir sorunla karşılaşırsanız, sorunu bildirmeden önce varsayılan ayarları geri yüklemeyi deneyin. Kaydedilen ayarlar simülatörün görünümünü, performansını ve özelliklerini etkileyebilir.</target>
+        </trans-unit>
+        <trans-unit id="sys/settings-migration-title:0" translate="yes" approved="yes">
+          <source>Settings migrated</source>
+          <target>Ayarlar taşındı</target>
+        </trans-unit>
+        <trans-unit id="sys/units-kbytes:0" translate="yes" approved="yes">
+          <source>KB</source>
+          <target>KB</target>
+        </trans-unit>
+        <trans-unit id="sys/units-kbytes-per-sec:0" translate="yes" approved="yes">
+          <source>KB/s</source>
+          <target>KB/s</target>
+        </trans-unit>
+        <trans-unit id="sys/units-mbytes:0" translate="yes" approved="yes">
+          <source>MB</source>
+          <target>MB</target>
+        </trans-unit>
+        <trans-unit id="sys/units-mbytes-per-sec:0" translate="yes" approved="yes">
+          <source>MB/s</source>
+          <target>MB/s</target>
+        </trans-unit>
+        <trans-unit id="sys/unstable-warning:0" translate="yes" approved="yes">
+          <source>Unstable nightly build - some features may be under active development</source>
+          <target>Kararsız gece yapısı - bazı özellikler aktif geliştirme aşamasında olabilir</target>
+        </trans-unit>
+      </group>
+      <group restype="x-trolltech-linguist-context" resname="tips">
+        <trans-unit id="tips/tip:0" translate="yes" approved="yes">
+          <source>Drag while holding the right mouse button to look around</source>
+          <target>Etrafa bakmak için farenin sağ düğmesini basılı tutarken sürükleyin</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:1" translate="yes" approved="yes">
+          <source>Hold Ctrl while looking around to move the view up, down, left or right</source>
+          <target>Görünümü yukarı, aşağı, sola veya sağa hareket ettirmek için etrafa bakarken Ctrl tuşunu basılı tutun</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:2" translate="yes" approved="yes">
+          <source>Press a/A to adjust the simulation speed</source>
+          <target>Simülasyon hızını ayarlamak için a/A'ya basın</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:3" translate="yes" approved="yes">
+          <source>Press x/X to zoom in and out</source>
+          <target>Yakınlaştırmak ve uzaklaştırmak için x/X'e basın</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:4" translate="yes" approved="yes">
+          <source>Find frequencies of nearby ATC services from the Radios dialog</source>
+          <target>Radyolar iletişim kutusundan yakındaki ATC hizmetlerinin frekanslarını bulun</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:5" translate="yes" approved="yes">
+          <source>Press v to change your viewpoint, Ctrl-V to return to the cockpit</source>
+          <target>Bakış açınızı değiştirmek için v'ye, kokpite dönmek için Ctrl-V'ye basın</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:6" translate="yes" approved="yes">
+          <source>Press F3 to take a screenshot</source>
+          <target>Ekran görüntüsü almak için F3'e basın</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:7" translate="yes" approved="yes">
+          <source>Join the FlightGear community at http://forum.flightgear.org</source>
+          <target>FlightGear topluluğuna katılın http://forum.flightgear.org</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:8" translate="yes" approved="yes">
+          <source>Press h to bring up a Heads Up Display</source>
+          <target>Baş Üstü Göstergesini getirmek için h tuşuna basın</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:9" translate="yes" approved="yes">
+          <source>Show or hide the menu bar by pressing F10</source>
+          <target>F10 tuşuna basarak menü çubuğunu gösterin veya gizleyin</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:10" translate="yes" approved="yes">
+          <source>Frame-rate too low? - try disabling AI traffic</source>
+          <target>Kare hızı çok mu düşük? - AI trafiğini devre dışı bırakmayı deneyin</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:11" translate="yes" approved="yes">
+          <source>Select Environment → Weather to fly in different weather</source>
+          <target>Farklı havalarda uçmak için Ortam → Hava Durumu'nu seçin</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:12" translate="yes" approved="yes">
+          <source>Press F12 to change the radio frequencies easily</source>
+          <target>Radyo frekanslarını kolayca değiştirmek için F12'ye basın</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:13" translate="yes" approved="yes">
+          <source>Look around by holding down the right mouse button and moving the mouse</source>
+          <target>Sağ fare düğmesini basılı tutarak ve fareyi hareket ettirerek etrafa bakın</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:14" translate="yes" approved="yes">
+          <source>Select Multiplayer → Multiplayer Settings to join the shared flight environment</source>
+          <target>Paylaşılan uçuş ortamına katılmak için Çok Oyunculu → Çok Oyunculu Ayarları'nı seçin</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:15" translate="yes" approved="yes">
+          <source>Can't get the engine started? - see Help → Aircraft Checklists</source>
+          <target>Motoru çalıştıramıyor musunuz? - bkz. Yardım → Uçak Kontrol Listeleri</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:16" translate="yes" approved="yes">
+          <source>Drag while holding the middle and right mouse buttons to move the viewpoint</source>
+          <target>Bakış açısını taşımak için orta ve sağ fare düğmelerini basılı tutarken sürükleyin</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:17" translate="yes" approved="yes">
+          <source>Press / to explore the internals of the simulator</source>
+          <target>Simülatörün içindekileri keşfetmek için / tuşlarına basın</target>
+        </trans-unit>
+        <trans-unit id="tips/tip:18" translate="yes" approved="yes">
+          <source>Press Tab to move the viewpoint with your mouse and use the scroll wheel to zoom</source>
+          <target>Bakış açısını farenizle hareket ettirmek için Sekme'ye basın ve yakınlaştırmak için kaydırma tekerleğini kullanın</target>
+        </trans-unit>
+      </group>
+      <group restype="x-trolltech-linguist-context" resname="weather-scenarios">
+        <trans-unit id="weather-scenarios/border-high-pressure-region-desc:0" translate="yes" approved="yes">
+          <source>The border of a high pressure region, in which the airmass becomes unstable and various convective and stratiform clouds may appear.</source>
+          <target>Hava kütlesinin dengesiz hale geldiği ve çeşitli konvektif ve tabakalı bulutların ortaya çıkabileceği yüksek basınçlı bir bölgenin sınırı.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/border-high-pressure-region-name:0" translate="yes" approved="yes">
+          <source>Border of a high pressure region</source>
+          <target>Yüksek basınç bölgesi sınırı</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/border-low-pressure-region-desc:0" translate="yes" approved="yes">
+          <source>The border of a low pressure region, in which the airmass is unstable and convective clouds start to form layers and merge into stratiform clouds.</source>
+          <target>Hava kütlesinin kararsız olduğu ve konvektif bulutların katmanlar oluşturmaya ve katmanlı bulutlar halinde birleşmeye başladığı alçak basınç bölgesinin sınırı.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/border-low-pressure-region-name:0" translate="yes" approved="yes">
+          <source>Border of a low pressure region</source>
+          <target>Alçak basınç bölgesi sınırı</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-one-minimum-desc:0" translate="yes" approved="yes">
+          <source>If you just got your IFR rating, this is what you are allowed to do. But can you?</source>
+          <target>IFR derecenizi yeni aldıysanız, bunu yapmanıza izin verilir. Ama yapabilir misin?</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-one-minimum-name:0" translate="yes" approved="yes">
+          <source>CAT I minimum</source>
+          <target>CAT I asgari</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-three-b-minimum-desc:0" translate="yes" approved="yes">
+          <source>This is expert level. You will barely see the taxiway from the cockpit, even if you are on ground. Fog and light drizzle, freezing level at 1000ft.</source>
+          <target>Bu uzman seviyesidir. Yerde olsanız bile taksi yolunu kokpitten zar zor göreceksiniz. Sis ve hafif çiseleyen yağmur, 1000ft'de donma seviyesi.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-three-b-minimum-name:0" translate="yes" approved="yes">
+          <source>CAT IIIb minimum</source>
+          <target>CAT IIIb asgari</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-two-minimum-desc:0" translate="yes" approved="yes">
+          <source>With just a 1/4 mile visibility and clouds at 100ft, you don't see much of the runway until seconds before touchdown. Trust your instruments to stay alive.</source>
+          <target>Sadece 1/4 mil görüş mesafesi ve 100 ft'deki bulutlarla, inişten saniyeler öncesine kadar pistin çoğunu göremezsiniz. Hayatta kalmak için enstrümanlarınıza güvenin.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/cat-two-minimum-name:0" translate="yes" approved="yes">
+          <source>CAT II minimum</source>
+          <target>CAT II asgari</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/core-high-pressure-region-desc:0" translate="yes" approved="yes">
+          <source>The center of a high pressure region, characterized by descending air and hence only weak cloud development with high visibility.</source>
+          <target>Alçalan hava ve dolayısıyla yalnızca yüksek görünürlükte zayıf bulut gelişimi ile karakterize edilen yüksek basınç bölgesinin merkezi.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/core-high-pressure-region-name:0" translate="yes" approved="yes">
+          <source>Core high pressure region</source>
+          <target>Çekirdek yüksek basınç bölgesi</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/core-low-pressure-region-desc:0" translate="yes" approved="yes">
+          <source>The core of a low pressure region, characterized by overcast clouds, bad visibility on the ground and significant rainfall.</source>
+          <target>Bulutlu bulutlar, zeminde kötü görüş ve önemli yağış ile karakterize edilen alçak basınç bölgesinin çekirdeği.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/core-low-pressure-region-name:0" translate="yes" approved="yes">
+          <source>Core low pressure region</source>
+          <target>Çekirdek alçak basınç bölgesi</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/early-morning-fog-desc:0" translate="yes" approved="yes">
+          <source>Fog developed this autumn's morning. Expect good visibility above the layer. However - getting through it can be a challenge. Stay alive for a 500' climb and you'll see the sun!</source>
+          <target>Sis bu sonbahar sabahı gelişti. Katmanın üzerinde iyi bir görünürlük bekleyin. Ancak - üstesinden gelmek zor olabilir. 500' tırmanış için hayatta kalın ve güneşi göreceksiniz!</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/early-morning-fog-name:0" translate="yes" approved="yes">
+          <source>Early morning fog</source>
+          <target>Sabah erken sis</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/fair-weather-desc:0" translate="yes" approved="yes">
+          <source>A lovely day for trip to your favorite 100$ hamburger airfield</source>
+          <target>En sevdiğiniz 100₺'lİk hamburger havaalanına gezi için güzel bir gün</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/fair-weather-name:0" translate="yes" approved="yes">
+          <source>Fair weather</source>
+          <target>Güzel hava</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/high-pressure-region-desc:0" translate="yes" approved="yes">
+          <source>A high pressure region, characterized by moderate to strong Cumulus development in the afternoon and fairly good visibility conditions.</source>
+          <target>Öğleden sonra orta ila güçlü kümülüs gelişimi ve oldukça iyi görüş koşulları ile karakterize edilen yüksek basınç bölgesi.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/high-pressure-region-name:0" translate="yes" approved="yes">
+          <source>High pressure region</source>
+          <target>Yüksek basınç bölgesi</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/live-data-desc:0" translate="yes" approved="yes">
+          <source>Fetch live weather data for your nearest airport from noaa.gov. You need a working internet connection. Weather is generated automatically, once a valid METAR is received.</source>
+          <target>noaa.gov'dan size en yakın havaalanı için canlı hava durumu verilerini alın. Çalışan bir internet bağlantısına ihtiyacınız var. Geçerli bir METAR alındığında hava durumu otomatik olarak oluşturulur.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/live-data-name:0" translate="yes" approved="yes">
+          <source>Live data</source>
+          <target>Canlı veri</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/low-pressure-region-desc:0" translate="yes" approved="yes">
+          <source>A low pressure region, characterized by rising air, widespread formation of stratiform clouds and beginning rain.</source>
+          <target>Yükselen hava, yaygın olarak tabakalı bulut oluşumu ve başlayan yağmur ile karakterize edilen bir alçak basınç bölgesi.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/low-pressure-region-name:0" translate="yes" approved="yes">
+          <source>Low pressure region</source>
+          <target>Alçak basınç bölgesi</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/manual-input-desc:0" translate="yes" approved="yes">
+          <source>Enter your favorite METAR weather. A valid METAR syntax is required.</source>
+          <target>En sevdiğiniz METAR hava durumunu girin. Geçerli bir METAR sözdizimi gereklidir.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/manual-input-name:0" translate="yes" approved="yes">
+          <source>Manual input</source>
+          <target>Elle giriş</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/marginal-vfr-desc:0" translate="yes" approved="yes">
+          <source>After the storm - limited visibility and some showers. Go or No-Go?</source>
+          <target>Fırtınadan sonra - sınırlı görüş ve biraz sağanak. Git veya Gitme?</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/marginal-vfr-name:0" translate="yes" approved="yes">
+          <source>Marginal VFR</source>
+          <target>Marjinal VFR</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/stormy-monday-desc:0" translate="yes" approved="yes">
+          <source>You're out for an adventure? Gusty winds blowing from the west and isolated thunderstorms should be avoided. Fasten your seatbelt!</source>
+          <target>Bir maceraya mı çıktınız? Batıdan esen sert rüzgarlardan ve izole gök gürültülü fırtınalardan kaçınılmalıdır. Emniyet kemerini bağla!</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/stormy-monday-name:0" translate="yes" approved="yes">
+          <source>Stormy Monday</source>
+          <target>Fırtınalı pazartesi</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/thunderstorm-desc:0" translate="yes" approved="yes">
+          <source>A hot and damp summer day with thunderstorms developing in the afternoon. Be prepared for reduction of visibility in showers and strong gusts near thunderstorms</source>
+          <target>Öğleden sonra gök gürültülü sağanak yağışlı, sıcak ve nemli bir yaz günü. Sağanak ve gök gürültülü sağanak yağışlarda görünürlüğün azalmasına hazırlıklı olun</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/thunderstorm-name:0" translate="yes" approved="yes">
+          <source>Thunderstorm</source>
+          <target>Fırtına</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/warm-sector-desc:0" translate="yes" approved="yes">
+          <source>A warm sector, characterized by high moisture in the air and haze extending up to high altitudes, but otherwise largely convective cloud development.</source>
+          <target>Havadaki yüksek nem ve yüksek irtifalara kadar uzanan pus, ancak bunun dışında büyük ölçüde konvektif bulut gelişimi ile karakterize edilen sıcak bir bölge.</target>
+        </trans-unit>
+        <trans-unit id="weather-scenarios/warm-sector-name:0" translate="yes" approved="yes">
+          <source>Warm sector</source>
+          <target>Sıcak bölge</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

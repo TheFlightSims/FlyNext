@@ -1,0 +1,516 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<name>rendering</name>
+	<modal>false</modal>
+	<layout>vbox</layout>
+	<padding>20</padding>
+
+	<group>
+		<layout>hbox</layout>
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<text>
+			<label>Rendering Options</label>
+		</text>
+
+		<empty>
+			<stretch>1</stretch>
+		</empty>
+
+		<button>
+			<pref-width>16</pref-width>
+			<pref-height>16</pref-height>
+			<legend></legend>
+			<keynum>27</keynum>
+			<border>2</border>
+			<binding>
+				<command>dialog-close</command>
+			</binding>
+		</button>
+	</group>
+
+	<hrule/>
+
+	<text>
+		<visible>
+			<equals>
+				<property>/sim/gui/dialogs/rendering/shader-warning</property>
+				<value>1</value>
+			</equals>
+		</visible>
+		<color>
+			<red>1.0</red>
+			<green>0.6</green>
+			<blue>0.6</blue>
+		</color>
+		<label>Warning: Your graphics card may not support complex graphics.</label>
+	</text>
+
+	<group>
+		<halign>center</halign>
+		<layout>hbox</layout>
+
+		<!-- only for a gap -->
+		<group>
+			<layout>vbox</layout>
+			<default-padding>1</default-padding>
+			<text>
+				<label> </label>
+			</text>
+		</group>
+
+		<group>
+			<layout>vbox</layout>
+
+			<group>
+				<layout>hbox</layout>
+				<halign>left</halign>
+
+				<checkbox>
+					<label>Throttle frame rate</label>
+					<name>frame-rate-throttle</name>
+					<property>/sim/gui/frame-rate-throttled</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>frame-rate-throttle</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							var throttled = getprop("/sim/gui/frame-rate-throttled");
+							if (throttled)
+							    setprop("/sim/frame-rate-throttle-hz", 60);
+							else
+							    setprop("/sim/frame-rate-throttle-hz", 0);
+						</script>
+					</binding>
+				</checkbox>
+				<empty>
+					<pref-width>46</pref-width>
+				</empty>
+				<slider>
+					<name>frame-rate</name>
+					<visible>
+						<greater-than>
+							<property>/sim/frame-rate-throttle-hz</property>
+							<value>0</value>
+						</greater-than>
+					</visible>
+					<min>15.0</min>
+					<max>70.0</max>
+					<step>1.0</step>
+					<live>true</live>
+					<property>/sim/frame-rate-throttle-hz</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>frame-rate</object-name>
+					</binding>
+				</slider>
+				<text>
+					<visible>
+						<greater-than>
+							<property>/sim/frame-rate-throttle-hz</property>
+							<value>0</value>
+						</greater-than>
+					</visible>
+					<label>99 Hz</label>
+					<format>%2.0f Hz</format>
+					<live>true</live>
+					<property>/sim/frame-rate-throttle-hz</property>
+				</text>
+			</group>
+
+			<checkbox>
+				<halign>left</halign>
+				<label>Compensate field of view for wider screens</label>
+				<property>sim/current-view/field-of-view-compensation</property>
+				<binding>
+					<command>nasal</command>
+					<script>view.screenWidthCompens.toggle()</script>
+				</binding>
+			</checkbox>
+
+			<checkbox>
+				<halign>left</halign>
+				<label>Use disk space for faster loading (DDS Texture Cache)</label>
+				<name>texture-cache-enabled</name>
+				<property>/sim/rendering/texture-cache/cache-enabled</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>texture-cache-enabled</object-name>
+				</binding>
+			</checkbox>
+
+			<checkbox>
+				<halign>left</halign>
+				<label>Use point sprites for runway lights</label>
+				<property>/sim/rendering/point-sprites</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+			</checkbox>
+
+			<checkbox>
+				<halign>left</halign>
+				<label>Use triangles for directional lights</label>
+				<property>/sim/rendering/triangle-directional-lights</property>
+				<binding>
+					<command>dialog-apply</command>
+				</binding>
+				<enable>
+					<property>/sim/rendering/point-sprites</property>
+				</enable>
+			</checkbox>
+
+			<checkbox>
+				<halign>left</halign>
+				<label>Animated jetways</label>
+				<name>jetways</name>
+				<property>/nasal/jetways/enabled</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>jetways</object-name>
+				</binding>
+			</checkbox>
+
+			<checkbox>
+				<halign>left</halign>
+				<label>Satellite Photoscenery</label>
+				<name>satellite-photoscenery</name>
+				<property>/sim/rendering/photoscenery/enabled</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>satellite-photoscenery</object-name>
+				</binding>
+			</checkbox>
+
+			<checkbox>
+				<halign>left</halign>
+				<label>Wireframe</label>
+				<name>wireframe</name>
+				<property>/sim/rendering/wireframe</property>
+				<binding>
+					<command>dialog-apply</command>
+					<object-name>wireframe</object-name>
+				</binding>
+			</checkbox>
+
+			<group>
+				<layout>hbox</layout>
+				<halign>left</halign>
+				<text>
+					<label>Maximum number of aircraft and scenery tiles cached</label>
+				</text>
+				<slider>
+					<name>max-plod</name>
+					<min>100.0</min>
+					<max>10000.0</max>
+					<step>100.0</step>
+					<fraction>0.17</fraction>
+					<property>/sim/rendering/max-paged-lod</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>max-plod</object-name>
+					</binding>
+				</slider>
+				<text>
+					<label>12345</label>
+					<format>%d</format>
+					<live>true</live>
+					<property>/sim/rendering/max-paged-lod</property>
+				</text>
+			</group>
+
+			<text>
+				<color>
+					<red>1.0</red>
+					<green>0.6</green>
+					<blue>0.6</blue>
+				</color>
+				<label>Warning: High values use a lot amount of memory and GPU</label>
+				<visible>
+					<greater-than>
+						<property>/sim/rendering/max-paged-lod</property>
+						<value>500.0</value>
+					</greater-than>
+				</visible>
+			</text>
+
+			<hrule/>
+
+			<group>
+				<layout>table</layout>
+
+				<group>
+					<layout>hbox</layout>
+					<row>0</row>
+					<col>0</col>
+					<visible>
+						<property>/sim/rendering/preset-active</property>
+					</visible>
+					<text>
+						<halign>left</halign>
+						<label>Graphics Quality</label>
+					</text>
+					<combo>
+						<name>graphics-preset</name>
+						<pref-width>150</pref-width>
+						<property>/sim/gui/dialogs/rendering/preset</property>
+						<properties>/sim/gui/dialogs/rendering/presets-list</properties>
+						<binding>
+							<command>dialog-apply</command>
+							<object-name>graphics-preset</object-name>
+						</binding>
+						<binding>
+							<command>nasal</command>
+                            <script>
+                                fgcommand("apply-graphics-preset", props.Node.new({'preset-name': getprop("/sim/gui/dialogs/rendering/preset")}));
+                            </script>
+						</binding>
+					</combo>
+				</group>
+
+				<group>
+					<layout>hbox</layout>
+					<row>0</row>
+					<col>0</col>
+					<visible>
+						<not>
+							<property>/sim/rendering/preset-active</property>
+						</not>
+					</visible>
+
+					<button>
+						<legend>Advanced Options</legend>
+						<halign>left</halign>
+						<binding>
+							<command>dialog-show</command>
+							<dialog-name>advanced-graphics-options</dialog-name>
+						</binding>
+						<binding>
+							<command>dialog-close</command>
+							<dialog-name>rendering</dialog-name>
+						</binding>
+						<pref-width>200</pref-width>
+					</button>
+				</group>
+
+				<checkbox>
+					<halign>left</halign>
+					<row>0</row>
+					<col>1</col>
+					<label>Custom</label>
+					<name>custom-settings</name>
+					<property>/sim/gui/dialogs/rendering/custom-settings</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>custom-settings</object-name>
+					</binding>
+					<binding>
+						<command>nasal</command>
+						<script>
+							setprop("/sim/rendering/preset-active", !getprop("/sim/gui/dialogs/rendering/custom-settings"));
+						</script>
+					</binding>
+				</checkbox>
+				
+			</group>
+
+            <group>
+                <layout>table</layout>
+                
+			    <textbox>
+					<visible>
+						<property>/sim/rendering/preset-active</property>
+					</visible>
+					<row>0</row>
+					<col>0</col>
+				    <name>preset-description</name>
+				    <halign>fill</halign>
+				    <stretch>true</stretch>
+				    <pref-width>400</pref-width>
+				    <pref-height>60</pref-height>
+				    <slider>15</slider>
+				    <editable>false</editable>
+				    <wrap>true</wrap>
+				    <live>true</live>
+				    <top-line>0</top-line>
+				    <property>/sim/rendering/preset-description</property>
+			    </textbox>
+
+ 				<button>
+					<visible>
+						<not>
+							<property>/sim/rendering/preset-active</property>
+						</not>
+					</visible>
+					<row>0</row>
+					<col>0</col>
+					<legend>Save custom settings to file</legend>
+					<pref-width>200</pref-width>
+                    <binding>
+                        <command>nasal</command>
+                        <script>
+                            var save = func(n) fgcommand("save-graphics-preset", props.Node.new({ path: n.getValue() }));
+                            custom_preset_sel = gui.FileSelector.new(save,
+                            "Save Custom Settings", "Save", ["*.xml"],
+                            getprop("/sim/fg-home"), "custom-preset.xml");
+                            custom_preset_sel.open();
+                        </script>
+                    </binding>
+				</button>
+            </group>
+
+			<hrule/>
+
+			<group>
+				<layout>hbox</layout>
+				<checkbox>
+					<halign>left</halign>
+					<label>WS3.0 (Experimental - requires OSG 3.6)</label>
+					<name>ws30</name>
+					<property>/scenery/use-vpb</property>
+					<enable>
+						<property>/sim/gui/dialogs/rendering/vpb-available</property>
+					</enable>
+					
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>ws30</object-name>
+					</binding>
+				</checkbox>
+			</group>
+
+			<group>
+				<layout>hbox</layout>
+				<halign>right</halign>
+				<text>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
+					<label>Elevation delta below airports</label>
+				</text>
+				<slider>
+					<name>elev-delta</name>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
+					<min>0.0</min>
+					<max>20.0</max>
+					<step>1.0</step>
+					<fraction>0.17</fraction>
+					<property>/scenery/elevation-mesh/constraint-gap-m</property>
+					<binding>
+						<command>dialog-apply</command>
+						<object-name>elev-delta</object-name>
+					</binding>
+				</slider>
+				<text>
+					<label>1234567890</label>
+					<enable>
+						<equals>
+							<property>/scenery/use-vpb</property>
+							<value>true</value>
+						</equals>
+					</enable>
+					<format>%2dm</format>
+					<live>true</live>
+					<property>/scenery/elevation-mesh/constraint-gap-m</property>
+				</text>
+			</group>
+
+			<text>
+				<visible>
+					<property>/sim/rendering/restart-required</property>
+				</visible>
+				<color>
+					<red>1.0</red>
+					<green>0.6</green>
+					<blue>0.6</blue>
+				</color>
+				<label>Some changes require a complete restart to be applied.</label>
+			</text>
+			
+		</group>
+
+		<!-- only for a gap -->
+		<group>
+			<layout>vbox</layout>
+			<default-padding>1</default-padding>
+			<text>
+				<label> </label>
+			</text>
+		</group>
+
+	</group>
+
+	<hrule/>
+
+	<button>
+		<legend>  OK  </legend>
+		<default>true</default>
+		<binding>
+			<command>nasal</command>
+			<script>
+				if (getprop("/sim/rendering/scenery-reload-required")) {
+				    fgcommand("reinit", props.Node.new({"subsystem": "scenery"}));
+				}
+				if (getprop("/sim/rendering/compositor-reload-required")) {
+				    fgcommand("reload-compositor");
+				}
+			</script>
+		</binding>
+		<binding>
+			<command>dialog-close</command>
+		</binding>
+	</button>
+
+	<nasal>
+		<open>
+			<![CDATA[
+			setprop("/sim/gui/frame-rate-throttled", (getprop("/sim/frame-rate-throttle-hz") > 0));
+			setprop("/sim/gui/dialogs/rendering/custom-settings", !getprop("/sim/rendering/preset-active"));
+
+			# Intel GPU warning
+			var vendor = getprop("/sim/rendering/gl-vendor");
+			if (vendor != nil) {
+			    vendor = string.lc(vendor);
+			    if (find("intel", vendor) != -1) {
+			        setprop("/sim/gui/dialogs/rendering/shader-warning", 1);
+			    } else {
+			        setprop("/sim/gui/dialogs/rendering/shader-warning", 0);
+			    }
+			}
+
+			# populate the presets combo based on the registered presets
+			fgcommand('list-graphics-presets', props.Node.new({
+			    'destination-path': '/sim/gui/dialogs/rendering/presets-list',
+			    'as-combobox-values':1,
+			    'clear-destination':1,
+			    }));
+
+			if (getprop('/sim/rendering/preset-active')) {
+				setprop('/sim/gui/dialogs/rendering/preset', getprop('/sim/rendering/preset-name'));
+			}
+
+			# WS 3.0
+			var osg_version = getprop("/sim/version/openscenegraph");
+			if ((osg_version != nil) and (find("3.6", osg_version) == 0 or find("3.7", osg_version) == 0)) {
+			# Currently vpb requires OSG 3.6 specifically.
+			    setprop("/sim/gui/dialogs/rendering/vpb-available", 1);
+			} else {
+			    setprop("/sim/gui/dialogs/rendering/vpb-available", 0);
+			}
+            ]]>
+		</open>
+	</nasal>
+</PropertyList>

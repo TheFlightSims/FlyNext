@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+  <name>Effects/HDR/gbuffer-debug-color</name>
+  <technique n="1">
+    <pass>
+      <program>
+        <vertex-shader>Shaders/HDR/quad_matrix.vert</vertex-shader>
+        <fragment-shader>Shaders/HDR/debug_gbuffer_color.frag</fragment-shader>
+      </program>
+      <uniform>
+        <name>gbuffer1_tex</name>
+        <type>sampler-2d</type>
+        <value type="int">0</value>
+      </uniform>
+    </pass>
+  </technique>
+</PropertyList>

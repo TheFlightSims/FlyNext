@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- lightning -->
+<PropertyList>
+  <name>Effects/lightning</name>
+  <inherits-from>Effects/rain-layer</inherits-from>
+  <parameters> 
+    <is-lightning type="bool">1</is-lightning>
+  </parameters>
+</PropertyList>

@@ -1,0 +1,35 @@
+
+#cmakedefine HAVE_SYS_TIME_H
+#cmakedefine HAVE_SYS_TIMEB_H
+#cmakedefine HAVE_UNISTD_H 1
+
+
+#cmakedefine HAVE_GETTIMEOFDAY
+#cmakedefine HAVE_GETLOCALTIME
+#cmakedefine HAVE_FTIME
+#cmakedefine HAVE_RINT
+#cmakedefine HAVE_TIMEGM
+
+#cmakedefine HAVE_STD_ISNAN
+#cmakedefine HAVE_WORKING_STD_REGEX
+#cmakedefine HAVE_WINDOWS_H
+#cmakedefine HAVE_MKDTEMP
+#cmakedefine HAVE_AL_EXT_H
+#cmakedefine HAVE_STD_INDEX_SEQUENCE
+#cmakedefine HAVE_STD_REMOVE_CV_T
+#cmakedefine HAVE_STD_REMOVE_CVREF_T
+#cmakedefine HAVE_STD_ENABLE_IF_T
+#cmakedefine HAVE_STD_BOOL_CONSTANT
+
+#cmakedefine GCC_ATOMIC_BUILTINS_FOUND
+
+#cmakedefine OPENVG
+#cmakedefine SYSTEM_EXPAT
+#cmakedefine ENABLE_SOUND
+#cmakedefine USE_AEONWAVE
+#cmakedefine SG_SOUND_USES_OPENALSOFT
+#cmakedefine ENABLE_SIMD
+#cmakedefine ENABLE_SIMD_CODE
+#cmakedefine ENABLE_GDAL
+
+#cmakedefine SG_FFMPEG

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+<!-- Beerenberg main crater activity -->
+
+
+<PropertyList>
+
+
+
+	
+	<model>
+	  <path>eyjafjallajokull_main_ash_eruption.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+      <heading-deg>0</heading-deg>
+      </offsets>
+	  <condition>
+	     <equals>
+			<property>/environment/volcanoes/eyjafjallajokull/main-activity</property>
+			<value>1</value>
+		 </equals>
+	  </condition>
+    </model>
+	
+	<model>
+	  <path>eyjafjallajokull_main_ash_eruption_secondary.xml</path>
+      <offsets>
+        <x-m>0.0</x-m>
+        <y-m>0.0</y-m>
+        <z-m>0.0</z-m>
+         <heading-deg>0</heading-deg>
+	  </offsets>
+	  <condition>
+	     <equals>
+			<property>/environment/volcanoes/eyjafjallajokull/main-activity</property>
+			<value>1</value>
+		 </equals>
+	  </condition>
+    </model>
+	
+
+	
+
+	
+
+</PropertyList>

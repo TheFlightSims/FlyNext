@@ -1,0 +1,118 @@
+<div id="vtabs-content">
+    <h1>Phi - The FlightGear User Interface</h1>
+
+    <p>Looking from the top, you will see a number of tabs such as "Aircraft", "Environment", "Map", "Tools", "Simulator", providing various functions and possibilities described below.</p>
+    <p>In addition, each subpage contains the same widgets displayed on the right, such as:</p>
+    <ol>
+        <li>METAR of a nearby airport;</li>
+        <li>PFD (Primary Flight Display), i.e. a display with the main flight parameters, such as position relative to the horizon, speed and altitude;</li>
+        <li>radio stack with frequency settings for COM1, COM2, NAV1, NAV2, ADF;</li>
+        <li>minimap from OpenStreetMap;</li>
+        <li>stopwatch.</li>
+    </ol>
+
+    <p>At the top on the right, you always have the following buttons available:</p>
+    <ol>
+        <li>Refresh Page - clicking this button will refresh the Phi webpage.</li>
+        <li>Pause - clicking this button will pause the simulation.</li>
+        <li>Play - clicking this button will unpause the simulation.</li>
+    </ol>
+
+    <h2>Aircraft</h2>
+    <p>This tab contains information about the selected aircraft. It also allows you to view and install other aircrafts available in the official hangar (FGAddon).</p>
+
+    <h3>Help</h3>
+    <p>This tab displays information about the aircraft, hotkeys, speed limits and other additional information and tips. The information contained here depends on the particular aircraft. In the simulator, this information can be obtained from the "Help" &gt; "Aircraft Help" menu.</p>
+    
+    <h3>Mass &amp; Balance</h3>
+    <p>This tab displays information about fuel and payload of aircraft. You also have an envelope with selected center of gravity. In the simulator, this information can be obtained from the "Equipment" &gt; "Fuel and Payload" menu.</p>
+
+    <h3>Checklists</h3>
+    <p>This tab displays all checklists provided by the selected aircraft. The information depends on the aircraft you chose. In the simulator, this information can be obtained from the "Help" &gt; "Aircraft Checklists" menu.</p>
+
+    <h3>Failures</h3>
+    <p>Not implemented yet.</p>
+
+    <h3>Panel</h3>
+    <p>Not implemented yet.</p>
+
+    <h3>Select</h3>
+    <p>Here you have a list of all available aircraft in the official FGAddon hangar. The list includes such information as:</p>
+    <ul>
+        <li>aircraft name;</li>
+        <li>thumbnail of the aircraft;</li>
+        <li>description (if available);</li>
+        <li>ratings on a scale of 1 to 5 for FDM, Systems, Cockpit and Model;</li>
+        <li>aircraft package size in KB;</li>
+        <li>ability to download and install the aircraft. If the aircraft is installed then "installed" label is displaying.</li>
+    </ul>
+
+    <hr/>
+
+    <h2>Environment</h2>
+    <p>This tab allows you to change the date, time of day, check the weather and check airport data.</p>
+
+    <h3>Date &amp; Time</h3>
+    <p>Here you can change the time of day by indicating presets, where "Clock Time" means setting the real time as it is in the location where the aircraft is. Here you can also change the date in the simulator as well as set the UTC time to the minute.</p>
+
+    <h3>Weather</h3>
+    <p>You have a weather diagram here:</p>
+    <ul>
+        <li>the left vertical axis shows the atmospheric pressure in hPa;</li>
+        <li>the lower horizontal axis shows the temperature from -50°C to +50°C;</li>
+        <li>the right vertical axis represents the altitude from 0&nbsp;km (sea level) to 16&nbsp;km;</li>
+        <li>the red graph shows the air temperature in °C;</li>
+        <li>the green graph shows the dew point temperature in °C;</li>
+        <li>the gray rectangles represent the cloud layers;</li>
+        <li>in the right part of the graph, you also have wind arrows showing the direction and speed of the wind at particular heights.</li>
+    </ul>
+
+    <h3>Position</h3>
+    <p>Here you can search for any airport (by ICAO code or name) and move the aircraft to the specified runway. In addition, you have here various information about the airport, such as elevation, geographical coordinates, communication frequencies, a map with the layout of runways, information about runways, the actual METAR.</p>
+
+    <hr/>
+
+    <h2>Map</h2>
+    <p>The main part of this view is filled with a map downloaded from OpenStreetMap as default, which shows the current position of the aircraft. The map can be freely moved, zoomed out or zoomed in. You can also add additional layers to the map, such as flight history, planned route, airports, navigation aids, other traffic and much more.</p>
+    <p>An interesting feature is also the fact that you can grab the aircraft with the mouse cursor and move it anywhere on the map. However, you can often do it accidentally, while moving the map, so using the icon in the upper right corner of the map ("Allow dragging own aircraft"), you can also disable the possibility of moving our aircraft.</p>
+    <p></p>
+
+    <hr/>
+
+    <h2>Tools</h2>
+    <p>This tab contains various helpful tools for the pilot.</p>
+
+    <h3>Holding Pattern</h3>
+    <p>Here you can determine how to properly fly into the holding pattern depending on the direction from which you are coming. You have to set "Inbound Track" of holding pattern, "Heading" of your aircraft and select whether holding is "left" or "right". After that, the image will show you how to properly fly into the holding pattern.</p>
+
+    <h3>Wind Calculator</h3>
+    <p>Not implemented yet.</p>
+
+    <h3>Vertical Navigation</h3>
+    <p>Not implemented yet.</p>
+
+    <h3>Stopwatch</h3>
+    <p>Here you have a stopwatch at our disposal, and you can add many independently operating stopwatches.</p>
+
+    <hr/>
+
+    <h2>Simulator</h2>
+    <p>In this tab you will find options related to the simulator.</p>
+
+    <h3>Screenshots</h3>
+    <p>Here, as an instructor, you can preview what is happening in the simulator, or otherwise you have a preview of what the pilot sees. At the top, you have the option to set how often you want to receive a new screenshot from the FlightGear. If you need a smoother preview of what the pilot is doing in the simulator, you should use the "/screenshot" URL.</p>
+
+    <h3>Properties</h3>
+    <p>Here you can view and change the value of each property available in FlightGear. For a person very familiar with FlightGear, it will be a powerful tool with the ability to change any parameter or simulation state. It may be more convenient to use than the "Debug" &gt; "Browse Internal Properties" menu option available in the simulator.</p>
+    <p>Another very useful option is the function of drawing graphs of any property, which will be useful for flight analysis. It is enough to go to the given property, e.g. "/position/altitude-ft", where you have a small image icon ("toggle plot"). When you click this icon, a real-time graph will be drawn at the top of the page, showing changes in the value of the indicated property over time - in our example, the altitude relative to the sea level. In this way, you can turn on several properties and plot their values on one graph.</p>
+
+    <h3>Config</h3>
+    <p>Here you have the option of enabling artificial air traffic, as well as the possibility of connecting to the multiplayer mode.</p>
+
+    <h3>Reset</h3>
+    <p>Here you have the option to reset the simulator, the same as the option from the "File" &gt; "Reset" menu in the simulator.</p>
+
+    <h3>Exit</h3>
+    <p>Here you have the option to exit the simulator, the same as the option from the "File" &gt; "Quit" menu in the simulator. After closing the simulator, you will not be able to restart it with Phi.</p>
+
+</div>

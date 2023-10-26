@@ -1,0 +1,28 @@
+
+<style>
+.yaxisLabel {
+	top: 50%;
+	left: 2px;
+	transform: rotate(-90deg);
+	transform-origin: 0px 0px 0px;
+    color: blue;
+}
+
+.axisLabel {
+	position: absolute;
+	text-align: center;
+	font-size: 12px;
+}
+
+.flot-y1-axis, .flot-x-axis {
+    color: blue;
+}
+</style>
+<div style="height: 100%; width: 100%" data-bind="
+    flotchart: { 
+        data: wxData, 
+        options: wxOptions, 
+        postUpdate: afterUpdate,
+        hover: plotHover,
+        click: plotClick, 
+    }"></div>

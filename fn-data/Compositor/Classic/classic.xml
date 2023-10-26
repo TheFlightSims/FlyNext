@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    The 'Classic' Compositor pipeline imitates the rendering pipeline that was
+    used before multi-pass rendering was introduced, with the added feature of
+    optional shadow mapping.
+    The precision of the Z-buffer deteriorates with huge near-far spreads, so
+    two passes with different depth ranges are used to avoid Z-fighting and
+    other unpleasantness.
+-->
+<PropertyList>
+  <name>Classic</name>
+
+  <buffer>
+    <name>sun-shadowmap-atlas</name>
+    <type>2d</type>
+    <width><property>/sim/rendering/shadows/sun-atlas-size</property></width>
+    <height><property>/sim/rendering/shadows/sun-atlas-size</property></height>
+    <format>depth16</format>
+    <wrap-s>clamp-to-border</wrap-s>
+    <wrap-t>clamp-to-border</wrap-t>
+    <wrap-r>clamp-to-border</wrap-r>
+    <min-filter>linear</min-filter>
+    <mag-filter>linear</mag-filter>
+    <border-color type="vec4d">1.0 1.0 1.0 1.0</border-color>
+    <shadow-comparison>true</shadow-comparison>
+    <condition>
+      <property>/sim/rendering/shadows/enabled</property>
+    </condition>
+  </buffer>
+
+  <pass n="0" include="csm-pass.xml">
+    <name>csm0</name>
+    <near-m>0.1</near-m>
+    <far-m>3.0</far-m>
+    <viewport>
+      <x>0.0</x>
+      <y>0.0</y>
+      <width>0.5</width>
+      <height>0.5</height>
+    </viewport>
+  </pass>
+  <pass n="1" include="csm-pass.xml">
+    <name>csm1</name>
+    <near-m>3.0</near-m>
+    <far-m>70.0</far-m>
+    <viewport>
+      <x>0.5</x>
+      <y>0.0</y>
+      <width>0.5</width>
+      <height>0.5</height>
+    </viewport>
+  </pass>
+  <pass n="2" include="csm-pass.xml">
+    <name>csm2</name>
+    <near-m>70.0</near-m>
+    <far-m>300.0</far-m>
+    <viewport>
+      <x>0.0</x>
+      <y>0.5</y>
+      <width>0.5</width>
+      <height>0.5</height>
+    </viewport>
+  </pass>
+  <pass n="3" include="csm-pass.xml">
+    <name>csm3</name>
+    <near-m>300.0</near-m>
+    <far-m>1000.0</far-m>
+    <viewport>
+      <x>0.5</x>
+      <y>0.5</y>
+      <width>0.5</width>
+      <height>0.5</height>
+    </viewport>
+  </pass>
+
+  <pass n="10" include="common-scene.xml">
+    <name>far</name>
+    <clear-mask>color depth</clear-mask>
+    <z-near>100.0</z-near>
+  </pass>
+  <pass n="11" include="common-scene.xml">
+    <name>near</name>
+    <cull-mask>0xfff7ff</cull-mask> <!-- Cull the sky (bit 11 off) -->
+    <!-- Only clear the depth buffer so color information isn't overwritten -->
+    <clear-mask>depth</clear-mask>
+    <z-far>100.0</z-far>
+  </pass>
+</PropertyList>

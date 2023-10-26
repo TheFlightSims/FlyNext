@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+
+<!--
+
+  Copyright (c) 2020 Jonathan Schellhase
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+<!--
+
+  Bindings for Thrustmaster TWCS Throttle
+
+  !Only tested on Ubuntu 18.04 with FlightGear 2910.2.0 (next) from March 7, 2020!
+
+  Assignments:
+
+  Axis 0: View heading (self-centering)
+  Axis 1: View pitch
+  Axis 2: Throttle
+  Axis 5: Rudder
+  Axis 7: Propeller pitch
+  Axis 8: Zoom
+
+  Button 0: Pause
+  Button 1: Left wheel brake
+  Button 2: Right wheel brake
+  Button 3: Elevator trim up
+  Button 4: Elevator trim down
+  Button 6: Aileron trim right
+  Button 8: Aileron trim left
+  Button 10: Rudder trim right
+  Button 12: Rudder trim left
+
+-->
+
+<PropertyList>
+  <name type="string">Thrustmaster TWCS Throttle</name>
+  <axis>
+    <desc type="string">View Horizontal Axis</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/sim/current-view/goal-heading-offset-deg</property>
+      <factor type="double">-180</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+  <axis n="1">
+    <desc type="string">View (vertical)</desc>
+    <low>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">setprop("/sim/current-view/goal-pitch-offset-deg", getprop("/sim/current-view/goal-pitch-offset-deg") + 1);</script>
+      </binding>
+      <repeatable type="bool">true</repeatable>
+    </low>
+    <high>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">setprop("/sim/current-view/goal-pitch-offset-deg", getprop("/sim/current-view/goal-pitch-offset-deg") - 1);</script>
+      </binding>
+      <repeatable type="bool">true</repeatable>
+    </high>
+  </axis>
+  <axis n="2">
+    <desc type="string">Throttle (all)</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.throttleAxis();</script>
+    </binding>
+  </axis>
+  <axis n="5">
+    <desc type="string">Rudder</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/flight/rudder</property>
+      <factor type="double">1</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+  <axis n="7">
+    <desc type="string">Propeller All Engines</desc>
+    <binding>
+      <command type="string">property-scale</command>
+      <property type="string">/controls/engines/propeller-pitch-all</property>
+      <factor type="double">-1</factor>
+      <offset type="double">0</offset>
+    </binding>
+  </axis>
+  <axis n="8">
+    <desc type="string">Zoom</desc>
+    <low>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">view.increase(0.75);</script>
+      </binding>
+      <repeatable type="double">1</repeatable>
+    </low>
+    <high>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">view.decrease(0.75);</script>
+      </binding>
+      <repeatable type="double">1</repeatable>
+    </high>
+  </axis>
+  <button>
+    <desc type="string">Custom</desc>
+    <binding>
+      <command type="string">pause</command>
+      <offset type="double">1</offset>
+    </binding>
+    <mod-up>
+      <binding type="string">
+      </binding>
+    </mod-up>
+  </button>
+  <button n="1">
+    <desc type="string">Custom</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.applyBrakes(1, -1)</script>
+      <module type="string">__js1</module>
+      <offset type="double">1</offset>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.applyBrakes(0, -1)</script>
+        <module type="string">__js1</module>
+        <offset type="double">1</offset>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="2">
+    <desc type="string">Custom</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.applyBrakes(1, 1)</script>
+      <module type="string">__js1</module>
+      <offset type="double">1</offset>
+    </binding>
+    <mod-up>
+      <binding>
+        <command type="string">nasal</command>
+        <script type="string">controls.applyBrakes(0, 1)</script>
+        <module type="string">__js1</module>
+        <offset type="double">1</offset>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="3">
+    <desc type="string">Elevator trim up</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.elevatorTrim(-1);</script>
+      <module type="string">__js1</module>
+      <offset type="double">1</offset>
+    </binding>
+    <repeatable type="double">1</repeatable>
+    <mod-up>
+      <binding type="string">
+      </binding>
+    </mod-up>
+  </button>
+  <button n="4">
+    <desc type="string">Elevator trim down</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.elevatorTrim(1);</script>
+      <module type="string">__js1</module>
+      <offset type="double">1</offset>
+    </binding>
+    <repeatable type="double">1</repeatable>
+    <mod-up>
+      <binding type="string">
+      </binding>
+    </mod-up>
+  </button>
+  <button n="6">
+    <desc type="string">Aileron Trim Right</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.aileronTrim(1);</script>
+    </binding>
+    <repeatable type="double">1</repeatable>
+  </button>
+  <button n="8">
+    <desc type="string">Aileron Trim Left</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.aileronTrim(-1);</script>
+    </binding>
+    <repeatable type="double">1</repeatable>
+  </button>
+  <button n="10">
+    <desc type="string">Rudder Trim Right</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.rudderTrim(1);</script>
+    </binding>
+    <repeatable type="double">1</repeatable>
+  </button>
+  <button n="12">
+    <desc type="string">Rudder Trim Left</desc>
+    <binding>
+      <command type="string">nasal</command>
+      <script type="string">controls.rudderTrim(-1);</script>
+    </binding>
+    <repeatable type="double">1</repeatable>
+  </button>
+</PropertyList>

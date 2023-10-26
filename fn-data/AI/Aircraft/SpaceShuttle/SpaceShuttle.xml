@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+
+
+<PropertyList>
+
+   <path>SpaceShuttle.ac</path>
+	
+   <offsets>
+     <pitch-deg>0.0</pitch-deg>  
+     <z-m>6.0</z-m>
+   </offsets>
+	
+
+<effect>
+ <inherits-from>Effects/shuttle-main</inherits-from>
+ <object-name>spaceshutt_spstob_3</object-name>
+ <object-name>spaceshutt_spstob_eal</object-name>
+ <object-name>SpeedBrakeL</object-name>
+ <object-name>SpeedBrakeR</object-name>
+ <object-name>heatshield</object-name>
+ <object-name>fuselage</object-name>
+ <object-name>GearDoorR</object-name>
+ <object-name>GearDoorL</object-name>
+ <object-name>NoseDoorR</object-name>
+ <object-name>NoseDoorL</object-name>
+ <object-name>inboard-elevon-left</object-name>
+ <object-name>inboard-elevon-right</object-name>
+ <object-name>outboard-elevon-left</object-name>
+ <object-name>outboard-elevon-right</object-name>
+ <object-name>BodyFlap</object-name>
+ <object-name>handholds-left</object-name>
+ <object-name>handholds-right</object-name>
+ <object-name>footholds-left</object-name>
+ <object-name>footholds-right</object-name>
+ <object-name>payload-bay</object-name>
+ <object-name>payload-bay-door-left</object-name>
+ <object-name>payload-bay-door-right</object-name>
+</effect>
+
+  <model>
+    <path>SSME1.xml</path>
+  </model>
+
+  <model>
+    <path>SSME2.xml</path>
+    <offsets>
+      <x-m> 0.0 </x-m>
+      <y-m> -1.5 </y-m>
+      <z-m> -2.5 </z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>SSME3.xml</path>
+    <offsets>
+      <x-m> 0.0 </x-m>
+      <y-m> 1.5 </y-m>
+      <z-m> -2.5 </z-m>
+    </offsets>
+  </model>
+
+ <model>
+    <path>OMSPods.xml</path>
+  </model>
+
+
+ <!-- Payload bay opening-->
+ <animation>
+  <type>rotate</type>
+  <object-name>payload-bay-door-left</object-name>
+  <offset-deg>-171</offset-deg>
+  <center>
+   <x-m> -2.2671</x-m>
+   <y-m> -2.552</y-m>
+   <z-m>  -1.52</z-m>   
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <!--<animation>
+  <type>translate</type>
+  <object-name>handholds-left</object-name>
+  <property>/fdm/jsbsim/systems/mechanical/pb-door-left-animation</property>
+  <interpolation>
+    <entry>
+      <ind>.7</ind>
+      <dep>-.1540</dep>
+    </entry>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+   <x>0</x>
+   <y>0</y>
+   <z>1</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>handholds-left</object-name>
+  <property>/fdm/jsbsim/systems/mechanical/pb-door-left-animation</property>
+  <interpolation>
+    <entry>
+      <ind>.7</ind>
+      <dep>35</dep>
+    </entry>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <center>
+   <x-m>-1.49746</x-m>
+   <y-m>-2.41842</y-m>
+   <z-m>-1.48727</z-m>   
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>footholds-left</object-name>
+  <property>/fdm/jsbsim/systems/mechanical/pb-door-left-animation</property>
+  <interpolation>
+    <entry>
+      <ind>1</ind>
+      <dep>-.2179</dep>
+    </entry>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+   <x>0</x>
+   <y>0</y>
+   <z>1</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>footholds-left</object-name>
+  <property>/fdm/jsbsim/systems/mechanical/pb-door-left-animation</property>
+  <interpolation>
+    <entry>
+      <ind>1</ind>
+      <dep>-5</dep>
+    </entry>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <center>
+   <x-m> 7.09093</x-m>
+   <y-m>-2.44588</y-m>
+   <z-m>-1.47793</z-m>   
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>-->
+
+ <animation>
+  <type>rotate</type>
+  <object-name>payload-bay-door-right</object-name>
+  <offset-deg>171</offset-deg>
+  <center>
+   <x-m>-2.2672</x-m>
+   <y-m> 2.552 </y-m>
+   <z-m>-1.52  </z-m>   
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <!--<animation>
+  <type>translate</type>
+  <object-name>handholds-right</object-name>
+  <property>/fdm/jsbsim/systems/mechanical/pb-door-right-animation</property>
+  <interpolation>
+    <entry>
+      <ind>.7</ind>
+      <dep>-.1540</dep>
+    </entry>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+   <x>0</x>
+   <y>0</y>
+   <z>1</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>handholds-right</object-name>
+  <property>/fdm/jsbsim/systems/mechanical/pb-door-right-animation</property>
+  <interpolation>
+    <entry>
+      <ind>.7</ind>
+      <dep>-35</dep>
+    </entry>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <center>
+   <x-m>-1.49746</x-m>
+   <y-m> 2.417  </y-m>
+   <z-m>-1.48292</z-m>   
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>translate</type>
+  <object-name>footholds-right</object-name>
+  <property>/fdm/jsbsim/systems/mechanical/pb-door-right-animation</property>
+  <interpolation>
+    <entry>
+      <ind>1</ind>
+      <dep>-.2179</dep>
+    </entry>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <axis>
+   <x>0</x>
+   <y>0</y>
+   <z>1</z>
+  </axis>
+ </animation>
+
+ <animation>
+  <type>rotate</type>
+  <object-name>footholds-right</object-name>
+  <property>/fdm/jsbsim/systems/mechanical/pb-door-right-animation</property>
+  <interpolation>
+    <entry>
+      <ind>1</ind>
+      <dep>5</dep>
+    </entry>
+    <entry>
+      <ind>0</ind>
+      <dep>0</dep>
+    </entry>
+  </interpolation>
+  <center>
+   <x-m>7 .09094</x-m>
+   <y-m> 2.44446</y-m>
+   <z-m>-1.4829 </z-m>   
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>-->
+
+
+</PropertyList>
